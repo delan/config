@@ -1,0 +1,5 @@
+set autoindent
+set const
+set suspend
+set smooth
+set fill 80
