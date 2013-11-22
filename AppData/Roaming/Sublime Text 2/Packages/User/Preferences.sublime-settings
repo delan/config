@@ -1,0 +1,19 @@
+{
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"default_line_ending": "unix",
+	"draw_white_space": "all",
+	"ensure_newline_at_eof_on_save": true,
+	"font_face": "ProggyClean",
+	"font_size": 8,
+	"indent_subsequent_lines": false,
+	"rulers":
+	[
+		72,
+		78,
+		80
+	],
+	"tab_size": 8,
+	"translate_tabs_to_spaces": false,
+	"word_wrap": true,
+	"wrap_width": 80
+}
