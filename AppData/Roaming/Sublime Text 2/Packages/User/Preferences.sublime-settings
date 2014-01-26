@@ -3,8 +3,8 @@
 	"default_line_ending": "unix",
 	"draw_white_space": "all",
 	"ensure_newline_at_eof_on_save": true,
-	"font_face": "ProggyClean",
-	"font_size": 8,
+	"font_face": "ProggyCleanTT",
+	"font_size": 12,
 	"indent_subsequent_lines": false,
 	"rulers":
 	[
