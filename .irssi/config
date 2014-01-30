@@ -1,0 +1,40 @@
+servers = (
+	{
+		address = "chat.freenode.net";
+		chatnet = "Freenode";
+		port = "6697";
+		use_ssl = "yes";
+		ssl_verify = "yes";
+		autoconnect = "no";
+	},
+	{
+		address = "irc.comssa.org.au";
+		chatnet = "ComSSA";
+		port = "6667";
+		autoconnect = "yes";
+	}
+);
+
+chatnets = {
+	Freenode = {
+		type = "IRC";
+		autosendcmd = "/^msg nickserv identify [REDACTED]";
+	};
+	ComSSA = {
+		type = "IRC";
+		autosendcmd = "/^msg nickserv identify [REDACTED]";
+	};
+};
+
+channels = (
+	{ name = "#comssa"; chatnet = "ComSSA"; autojoin = "yes"; }
+);
+
+settings = {
+	core = {
+		real_name = "Delan Azabani";
+		user_name = "delan@azabani.com";
+		nick = "delan";
+		resolve_prefer_ipv6 = "yes";
+	};
+};
