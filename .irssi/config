@@ -9,7 +9,7 @@ servers = (
 	{
 		address = "irc.comssa.org.au";
 		chatnet = "ComSSA";
-		port = "6667";
+		port = "6697";
 		use_ssl = "yes";
 		autoconnect = "yes";
 	}
