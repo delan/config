@@ -35,6 +35,7 @@ chatnets = {
 channels = (
 	{ name = "#aioc"; chatnet = "Freenode"; autojoin = "yes"; }
 	{ name = "#comssa"; chatnet = "ComSSA"; autojoin = "yes"; }
+	{ name = "#sysop"; chatnet = "ComSSA"; autojoin = "yes"; }
 	{ name = "#ucc"; chatnet = "UCC"; autojoin = "yes"; }
 );
 
