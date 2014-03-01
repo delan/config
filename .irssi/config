@@ -33,7 +33,7 @@ channels = (
 settings = {
 	core = {
 		real_name = "Delan Azabani";
-		user_name = "delan@azabani.com";
+		user_name = "delan";
 		nick = "delan";
 		resolve_prefer_ipv6 = "yes";
 	};
