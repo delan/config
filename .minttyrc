@@ -1,4 +1,9 @@
-BoldAsFont=yes
+BoldAsFont=no
 Font=ProggyCleanTT
 FontHeight=12
-BoldAsColour=no
+BoldAsColour=yes
+BellSound=yes
+BellFlash=yes
+Locale=C
+Charset=UTF-8
+FontSmoothing=default
