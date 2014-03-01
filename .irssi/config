@@ -12,6 +12,12 @@ servers = (
 		port = "6697";
 		use_ssl = "yes";
 		autoconnect = "yes";
+	},
+	{
+		address = "irc.ucc.asn.au";
+		chatnet = "UCC";
+		port = "6667";
+		autoconnect = "yes";
 	}
 );
 
@@ -29,6 +35,7 @@ chatnets = {
 channels = (
 	{ name = "#aioc"; chatnet = "Freenode"; autojoin = "yes"; }
 	{ name = "#comssa"; chatnet = "ComSSA"; autojoin = "yes"; }
+	{ name = "#ucc"; chatnet = "UCC"; autojoin = "yes"; }
 );
 
 settings = {
