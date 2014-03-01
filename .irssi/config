@@ -1,10 +1,9 @@
 servers = (
 	{
-		address = "chat.freenode.net";
+		address = "chat.au.freenode.net";
 		chatnet = "Freenode";
 		port = "6697";
 		use_ssl = "yes";
-		ssl_verify = "yes";
 		autoconnect = "no";
 	},
 	{
