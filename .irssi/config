@@ -10,6 +10,7 @@ servers = (
 		address = "irc.comssa.org.au";
 		chatnet = "ComSSA";
 		port = "6667";
+		use_ssl = "yes";
 		autoconnect = "yes";
 	}
 );
