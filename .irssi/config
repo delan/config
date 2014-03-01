@@ -4,7 +4,7 @@ servers = (
 		chatnet = "Freenode";
 		port = "6697";
 		use_ssl = "yes";
-		autoconnect = "no";
+		autoconnect = "yes";
 	},
 	{
 		address = "irc.comssa.org.au";
@@ -26,6 +26,7 @@ chatnets = {
 };
 
 channels = (
+	{ name = "#aioc"; chatnet = "Freenode"; autojoin = "yes"; }
 	{ name = "#comssa"; chatnet = "ComSSA"; autojoin = "yes"; }
 );
 
