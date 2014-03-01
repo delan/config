@@ -50,4 +50,18 @@ settings = {
 		nick = "delan";
 		resolve_prefer_ipv6 = "yes";
 	};
+	"fe-text" = { actlist_sort = "refnum"; };
+	"fe-common/core" = {
+		bell_beeps = "yes";
+		beep_msg_level = "MSGS NOTICES DCC DCCMSGS HILIGHT INVITES";
+		beep_when_away = "yes";
+		beep_when_window_active = "yes";
+	};
 };
+hilights = (
+	{ text = "delan"; nick = "yes"; word = "yes"; },
+	{ text = "daz"; nick = "yes"; word = "yes"; },
+	{ text = "doonil"; nick = "yes"; word = "yes"; },
+	{ text = "azabani"; nick = "yes"; word = "yes"; },
+	{ text = "azurebalance"; nick = "yes"; word = "yes"; }
+);
