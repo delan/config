@@ -30,6 +30,10 @@ chatnets = {
 		type = "IRC";
 		autosendcmd = "/^msg nickserv identify [REDACTED]";
 	};
+	UCC = {
+		type = "IRC";
+		autosendcmd = "/^msg nickserv identify [REDACTED]";
+	};
 };
 
 channels = (
