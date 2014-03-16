@@ -8,15 +8,9 @@ servers = (
 	},
 	{
 		address = "irc.comssa.org.au";
-		chatnet = "ComSSA";
+		chatnet = "UniIRC";
 		port = "6697";
 		use_ssl = "yes";
-		autoconnect = "yes";
-	},
-	{
-		address = "irc.ucc.asn.au";
-		chatnet = "UCC";
-		port = "6667";
 		autoconnect = "yes";
 	}
 );
@@ -26,21 +20,17 @@ chatnets = {
 		type = "IRC";
 		autosendcmd = "/^msg nickserv identify [REDACTED]";
 	};
-	ComSSA = {
-		type = "IRC";
-		autosendcmd = "/^msg nickserv identify [REDACTED]";
-	};
-	UCC = {
+	UniIRC = {
 		type = "IRC";
 		autosendcmd = "/^msg nickserv identify [REDACTED]";
 	};
 };
 
 channels = (
-	{ name = "#aioc"; chatnet = "Freenode"; autojoin = "yes"; }
-	{ name = "#comssa"; chatnet = "ComSSA"; autojoin = "yes"; }
-	{ name = "#sysop"; chatnet = "ComSSA"; autojoin = "yes"; }
-	{ name = "#ucc"; chatnet = "UCC"; autojoin = "yes"; }
+	{ name = "#aioc"; chatnet = "Freenode"; autojoin = "yes"; },
+	{ name = "#comssa"; chatnet = "UniIRC"; autojoin = "yes"; },
+	{ name = "#sysop"; chatnet = "UniIRC"; autojoin = "yes"; },
+	{ name = "#ucc"; chatnet = "UniIRC"; autojoin = "yes"; }
 );
 
 settings = {
@@ -58,10 +48,11 @@ settings = {
 		beep_when_window_active = "yes";
 	};
 };
+
 hilights = (
 	{ text = "delan"; nick = "yes"; word = "yes"; },
 	{ text = "daz"; nick = "yes"; word = "yes"; },
 	{ text = "doonil"; nick = "yes"; word = "yes"; },
 	{ text = "azabani"; nick = "yes"; word = "yes"; },
-	{ text = "azurebalance"; nick = "yes"; word = "yes"; }
+	{ text = "azurebalance"; nick = "yes"; word = "yes"; },
 );
