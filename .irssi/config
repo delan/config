@@ -34,7 +34,7 @@ settings = {
 		real_name = "Delan Azabani";
 		user_name = "delan";
 		nick = "delan";
-		resolve_prefer_ipv6 = "yes";
+		resolve_prefer_ipv6 = "no";
 	};
 	"fe-text" = { actlist_sort = "refnum"; };
 	"fe-common/core" = {
