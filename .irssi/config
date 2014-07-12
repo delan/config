@@ -9,9 +9,9 @@ servers = (
 	{
 		address = "irc.comssa.org.au";
 		chatnet = "UniIRC";
-		port = "6697";
-		use_ssl = "yes";
+		port = "6701";
 		autoconnect = "yes";
+		password = "delan:[REDACTED]";
 	}
 );
 
@@ -22,15 +22,11 @@ chatnets = {
 	};
 	UniIRC = {
 		type = "IRC";
-		autosendcmd = "/^msg nickserv identify [REDACTED]";
 	};
 };
 
 channels = (
 	{ name = "#aioc"; chatnet = "Freenode"; autojoin = "yes"; },
-	{ name = "#comssa"; chatnet = "UniIRC"; autojoin = "yes"; },
-	{ name = "#sysop"; chatnet = "UniIRC"; autojoin = "yes"; },
-	{ name = "#ucc"; chatnet = "UniIRC"; autojoin = "yes"; }
 );
 
 settings = {
