@@ -7,3 +7,6 @@ export EDITOR=vim
 
 # Force non-login POSIX /bin/sh to execute this file
 export ENV=~/.profile
+
+# Set default package mirror for OpenBSD
+export PKG_PATH=ftp://ftp.ii.net/pub/OpenBSD/5.5/packages/amd64/
