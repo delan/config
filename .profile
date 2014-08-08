@@ -15,3 +15,6 @@ export ENV=~/.profile
 
 # Set default package mirror for OpenBSD
 export PKG_PATH=ftp://ftp.ii.net/pub/OpenBSD/5.5/packages/amd64/
+
+# Cajole X11 applications who prefer .Xdefaults into using .Xresources
+export XENVIRONMENT=$HOME/.Xresources
