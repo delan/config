@@ -1,3 +1,5 @@
 [user]
 	name = Delan Azabani
 	email = delan@azabani.com
+[push]
+	default = matching
