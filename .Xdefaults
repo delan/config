@@ -1,1 +1,3 @@
 XTerm*loginShell:true
+XTerm*faceName:ProggyCleanTT
+XTerm*faceSize:12
