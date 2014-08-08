@@ -6,3 +6,5 @@ bindkey -v
 zstyle :compinstall filename '/home/delan/.zshrc'
 autoload -Uz compinit
 compinit
+
+. ~/.profile
