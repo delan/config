@@ -2,6 +2,7 @@ XTerm*loginShell:true
 XTerm*faceName:ProggyCleanTT
 XTerm*faceSize:12
 XTerm*allowBoldFonts:false
+XTerm*rightScrollBar:true
 ! Molokai theme
 *xterm*background: #101010
 *xterm*foreground: #d0d0d0
