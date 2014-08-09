@@ -1,4 +1,5 @@
 set autoindent
+set colorcolumn=80
 set number
 set ruler
 set laststatus=2
