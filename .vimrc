@@ -4,6 +4,7 @@ set number
 set ruler
 set laststatus=2
 set mouse=a
+set backspace=indent,eol,start
 syntax on
 let g:rehash256=1
 colorscheme molokai
