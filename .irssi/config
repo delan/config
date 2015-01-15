@@ -1,32 +1,54 @@
 servers = (
 	{
-		address = "chat.au.freenode.net";
-		chatnet = "Freenode";
-		port = "6697";
+		address = "irc.comssa.org.au";
+		chatnet = "UniIRC";
+		port = "6420";
+		autoconnect = "yes";
 		use_ssl = "yes";
-		autoconnect = "no";
+		password = "delan-uniirc:[REDACTED]";
 	},
 	{
 		address = "irc.comssa.org.au";
-		chatnet = "UniIRC";
-		port = "6701";
+		chatnet = "SynIRC";
+		port = "6420";
 		autoconnect = "yes";
-		password = "delan:[REDACTED]";
+		use_ssl = "yes";
+		password = "delan-synirc:[REDACTED]";
+	},
+	{
+		address = "irc.comssa.org.au";
+		chatnet = "Freenode";
+		port = "6420";
+		autoconnect = "yes";
+		use_ssl = "yes";
+		password = "delan-freenode:[REDACTED]";
+	},
+	{
+		address = "irc.comssa.org.au";
+		chatnet = "What";
+		port = "6420";
+		autoconnect = "yes";
+		use_ssl = "yes";
+		password = "delan-what:[REDACTED]";
 	}
 );
 
 chatnets = {
+	UniIRC = {
+		type = "IRC";
+	};
+	SynIRC = {
+		type = "IRC";
+	};
 	Freenode = {
 		type = "IRC";
-		autosendcmd = "/^msg nickserv identify [REDACTED]";
 	};
-	UniIRC = {
+	What = {
 		type = "IRC";
 	};
 };
 
 channels = (
-	{ name = "#aioc"; chatnet = "Freenode"; autojoin = "yes"; },
 );
 
 settings = {
