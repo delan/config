@@ -10,6 +10,11 @@ setopt appendhistory autocd beep extendedglob nomatch notify
 
 bindkey -e
 
+# Delete/Home/End to work as usual
+bindkey '^[[3~' delete-char
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+
 # Ctrl+Left/Right to move by whole words
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
