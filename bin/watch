@@ -37,6 +37,7 @@ esac; done
 [ $# -lt 1 ] && usage
 
 tput smcup
+clear
 while true; do
 	printf '%s\n\n' "$(date) ~ $wait s ~ $*"
 	"$@"
