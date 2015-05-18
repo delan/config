@@ -4,8 +4,8 @@ set -o emacs
 # Language and encoding
 export LANG=en_AU.UTF-8
 
-# Default OpenBSD PATH variable
-export PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:.
+# Executable search path
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/games:/bin:/sbin:.
 
 if ps -p $$ | egrep -q '[ (/]sh'; then
 	green="$(printf '\e[32m')"
