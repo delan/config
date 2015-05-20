@@ -36,3 +36,18 @@ export PKG_PATH=ftp://ftp.ii.net/pub/OpenBSD/$(uname -r)/packages/$(uname -m)/
 
 # Cajole X11 applications who prefer .Xdefaults into using .Xresources
 export XENVIRONMENT=$HOME/.Xresources
+
+# Fire up gpg-agent if it's not already running
+gpg_agent_env="$HOME/.gnupg/gpg-agent.env"
+if [ -e "$gpg_agent_env" ] && kill -0 $(
+	grep GPG_AGENT_INFO "$gpg_agent_env" | cut -d ':' -f 2
+) 2>/dev/null; then
+	eval "$(cat "$gpg_agent_env")"
+else
+	eval "$(
+		gpg-agent --daemon --enable-ssh-support \
+			--write-env-file "$gpg_agent_env"
+	)"
+fi
+export GPG_AGENT_INFO  # the env file does not contain the export statement
+export SSH_AUTH_SOCK   # enable gpg-agent for ssh
