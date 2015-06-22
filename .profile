@@ -5,7 +5,13 @@ set -o emacs
 export LANG=en_AU.UTF-8
 
 # Executable search path
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/games:/bin:/sbin:.
+export PATH="$HOME/bin"
+export PATH="$PATH:/usr/local/texlive/2014/bin/universal-darwin"
+export PATH="$PATH:/usr/local/bin:/usr/local/sbin"
+export PATH="$PATH:/usr/bin:/usr/sbin"
+export PATH="$PATH:/usr/X11R6/bin:/usr/games"
+export PATH="$PATH:/bin:/sbin"
+export PATH="$PATH:."
 
 if ps -p $$ | egrep -q '[ (/]sh'; then
 	green="$(printf '\e[32m')"

@@ -1,3 +1,4 @@
+set nowrap
 set autoindent
 set const
 set suspend
