@@ -1,0 +1,27 @@
+#!/bin/sh
+
+out=$(mktemp -td daria.backup.XXXXXX)
+ball=$(mktemp -t daria.backup.XXXXXX)
+cd $out
+
+mkdir -p etc/rc.d root
+cp /etc/myname etc
+cp /etc/sysctl.conf etc
+cp /etc/resolv.conf etc
+cp /etc/hostname.* etc
+cp /etc/pf.conf etc
+cp /etc/dhcpd.conf etc
+cp /etc/dhcp6c.conf etc
+cp /etc/rc.d/dhcp6c etc/rc.d
+cp /etc/rc.conf.local etc
+cp /root/backup.sh root
+
+sed -E 's/authkey .+/authkey redacted/' \
+	< /etc/hostname.pppoe0 > etc/hostname.pppoe0
+
+sed -E 's/wpakey .+/wpakey redacted/' \
+	< /etc/hostname.ral0 > etc/hostname.ral0
+
+tar cvpf $ball *
+mv $ball $ball.tar
+echo $ball.tar

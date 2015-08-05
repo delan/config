@@ -1,0 +1,8 @@
+media autoselect mode 11g mediaopt hostap
+nwid deLAN
+wpakey redacted
+wpaprotos wpa2
+wpaakms psk
+wpaciphers ccmp
+wpagroupcipher ccmp
+up
