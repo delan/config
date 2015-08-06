@@ -8,3 +8,4 @@ dest 0.0.0.1
 inet6 eui64
 !/sbin/route add 0.0.0.0/0 -ifp pppoe0 0.0.0.1
 !/sbin/route add ::/0 -ifp pppoe0 fe80::
+!/etc/rc.d/dhcp6c restart
