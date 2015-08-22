@@ -6,7 +6,7 @@ precmd() {
 	print -Pn "\e]0;%n@%m %? %~\a"
 }
 
-setopt appendhistory autocd beep extendedglob nomatch notify
+setopt appendhistory autocd beep extendedglob menucomplete nomatch notify
 
 bindkey -e
 
@@ -33,6 +33,8 @@ bindkey '^[^?' undo
 # Ctrl+Up/Down for searching command history
 bindkey '^[[1;5A' history-search-backward
 bindkey '^[[1;5B' history-search-forward
+
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 zstyle :compinstall filename '/home/delan/.zshrc'
 autoload -Uz compinit
