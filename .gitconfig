@@ -3,3 +3,8 @@
 	email = delan@azabani.com
 [push]
 	default = matching
+[sendemail]
+	smtpencryption = tls
+	smtpserver = smtp.gmail.com
+	smtpuser = delan@azabani.com
+	smtpserverport = 587
