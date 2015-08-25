@@ -12,6 +12,7 @@ cp /etc/hostname.* etc
 cp /etc/pf.conf etc
 cp /etc/dhcpd.conf etc
 cp /etc/dhcp6c.conf etc
+cp /etc/ntpd.conf etc
 cp /etc/rc.d/dhcp6c etc/rc.d
 cp /etc/rc.conf.local etc
 cp /etc/ssh/sshd_config etc/ssh
