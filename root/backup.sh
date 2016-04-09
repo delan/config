@@ -21,6 +21,7 @@ cp /etc/rc.d/mi.subr etc/rc.d
 cp /etc/rc.d/dhcp6c etc/rc.d
 cp /etc/rc.d/openvpn etc/rc.d
 ln -s openvpn etc/rc.d/openvpn__chi
+ln -s openvpn etc/rc.d/openvpn__venus
 cp /etc/rc.conf.local etc
 cp /etc/ssh/sshd_config etc/ssh
 cp /root/backup.sh root
