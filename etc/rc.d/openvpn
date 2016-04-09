@@ -34,4 +34,4 @@ rc_pre() {
 	chown -R _openvpn:_openvpn /var/run/openvpn
 }
 
-mi_cmd "$1"
+mi_cmd "$@"

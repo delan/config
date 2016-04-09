@@ -1,6 +1,7 @@
-pkg_scripts=dhcp6c openvpn__chi openvpn__venus
+pkg_scripts=dhcp6c openvpn
 dhcpd_flags=vether0
 rtadvd_flags=vether0
 dhcp6c_flags=em0
 ntpd_flags=
 unbound_flags=
+openvpn_flags=chi venus

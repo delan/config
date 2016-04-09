@@ -1,8 +1,57 @@
+mi_instances="$daemon_flags"
+
 mi_instance=$(echo "$0" | sed -E 's/_*([^_]_?)+(__|$)//')
 
 mi_cmd() {
 	if [ _"$mi_instance" = _ ]; then
-		_rc_err "usage: $0__foo [-df] start|stop|restart|reload|check"
+		if [ _"$_RC_DEBUG" = _ ]; then
+			mi_debug=''
+		else
+			mi_debug='-d'
+		fi
+		if [ _"$_RC_FORCE" = _ ]; then
+			mi_force=''
+		else
+			mi_force='-f'
+		fi
+		if [ _"$_RC_FORCE" = _ ] && [ _"$mi_instances" = _NO ]; then
+			_rc_err "$0: need -f to force $1 since ${_name}_flags=NO"
+		else
+			case "$1" in
+			check|start|stop|reload|restart)
+				if [ _"$2" = _ ]; then
+					if [ _"$_RC_FORCE" != _ ] && [ _"$mi_instances" = _ ]; then
+						for i in "$0__"*; do
+							"${i}" $mi_debug $mi_force "${1}"
+						done
+						exit 0
+					fi
+					mi_candidates="$mi_instances"
+				else
+					if [ _"$_RC_FORCE" = _ ]; then
+						found=0
+						for i in $mi_instances; do
+							if [ _"$i" = _"$2" ]; then
+								found=1
+								break
+							fi
+						done
+						if [ $found = 0 ]; then
+							_rc_err "$0: need -f to force $1 since '$2' is not in ${_name}_flags"
+						fi
+					fi
+					mi_candidates="$2"
+				fi
+				for i in $mi_candidates; do
+					"${0}__${i}" $mi_debug $mi_force "${1}"
+				done
+				exit 0
+				;;
+			*)
+				_rc_err "usage: $0 [-df] start|stop|restart|reload|check [instance]"
+				;;
+			esac
+		fi
 	else
 		rc_cmd "$1"
 	fi
