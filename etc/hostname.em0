@@ -2,3 +2,6 @@ inet6 eui64
 dhcp
 !/sbin/route delete ::/0
 !/sbin/route add ::/0 fe80::d6ca:6dff:fe0d:966d%em0
+!/etc/rc.d/dhcp6c start
+!/usr/local/sbin/dhcp6ctl stop interface em0
+!/usr/local/sbin/dhcp6ctl start interface em0
