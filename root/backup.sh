@@ -5,7 +5,7 @@ ball=$(mktemp -t daria.backup.XXXXXX)
 cd $out
 
 mkdir -p etc/rc.d etc/ssh root
-mkdir -p etc/openvpn var/run/openvpn
+mkdir -p etc/openvpn
 mkdir -p var/unbound/etc
 cp /etc/myname etc
 cp /etc/sysctl.conf etc
@@ -25,6 +25,7 @@ cp /etc/rc.conf.local etc
 cp /etc/ssh/sshd_config etc/ssh
 cp /root/backup.sh root
 cp /etc/openvpn/*.conf etc/openvpn
+cp /etc/openvpn/*.up etc/openvpn
 
 tar cvpf $ball *
 mv $ball $ball.tar
