@@ -1,0 +1,35 @@
+#!/bin/sh
+
+daemon="/usr/local/sbin/openvpn"
+
+. /etc/rc.d/rc.subr
+. /etc/rc.d/mi.subr
+
+daemon_flags="--config /etc/openvpn/$mi_instance.conf \
+--writepid /var/run/openvpn/$mi_instance.pid \
+--management /var/run/openvpn/$mi_instance.sock unix \
+--user _openvpn \
+--group _openvpn \
+--chroot /var/run/openvpn \
+--daemon"
+
+rc_reload=NO
+
+rc_check() {
+	stat "/var/run/openvpn/$mi_instance.pid"
+}
+
+rc_stop() {
+	kill -TERM $(
+		cat /var/run/openvpn/$mi_instance.pid
+		rm -f /var/run/openvpn/$mi_instance.pid 2> /dev/null > /dev/null
+		rm -f /var/run/openvpn/$mi_instance.sock 2> /dev/null > /dev/null
+	)
+}
+
+rc_pre() {
+	mkdir -p /var/run/openvpn/tmp
+	chown -R _openvpn:_openvpn /var/run/openvpn
+}
+
+mi_cmd "$1"

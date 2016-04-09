@@ -1,0 +1,9 @@
+mi_instance=$(echo "$0" | sed -E 's/_*([^_]_?)+(__|$)//')
+
+mi_cmd() {
+	if [ _"$mi_instance" = _ ]; then
+		_rc_err "usage: $0__foo [-df] start|stop|restart|reload|check"
+	else
+		rc_cmd "$1"
+	fi
+}

@@ -1,4 +1,4 @@
-pkg_scripts=dhcp6c
+pkg_scripts=dhcp6c openvpn__chi
 dhcpd_flags=vether0
 rtadvd_flags=vether0
 dhcp6c_flags=em0
