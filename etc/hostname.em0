@@ -1,7 +1,11 @@
 inet6 eui64
 dhcp
+!/sbin/route delete 180.181.246.0/23
+!/sbin/route delete 180.181.244.0/23
 !/sbin/route delete ::/0
 !/sbin/route add ::/0 fe80::d6ca:6dff:fe0d:966d%em0
+!/sbin/route add 180.181.244.0/23 180.181.244.1
+!/sbin/route add 180.181.246.0/23 180.181.244.1
 !/etc/rc.d/dhcp6c start
 !/usr/local/sbin/dhcp6ctl stop interface em0
 !/usr/local/sbin/dhcp6ctl start interface em0
