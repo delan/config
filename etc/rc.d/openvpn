@@ -16,7 +16,7 @@ daemon_flags="--config /etc/openvpn/$mi_instance.conf \
 rc_reload=NO
 
 rc_check() {
-	stat "/var/run/openvpn/$mi_instance.pid"
+	kill -0 $(cat "/var/run/openvpn/$mi_instance.pid")
 }
 
 rc_stop() {
