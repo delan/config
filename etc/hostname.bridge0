@@ -1,3 +1,5 @@
+!/sbin/ifconfig bridge0 destroy
+!/sbin/ifconfig bridge0 create
 add vether0
 add em1
 up
