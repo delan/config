@@ -24,8 +24,6 @@ cp /var/run/openvpn/.keep var/run/openvpn
 sed -E 's/authkey .+/authkey redacted/' \
 	< /etc/hostname.pppoe0 > etc/hostname.pppoe0
 
-sed -E 's/wpakey .+/wpakey redacted/' \
-	< /etc/hostname.ral* > etc/hostname.ral*
 
 tar cvpf $ball *
 mv $ball $ball.tar
