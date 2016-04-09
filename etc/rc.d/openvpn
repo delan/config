@@ -21,9 +21,11 @@ rc_check() {
 
 rc_stop() {
 	kill -TERM $(
-		cat /var/run/openvpn/$mi_instance.pid
-		rm -f /var/run/openvpn/$mi_instance.pid 2> /dev/null > /dev/null
-		rm -f /var/run/openvpn/$mi_instance.sock 2> /dev/null > /dev/null
+		cat "/var/run/openvpn/$mi_instance.pid" \
+			2> /dev/null
+		rm -f "/var/run/openvpn/$mi_instance.pid" \
+			"/var/run/openvpn/$mi_instance.sock" \
+			2> /dev/null > /dev/null
 	)
 }
 
