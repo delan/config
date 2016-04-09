@@ -1,4 +1,4 @@
 dhcpd_flags=vether0
 rtadvd_flags=vether0
-dhcp6c_flags=pppoe0
+dhcp6c_flags=em0
 ntpd_flags=

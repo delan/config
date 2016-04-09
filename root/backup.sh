@@ -21,10 +21,6 @@ cp /root/backup.sh root
 cp /etc/openvpn/*.conf etc/openvpn
 cp /var/run/openvpn/.keep var/run/openvpn
 
-sed -E 's/authkey .+/authkey redacted/' \
-	< /etc/hostname.pppoe0 > etc/hostname.pppoe0
-
-
 tar cvpf $ball *
 mv $ball $ball.tar
 echo $ball.tar
