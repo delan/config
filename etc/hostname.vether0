@@ -1,5 +1,5 @@
 !/sbin/ifconfig vether0 destroy
 !/sbin/ifconfig vether0 create
-lladdr ce:cc:ff:ee:00:01
+lladdr ce:cc:ff:ee:80:01
 inet6 eui64
-inet 172.19.1.1 255.255.0.0
+inet 172.19.128.1 255.255.255.0
