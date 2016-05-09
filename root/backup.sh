@@ -15,6 +15,7 @@ cp /etc/pf.conf etc
 cp /etc/dhclient.conf etc
 cp /etc/dhcpd.conf etc
 cp /etc/dhcp6c.conf etc
+cp /etc/rtadvd.conf etc
 cp /etc/ntpd.conf etc
 cp /var/unbound/etc/unbound.conf var/unbound/etc
 cp /etc/rc.d/mi.subr etc/rc.d
