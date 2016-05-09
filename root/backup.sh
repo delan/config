@@ -15,11 +15,13 @@ cp /etc/pf.conf etc
 cp /etc/dhclient.conf etc
 cp /etc/dhcpd.conf etc
 cp /etc/dhcp6c.conf etc
+cp /etc/dhcp6s.conf etc
 cp /etc/rtadvd.conf etc
 cp /etc/ntpd.conf etc
 cp /var/unbound/etc/unbound.conf var/unbound/etc
 cp /etc/rc.d/mi.subr etc/rc.d
 cp /etc/rc.d/dhcp6c etc/rc.d
+cp /etc/rc.d/dhcp6s etc/rc.d
 cp /etc/rc.d/openvpn etc/rc.d
 ln -s openvpn etc/rc.d/openvpn__chi
 ln -s openvpn etc/rc.d/openvpn__venus
