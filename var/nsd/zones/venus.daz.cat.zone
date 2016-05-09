@@ -1,0 +1,6 @@
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2016050915 600 60 1814400 60 )
+@                                       3600    IN  NS      daria.daz.cat.
+@                                       3600    IN  AAAA    2401:a400:5201:8900:c612:f5ff:fede:5f2d
+host                                    3600    IN  A       172.18.36.1
+storage                                 3600    IN  A       172.18.36.75                            
+redmond                                 3600    IN  A       172.18.36.103

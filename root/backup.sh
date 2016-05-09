@@ -6,6 +6,7 @@ cd $out
 
 mkdir -p etc/rc.d etc/ssh root
 mkdir -p etc/openvpn
+mkdir -p var/nsd/etc var/nsd/zones
 mkdir -p var/unbound/etc
 cp /etc/myname etc
 cp /etc/sysctl.conf etc
@@ -18,6 +19,8 @@ cp /etc/dhcp6c.conf etc
 cp /etc/dhcp6s.conf etc
 cp /etc/rtadvd.conf etc
 cp /etc/ntpd.conf etc
+cp /var/nsd/etc/nsd.conf var/nsd/etc
+cp /var/nsd/zones/* var/nsd/zones
 cp /var/unbound/etc/unbound.conf var/unbound/etc
 cp /etc/rc.d/mi.subr etc/rc.d
 cp /etc/rc.d/dhcp6c etc/rc.d
