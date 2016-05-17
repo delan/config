@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2016050915 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2016051705 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 @                                       3600    IN  A       180.181.245.243
 daria                                   3600    IN  A       172.19.128.1
@@ -6,6 +6,10 @@ aether                                  3600    IN  A       172.19.128.11
 uranus                                  3600    IN  A       172.19.128.128
 wlan0.uranus                            3600    IN  A       172.19.128.128
 eth0.uranus                             3600    IN  A       172.19.128.129
-uranus                                  3600    IN  AAAA    2401:a400:5201:8900:2677:03ff:fe42:3100
-wlan0.uranus                            3600    IN  AAAA    2401:a400:5201:8900:2677:03ff:fe42:3100
-eth0.uranus                             3600    IN  AAAA    2401:a400:5201:8900:f2de:f1ff:fecc:cb4f
+brother                                 3600    IN  A       172.19.128.136
+venus                                   3600    IN  A       172.19.128.137
+wlan0.venus                             3600    IN  A       172.19.128.137
+storage                                 3600    IN  A       172.19.128.138
+vtnet0.storage                          3600    IN  A       172.19.128.138
+redmond                                 3600    IN  A       172.19.128.139
+netkvm1.redmond                         3600    IN  A       172.19.128.139

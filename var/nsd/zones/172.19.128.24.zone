@@ -1,6 +1,11 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2016050915 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2016051705 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 1                                       3600    IN  PTR     daria.colombo.daz.cat.
 11                                      3600    IN  PTR     aether.colombo.daz.cat.
 128                                     3600    IN  PTR     wlan0.uranus.colombo.daz.cat.
 129                                     3600    IN  PTR     eth0.uranus.colombo.daz.cat.
+131                                     3600    IN  PTR     lumia.colombo.daz.cat.
+136                                     3600    IN  PTR     brother.colombo.daz.cat.
+137                                     3600    IN  PTR     wlan0.venus.colombo.daz.cat.
+138                                     3600    IN  PTR     vtnet0.storage.colombo.daz.cat.
+139                                     3600    IN  PTR     netkvm1.redmond.colombo.daz.cat.
