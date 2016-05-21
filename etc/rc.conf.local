@@ -1,4 +1,4 @@
-pkg_scripts=dhcp6c openvpn
+pkg_scripts=dhcp6c dhcp6s openvpn
 dhcpd_flags=vether0
 rtadvd_flags=vether0
 dhcp6c_flags=em0
@@ -6,4 +6,4 @@ dhcp6s_flags=vether0
 ntpd_flags=
 unbound_flags=
 openvpn_flags=chi venus
-nsd_flags=
+nsd_flags=-c /var/nsd/etc/nsd.conf
