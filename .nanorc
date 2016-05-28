@@ -1,9 +1,11 @@
+unset backup
+unset locking
+set tabsize 8
 set nowrap
 set autoindent
 set const
 set suspend
 set smooth
-set fill 80
 include /usr/local/share/nano/c.nanorc
 include /usr/local/share/nano/css.nanorc
 include /usr/local/share/nano/html.nanorc
