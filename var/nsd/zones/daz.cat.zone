@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2016052103 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2016071601 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -8,6 +8,13 @@ opacus                                  3600    IN  A       107.191.57.160
 stratus                                 3600    IN  A       128.199.143.67
 nimbus                                  3600    IN  A       128.199.235.112
 fractus                                 3600    IN  A       64.137.160.247
+cactus0                                 3600    IN  A       64.137.198.204
+cactus1                                 3600    IN  A       64.137.195.59
+cactus2                                 3600    IN  A       64.137.195.60
+cactus3                                 3600    IN  A       64.137.195.61
+cactus4                                 3600    IN  A       64.137.195.62
+cactus5                                 3600    IN  A       64.137.195.63
+cactus6                                 3600    IN  A       64.137.195.64
 daria                                   3600    IN  A       180.181.245.243
 virbr0.venus                            3600    IN  A       172.19.129.1
 vtnet1.storage                          3600    IN  A       172.19.129.140
