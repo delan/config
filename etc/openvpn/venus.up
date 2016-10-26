@@ -1,3 +1,2 @@
 #!/bin/sh
-/sbin/ifconfig $1 link0 up
 /sbin/ifconfig bridge0 add $1
