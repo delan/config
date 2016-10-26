@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2016071601 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2016102602 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -6,15 +6,6 @@ colombo                                 3600    IN  NS      daria.daz.cat.
 @                                       3600    IN  A       107.191.57.160
 opacus                                  3600    IN  A       107.191.57.160
 stratus                                 3600    IN  A       128.199.143.67
-nimbus                                  3600    IN  A       128.199.235.112
-fractus                                 3600    IN  A       64.137.160.247
-cactus0                                 3600    IN  A       64.137.198.204
-cactus1                                 3600    IN  A       64.137.195.59
-cactus2                                 3600    IN  A       64.137.195.60
-cactus3                                 3600    IN  A       64.137.195.61
-cactus4                                 3600    IN  A       64.137.195.62
-cactus5                                 3600    IN  A       64.137.195.63
-cactus6                                 3600    IN  A       64.137.195.64
 daria                                   3600    IN  A       180.181.245.243
 virbr0.venus                            3600    IN  A       172.19.129.1
 vtnet1.storage                          3600    IN  A       172.19.129.140
@@ -23,22 +14,21 @@ netkvm2.redmond                         3600    IN  A       172.19.129.179
 @                                       3600    IN  AAAA    2001:19f0:5800:8a45:0ec4:7aff:fe15:d8a2
 opacus                                  3600    IN  AAAA    2001:19f0:5800:8a45:0ec4:7aff:fe15:d8a2
 stratus                                 3600    IN  AAAA    2400:6180:0:d0::09f:7001
-nimbus                                  3600    IN  AAAA    2400:6180:0:d0::14e:7001
-daria                                   3600    IN  AAAA    2401:a400:5201:8900:cccc:ffff:feee:8001
-uranus                                  3600    IN  AAAA    2401:a400:5201:8900:2677:03ff:fe42:3100
-wlan0.uranus                            3600    IN  AAAA    2401:a400:5201:8900:2677:03ff:fe42:3100
-eth0.uranus                             3600    IN  AAAA    2401:a400:5201:8900:f2de:f1ff:fecc:cb4f
-brother                                 3600    IN  AAAA    2401:a400:5201:8900:3205:5cff:fe63:318c
-venus                                   3600    IN  AAAA    2401:a400:5201:8900:c612:f5ff:fede:5f2d
-bmc.venus                               3600    IN  AAAA    2401:a400:5201:8900:0ec4:7aff:fe77:4a14
-wlan0.venus                             3600    IN  AAAA    2401:a400:5201:8900:c612:f5ff:fede:5f2d
+daria                                   3600    IN  AAAA    2401:a400:6200:bc00:cccc:ffff:feee:8001
+uranus                                  3600    IN  AAAA    2401:a400:6200:bc00:2677:03ff:fe42:3100
+wlan0.uranus                            3600    IN  AAAA    2401:a400:6200:bc00:2677:03ff:fe42:3100
+eth0.uranus                             3600    IN  AAAA    2401:a400:6200:bc00:f2de:f1ff:fecc:cb4f
+brother                                 3600    IN  AAAA    2401:a400:6200:bc00:3205:5cff:fe63:318c
+venus                                   3600    IN  AAAA    2401:a400:6200:bc00:cccc:ffff:feee:8023
+bmc.venus                               3600    IN  AAAA    2401:a400:6200:bc00:0ec4:7aff:fe77:4a14
+bridge13.venus                          3600    IN  AAAA    2401:a400:6200:bc00:cccc:ffff:feee:8023
 virbr0.venus                            3600    IN  AAAA    fd36:09ef:4322:29ce::1
 bmc.virbr0.venus                        3600    IN  AAAA    fd36:09ef:4322:29ce:0ec4:7aff:fe77:4a14
-storage                                 3600    IN  AAAA    2401:a400:5201:8900:5054:00ff:fe01:4018
-vtnet0.storage                          3600    IN  AAAA    2401:a400:5201:8900:5054:00ff:fe01:4018
+storage                                 3600    IN  AAAA    2401:a400:6200:bc00:5054:00ff:fe01:4018
+vtnet0.storage                          3600    IN  AAAA    2401:a400:6200:bc00:5054:00ff:fe01:4018
 vtnet1.storage                          3600    IN  AAAA    fd36:09ef:4322:29ce:5054:00ff:fe11:6c8b
-redmond                                 3600    IN  AAAA    2401:a400:5201:8900:44bd:3ad3:7069:91bc
-netkvm1.redmond                         3600    IN  AAAA    2401:a400:5201:8900:44bd:3ad3:7069:91bc
+redmond                                 3600    IN  AAAA    2401:a400:6200:bc00:44bd:3ad3:7069:91bc
+netkvm1.redmond                         3600    IN  AAAA    2401:a400:6200:bc00:44bd:3ad3:7069:91bc
 netkvm2.redmond                         3600    IN  AAAA    fd36:09ef:4322:29ce:ed0c:2ae5:9d3d:9e98
 bucket                                  3600    IN  CNAME   opacus.daz.cat.
 @                                       3600    IN  TXT     "keybase-site-verification=zzcGEacJisGLAhzLlZC1IQ_4swmfqh1XyRc0a5YLROc"
