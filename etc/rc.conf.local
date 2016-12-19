@@ -6,4 +6,3 @@ dhcp6s_flags=vether0
 ntpd_flags=
 unbound_flags=
 openvpn_flags=chi venus
-nsd_flags=-c /var/nsd/etc/nsd.conf
