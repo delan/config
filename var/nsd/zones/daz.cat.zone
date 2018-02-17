@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2017062901 600 60 1814400 60 )
+@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2018021701 600 60 1814400 60 )
 @                                       3600    IN  NS      opacus.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -32,4 +32,5 @@ netkvm1.redmond                         3600    IN  AAAA    2401:a400:6200:bc00:
 netkvm2.redmond                         3600    IN  AAAA    fd36:09ef:4322:29ce:ed0c:2ae5:9d3d:9e98
 bucket                                  3600    IN  CNAME   opacus.daz.cat.
 charming                                3600    IN  CNAME   opacus.daz.cat.
+toot                                    3600    IN  CNAME   opacus.daz.cat.
 @                                       3600    IN  TXT     "keybase-site-verification=zzcGEacJisGLAhzLlZC1IQ_4swmfqh1XyRc0a5YLROc"
