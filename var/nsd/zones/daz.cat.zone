@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2018071301 600 60 1814400 60 )
+@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2018073101 600 60 1814400 60 )
 @                                       3600    IN  NS      opacus.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -41,3 +41,16 @@ transalary                              3600    IN  A       149.28.170.227
 transalary                              3600    IN  AAAA    2001:19f0:5801:0700:5400:01ff:fe7d:6779
 @                                       3600    IN  TXT     "keybase-site-verification=zzcGEacJisGLAhzLlZC1IQ_4swmfqh1XyRc0a5YLROc"
 @                                       3600    IN  TXT     "keybase-site-verification=0TvQVAHxVz9UqJ_ce5XC7HcDjm05AVbmGtTtjpIvKS0"
+4D075BE531BD1._domainkey.opacus         3600    IN  TXT     (
+        "v=DKIM1; g=*; k=rsa; p=MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA6"
+        "ZODP6DTVkjobGjtpKP5tdmLDcfX2E4/VAtoJ714Mz836GJaClCGUwsqSMyVhiHMV8rn4"
+        "0JsSQBbcDX+Adu/XSfhj4OB33tUe5UspuD6kCy6qYOjdEwm9fitRs8c95kC5lIw0LEsQ"
+        "qmHUhgISQoWW3IAkm4pBswksCy7qtu7DZspU0qTXf4C4czfpIcEJ9oT/YMwJuXpbSawU"
+        "KXHWHwsTba7tU2ivtHIA+icud8jZQSeecGZkMFVVgwfuzQBUTobBqN7qEL0WpeXUreFb"
+        "rkMg5yYkCuQdRGd6bA7jcgrIxc1EIiJCAheBFFirK6hf66sppizolPtA1UyBqnF3V6d5"
+        "Gr0bIR1GtLFqQIILFVs+CkXtgcdQ6gOoS+WtU4Ut6N9s64+PWkkrwKP9RVmjuCvmqm0c"
+        "jEuVCahgUVvpF8WmtGg9pwUmvX+cY+y5hRRYbuA+iI1lH93WV2hIH4ljkFaczshLn/Ab"
+        "YzrV0J+N8tQBBHjt/cu+aQiUq9Hzg+XV5kYDiodN9DgpdlQ5hDAbRud9FNB3XDM9eMkM"
+        "5l17sX4SjDjRT6OihniO1sO6AzPOUhUM1THsk8dk1F04WP0TZAQ5+GKVSbSRdZ8ByL/V"
+        "0zgtk1Lh4rIVcApl59L91N7LlYSPfRo/NhK8/hd1aBWwp2EyFgF/M0cqhwv7epOyq1xN"
+        "5kCAwEAAQ==")
