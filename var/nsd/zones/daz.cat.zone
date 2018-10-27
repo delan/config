@@ -1,8 +1,8 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2018073102 600 60 1814400 60 )
+@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2018102701 600 60 1814400 60 )
 @                                       3600    IN  NS      opacus.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
-colombo                                 3600    IN  NS      daria.daz.cat.
+home                                    3600    IN  NS      opacus.daz.cat.
 @                                       3600    IN  CAA 128 issue "letsencrypt.org"
 @                                       3600    IN  CAA 128 issuewild ";"
 @                                       3600    IN  CAA 0   iodef "mailto:delan@azabani.com"
@@ -10,7 +10,7 @@ colombo                                 3600    IN  NS      daria.daz.cat.
 opacus                                  3600    IN  A       107.191.57.160
 stratus                                 3600    IN  A       128.199.143.67
 flipflopper.stratus                     3600    IN  CNAME   stratus.daz.cat.
-daria                                   3600    IN  A       180.181.245.243
+daria                                   3600    IN  A       203.129.24.131
 virbr0.venus                            3600    IN  A       172.19.129.1
 vtnet1.storage                          3600    IN  A       172.19.129.140
 bmc.virbr0.venus                        3600    IN  A       172.19.129.155
