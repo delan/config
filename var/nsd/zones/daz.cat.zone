@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2018103001 600 60 1814400 60 )
+@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2018103002 600 60 1814400 60 )
 @                                       3600    IN  NS      opacus.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -19,9 +19,9 @@ netkvm2.redmond                         3600    IN  A       172.19.129.179
 opacus                                  3600    IN  AAAA    2001:19f0:5800:8a45:0ec4:7aff:fe15:d8a2
 stratus                                 3600    IN  AAAA    2400:6180:0:d0::09f:7001
 daria                                   3600    IN  AAAA    2600:70ff:c091::cccc:ffff:feee:8001
-uranus                                  3600    IN  AAAA    2600:70ff:c091::2677:03ff:fe42:3100
-wlan0.uranus                            3600    IN  AAAA    2600:70ff:c091::2677:03ff:fe42:3100
-eth0.uranus                             3600    IN  AAAA    2600:70ff:c091::f2de:f1ff:fecc:cb4f
+uranus                                  3600    IN  AAAA    2600:70ff:c091::8a53:2eff:fe98:6e3a
+wlp4s0.uranus                           3600    IN  AAAA    2600:70ff:c091::8a53:2eff:fe98:6e3a
+enp5s0.uranus                           3600    IN  AAAA    2600:70ff:c091::16da:e9ff:fe0c:223c
 brother                                 3600    IN  AAAA    2600:70ff:c091::3205:5cff:fe63:318c
 venus                                   3600    IN  AAAA    2600:70ff:c091::cccc:ffff:feee:8023
 bmc.venus                               3600    IN  AAAA    2600:70ff:c091::0ec4:7aff:fe77:4a14
