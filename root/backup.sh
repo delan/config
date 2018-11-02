@@ -9,6 +9,7 @@ mkdir -p etc/openvpn
 mkdir -p var/nsd/etc var/nsd/zones
 mkdir -p var/unbound/etc
 cp /etc/myname etc
+cp /etc/installurl etc
 cp /etc/sysctl.conf etc
 cp /etc/resolv.conf etc
 cp /etc/hostname.* etc
@@ -17,7 +18,7 @@ cp /etc/dhclient.conf etc
 cp /etc/dhcpd.conf etc
 cp /etc/dhcp6c.conf etc
 cp /etc/dhcp6s.conf etc
-cp /etc/rtadvd.conf etc
+cp /etc/rad.conf etc
 cp /etc/ntpd.conf etc
 cp /var/nsd/etc/nsd.conf var/nsd/etc
 cp /var/nsd/zones/* var/nsd/zones
