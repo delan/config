@@ -6,3 +6,4 @@ rad_flags=
 ntpd_flags=
 unbound_flags=
 openvpn_flags=chi venus
+nsd_flags=-c /var/nsd/etc/nsd.conf

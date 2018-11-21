@@ -1,8 +1,8 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2018112101 600 60 1814400 60 )
-@                                       3600    IN  NS      opacus.daz.cat.
-@                                       3600    IN  NS      ns2.he.net.
-@                                       3600    IN  NS      ns2.afraid.org.
-home                                    3600    IN  NS      opacus.daz.cat.
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2018112102 600 60 1814400 60 )
+@                                       3600    IN  NS      daria.daz.cat.
+; @                                       3600    IN  NS      ns2.he.net.
+; @                                       3600    IN  NS      ns2.afraid.org.
+home                                    3600    IN  NS      daria.daz.cat.
 @                                       3600    IN  CAA 128 issue "letsencrypt.org"
 @                                       3600    IN  CAA 128 issuewild ";"
 @                                       3600    IN  CAA 0   iodef "mailto:delan@azabani.com"
