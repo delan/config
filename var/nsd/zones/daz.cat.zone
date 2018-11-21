@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2018103002 600 60 1814400 60 )
+@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2018112101 600 60 1814400 60 )
 @                                       3600    IN  NS      opacus.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -18,21 +18,21 @@ netkvm2.redmond                         3600    IN  A       172.19.129.179
 @                                       3600    IN  AAAA    2001:19f0:5800:8a45:0ec4:7aff:fe15:d8a2
 opacus                                  3600    IN  AAAA    2001:19f0:5800:8a45:0ec4:7aff:fe15:d8a2
 stratus                                 3600    IN  AAAA    2400:6180:0:d0::09f:7001
-daria                                   3600    IN  AAAA    2600:70ff:c091::cccc:ffff:feee:8001
-uranus                                  3600    IN  AAAA    2600:70ff:c091::8a53:2eff:fe98:6e3a
-wlp4s0.uranus                           3600    IN  AAAA    2600:70ff:c091::8a53:2eff:fe98:6e3a
-enp5s0.uranus                           3600    IN  AAAA    2600:70ff:c091::16da:e9ff:fe0c:223c
-brother                                 3600    IN  AAAA    2600:70ff:c091::3205:5cff:fe63:318c
-venus                                   3600    IN  AAAA    2600:70ff:c091::cccc:ffff:feee:8023
-bmc.venus                               3600    IN  AAAA    2600:70ff:c091::0ec4:7aff:fe77:4a14
-bridge13.venus                          3600    IN  AAAA    2600:70ff:c091::cccc:ffff:feee:8023
+daria                                   3600    IN  AAAA    2403:5800:7100:2c00:cccc:ffff:feee:8001
+uranus                                  3600    IN  AAAA    2403:5800:7100:2c00:8a53:2eff:fe98:6e3a
+wlp4s0.uranus                           3600    IN  AAAA    2403:5800:7100:2c00:8a53:2eff:fe98:6e3a
+enp5s0.uranus                           3600    IN  AAAA    2403:5800:7100:2c00:16da:e9ff:fe0c:223c
+brother                                 3600    IN  AAAA    2403:5800:7100:2c00:3205:5cff:fe63:318c
+venus                                   3600    IN  AAAA    2403:5800:7100:2c00:cccc:ffff:feee:8023
+bmc.venus                               3600    IN  AAAA    2403:5800:7100:2c00:0ec4:7aff:fe77:4a14
+bridge13.venus                          3600    IN  AAAA    2403:5800:7100:2c00:cccc:ffff:feee:8023
 virbr0.venus                            3600    IN  AAAA    fd36:09ef:4322:29ce::1
 bmc.virbr0.venus                        3600    IN  AAAA    fd36:09ef:4322:29ce:0ec4:7aff:fe77:4a14
-storage                                 3600    IN  AAAA    2600:70ff:c091::5054:00ff:fe01:4018
-vtnet0.storage                          3600    IN  AAAA    2600:70ff:c091::5054:00ff:fe01:4018
+storage                                 3600    IN  AAAA    2403:5800:7100:2c00:5054:00ff:fe01:4018
+vtnet0.storage                          3600    IN  AAAA    2403:5800:7100:2c00:5054:00ff:fe01:4018
 vtnet1.storage                          3600    IN  AAAA    fd36:09ef:4322:29ce:5054:00ff:fe11:6c8b
-redmond                                 3600    IN  AAAA    2600:70ff:c091::44bd:3ad3:7069:91bc
-netkvm1.redmond                         3600    IN  AAAA    2600:70ff:c091::44bd:3ad3:7069:91bc
+redmond                                 3600    IN  AAAA    2403:5800:7100:2c00:44bd:3ad3:7069:91bc
+netkvm1.redmond                         3600    IN  AAAA    2403:5800:7100:2c00:44bd:3ad3:7069:91bc
 netkvm2.redmond                         3600    IN  AAAA    fd36:09ef:4322:29ce:ed0c:2ae5:9d3d:9e98
 bucket                                  3600    IN  CNAME   opacus.daz.cat.
 charming                                3600    IN  CNAME   opacus.daz.cat.

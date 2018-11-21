@@ -2,5 +2,4 @@
 !/sbin/ifconfig vether0 create
 lladdr ce:cc:ff:ee:80:01
 inet6 eui64 -soii
-inet6 alias 2600:70ff:c091::cccc:ffff:feee:8001 64
 inet 172.19.128.1 255.255.255.0

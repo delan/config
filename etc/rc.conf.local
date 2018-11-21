@@ -1,6 +1,7 @@
-pkg_scripts=dhcp6s openvpn
+pkg_scripts=dhcp6s dhcp6c openvpn
 dhcpd_flags=vether0
 dhcp6s_flags=vether0
+dhcp6c_flags=em0
 rad_flags=
 ntpd_flags=
 unbound_flags=
