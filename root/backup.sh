@@ -7,6 +7,7 @@ cd $out
 mkdir -p etc/rc.d etc/ssh root
 mkdir -p etc/mail
 mkdir -p etc/openvpn
+mkdir -p etc/.local/DKIM
 mkdir -p var/nsd/etc var/nsd/zones
 mkdir -p var/unbound/etc
 cp /etc/myname etc
@@ -33,6 +34,9 @@ ln -s openvpn etc/rc.d/openvpn__venus
 cp /etc/rc.conf.local etc
 cp /etc/ssh/sshd_config etc/ssh
 cp /etc/mail/smtpd.conf etc/mail
+cp /etc/dkimproxy_in.conf etc
+cp /etc/dkimproxy_out.conf etc
+cp /etc/.local/DKIM/*.txt etc/.local/DKIM
 cp /root/backup.sh root
 cp /etc/openvpn/*.conf etc/openvpn
 cp /etc/openvpn/*.up etc/openvpn

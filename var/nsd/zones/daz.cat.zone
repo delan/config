@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2018121601 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2018121602 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -42,6 +42,7 @@ toot                                    3600    IN  CNAME   opacus.daz.cat.
 opacus                                  3600    IN  TXT     "v=spf1 a -all"
 daria                                   3600    IN  TXT     "v=spf1 a -all"
 _dmarc.opacus                           3600    IN  TXT     "v=DMARC1; p=reject; rua=mailto:delan+dmarc@azabani.com"
+_dmarc.daria                            3600    IN  TXT     "v=DMARC1; p=reject; rua=mailto:delan+dmarc@azabani.com"
 4D075BE531BD1._domainkey.opacus         3600    IN  TXT     (
         "v=DKIM1; g=*; k=rsa; p=MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA6"
         "ZODP6DTVkjobGjtpKP5tdmLDcfX2E4/VAtoJ714Mz836GJaClCGUwsqSMyVhiHMV8rn4"
@@ -55,3 +56,16 @@ _dmarc.opacus                           3600    IN  TXT     "v=DMARC1; p=reject;
         "5l17sX4SjDjRT6OihniO1sO6AzPOUhUM1THsk8dk1F04WP0TZAQ5+GKVSbSRdZ8ByL/V"
         "0zgtk1Lh4rIVcApl59L91N7LlYSPfRo/NhK8/hd1aBWwp2EyFgF/M0cqhwv7epOyq1xN"
         "5kCAwEAAQ==")
+ADFAF306CC552._domainkey.daria          3600    IN  TXT     (
+        "v=DKIM1; k=rsa; p=MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAx1RCz7"
+        "1Gwc5D+V4K8+LMIYXLpMLEDpcfY2YENndE/VHOw+ZtRQYwBpzNvYkZuXB1vG4AdYEYTK"
+        "Nfhc8Ddxq+DYEfS0qGqf5Hdxxar8WczuI9YAyBHN1nYKesRkVuP6SO0SWNNk8IAmcoMn"
+        "168JXBElPq2TodhSOzhYrESGDyQaQFTjiZsimlICjqvyzHd6BmAC87E6ZzBvLQnYS1dP"
+        "aYugwRCJyucLrdvXJkO37hvAvv+rSUOYVwyMfFnUhCA0teM2YWtS2d1kOcJZ14w6Sb6y"
+        "alq0wGg1QjfRiSospLVpqRx5AiWEPEqL6VfmUjbOrileFbN4WejHJF/1ff1Nl6xQqcB/"
+        "kfME49iYzAon0Z8d4c3x1SZh+kCNNk1cfEltKyDzGZsDdKTALvM/A1RUIdymWY2lhRHh"
+        "GSv+vE3XqdETmZWuXwvp10ghsupX0Pyi74J3Uq6OWvexb86xIwzSmSsdroPPQL6s9V8P"
+        "gQJSeEYJlljbxG76GZlhfFGY20JerRp16yCGQ23zICfZNcdi82uT94rmrPaqBOfr3QJA"
+        "SdPVvQeCBgEv/WjGQTySjqgoK4vPir+663Dw7oeL9DAewuuiKTjbnoDov+vGYF25j/mt"
+        "PJ7EOWPr2SE0Dq+sVAlhJY61/8zmIkGoT8sicTPQWGFc5fYFjZZvKIS3BbaaHqGbECAw"
+        "EAAQ==")
