@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2018112802 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2018121601 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -40,6 +40,7 @@ toot                                    3600    IN  CNAME   opacus.daz.cat.
 @                                       3600    IN  TXT     "keybase-site-verification=zzcGEacJisGLAhzLlZC1IQ_4swmfqh1XyRc0a5YLROc"
 @                                       3600    IN  TXT     "keybase-site-verification=0TvQVAHxVz9UqJ_ce5XC7HcDjm05AVbmGtTtjpIvKS0"
 opacus                                  3600    IN  TXT     "v=spf1 a -all"
+daria                                   3600    IN  TXT     "v=spf1 a -all"
 _dmarc.opacus                           3600    IN  TXT     "v=DMARC1; p=reject; rua=mailto:delan+dmarc@azabani.com"
 4D075BE531BD1._domainkey.opacus         3600    IN  TXT     (
         "v=DKIM1; g=*; k=rsa; p=MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA6"
