@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2018112102 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2019011801 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 @                                       3600    IN  A       203.129.24.131
 daria                                   3600    IN  A       172.19.128.1
@@ -11,6 +11,7 @@ wlp4s0.uranus                           3600    IN  A       172.19.128.33
 bmc.venus                               3600    IN  A       172.19.128.34
 venus                                   3600    IN  A       172.19.128.35
 bridge13.venus                          3600    IN  A       172.19.128.35
+Uranium                                 3600    IN  A       172.19.128.36
 storage                                 3600    IN  A       172.19.128.64
 vtnet0.storage                          3600    IN  A       172.19.128.64
 redmond                                 3600    IN  A       172.19.128.65
