@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2019022200 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2019022201 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -11,6 +11,7 @@ opacus                                  3600    IN  A       107.191.57.160
 stratus                                 3600    IN  A       128.199.143.67
 flipflopper.stratus                     3600    IN  CNAME   stratus.daz.cat.
 daria                                   3600    IN  A       203.129.24.131
+Nobelium                                3600    IN  A       203.129.24.131
 virbr0.venus                            3600    IN  A       172.19.129.1
 vtnet1.storage                          3600    IN  A       172.19.129.140
 bmc.virbr0.venus                        3600    IN  A       172.19.129.155
