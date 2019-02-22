@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2019011800 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2019022200 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -25,6 +25,8 @@ enp5s0.uranus                           3600    IN  AAAA    2403:5800:7100:2c00:
 brother                                 3600    IN  AAAA    2403:5800:7100:2c00:3205:5cff:fe63:318c
 venus                                   3600    IN  AAAA    2403:5800:7100:2c00:cccc:ffff:feee:8023
 Uranium                                 3600    IN  AAAA    2403:5800:7100:2c00:9f44:5897:6fb6:f568
+Nobelium                                3600    IN  AAAA    2403:5800:7100:2c00:668a:614d:120d:092d
+wlp8s0.Nobelium                         3600    IN  AAAA    2403:5800:7100:2c00:668a:614d:120d:092d
 bmc.venus                               3600    IN  AAAA    2403:5800:7100:2c00:0ec4:7aff:fe77:4a14
 bridge13.venus                          3600    IN  AAAA    2403:5800:7100:2c00:cccc:ffff:feee:8023
 virbr0.venus                            3600    IN  AAAA    fd36:09ef:4322:29ce::1
