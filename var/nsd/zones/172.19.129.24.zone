@@ -1,6 +1,6 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2018112102 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2019030700 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 1                                       3600    IN  PTR     virbr0.venus.daz.cat.
-140                                     3600    IN  PTR     vtnet1.storage.daz.cat.
+205                                     3600    IN  PTR     vtnet1.storage.daz.cat.
 155                                     3600    IN  PTR     bmc.virbr0.venus.daz.cat.
 179                                     3600    IN  PTR     netkvm2.redmond.daz.cat.
