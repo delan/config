@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2019030700 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2019030900 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -15,7 +15,7 @@ Nobelium                                3600    IN  A       203.129.24.131
 virbr0.venus                            3600    IN  A       172.19.129.1
 vtnet1.storage                          3600    IN  A       172.19.129.205
 bmc.virbr0.venus                        3600    IN  A       172.19.129.155
-netkvm2.redmond                         3600    IN  A       172.19.129.179
+netkvm2.redmond                         3600    IN  A       172.19.129.240
 @                                       3600    IN  AAAA    2001:19f0:5800:8a45:0ec4:7aff:fe15:d8a2
 opacus                                  3600    IN  AAAA    2001:19f0:5800:8a45:0ec4:7aff:fe15:d8a2
 stratus                                 3600    IN  AAAA    2400:6180:0:d0::09f:7001
@@ -36,9 +36,9 @@ bmc.virbr0.venus                        3600    IN  AAAA    fd36:09ef:4322:29ce:
 storage                                 3600    IN  AAAA    2403:5800:7100:2c00:5054:00ff:fe01:4018
 vtnet0.storage                          3600    IN  AAAA    2403:5800:7100:2c00:5054:00ff:fe01:4018
 vtnet1.storage                          3600    IN  AAAA    fd36:09ef:4322:29ce:5054:00ff:fe11:6c8b
-redmond                                 3600    IN  AAAA    2403:5800:7100:2c00:44bd:3ad3:7069:91bc
-netkvm1.redmond                         3600    IN  AAAA    2403:5800:7100:2c00:44bd:3ad3:7069:91bc
-netkvm2.redmond                         3600    IN  AAAA    fd36:09ef:4322:29ce:ed0c:2ae5:9d3d:9e98
+redmond                                 3600    IN  AAAA    2403:5800:7100:2c00:b18b:9a7f:22a4:ed4c
+netkvm1.redmond                         3600    IN  AAAA    2403:5800:7100:2c00:b18b:9a7f:22a4:ed4c
+netkvm2.redmond                         3600    IN  AAAA    fd36:09ef:4322:29ce:41d8:84ea:b1fe:fa17
 bucket                                  3600    IN  CNAME   opacus.daz.cat.
 charming                                3600    IN  CNAME   opacus.daz.cat.
 toot                                    3600    IN  CNAME   opacus.daz.cat.
