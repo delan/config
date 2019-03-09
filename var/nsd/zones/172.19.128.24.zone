@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2019022700 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2019031000 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 1                                       3600    IN  PTR     daria.home.daz.cat.
 11                                      3600    IN  PTR     aether.home.daz.cat.
@@ -8,7 +8,7 @@
 33                                      3600    IN  PTR     wlp4s0.uranus.home.daz.cat.
 34                                      3600    IN  PTR     bmc.venus.home.daz.cat.
 35                                      3600    IN  PTR     bridge13.venus.home.daz.cat.
-36                                      3600    IN  PTR     Uranium.home.daz.cat.
+36                                      3600    IN  PTR     bridge0.uranium.home.daz.cat.
 37                                      3600    IN  PTR     wlp8s0.Nobelium.home.daz.cat.
 38                                      3600    IN  PTR     wlp0s20u2.Nobelium.home.daz.cat.
 64                                      3600    IN  PTR     vtnet0.storage.home.daz.cat.
