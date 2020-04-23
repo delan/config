@@ -1,17 +1,19 @@
-# Use emacs line editing
+test -e ~/.nix-profile/etc/profile.d/hm-session-vars.sh \
+&& . ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+
+test -e ~/.profile.private \
+&& . ~/.profile.private
+
+# FreeBSD
 set -o emacs
 
 # Language and encoding
 export LANG=en_AU.UTF-8
 
-# Executable search path
-export PATH="$HOME/bin"
-export PATH="$PATH:/usr/local/texlive/2014/bin/universal-darwin"
-export PATH="$PATH:/usr/local/bin:/usr/local/sbin"
-export PATH="$PATH:/usr/bin:/usr/sbin"
-export PATH="$PATH:/usr/X11R6/bin:/usr/games"
-export PATH="$PATH:/bin:/sbin"
-export PATH="$PATH:."
+export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.emacs.d/bin"
+export PATH="$PATH:$HOME/.npm-global/bin"
 
 if ps -p $$ | egrep -q '[ (/]sh'; then
 	green="$(printf '\e[32m')"
@@ -37,23 +39,23 @@ export EDITOR=vim
 # Force non-login POSIX /bin/sh to execute this file
 export ENV=~/.profile
 
-# Set default package mirror for OpenBSD
-export PKG_PATH=ftp://ftp.ii.net/pub/OpenBSD/$(uname -r)/packages/$(uname -m)/
+# OpenBSD: use installurl(5) instead
+# export PKG_PATH=ftp://ftp.ii.net/pub/OpenBSD/$(uname -r)/packages/$(uname -m)/
 
 # Cajole X11 applications who prefer .Xdefaults into using .Xresources
 export XENVIRONMENT=$HOME/.Xresources
 
-# Fire up gpg-agent if it's not already running
-gpg_agent_env="$HOME/.gnupg/gpg-agent.env"
-if [ -e "$gpg_agent_env" ] && kill -0 $(
-	grep GPG_AGENT_INFO "$gpg_agent_env" | cut -d ':' -f 2
-) 2>/dev/null; then
-	eval "$(cat "$gpg_agent_env")"
-else
-	eval "$(
-		gpg-agent --daemon --enable-ssh-support \
-			--write-env-file "$gpg_agent_env"
-	)"
-fi
-export GPG_AGENT_INFO  # the env file does not contain the export statement
-export SSH_AUTH_SOCK   # enable gpg-agent for ssh
+# # Fire up gpg-agent if it's not already running
+# gpg_agent_env="$HOME/.gnupg/gpg-agent.env"
+# if [ -e "$gpg_agent_env" ] && kill -0 $(
+# 	grep GPG_AGENT_INFO "$gpg_agent_env" | cut -d ':' -f 2
+# ) 2>/dev/null; then
+# 	eval "$(cat "$gpg_agent_env")"
+# else
+# 	eval "$(
+# 		gpg-agent --daemon --enable-ssh-support \
+# 			--write-env-file "$gpg_agent_env"
+# 	)"
+# fi
+# export GPG_AGENT_INFO  # the env file does not contain the export statement
+# export SSH_AUTH_SOCK   # enable gpg-agent for ssh
