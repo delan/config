@@ -1,16 +1,19 @@
 Xft.antialias: 1
 Xft.rgba: none
-Xft.lcdfilter: lcddefault
-Xft.hinting: 1
-Xft.autohint: 1
-Xft.hintstyle: hintslight
+Xft.lcdfilter: lcdnone
+Xft.hinting: 0
+Xft.autohint: 0
+Xft.hintstyle: hintnone
 
-XTerm*loginShell:true
-XTerm*faceName:ProggyCleanTT
-XTerm*faceSize:12
-XTerm*allowBoldFonts:false
-XTerm*rightScrollBar:true
-XTerm*termName:xterm-256color
+*xterm*loginShell:true
+! *xterm*faceName:ProggyCleanTT
+! *xterm*faceSize:12
+*xterm*renderFont:true
+*xterm*faceName:Inconsolata
+*xterm*faceSize:13
+*xterm*allowBoldFonts:false
+*xterm*rightScrollBar:true
+*xterm*termName:xterm-256color
 
 ! Molokai theme
 *xterm*background: #101010
