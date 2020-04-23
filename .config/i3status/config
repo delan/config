@@ -1,0 +1,27 @@
+order += "battery all"
+order += "volume master"
+order += "tztime local"
+
+general {
+	output_format = "i3bar"
+}
+
+battery all {
+	format = "%percentage%status%remaining"
+	format_down = ""
+	status_chr = " + "
+	status_bat = " − "
+	status_unk = " "
+	status_full = " "
+
+	threshold_type = time
+	low_threshold = 30
+}
+
+volume master {
+	format = "%volume"
+}
+
+tztime local {
+	format = "%F %T"
+}
