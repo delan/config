@@ -1,6 +1,6 @@
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=999999
+SAVEHIST=999999
 
 precmd() {
 	print -Pn "\e]0;%n@%m %? %~\a"
@@ -40,25 +40,5 @@ zstyle :compinstall filename '/home/delan/.zshrc'
 autoload -Uz compinit
 compinit
 
-alias   ls='/bin/ls'
-alias   sl='/bin/ls'
-alias    a='/bin/ls -a'
-alias   la='/bin/ls -a'
-alias   al='/bin/ls -a'
-alias    l='/bin/ls -la'
-alias   ll='/bin/ls -la'
-alias naon='nano'
-alias path='echo $PATH'
-alias lz='. ~/.zshrc'
-alias ez='nano ~/.zshrc'
-alias mount='sudo mount'
-alias umount='sudo umount'
-alias systemctl='sudo systemctl'
-alias dpkg='sudo dpkg'
-alias apt='sudo apt'
-alias get='sudo apt-get'
-alias cache='sudo apt-cache'
-alias show='sudo apt-cache show'
-alias policy='sudo apt-cache policy'
-
-. ~/.profile
+# NixOS: interactive
+export NIX_AUTO_RUN=1
