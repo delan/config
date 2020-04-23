@@ -1,51 +1,117 @@
 servers = (
 	{
 		address = "irc.comssa.org.au";
+		chatnet = "ComSSA";
+		port = "7797";
+		autoconnect = "no";
+		use_ssl = "yes";
+		ssl_verify = "yes";
+		password = "delan:[redacted]";
+	},
+	{
+		address = "opacus.daz.cat";
 		chatnet = "UniIRC";
 		port = "6420";
-		autoconnect = "yes";
+		autoconnect = "no";
 		use_ssl = "yes";
-		password = "delan-uniirc:[REDACTED]";
+		ssl_verify = "yes";
+		password = "delan/UniIRC:[redacted]";
 	},
 	{
-		address = "irc.comssa.org.au";
-		chatnet = "SynIRC";
-		port = "6420";
-		autoconnect = "yes";
-		use_ssl = "yes";
-		password = "delan-synirc:[REDACTED]";
-	},
-	{
-		address = "irc.comssa.org.au";
+		address = "opacus.daz.cat";
 		chatnet = "Freenode";
 		port = "6420";
-		autoconnect = "yes";
+		autoconnect = "no";
 		use_ssl = "yes";
-		password = "delan-freenode:[REDACTED]";
+		ssl_verify = "yes";
+		password = "delan/Freenode:[redacted]";
 	},
 	{
-		address = "irc.comssa.org.au";
+		address = "opacus.daz.cat";
+		chatnet = "synIRC";
+		port = "6420";
+		autoconnect = "no";
+		use_ssl = "yes";
+		ssl_verify = "yes";
+		password = "delan/synIRC:[redacted]";
+	},
+	{
+		address = "opacus.daz.cat";
 		chatnet = "What";
 		port = "6420";
-		autoconnect = "yes";
+		autoconnect = "no";
 		use_ssl = "yes";
-		password = "delan-what:[REDACTED]";
+		ssl_verify = "yes";
+		password = "delan/What:[redacted]";
+	},
+	{
+		address = "opacus.daz.cat";
+		chatnet = "P2P-NET";
+		port = "6420";
+		autoconnect = "no";
+		use_ssl = "yes";
+		ssl_verify = "yes";
+		password = "delan/P2P-NET:[redacted]";
+	},
+	{
+		address = "opacus.daz.cat";
+		chatnet = "rippy";
+		port = "6420";
+		autoconnect = "no";
+		use_ssl = "yes";
+		ssl_verify = "yes";
+		password = "delan/rippy:[redacted]";
+	},
+	{
+		address = "opacus.daz.cat";
+		chatnet = "WACAN";
+		port = "6420";
+		autoconnect = "no";
+		use_ssl = "yes";
+		ssl_verify = "yes";
+		password = "delan/WACAN:[redacted]";
+	},
+	{
+		address = "opacus.daz.cat";
+		chatnet = "Rizon";
+		port = "6420";
+		autoconnect = "no";
+		use_ssl = "yes";
+		ssl_verify = "yes";
+		password = "delan/Rizon:[redacted]";
+	},
+	{
+		address = "opacus.daz.cat";
+		chatnet = "CySCA";
+		port = "6420";
+		autoconnect = "no";
+		use_ssl = "yes";
+		ssl_verify = "yes";
+		password = "delan/CySCA:[redacted]";
+	},
+	{
+		address = "opacus.daz.cat";
+		chatnet = "Mozilla";
+		port = "6420";
+		autoconnect = "no";
+		use_ssl = "yes";
+		ssl_verify = "yes";
+		password = "delan/Mozilla:[redacted]";
 	}
 );
 
 chatnets = {
-	UniIRC = {
-		type = "IRC";
-	};
-	SynIRC = {
-		type = "IRC";
-	};
-	Freenode = {
-		type = "IRC";
-	};
-	What = {
-		type = "IRC";
-	};
+	UniIRC = { type = "IRC"; };
+	Freenode = { type = "IRC"; };
+	synIRC = { type = "IRC"; };
+	What = { type = "IRC"; };
+	WACAN = { type = "IRC"; };
+	Rizon = { type = "IRC"; };
+	CySCA = { type = "IRC"; };
+	"P2P-NET" = { type = "IRC"; };
+	rippy = { type = "IRC"; };
+	ComSSA = { type = "IRC"; };
+	Mozilla = { type = "IRC"; };
 };
 
 channels = (
@@ -65,6 +131,7 @@ settings = {
 		beep_when_away = "yes";
 		beep_when_window_active = "yes";
 	};
+	"perl/core/scripts" = { trackbar_string = "━"; };
 };
 
 hilights = (
