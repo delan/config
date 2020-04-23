@@ -8,15 +8,17 @@
   ];
 
   options.internal = {
-    hostName = mkOption { type = types.str; };
     hostId = mkOption { type = types.str; };
+    hostName = mkOption { type = types.str; };
+    domain = mkOption { type = types.str; };
     luksDevice = mkOption { type = types.str; };
     initialUser = mkOption { type = types.str; };
   };
 
   config = {
-    networking.hostName = config.internal.hostName;
     networking.hostId = config.internal.hostId;
+    networking.hostName = config.internal.hostName;
+    networking.domain = config.internal.domain;
     system.stateVersion = "18.09";
 
     users.users."${config.internal.initialUser}" = {

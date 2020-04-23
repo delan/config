@@ -2,8 +2,9 @@
   imports = [ ./lib ];
 
   internal = {
-    hostName = "uranus.daz.cat";
     hostId = "2C562D26";
+    hostName = "uranus";
+    domain = "daz.cat";
     luksDevice = "/dev/disk/by-uuid/591f63f0-a756-4696-b68c-784749e3dff7";
     initialUser = "delan";
 
