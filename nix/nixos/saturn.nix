@@ -1,5 +1,5 @@
 { config, pkgs, lib, options, modulesPath }: {
-  imports = [ ./lib ];
+  imports = [ <nixos-hardware/lenovo/thinkpad/x1-extreme/gen2> ./lib ];
 
   internal = {
     hostId = "7A27D153";
@@ -16,6 +16,8 @@
     interactive = true;
     laptop = true;
   };
+
+  hardware.bumblebee.enable = true;
 
   environment.systemPackages = with pkgs; [
     # TODO interactive + virtualisation.libvirt
