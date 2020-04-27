@@ -33,18 +33,16 @@
 
     nixpkgs.config.allowUnfree = true;
 
-    i18n = {
-      consoleKeyMap = "us";
-      defaultLocale = "en_AU.UTF-8";
-    };
-
+    console.keyMap = "us";
+    i18n.defaultLocale = "en_AU.UTF-8";
     time.timeZone = "Australia/Sydney";
 
     boot = {
-      initrd.luks.devices = [{
-        name = "cuffs";
-        device = config.internal.luksDevice;
-      }];
+      initrd.luks.devices = {
+        cuffs = {
+          device = config.internal.luksDevice;
+        };
+      };
 
       loader = {
         systemd-boot.enable = true;

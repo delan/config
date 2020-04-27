@@ -20,7 +20,7 @@
     mediainfo
     obs-studio
     spotify
-    skype
+    # skype
 
     nix-index manpages git-lfs clang clang-tools ccls patchelf
     binutils gnumake
@@ -62,7 +62,7 @@
   ];
 
   services = {
-    compton.enable = true;
+    picom.enable = true;
   };
 
   programs = {
@@ -74,16 +74,12 @@
       enable = true;
       userName = "Delan Azabani";
       userEmail = "delan@azabani.com";
-      extraConfig = ''
-        [filter "lfs"]
-        clean = git-lfs clean -- %f
-        smudge = git-lfs smudge -- %f
-        process = git-lfs filter-process
-        required = true
-
-        [github]
-        user = delan
-      '';
+      lfs.enable = true;
+      extraConfig = {
+        github = {
+          user = "delan";
+        };
+      };
     };
 
     mercurial = {
