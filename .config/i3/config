@@ -18,6 +18,12 @@ exec --no-startup-id nm-applet
 # exec --no-startup-id barriers -f -c barrier.conf --address :24800
 # exec --no-startup-id barrierc -f -n uranus 172.19.128.65
 
+# https://bbs.archlinux.org/viewtopic.php?id=248862
+bindsym $mod+o exec light -U 5
+bindsym $mod+p exec light -A 5
+bindsym XF86MonBrightnessDown exec light -U 5
+bindsym XF86MonBrightnessUp exec light -A 5
+
 bindsym Print exec rofi-ss
 # bindsym XF86AudioMute exec amixer -q set Master toggle, exec pkill -USR1 i3status
 # bindsym XF86AudioLowerVolume exec amixer -q set Master 5%-, exec pkill -USR1 i3status
