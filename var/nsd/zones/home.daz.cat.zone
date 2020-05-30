@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2020050500 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2020050501 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 @                                       3600    IN  A       203.129.24.131
 daria                                   3600    IN  A       172.19.128.1
@@ -24,3 +24,5 @@ redmond                                 3600    IN  A       172.19.128.65
 netkvm1.redmond                         3600    IN  A       172.19.128.65
 debalia                                 3600    IN  A       172.19.128.66
 enp3s0.debalia                          3600    IN  A       172.19.128.66
+deburn                                  3600    IN  A       172.19.128.68
+enp3s0.deburn                           3600    IN  A       172.19.128.68

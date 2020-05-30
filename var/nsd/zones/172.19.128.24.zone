@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2020050500 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2020050501 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 1                                       3600    IN  PTR     daria.home.daz.cat.
 11                                      3600    IN  PTR     aether.home.daz.cat.
@@ -15,3 +15,4 @@
 64                                      3600    IN  PTR     vtnet0.storage.home.daz.cat.
 65                                      3600    IN  PTR     netkvm1.redmond.home.daz.cat.
 66                                      3600    IN  PTR     enp3s0.debalia.home.daz.cat.
+68                                      3600    IN  PTR     enp3s0.deburn.home.daz.cat.

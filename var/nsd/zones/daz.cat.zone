@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2020050500 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2020050501 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -46,7 +46,11 @@ vtnet1.storage                          3600    IN  AAAA    fd36:09ef:4322:29ce:
 redmond                                 3600    IN  AAAA    2403:5800:7100:2c00:b18b:9a7f:22a4:ed4c
 netkvm1.redmond                         3600    IN  AAAA    2403:5800:7100:2c00:b18b:9a7f:22a4:ed4c
 netkvm2.redmond                         3600    IN  AAAA    fd36:09ef:4322:29ce:41d8:84ea:b1fe:fa17
+debalia                                 3600    IN  AAAA    2403:5800:7100:2c00:5054:00ff:feea:1b5c
+enp3s0.debalia                          3600    IN  AAAA    2403:5800:7100:2c00:5054:00ff:feea:1b5c
 enp4s0.debalia                          3600    IN  AAAA    fd36:09ef:4322:29ce:5054:00ff:fe34:f713
+deburn                                  3600    IN  AAAA    2403:5800:7100:2c00:5054:00ff:fe7c:1f4e
+enp3s0.deburn                           3600    IN  AAAA    2403:5800:7100:2c00:5054:00ff:fe7c:1f4e
 bucket                                  3600    IN  CNAME   opacus.daz.cat.
 charming                                3600    IN  CNAME   opacus.daz.cat.
 toot                                    3600    IN  CNAME   opacus.daz.cat.
