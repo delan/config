@@ -1,2 +1,0 @@
-#!/bin/sh
-/sbin/ifconfig bridge0 add $1
