@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2019031000 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2020050500 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 @                                       3600    IN  A       203.129.24.131
 daria                                   3600    IN  A       172.19.128.1
@@ -16,7 +16,11 @@ bridge0.uranium                         3600    IN  A       172.19.128.36
 wlp8s0.Nobelium                         3600    IN  A       172.19.128.37
 Nobelium                                3600    IN  A       172.19.128.38
 wlp0s20u2.Nobelium                      3600    IN  A       172.19.128.38
+saturn                                  3600    IN  A       172.19.128.39
+bridge13.saturn                         3600    IN  A       172.19.128.39
 storage                                 3600    IN  A       172.19.128.64
 vtnet0.storage                          3600    IN  A       172.19.128.64
 redmond                                 3600    IN  A       172.19.128.65
 netkvm1.redmond                         3600    IN  A       172.19.128.65
+debalia                                 3600    IN  A       172.19.128.66
+enp3s0.debalia                          3600    IN  A       172.19.128.66
