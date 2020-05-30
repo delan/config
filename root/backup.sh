@@ -33,11 +33,8 @@ cp /etc/ntpd.conf etc
 cp /var/nsd/etc/nsd.conf var/nsd/etc
 cp /var/nsd/zones/*.zone var/nsd/zones
 cp /var/unbound/etc/unbound.conf var/unbound/etc
-cp /etc/rc.d/mi.subr etc/rc.d
 cp /etc/rc.d/dhcp6c etc/rc.d
 cp /etc/rc.d/dhcp6s etc/rc.d
-cp /etc/rc.d/openvpn etc/rc.d
-ln -sf openvpn etc/rc.d/openvpn__chi
 cp /etc/rc.conf.local etc
 cp /etc/ssh/sshd_config etc/ssh
 cp /etc/mail/smtpd.conf etc/mail
