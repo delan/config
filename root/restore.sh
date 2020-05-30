@@ -19,6 +19,7 @@ set -eu -- \
 	pciutils-- \
 	pv-- \
 	ripgrep-- \
+	usbutils-- \
 	vim--no_x11 \
 	wide-dhcpv6-- \
 	zsh-- \

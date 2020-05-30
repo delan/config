@@ -14,6 +14,7 @@ cd -- "$1"
 
 mkdir -p etc/rc.d etc/ssh root
 mkdir -p etc/mail
+mkdir -p etc/nut
 mkdir -p etc/openvpn
 mkdir -p etc/.local/DKIM
 mkdir -p var/nsd/etc var/nsd/zones
@@ -38,6 +39,9 @@ cp /etc/rc.d/dhcp6s etc/rc.d
 cp /etc/rc.conf.local etc
 cp /etc/ssh/sshd_config etc/ssh
 cp /etc/mail/smtpd.conf etc/mail
+cp /etc/nut/ups.conf etc/nut
+cp /etc/nut/upsd.users etc/nut
+cp /etc/nut/upsmon.conf etc/nut
 cp /etc/dkimproxy_in.conf etc
 cp /etc/dkimproxy_out.conf etc
 cp /etc/miniupnpd.conf etc
