@@ -4,6 +4,6 @@ dhcpd_flags=em1
 nsd_flags=-c /var/nsd/etc/nsd.conf
 ntpd_flags=
 openvpn_flags=--config /etc/openvpn/chi.conf
-pkg_scripts=dhcp6s dhcp6c dkimproxy_in dkimproxy_out openvpn
+pkg_scripts=dhcp6s dhcp6c dkimproxy_in dkimproxy_out miniupnpd openvpn
 rad_flags=
 unbound_flags=

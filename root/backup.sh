@@ -40,6 +40,7 @@ cp /etc/ssh/sshd_config etc/ssh
 cp /etc/mail/smtpd.conf etc/mail
 cp /etc/dkimproxy_in.conf etc
 cp /etc/dkimproxy_out.conf etc
+cp /etc/miniupnpd.conf etc
 cp /etc/.local/DKIM/*.txt etc/.local/DKIM
 cp /root/backup.sh root
 cp /root/restore.sh root
