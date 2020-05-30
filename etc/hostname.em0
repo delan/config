@@ -1,5 +1,6 @@
-inet6 autoconf
+lladdr ce:cc:ff:ee:80:00
+inet6 autoconf -soii
 dhcp
-!/etc/rc.d/dhcp6c start
-!/usr/local/sbin/dhcp6ctl stop interface em0
-!/usr/local/sbin/dhcp6ctl start interface em0
+# !/etc/rc.d/dhcp6c start
+# !/usr/local/sbin/dhcp6ctl stop interface em0
+# !/usr/local/sbin/dhcp6ctl start interface em0
