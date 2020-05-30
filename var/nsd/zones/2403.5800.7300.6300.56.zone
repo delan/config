@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2020050501 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2020053001 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 1.0.0.8.e.e.e.f.f.f.f.f.c.c.c.c.0.0     3600    IN  PTR     daria.daz.cat.
 a.3.e.6.8.9.e.f.f.f.e.2.3.5.a.8.0.0     3600    IN  PTR     wlp4s0.uranus.daz.cat.
