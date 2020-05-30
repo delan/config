@@ -45,6 +45,7 @@ cp /etc/dkimproxy_in.conf etc
 cp /etc/dkimproxy_out.conf etc
 cp /etc/.local/DKIM/*.txt etc/.local/DKIM
 cp /root/backup.sh root
+cp /root/restore.sh root
 cp /etc/openvpn/chi.conf etc/openvpn
 
 tar cf "$2" *
