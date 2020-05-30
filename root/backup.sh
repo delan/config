@@ -1,8 +1,16 @@
 #!/bin/sh
+set -eu
 
-out=$(mktemp -td daria.backup.XXXXXX)
-ball=$(mktemp -t daria.backup.XXXXXX)
-cd $out
+if [ $# -lt 1 ]; then
+	set -- "$@" $(mktemp -td backup.XXXXXXX)
+fi
+
+if [ $# -lt 2 ]; then
+	set -- "$@" $(mktemp -t backup.XXXXXXX | sed s/\$/.tar/)
+fi
+
+>&2 printf \%s\\n "$1" "$2"
+cd -- "$1"
 
 mkdir -p etc/rc.d etc/ssh root
 mkdir -p etc/mail
@@ -23,14 +31,14 @@ cp /etc/dhcp6s.conf etc
 cp /etc/rad.conf etc
 cp /etc/ntpd.conf etc
 cp /var/nsd/etc/nsd.conf var/nsd/etc
-cp /var/nsd/zones/* var/nsd/zones
+cp /var/nsd/zones/*.zone var/nsd/zones
 cp /var/unbound/etc/unbound.conf var/unbound/etc
 cp /etc/rc.d/mi.subr etc/rc.d
 cp /etc/rc.d/dhcp6c etc/rc.d
 cp /etc/rc.d/dhcp6s etc/rc.d
 cp /etc/rc.d/openvpn etc/rc.d
-ln -s openvpn etc/rc.d/openvpn__chi
-ln -s openvpn etc/rc.d/openvpn__venus
+ln -sf openvpn etc/rc.d/openvpn__chi
+ln -sf openvpn etc/rc.d/openvpn__venus
 cp /etc/rc.conf.local etc
 cp /etc/ssh/sshd_config etc/ssh
 cp /etc/mail/smtpd.conf etc/mail
@@ -41,6 +49,4 @@ cp /root/backup.sh root
 cp /etc/openvpn/*.conf etc/openvpn
 cp /etc/openvpn/*.up etc/openvpn
 
-tar cvpf $ball *
-mv $ball $ball.tar
-echo $ball.tar
+tar cf "$2" *
