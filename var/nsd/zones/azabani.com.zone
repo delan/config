@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2020122000 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2020122001 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -7,10 +7,16 @@
 @                                       3600    IN  CAA 0   iodef "mailto:delan@azabani.com"
 @                                       3600    IN  MX  10  in1-smtp.messagingengine.com.
 @                                       3600    IN  MX  20  in2-smtp.messagingengine.com.
+_submission._tcp                        3600    IN  SRV 0 1 587 smtp.fastmail.com.
+_imap._tcp                              3600    IN  SRV 0 0 0 .
+_imaps._tcp                             3600    IN  SRV 0 1 993 imap.fastmail.com.
+_pop3._tcp                              3600    IN  SRV 0 0 0 .
+_pop3s._tcp                             3600    IN  SRV 0 0 0 . ; 10 1 995 pop.fastmail.com.
+_jmap._tcp                              3600    IN  SRV 0 1 443 jmap.fastmail.com.
 @                                       3600    IN  A       107.191.57.160
 @                                       3600    IN  AAAA    2001:19f0:5800:8a45:ec4:7aff:fe15:d8a2
 www                                     3600    IN  CNAME   opacus.daz.cat.
-@                                       3600    IN  TXT     "v=spf1 include:spf.messagingengine.com ?all"
+@                                       3600    IN  TXT     "v=spf1 include:spf.messagingengine.com -all"
 @                                       3600    IN  TXT     "keybase-site-verification=5qEBsukhu2N-Uw03F1DUyOCZ7RIYpMoqTZhGZCs-NZI"
 @                                       3600    IN  TXT     "keybase-site-verification=ITmFPa3_p1mKVpmqRzNJ50LOOUEoXV-SuZ4SUN4yzMw"
 @                                       3600    IN  TXT     "blitz=mu-25b8a55c-a9fee579-723dcc44-977ee1b9"
