@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2020053001 600 60 1814400 60 )
+@                                       3600    IN  SOA     daria.daz.cat. delan.azabani.com. ( 2020082100 600 60 1814400 60 )
 @                                       3600    IN  NS      daria.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -15,6 +15,7 @@ Nobelium                                3600    IN  A       180.150.30.255
 wpdev                                   3600    IN  A       180.150.30.255
 wpdew                                   3600    IN  A       180.150.30.255
 wpdex                                   3600    IN  A       180.150.30.255
+wpdey                                   3600    IN  A       180.150.30.255
 virbr1.venus                            3600    IN  A       172.19.129.1
 vtnet1.storage                          3600    IN  A       172.19.129.205
 bmc.virbr1.venus                        3600    IN  A       172.19.129.155
