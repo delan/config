@@ -35,7 +35,7 @@
 
     console.keyMap = "us";
     i18n.defaultLocale = "en_AU.UTF-8";
-    time.timeZone = "Australia/Sydney";
+    time.timeZone = "Australia/Perth";
 
     boot = {
       initrd.luks.devices = {
