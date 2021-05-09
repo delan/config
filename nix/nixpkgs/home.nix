@@ -102,12 +102,12 @@
 
     rofi = {
       enable = true;
-      extraConfig = ''
-        rofi.modi: window,run,ssh,combi
-        rofi.ssh-client: mosh
-        rofi.ssh-command: {terminal} -e "{ssh-client} {host}"
-        rofi.combi-modi: window,drun,ssh,run
-      '';
+      extraConfig = {
+        modi = "window,run,ssh,combi";
+        ssh-client = "mosh";
+        ssh-command = "{terminal} -e \"{ssh-client} {host}\"";
+        combi-modi = "window,drun,ssh,run";
+      };
       terminal = "termite";
       theme = "Monokai";
     };
