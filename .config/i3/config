@@ -34,7 +34,7 @@ bindsym $mod+c exec termite -e 'zsh -c '\''nix run nixpkgs.bc -c bc -l <(echo sc
 bindsym $mod+u exec termite -e units
 # bindsym $mod+e exec emacsclient -c
 # bindsym $mod+e exec emacsclient -c --socket-name $XDG_RUNTIME_DIR/emacs.socket
-bindsym $mod+e exec emacs
+bindsym $mod+e exec code
 bindsym $mod+w exec firefox
 bindsym $mod+i exec termite --name weechat -e weechat
 

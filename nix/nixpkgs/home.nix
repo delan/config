@@ -59,6 +59,8 @@
     #     inherit (gnome2) GConf gnome_vfs;
     #   };
     # })
+
+    vscode
   ];
 
   services = {
