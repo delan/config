@@ -29,7 +29,8 @@ bindsym Print exec rofi-ss
 # bindsym XF86AudioLowerVolume exec amixer -q set Master 5%-, exec pkill -USR1 i3status
 # bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+, exec pkill -USR1 i3status
 bindsym $mod+l exec --no-startup-id i3lock
-bindsym $mod+c exec termite -e polishnt
+# bindsym $mod+c exec termite -e polishnt
+bindsym $mod+c exec termite -e 'zsh -c '\''nix run nixpkgs.bc -c bc -l <(echo scale=9)'\'
 bindsym $mod+u exec termite -e units
 # bindsym $mod+e exec emacsclient -c
 # bindsym $mod+e exec emacsclient -c --socket-name $XDG_RUNTIME_DIR/emacs.socket
