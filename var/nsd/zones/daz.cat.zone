@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2021101700 600 60 1814400 60 )
+@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2021102700 600 60 1814400 60 )
 @                                       3600    IN  NS      opacus.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -41,6 +41,7 @@ bmc.virbr1.venus                        3600    IN  AAAA    fd36:09ef:4322:29ce:
 vtnet1.storage                          3600    IN  AAAA    fd36:09ef:4322:29ce:5054:00ff:fe11:6c8b
 netkvm2.redmond                         3600    IN  AAAA    fd36:09ef:4322:29ce:41d8:84ea:b1fe:fa17
 enp4s0.debalia                          3600    IN  AAAA    fd36:09ef:4322:29ce:5054:00ff:fe34:f713
+go                                      3600    IN  CNAME   opacus.daz.cat.
 bucket                                  3600    IN  CNAME   opacus.daz.cat.
 charming                                3600    IN  CNAME   opacus.daz.cat.
 toot                                    3600    IN  CNAME   opacus.daz.cat.
