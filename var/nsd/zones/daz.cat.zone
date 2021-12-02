@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2021120201 600 60 1814400 60 )
+@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2021120202 600 60 1814400 60 )
 @                                       3600    IN  NS      opacus.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -8,8 +8,8 @@ home                                    3600    IN  NS      opacus.daz.cat.
 @                                       3600    IN  CAA 0   iodef "mailto:delan@azabani.com"
 @                                       3600    IN  A       180.150.84.38
 opacus                                  3600    IN  A       180.150.84.38
-stratus                                 3600    IN  A       128.199.143.67
-bamboo                                  3600    IN  A       128.199.143.67
+stratus                                 3600    IN  A       180.150.84.39
+bamboo                                  3600    IN  A       180.150.84.39
 flipflopper.stratus                     3600    IN  CNAME   stratus.daz.cat.
 jane                                    3600    IN  A       180.150.90.186
 virbr1.venus                            3600    IN  A       172.19.129.1
@@ -19,7 +19,7 @@ netkvm2.redmond                         3600    IN  A       172.19.129.240
 enp4s0.debalia                          3600    IN  A       172.19.129.218
 @                                       3600    IN  AAAA    2403:580e:214::5054:ff:fe09:6507
 opacus                                  3600    IN  AAAA    2403:580e:214::5054:ff:fe09:6507
-stratus                                 3600    IN  AAAA    2400:6180:0:d0::09f:7001
+stratus                                 3600    IN  AAAA    2403:580e:214::5054:ff:fec4:8f04
 jane                                    3600    IN  AAAA    2403:580e:0214:0000:f6ce:46ff:fea7:6e20
 venus                                   3600    IN  AAAA    2403:580e:0214:0000:cccc:ffff:feee:8023
 bridge13.venus                          3600    IN  AAAA    2403:580e:0214:0000:cccc:ffff:feee:8023
