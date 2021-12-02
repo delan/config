@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2021112600 600 60 1814400 60 )
+@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2021120201 600 60 1814400 60 )
 @                                       3600    IN  NS      opacus.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -6,8 +6,8 @@ home                                    3600    IN  NS      opacus.daz.cat.
 @                                       3600    IN  CAA 128 issue "letsencrypt.org"
 @                                       3600    IN  CAA 128 issuewild ";"
 @                                       3600    IN  CAA 0   iodef "mailto:delan@azabani.com"
-@                                       3600    IN  A       107.191.57.160
-opacus                                  3600    IN  A       107.191.57.160
+@                                       3600    IN  A       180.150.84.38
+opacus                                  3600    IN  A       180.150.84.38
 stratus                                 3600    IN  A       128.199.143.67
 bamboo                                  3600    IN  A       128.199.143.67
 flipflopper.stratus                     3600    IN  CNAME   stratus.daz.cat.
@@ -17,8 +17,8 @@ vtnet1.storage                          3600    IN  A       172.19.129.205
 bmc.virbr1.venus                        3600    IN  A       172.19.129.155
 netkvm2.redmond                         3600    IN  A       172.19.129.240
 enp4s0.debalia                          3600    IN  A       172.19.129.218
-@                                       3600    IN  AAAA    2001:19f0:5800:8a45:0ec4:7aff:fe15:d8a2
-opacus                                  3600    IN  AAAA    2001:19f0:5800:8a45:0ec4:7aff:fe15:d8a2
+@                                       3600    IN  AAAA    2403:580e:214::5054:ff:fe09:6507
+opacus                                  3600    IN  AAAA    2403:580e:214::5054:ff:fe09:6507
 stratus                                 3600    IN  AAAA    2400:6180:0:d0::09f:7001
 jane                                    3600    IN  AAAA    2403:580e:0214:0000:f6ce:46ff:fea7:6e20
 venus                                   3600    IN  AAAA    2403:580e:0214:0000:cccc:ffff:feee:8023

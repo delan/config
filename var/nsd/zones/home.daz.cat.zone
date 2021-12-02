@@ -11,3 +11,5 @@ vtnet0.storage                          3600    IN  A       172.19.42.3
 uranium                                 3600    IN  A       172.19.42.4
 saturn                                  3600    IN  A       172.19.42.5
 bridge13.saturn                         3600    IN  A       172.19.42.5
+opacus                                  3600    IN  A       172.19.42.6
+vio0.opacus                             3600    IN  A       172.19.42.6
