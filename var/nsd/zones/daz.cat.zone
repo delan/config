@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2021120203 600 60 1814400 60 )
+@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2021120800 600 60 1814400 60 )
 @                                       3600    IN  NS      opacus.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -20,6 +20,7 @@ enp4s0.debalia                          3600    IN  A       172.19.129.218
 @                                       3600    IN  AAAA    2403:580e:214::5054:ff:fe09:6507
 opacus                                  3600    IN  AAAA    2403:580e:214::5054:ff:fe09:6507
 stratus                                 3600    IN  AAAA    2403:580e:214::5054:ff:fec4:8f04
+cirrus                                  3600    IN  AAAA    2001:19f0:5:2beb:5400:03ff:feb9:95bb
 mtu1500.stratus                         3600    IN  AAAA    2403:580e:214::8f04:1500
 mtu1280.stratus                         3600    IN  AAAA    2403:580e:214::8f04:1280
 jane                                    3600    IN  AAAA    2403:580e:0214:0000:f6ce:46ff:fea7:6e20
