@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2021120800 600 60 1814400 60 )
+@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2021120801 600 60 1814400 60 )
 @                                       3600    IN  NS      opacus.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -52,6 +52,8 @@ xn--blhaj-nra                           3600    IN  CNAME   opacus.daz.cat.
 @                                       3600    IN  TXT     "keybase-site-verification=zzcGEacJisGLAhzLlZC1IQ_4swmfqh1XyRc0a5YLROc"
 @                                       3600    IN  TXT     "keybase-site-verification=0TvQVAHxVz9UqJ_ce5XC7HcDjm05AVbmGtTtjpIvKS0"
 opacus                                  3600    IN  TXT     "v=spf1 a -all"
+stratus                                 3600    IN  TXT     "v=spf1 a -all"
+cirrus                                  3600    IN  TXT     "v=spf1 a -all"
 daria                                   3600    IN  TXT     "v=spf1 a -all"
 _dmarc.opacus                           3600    IN  TXT     "v=DMARC1; p=reject; rua=mailto:delan+dmarc@azabani.com"
 _dmarc.daria                            3600    IN  TXT     "v=DMARC1; p=reject; rua=mailto:delan+dmarc@azabani.com"
