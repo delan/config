@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2021120203 600 60 1814400 60 )
+@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2021121100 600 60 1814400 60 )
 @                                       3600    IN  NS      opacus.daz.cat.
 1                                       3600    IN  PTR     jane.home.daz.cat.
 2                                       3600    IN  PTR     bridge13.venus.home.daz.cat.
@@ -7,3 +7,4 @@
 5                                       3600    IN  PTR     bridge13.saturn.home.daz.cat.
 6                                       3600    IN  PTR     vio0.opacus.home.daz.cat.
 7                                       3600    IN  PTR     enp1s0.stratus.home.daz.cat.
+8                                       3600    IN  PTR     enp5s0.uranus.home.daz.cat.
