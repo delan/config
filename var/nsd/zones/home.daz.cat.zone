@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2022012601 600 60 1814400 60 )
+@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2022020600 600 60 1814400 60 )
 @                                       3600    IN  NS      opacus.daz.cat.
 @                                       3600    IN  A       180.150.90.186
 a                                       3600    IN  A       180.150.84.38
@@ -21,3 +21,5 @@ ark-1                                   3600    IN  A       172.19.42.31
 eth0.ark-1                              3600    IN  A       172.19.42.31
 ark-2                                   3600    IN  A       172.19.42.32
 eth0.ark-2                              3600    IN  A       172.19.42.32
+nyaaa                                   3600    IN  A       172.19.42.33
+ens5.nyaaa                              3600    IN  A       172.19.42.33

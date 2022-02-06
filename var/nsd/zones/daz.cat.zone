@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2022020300 600 60 1814400 60 )
+@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2022020600 600 60 1814400 60 )
 @                                       3600    IN  NS      opacus.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -38,6 +38,8 @@ ark-1                                   3600    IN  AAAA    2403:580e:0214:0000:
 eth0.ark-1                              3600    IN  AAAA    2403:580e:0214:0000:020b:abff:fe26:ed67
 ark-2                                   3600    IN  AAAA    2403:580e:0214:0000:02d0:c9ff:fea9:6da8
 eth0.ark-2                              3600    IN  AAAA    2403:580e:0214:0000:02d0:c9ff:fea9:6da8
+nyaaa                                   3600    IN  AAAA    2403:580e:0214:0000:02e0:81ff:fec8:8632
+ens5.nyaaa                              3600    IN  AAAA    2403:580e:0214:0000:02e0:81ff:fec8:8632
 redmond                                 3600    IN  AAAA    2403:580e:0214:0000:b18b:9a7f:22a4:ed4c
 netkvm1.redmond                         3600    IN  AAAA    2403:580e:0214:0000:b18b:9a7f:22a4:ed4c
 debalia                                 3600    IN  AAAA    2403:580e:0214:0000:5054:00ff:feea:1b5c
