@@ -1,5 +1,6 @@
 { config, pkgs, ... }: {
   home.sessionVariables = {
+    # FIXME broken for like a year
     # https://www.reddit.com/r/linux/comments/72mfv8
     MOZ_USE_XINPUT2 = 1;
 
@@ -10,72 +11,34 @@
   home.packages = with pkgs; let
     next = import <nixos-unstable> { config = { allowUnfree = true; }; };
   in [
-    next._1password next._1password-gui next.google-chrome-dev
-    networkmanagerapplet termite virtmanager geeqie smartmontools pavucontrol
-    tmux htop vim fzf fd pv bat neofetch (ripgrep.override { withPCRE2 = true; })
+    next.google-chrome-dev
+    networkmanagerapplet termite geeqie smartmontools pavucontrol
+    tmux htop vim fd pv neofetch ripgrep
 
-    atool unzip zip cabextract jq aria nmap dnsutils liboping
-    weechat next.discord slack tdesktop okular remmina
-    keepass mpv gimp gnome3.gnome-font-viewer
-    kdenlive ffmpeg
+    atool unzip zip cabextract jq nmap dnsutils
+    weechat next.discord tdesktop okular remmina
+    mpv gimp gnome3.gnome-font-viewer
+    ffmpeg
     aria2 youtubeDL
     sshfs-fuse
-    barrier
-    minecraft
-    audacity
-    mediainfo
     obs-studio
     spotify
-    # skype
     next.vscode
 
-    nix-index manpages git-lfs clang clang-tools ccls patchelf
-    gnumake # binutils
-    texlive.combined.scheme-full
-    bundler # clang
-    pkgs.nodejs
-    openssl
-    nasm qemu bochs
-    ispell docker-compose # php php73Packages.composer
-    wineWowPackages.full winetricks
-
-    # provides rls
-    # latest.rustChannels.stable.rust
+    nix-index manpages git-lfs clang clang-tools patchelf
+    gnumake
     rustup
 
-    # migrate to firefox.package once it works
-    # firefox-devedition-bin
-
-    maim xdotool # for rofi-ss
-    gnome3.seahorse # for gnome3.gnome-keyring
-
+    maim
     units
 
     nix-diff
 
-    bc xclip zoom-us filezilla google-chrome imagemagick cdrkit whois openvpn
-    linuxPackages.perf next.jdk17 maven # neovim-nightly jdk11 jdk8
-    steam inkscape libreoffice
-    uefitool
-    run-scaled
+    bc xclip google-chrome imagemagick cdrkit whois openvpn
+    libreoffice
     timidity soundfont-fluid
-    drawio
     wget
     python3
-
-    # (pkgs.haskellPackages.callCabal2nix "polishnt" ~/code/GitHub/ar1a/polishnt {})
-    # (callPackage ~/nix/nmcli-rofi {})
-    # (callPackage ~/nix/adc902fc0fa11bbe {})
-
-    # (libsForQt5.callPackage ~/nixos-19.09/pkgs/games/multimc {})
-    # (multimc.override {
-    #   jdk = callPackage ~/nixos-19.03/pkgs/development/compilers/openjdk/8.nix {
-    #     bootjdk = callPackage ~/nixos-19.03/pkgs/development/compilers/openjdk/bootstrap.nix {
-    #       version = "8";
-    #     };
-    #     inherit (gnome2) GConf gnome_vfs;
-    #   };
-    # })
   ];
 
   services = {

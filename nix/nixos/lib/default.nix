@@ -52,9 +52,6 @@
       cleanTmpDir = true;
       supportedFilesystems = [ "zfs" "xfs" ];
 
-      # kernelPackages = pkgs.linuxPackages_latest;
-      # zfs.enableUnstable = true;
-
       kernel.sysctl = {
         # enable all magic sysrq functions
         # https://github.com/NixOS/nixpkgs/issues/83694
@@ -66,21 +63,10 @@
     hardware.keyboard.zsa.enable = true;
 
     networking = {
-      networkmanager = {
-        enable = true;
-        # extraConfig = ''
-        #   [logging]
-        #   domains=VPN:TRACE,AGENTS:TRACE
-        # '';
-      };
+      networkmanager.enable = true;
 
       # fucking breaks everything
       dhcpcd.enable = false;
-    };
-
-    networking.hosts = {
-      # TODO document
-      # "151.101.82.217" = [ "cache.nixos.org" ];
     };
 
     services = {

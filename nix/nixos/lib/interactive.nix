@@ -55,20 +55,7 @@
 
         windowManager.i3.enable = true;
       };
-
-      # for nm-applet (to store AnyConnect secrets)
-      # gnome.gnome-keyring.enable = true;
     };
-
-    # for nm-applet (to store AnyConnect secrets)
-    security.pam.services.lightdm.enableGnomeKeyring = true;
-    security.pam.services.i3lock.enableGnomeKeyring = true;
-    # security.wrappers = {
-    #   gnome-keyring-daemon = {
-    #     source = "${pkgs.gnome3.gnome-keyring}/bin/gnome-keyring-daemon";
-    #     capabilities = "cap_ipc_lock+ep";
-    #   };
-    # };
 
     fonts = {
       fontconfig.defaultFonts = {
@@ -84,8 +71,5 @@
         corefonts
       ];
     };
-
-    # for barrier
-    networking.firewall.allowedTCPPorts = [ 24800 ];
   };
 }

@@ -64,17 +64,20 @@
   networking = {
     firewall = {
       allowedTCPPorts = [
-        13368 13369 139 445 35729
-        4000 8000 8001 8013 8080 9800 9801 9802 9803
+        139 445 # samba
+        4000 8000 # default node/python dev
+        9800 9801 9802 9803 # more dev (arbitrary)
+        13368 13369 # aria2 torrent (arbitrary)
       ];
 
-      allowedUDPPorts = [ 13368 13369 137 138 ];
+      allowedUDPPorts = [
+        137 138 # samba
+        13368 13369 # aria2 torrent (arbitrary)
+      ];
     };
 
     hosts = {
       "127.0.0.1" = [
-        "calypso.localhost"
-        "jetpack.cloud.localhost"
         "www1.xn--n8j6ds53lwwkrqhv28a.web-platform.test"
         "op88.web-platform.test"
         "op36.not-web-platform.test"
@@ -337,20 +340,11 @@
         "xn--lve-6lad.www2.not-web-platform.test"
       ];
     };
-
-    extraHosts = ''
-      172.19.128.68 wpdey.daz.cat
-      # 192.0.97.219 private-api.vaultpress.com
-      # 192.0.92.161 public-api.wordpress.com
-    '';
   };
 
   environment.systemPackages = with pkgs; [
-    # for nm-applet (to store AnyConnect secrets)
-    gcr gnome3.defaultIconTheme
-
     lm_sensors
-    file ncdu lsof colordiff openssl usbmuxd efibootmgr termite pciutils usbutils ntfs3g woeusb
+    file ncdu lsof colordiff efibootmgr termite pciutils usbutils ntfs3g
     gnome3.networkmanager-openvpn
     iftop tcpdump
     iotop hdparm
