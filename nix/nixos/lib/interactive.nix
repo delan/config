@@ -5,7 +5,13 @@
 
   config = mkIf config.internal.interactive {
     sound.enable = true;
-    hardware.pulseaudio.enable = true;
+    hardware = {
+      pulseaudio.enable = true;
+
+      # 32-bit game support
+      opengl.driSupport32Bit = true;
+      pulseaudio.support32Bit = true;
+    };
 
     environment.systemPackages = with pkgs; [
       i3lock
@@ -32,7 +38,6 @@
         layout = "us(mac)";
         xkbOptions = "compose:menu,caps:backspace";
 
-        # TODO laptop
         libinput = {
           enable = true;
           touchpad.tapping = false;

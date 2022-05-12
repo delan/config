@@ -2,9 +2,11 @@
   imports = [
     ../hardware-configuration.nix
     ./interactive.nix
-    ./virtualisation.nix
     ./laptop.nix
+    ./igalia.nix
+    ./virtualisation.nix
     ./services
+    ./programs
   ];
 
   options.internal = {
@@ -95,10 +97,6 @@
             # verbosity = 3;
             # do-ip6 = false;
           };
-          stub-zone = [
-            { name = "local.igalia.com."; stub-addr = "192.168.10.14"; }
-            { name = "10.168.192.in-addr.arpa."; stub-addr = "192.168.10.14"; }
-          ];
         };
       };
 
@@ -140,6 +138,7 @@
       commands = [
         { options = [ "NOPASSWD" ]; command = "/run/current-system/sw/bin/nixos-rebuild switch"; }
         { options = [ "NOPASSWD" ]; command = "/run/current-system/sw/bin/nixos-rebuild switch --upgrade"; }
+        { options = [ "NOPASSWD" ]; command = "/run/current-system/sw/bin/zfs"; }
       ];
     }];
   };
