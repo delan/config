@@ -1,4 +1,4 @@
-{ config, lib, options, modulesPath, pkgs }: with lib; {
+{ config, lib, options, modulesPath, pkgs, ... }: with lib; {
   options.internal.services = {
     collectd = mkOption { type = types.bool; default = false; };
   };
