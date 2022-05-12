@@ -1,4 +1,4 @@
-{ config, lib, options, modulesPath, pkgs }: with lib; {
+{ config, lib, options, modulesPath, pkgs, ... }: with lib; {
   options.internal.virtualisation = {
     libvirt = mkOption { type = types.bool; default = false; };
     docker = mkOption { type = types.bool; default = false; };
@@ -15,6 +15,11 @@
       };
 
       users.users."${config.internal.initialUser}".extraGroups = [ "libvirtd" ];
+
+      # TODO interactive only
+      # for virt-manager (NixOS/nixpkgs#2448)
+      environment.systemPackages = [ pkgs.virt-manager pkgs.gnome3.dconf ];
+      programs.dconf.enable = true;
     })
 
     (mkIf cfg.docker {

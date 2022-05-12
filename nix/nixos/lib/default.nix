@@ -1,4 +1,4 @@
-{ config, lib, options, modulesPath, pkgs }: with lib; {
+{ config, lib, options, modulesPath, pkgs, ... }: with lib; {
   imports = [
     ../hardware-configuration.nix
     ./interactive.nix
@@ -90,44 +90,19 @@
         # fuck DNSSEC
         enableRootTrustAnchor = false;
 
-        extraConfig = ''
-          server:
-          use-caps-for-id: yes
-          qname-minimisation: yes
-          # qname-minimisation-strict: yes
-
-          local-zone: '128.19.172.in-addr.arpa.' always_transparent
-          local-zone: '129.19.172.in-addr.arpa.' always_transparent
-          local-zone: 'e.c.9.2.2.2.3.4.f.e.9.0.6.3.d.f.ip6.arpa.' always_transparent
-
-          # stub-zone:
-          # name: 'internal.atlassian.com'
-          # stub-addr: 10.53.53.53
-
-          # stub-zone:
-          # name: 'buildeng.atlassian.com'
-          # stub-addr: 10.53.53.53
-
-          # stub-zone:
-          # name: 'media.atlassian.com'
-          # stub-addr: 10.53.53.53
-
-          # stub-zone:
-          # name: 'stash.atlassian.com'
-          # stub-addr: 10.53.53.53
-
-          stub-zone:
-          name: '128.19.172.in-addr.arpa.'
-          stub-host: 'daria.daz.cat.'
-
-          stub-zone:
-          name: '129.19.172.in-addr.arpa.'
-          stub-host: 'daria.daz.cat.'
-
-          stub-zone:
-          name: 'e.c.9.2.2.2.3.4.f.e.9.0.6.3.d.f.ip6.arpa.'
-          stub-host: 'daria.daz.cat.'
-        '';
+        settings = {
+          server = {
+            use-caps-for-id = true;
+            qname-minimisation = true;
+            # qname-minimisation-strict = true;
+            # verbosity = 3;
+            # do-ip6 = false;
+          };
+          stub-zone = [
+            { name = "local.igalia.com."; stub-addr = "192.168.10.14"; }
+            { name = "10.168.192.in-addr.arpa."; stub-addr = "192.168.10.14"; }
+          ];
+        };
       };
 
       avahi = {

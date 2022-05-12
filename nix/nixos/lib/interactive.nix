@@ -1,4 +1,4 @@
-{ config, lib, options, modulesPath, pkgs }: with lib; {
+{ config, lib, options, modulesPath, pkgs, ... }: with lib; {
   options.internal = {
     interactive = mkOption { type = types.bool; default = false; };
   };
@@ -34,12 +34,10 @@
         # TODO laptop
         libinput = {
           enable = true;
-          tapping = false;
-          disableWhileTyping = true;
-          naturalScrolling = true;
-
-          # for touchpad only
-          # accelProfile = "flat";
+          touchpad.tapping = false;
+          touchpad.disableWhileTyping = true;
+          touchpad.naturalScrolling = true;
+          # touchpad.accelProfile = "flat";
         };
 
         # for mouse only
@@ -50,6 +48,7 @@
             MatchIsPointer "on"
             Option "AccelProfile" "flat"
             Option "AccelSpeed" "0"
+            Option "NaturalScrolling" "off"
           EndSection
         '';
 
@@ -57,7 +56,7 @@
       };
 
       # for nm-applet (to store AnyConnect secrets)
-      gnome3.gnome-keyring.enable = true;
+      # gnome.gnome-keyring.enable = true;
     };
 
     # for nm-applet (to store AnyConnect secrets)

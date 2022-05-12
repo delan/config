@@ -1,4 +1,4 @@
-{ config, lib, options, modulesPath, pkgs }: with lib; {
+{ config, lib, options, modulesPath, pkgs, ... }: with lib; {
   options.internal = {
     laptop = mkOption { type = types.bool; default = false; };
   };
