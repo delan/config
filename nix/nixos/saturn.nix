@@ -20,6 +20,9 @@
 
   nix.useSandbox = true;
 
+  # biggest(?) available font
+  console.font = "iso01-12x22";
+
   # https://nixos.wiki/wiki/Nvidia#sync_mode
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.prime = {
