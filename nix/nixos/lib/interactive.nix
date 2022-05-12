@@ -28,8 +28,9 @@
 
       xserver = {
         enable = true;
+        exportConfiguration = true;
         layout = "us(mac)";
-        xkbOptions = "compose:menu";
+        xkbOptions = "compose:menu,caps:backspace";
 
         # TODO laptop
         libinput = {

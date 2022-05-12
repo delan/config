@@ -50,11 +50,20 @@
       };
 
       cleanTmpDir = true;
-      supportedFilesystems = [ "zfs" ];
+      supportedFilesystems = [ "zfs" "xfs" ];
 
       # kernelPackages = pkgs.linuxPackages_latest;
       # zfs.enableUnstable = true;
+
+      kernel.sysctl = {
+        # enable all magic sysrq functions
+        # https://github.com/NixOS/nixpkgs/issues/83694
+        # https://www.kernel.org/doc/html/latest/admin-guide/sysrq.html
+        "kernel.sysrq" = 1;
+      };
     };
+
+    hardware.keyboard.zsa.enable = true;
 
     networking = {
       networkmanager = {
@@ -75,6 +84,8 @@
     };
 
     services = {
+      fwupd.enable = true;
+
       openssh = {
         enable = true;
         startWhenNeeded = true;
@@ -130,8 +141,12 @@
 
       gnupg.agent = {
         enable = true;
-        enableSSHSupport = true;
+
+        # incompatible with ssh.startAgent
+        # enableSSHSupport = true;
       };
+
+      ssh.startAgent = true;
     };
 
     security.sudo.extraRules = [{
