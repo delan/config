@@ -7,8 +7,9 @@
     cfg = config.internal;
   in mkMerge [
     (mkIf cfg.igalia {
-      services.flatpak.enable = true;
-      xdg.portal.enable = true;
+      # FIXME “Setting xdg.portal.enable to true requires a portal implementation in xdg.portal.extraPortals such as xdg-desktop-portal-gtk or xdg-desktop-portal-kde.”
+      # services.flatpak.enable = true;
+      # xdg.portal.enable = true;
 
       services.unbound.settings.stub-zone = [
         { name = "local.igalia.com."; stub-addr = "192.168.10.14"; }

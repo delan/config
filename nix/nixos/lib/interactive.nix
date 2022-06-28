@@ -20,7 +20,8 @@
 
     programs = {
       xss-lock = {
-        enable = true;
+        # FIXME disabled while debugging X11 ABI problem?
+        enable = false;
         lockerCommand = "i3lock";
       };
     };

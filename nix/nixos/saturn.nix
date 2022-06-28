@@ -31,6 +31,9 @@
     intelBusId = "PCI:0:2:0";
   };
 
+  # FIXME only done for debugging X11 ABI problem?
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
+
   boot.kernelModules = [ "vfio" "vfio_pci" "vfio_virqfd" "vfio_iommu_type1" ];
   boot.kernelParams = [
     "intel_iommu=on" "default_hugepagesz=1G" "hugepagesz=1G"

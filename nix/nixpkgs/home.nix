@@ -9,21 +9,22 @@
   };
 
   home.packages = with pkgs; let
-    next = import <nixos-unstable> { config = { allowUnfree = true; }; };
+    # FIXME disabled while debugging X11 ABI problem?
+    # next = import <nixos-unstable> { config = { allowUnfree = true; }; };
   in [
-    next.google-chrome-dev
+    # next.google-chrome-dev
     networkmanagerapplet termite geeqie smartmontools pavucontrol
     tmux htop vim fd pv neofetch ripgrep
 
     atool unzip zip cabextract jq nmap dnsutils
-    weechat next.discord tdesktop okular remmina
+    weechat discord tdesktop okular remmina
     mpv gimp gnome3.gnome-font-viewer
     ffmpeg
     aria2 youtubeDL
     sshfs-fuse
     obs-studio
     spotify
-    next.vscode
+    vscode
 
     nix-index manpages git-lfs clang clang-tools patchelf
     gnumake
@@ -43,7 +44,8 @@
 
   services = {
     picom = {
-      enable = true;
+      # FIXME disabled while debugging X11 ABI problem?
+      enable = false;
       vSync = true;
       backend = "xrender";
       experimentalBackends = true;
