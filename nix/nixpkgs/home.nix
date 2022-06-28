@@ -40,6 +40,10 @@
     timidity soundfont-fluid
     wget
     python3
+
+    jetbrains.idea-community
+    virt-viewer
+    opentabletdriver wine winetricks
   ];
 
   services = {

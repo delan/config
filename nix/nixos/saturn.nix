@@ -34,6 +34,8 @@
   # FIXME only done for debugging X11 ABI problem?
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
 
+  hardware.opentabletdriver.enable = true;
+
   boot.kernelModules = [ "vfio" "vfio_pci" "vfio_virqfd" "vfio_iommu_type1" ];
   boot.kernelParams = [
     "intel_iommu=on" "default_hugepagesz=1G" "hugepagesz=1G"
@@ -51,6 +53,8 @@
         4000 8000 # default node/python dev
         9800 9801 9802 9803 # more dev (arbitrary)
         13368 13369 # aria2 torrent (arbitrary)
+        3128 3180 # oldssl-proxy
+        9222 # cros
       ];
 
       allowedUDPPorts = [
