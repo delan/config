@@ -1,4 +1,4 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2022020600 600 60 1814400 60 )
+@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2022091800 600 60 1814400 60 )
 @                                       3600    IN  NS      opacus.daz.cat.
 @                                       3600    IN  NS      ns2.he.net.
 @                                       3600    IN  NS      ns2.afraid.org.
@@ -10,7 +10,7 @@ home                                    3600    IN  NS      opacus.daz.cat.
 opacus                                  3600    IN  A       180.150.84.38
 stratus                                 3600    IN  A       180.150.84.39
 cirrus                                  3600    IN  A       45.63.22.177
-bamboo                                  3600    IN  A       180.150.84.39
+bamboo                                  3600    IN  CNAME   stratus.daz.cat.
 flipflopper.stratus                     3600    IN  CNAME   stratus.daz.cat.
 jane                                    3600    IN  A       180.150.90.186
 virbr1.venus                            3600    IN  A       172.19.129.1
