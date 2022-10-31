@@ -34,6 +34,9 @@
     };
 
     nixpkgs.config.allowUnfree = true;
+    nix.extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
 
     console.keyMap = "us";
     i18n.defaultLocale = "en_AU.UTF-8";

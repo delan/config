@@ -20,13 +20,13 @@
     weechat discord tdesktop okular remmina
     mpv gimp gnome3.gnome-font-viewer
     ffmpeg
-    aria2 youtubeDL
+    aria2 youtube-dl
     sshfs-fuse
     obs-studio
     spotify
     vscode
 
-    nix-index manpages git-lfs clang clang-tools patchelf
+    nix-index man-pages git-lfs clang clang-tools patchelf
     gnumake
     rustup
 

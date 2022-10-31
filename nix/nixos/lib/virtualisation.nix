@@ -12,7 +12,7 @@
       {
         virtualisation.libvirtd = {
           enable = true;
-          qemuRunAsRoot = false;
+          qemu.runAsRoot = false;
           onShutdown = "shutdown";
         };
 
@@ -20,7 +20,7 @@
       }
 
       (mkIf cfg.interactive {
-        environment.systemPackages = with pkgs; [ virt-manager gnome3.dconf ];
+        environment.systemPackages = with pkgs; [ virt-manager dconf ];
         programs.dconf.enable = true;
       })
     ]))
