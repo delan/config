@@ -113,6 +113,11 @@
           domain = true;
         };
       };
+
+      openiscsi = {
+        enable = true;
+        name = "iqn.2015-05.cat.daz.${config.internal.hostName}:initiator";
+      };
     };
 
     programs = {

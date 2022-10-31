@@ -41,9 +41,15 @@
     wget
     python3
 
-    jetbrains.idea-community
+    # jetbrains.idea-community
     virt-viewer
-    opentabletdriver wine winetricks
+    opentabletdriver wineWowPackages.full winetricks openjdk17
+    pup
+    # binutils-unwrapped
+    texlive.combined.scheme-full
+    linuxKernel.packages.linux_5_15.perf
+    #platformio
+    steam-run
   ];
 
   services = {

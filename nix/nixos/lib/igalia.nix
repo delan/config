@@ -7,14 +7,18 @@
     cfg = config.internal;
   in mkMerge [
     (mkIf cfg.igalia {
-      services.flatpak.enable = true;
-      xdg.portal.enable = true;
-      xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
-
       services.unbound.settings.stub-zone = [
         { name = "local.igalia.com."; stub-addr = "192.168.10.14"; }
         { name = "10.168.192.in-addr.arpa."; stub-addr = "192.168.10.14"; }
       ];
+
+      # Gobby + Linphone
+      services.flatpak.enable = true;
+      xdg.portal.enable = true;
+      xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+
+      # https://gitlab.igalia.com/support/people/selection-processes/-/blob/e0a5aa58626d22babcfd1f8e117864c49f658e4e/tools/import_issue.py
+      services.gnome.gnome-keyring.enable = true;
 
       networking.hosts = {
         "127.0.0.1" = [

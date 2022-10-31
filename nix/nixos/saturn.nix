@@ -55,6 +55,7 @@
         13368 13369 # aria2 torrent (arbitrary)
         3128 3180 # oldssl-proxy
         9222 # cros
+        3000 # bloomberg 2022-10-tks-scrolling-on-web-master
       ];
 
       allowedUDPPorts = [
@@ -72,4 +73,12 @@
   ];
 
   fonts.fontconfig.defaultFonts.monospace = [ "monofur" ];
+
+  # tdarr node
+  programs.fuse.userAllowOther = true;
+
+  # raspberry pi pico
+  services.udev.extraRules = ''
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="2e8a", MODE:="0666"
+  '';
 }
