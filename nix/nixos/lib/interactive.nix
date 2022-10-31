@@ -1,11 +1,17 @@
-{ config, lib, options, modulesPath, pkgs }: with lib; {
+{ config, lib, options, modulesPath, pkgs, ... }: with lib; {
   options.internal = {
     interactive = mkOption { type = types.bool; default = false; };
   };
 
   config = mkIf config.internal.interactive {
     sound.enable = true;
-    hardware.pulseaudio.enable = true;
+    hardware = {
+      pulseaudio.enable = true;
+
+      # 32-bit game support
+      opengl.driSupport32Bit = true;
+      pulseaudio.support32Bit = true;
+    };
 
     environment.systemPackages = with pkgs; [
       i3lock
@@ -14,7 +20,8 @@
 
     programs = {
       xss-lock = {
-        enable = true;
+        # FIXME disabled while debugging X11 ABI problem?
+        enable = false;
         lockerCommand = "i3lock";
       };
     };
@@ -28,18 +35,16 @@
 
       xserver = {
         enable = true;
+        exportConfiguration = true;
         layout = "us(mac)";
-        xkbOptions = "compose:menu";
+        xkbOptions = "compose:menu,caps:backspace";
 
-        # TODO laptop
         libinput = {
           enable = true;
-          tapping = false;
-          disableWhileTyping = true;
-          naturalScrolling = true;
-
-          # for touchpad only
-          # accelProfile = "flat";
+          touchpad.tapping = false;
+          touchpad.disableWhileTyping = true;
+          touchpad.naturalScrolling = true;
+          # touchpad.accelProfile = "flat";
         };
 
         # for mouse only
@@ -50,25 +55,13 @@
             MatchIsPointer "on"
             Option "AccelProfile" "flat"
             Option "AccelSpeed" "0"
+            Option "NaturalScrolling" "off"
           EndSection
         '';
 
         windowManager.i3.enable = true;
       };
-
-      # for nm-applet (to store AnyConnect secrets)
-      gnome3.gnome-keyring.enable = true;
     };
-
-    # for nm-applet (to store AnyConnect secrets)
-    security.pam.services.lightdm.enableGnomeKeyring = true;
-    security.pam.services.i3lock.enableGnomeKeyring = true;
-    # security.wrappers = {
-    #   gnome-keyring-daemon = {
-    #     source = "${pkgs.gnome3.gnome-keyring}/bin/gnome-keyring-daemon";
-    #     capabilities = "cap_ipc_lock+ep";
-    #   };
-    # };
 
     fonts = {
       fontconfig.defaultFonts = {
@@ -84,8 +77,5 @@
         corefonts
       ];
     };
-
-    # for barrier
-    networking.firewall.allowedTCPPorts = [ 24800 ];
   };
 }

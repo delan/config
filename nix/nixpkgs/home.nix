@@ -1,70 +1,127 @@
 { config, pkgs, ... }: {
   home.sessionVariables = {
+    # FIXME broken for like a year
     # https://www.reddit.com/r/linux/comments/72mfv8
     MOZ_USE_XINPUT2 = 1;
+
+    # https://wiki.archlinux.org/index.php/HiDPI#Qt_5
+    QT_AUTO_SCREEN_SCALE_FACTOR = 1;
   };
 
-  home.packages = with pkgs; [
-    dunst networkmanagerapplet termite virtmanager geeqie smartmontools pavucontrol
-    tmux htop vim fzf fd pv bat neofetch (ripgrep.override { withPCRE2 = true; })
+  home.packages = with pkgs; let
+    # FIXME disabled while debugging X11 ABI problem?
+    # next = import <nixos-unstable> { config = { allowUnfree = true; }; };
+  in [
+    # next.google-chrome-dev
+    networkmanagerapplet termite geeqie smartmontools pavucontrol
+    tmux htop vim fd pv neofetch ripgrep
 
-    atool unzip zip cabextract jq aria nmap dnsutils liboping
-    weechat discord slack tdesktop okular remmina
-    keepass mpv gimp gnome3.gnome-font-viewer
-    kdenlive ffmpeg
-    aria2 youtubeDL
+    atool unzip zip cabextract jq nmap dnsutils
+    weechat discord tdesktop okular remmina
+    mpv gimp gnome3.gnome-font-viewer
+    ffmpeg
+    aria2 youtube-dl
     sshfs-fuse
-    barrier
-    minecraft
-    audacity
-    mediainfo
     obs-studio
     spotify
-    # skype
+    vscode
 
-    nix-index manpages git-lfs clang clang-tools ccls patchelf
-    binutils gnumake
-    texlive.combined.scheme-full
-    bundler # clang
-    nodejs # nodejs-11_x
-    openssl
-    nasm qemu bochs
-    ispell docker-compose php php73Packages.composer
-    wine winetricks
-
-    # provides rls
-    # latest.rustChannels.stable.rust
+    nix-index man-pages git-lfs clang clang-tools patchelf
+    gnumake
     rustup
 
-    # migrate to firefox.package once it works
-    # firefox-devedition-bin
-
-    maim xdotool # for rofi-ss
-    gnome3.seahorse # for gnome3.gnome-keyring
-
+    maim
     units
 
     nix-diff
 
-    # (pkgs.haskellPackages.callCabal2nix "polishnt" ~/code/GitHub/ar1a/polishnt {})
-    # (callPackage ~/nix/nmcli-rofi {})
-    # (callPackage ~/nix/adc902fc0fa11bbe {})
+    bc xclip google-chrome imagemagick cdrkit whois openvpn
+    libreoffice
+    timidity soundfont-fluid
+    wget
+    python3
 
-    # (libsForQt5.callPackage ~/nixos-19.09/pkgs/games/multimc {})
-    # (multimc.override {
-    #   jdk = callPackage ~/nixos-19.03/pkgs/development/compilers/openjdk/8.nix {
-    #     bootjdk = callPackage ~/nixos-19.03/pkgs/development/compilers/openjdk/bootstrap.nix {
-    #       version = "8";
-    #     };
-    #     inherit (gnome2) GConf gnome_vfs;
-    #   };
-    # })
-
-    vscode
+    # jetbrains.idea-community
+    virt-viewer
+    opentabletdriver wineWowPackages.full winetricks openjdk17
+    pup
+    # binutils-unwrapped
+    texlive.combined.scheme-full
+    linuxKernel.packages.linux_5_15.perf
+    #platformio
+    steam-run
   ];
 
   services = {
-    picom.enable = true;
+    picom = {
+      # FIXME disabled while debugging X11 ABI problem?
+      enable = false;
+      vSync = true;
+      backend = "xrender";
+      experimentalBackends = true;
+      extraOptions = ''
+        xrender-sync-fence = true;
+        show-all-xerrors = true;
+      '';
+    };
+    dunst = {
+      enable = true;
+      settings = {
+        global = {
+          font = "Inconsolata 13";
+          markup = "full";
+          format = "<b>%s</b>\n%b";
+          monitor = 0;
+          follow = "mouse";
+          geometry = "1000x50-10+10";
+          indicate_hidden = true;
+          sort = true;
+          alignment = "left";
+          shrink = true;
+          separator_height = 4;
+          padding = 16;
+          horizontal_padding = 16;
+          separator_color = "auto";
+          idle_threshold = 120;
+          show_age_threshold = 60;
+          word_wrap = true;
+          ignore_newline = false;
+          stack_duplicates = true;
+          hide_duplicate_count = false;
+          show_indicators = false;
+          history_length = 20;
+          title = "Dunst";
+          class = "Dunst";
+          browser = "/run/current-system/sw/bin/xdg-open";
+          startup_notification = false;
+          always_run_script = true;
+          icon_position = "left";
+          frame_color = "#000000";
+          frame_width = 1;
+        };
+        shortcuts = {
+          close = "ctrl+space";
+          close_all = "ctrl+shift+space";
+          context = "ctrl+shift+p";
+          history = "ctrl+grave";
+        };
+        urgency_low = {
+          background = "#121c21";
+          foreground = "#aaafb2";
+          timeout = 4;
+        };
+        urgency_normal = {
+          background = "#ffffff";
+          foreground = "#000000";
+          timeout = 6;
+        };
+        urgency_critical = {
+          background = "#121c21";
+          foreground = "#aaafb2";
+          timeout = 0;
+        };
+      };
+    };
   };
 
   programs = {
@@ -103,10 +160,10 @@
     rofi = {
       enable = true;
       extraConfig = {
-        modi = "window,run,ssh,combi";
+        modi = "run,ssh,combi";
         ssh-client = "mosh";
-        ssh-command = "{terminal} -e \"{ssh-client} {host}\"";
-        combi-modi = "window,drun,ssh,run";
+        ssh-command = ''{terminal} -e "{ssh-client} {host}"'';
+        combi-modi = "drun,ssh,run";
       };
       terminal = "termite";
       theme = "Monokai";

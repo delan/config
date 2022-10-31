@@ -1,10 +1,12 @@
-{ config, lib, options, modulesPath, pkgs }: with lib; {
+{ config, lib, options, modulesPath, pkgs, ... }: with lib; {
   imports = [
     ../hardware-configuration.nix
     ./interactive.nix
-    ./virtualisation.nix
     ./laptop.nix
+    ./igalia.nix
+    ./virtualisation.nix
     ./services
+    ./programs
   ];
 
   options.internal = {
@@ -32,6 +34,9 @@
     };
 
     nixpkgs.config.allowUnfree = true;
+    nix.extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
 
     console.keyMap = "us";
     i18n.defaultLocale = "en_AU.UTF-8";
@@ -50,31 +55,28 @@
       };
 
       cleanTmpDir = true;
-      supportedFilesystems = [ "zfs" ];
+      supportedFilesystems = [ "zfs" "xfs" ];
 
-      # kernelPackages = pkgs.linuxPackages_latest;
-      # zfs.enableUnstable = true;
+      kernel.sysctl = {
+        # enable all magic sysrq functions
+        # https://github.com/NixOS/nixpkgs/issues/83694
+        # https://www.kernel.org/doc/html/latest/admin-guide/sysrq.html
+        "kernel.sysrq" = 1;
+      };
     };
 
+    hardware.keyboard.zsa.enable = true;
+
     networking = {
-      networkmanager = {
-        enable = true;
-        # extraConfig = ''
-        #   [logging]
-        #   domains=VPN:TRACE,AGENTS:TRACE
-        # '';
-      };
+      networkmanager.enable = true;
 
       # fucking breaks everything
       dhcpcd.enable = false;
     };
 
-    networking.hosts = {
-      # TODO document
-      # "151.101.82.217" = [ "cache.nixos.org" ];
-    };
-
     services = {
+      fwupd.enable = true;
+
       openssh = {
         enable = true;
         startWhenNeeded = true;
@@ -90,44 +92,15 @@
         # fuck DNSSEC
         enableRootTrustAnchor = false;
 
-        extraConfig = ''
-          server:
-          use-caps-for-id: yes
-          qname-minimisation: yes
-          # qname-minimisation-strict: yes
-
-          local-zone: '128.19.172.in-addr.arpa.' always_transparent
-          local-zone: '129.19.172.in-addr.arpa.' always_transparent
-          local-zone: 'e.c.9.2.2.2.3.4.f.e.9.0.6.3.d.f.ip6.arpa.' always_transparent
-
-          # stub-zone:
-          # name: 'internal.atlassian.com'
-          # stub-addr: 10.53.53.53
-
-          # stub-zone:
-          # name: 'buildeng.atlassian.com'
-          # stub-addr: 10.53.53.53
-
-          # stub-zone:
-          # name: 'media.atlassian.com'
-          # stub-addr: 10.53.53.53
-
-          # stub-zone:
-          # name: 'stash.atlassian.com'
-          # stub-addr: 10.53.53.53
-
-          stub-zone:
-          name: '128.19.172.in-addr.arpa.'
-          stub-host: 'daria.daz.cat.'
-
-          stub-zone:
-          name: '129.19.172.in-addr.arpa.'
-          stub-host: 'daria.daz.cat.'
-
-          stub-zone:
-          name: 'e.c.9.2.2.2.3.4.f.e.9.0.6.3.d.f.ip6.arpa.'
-          stub-host: 'daria.daz.cat.'
-        '';
+        settings = {
+          server = {
+            use-caps-for-id = true;
+            qname-minimisation = true;
+            # qname-minimisation-strict = true;
+            # verbosity = 3;
+            # do-ip6 = false;
+          };
+        };
       };
 
       avahi = {
@@ -139,6 +112,11 @@
           addresses = true;
           domain = true;
         };
+      };
+
+      openiscsi = {
+        enable = true;
+        name = "iqn.2015-05.cat.daz.${config.internal.hostName}:initiator";
       };
     };
 
@@ -155,8 +133,12 @@
 
       gnupg.agent = {
         enable = true;
-        enableSSHSupport = true;
+
+        # incompatible with ssh.startAgent
+        # enableSSHSupport = true;
       };
+
+      ssh.startAgent = true;
     };
 
     security.sudo.extraRules = [{
@@ -164,6 +146,7 @@
       commands = [
         { options = [ "NOPASSWD" ]; command = "/run/current-system/sw/bin/nixos-rebuild switch"; }
         { options = [ "NOPASSWD" ]; command = "/run/current-system/sw/bin/nixos-rebuild switch --upgrade"; }
+        { options = [ "NOPASSWD" ]; command = "/run/current-system/sw/bin/zfs"; }
       ];
     }];
   };

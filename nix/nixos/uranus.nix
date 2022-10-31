@@ -18,10 +18,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # TODO interactive + virtualisation.libvirt
-    # for virt-manager (NixOS/nixpkgs#2448)
-    gnome3.dconf
-
     # for nm-applet (to store AnyConnect secrets)
     gcr gnome3.defaultIconTheme
   ];
