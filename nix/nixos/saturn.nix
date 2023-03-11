@@ -65,11 +65,21 @@
   };
 
   environment.systemPackages = with pkgs; [
-    lm_sensors
-    file ncdu lsof colordiff efibootmgr termite pciutils usbutils ntfs3g
+    colordiff
+    efibootmgr
+    file
     gnome3.networkmanager-openvpn
-    iftop tcpdump
-    iotop hdparm
+    hdparm
+    iftop
+    iotop
+    lm_sensors
+    lsof
+    ncdu
+    ntfs3g
+    pciutils
+    tcpdump
+    termite
+    usbutils
   ];
 
   fonts.fontconfig.defaultFonts.monospace = [ "monofur" ];
