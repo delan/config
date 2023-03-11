@@ -18,7 +18,7 @@
     };
   };
 
-  nix.useSandbox = true;
+  nix.settings.sandbox = true;
 
   hardware.opentabletdriver.enable = true;
 

@@ -18,7 +18,7 @@
     };
   };
 
-  nix.useSandbox = true;
+  nix.settings.sandbox = true;
 
   # biggest(?) available font
   console.font = "iso01-12x22";

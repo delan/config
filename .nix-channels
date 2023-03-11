@@ -1,6 +1,2 @@
-https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz home-manager
-https://github.com/rycee/home-manager/archive/release-20.03.tar.gz home-manager-20.03
-https://github.com/rycee/home-manager/archive/release-20.09.tar.gz home-manager-20.09
-https://github.com/rycee/home-manager/archive/release-21.05.tar.gz home-manager-21.05
-https://github.com/rycee/home-manager/archive/release-21.11.tar.gz home-manager-21.11
+https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz home-manager
 https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager-unstable
