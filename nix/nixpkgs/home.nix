@@ -12,56 +12,87 @@
     # FIXME disabled while debugging X11 ABI problem?
     # next = import <nixos-unstable> { config = { allowUnfree = true; }; };
   in [
-    # next.google-chrome-dev
-    networkmanagerapplet termite geeqie smartmontools pavucontrol
-    tmux htop vim fd pv neofetch ripgrep
-
-    atool unzip zip p7zip cabextract jq nmap dnsutils
-    weechat tdesktop okular remmina
-    mpv gimp gnome3.gnome-font-viewer
-    ffmpeg
-    aria2 youtube-dl
-    sshfs-fuse
-    obs-studio
-    spotify
-    vscode
-
-    nix-index man-pages git-lfs clang clang-tools patchelf
-    gnumake
-    rustup
-
-    maim
-    units
-
-    nix-diff
-
-    bc xclip google-chrome imagemagick cdrkit whois openvpn
-    libreoffice
-    timidity soundfont-fluid
-    wget
-    python3
-
-    # jetbrains.idea-community
-    virt-viewer
-    opentabletdriver wineWowPackages.full winetricks openjdk17
-    pup
-    # binutils-unwrapped
-    texlive.combined.scheme-full
-    linuxKernel.packages.linux_5_15.perf
+    #binutils-unwrapped
+    #jetbrains.idea-community
     #platformio
-    steam-run
-    mc pcmanfm
+    aria2
+    atool
+    bc
+    cabextract
+    cdrkit
+    clang
+    clang-tools
+    dnsutils
     exiftool
-    kdenlive
-    minicom
-    obsidian
-    xorg.xmodmap
-
-    xdotool
-    sqlite
-    inkscape
-    rnix-lsp
+    fd
+    ffmpeg
     gdb
+    geeqie
+    gimp
+    git-lfs
+    gnome3.gnome-font-viewer
+    gnumake
+    google-chrome
+    htop
+    imagemagick
+    inkscape
+    jq
+    kdenlive
+    libreoffice
+    linuxKernel.packages.linux_5_15.perf
+    maim
+    man-pages
+    mc
+    minicom
+    mpv
+    neofetch
+    networkmanagerapplet
+    nix-diff
+    nix-index
+    nmap
+    obs-studio
+    obsidian
+    okular
+    openjdk17
+    opentabletdriver
+    openvpn
+    p7zip
+    patchelf
+    pavucontrol
+    pcmanfm
+    pup
+    pv
+    python3
+    remmina
+    ripgrep
+    rnix-lsp
+    rustup
+    smartmontools
+    soundfont-fluid
+    spotify
+    sqlite
+    sshfs-fuse
+    steam-run
+    tdesktop
+    termite
+    texlive.combined.scheme-full
+    timidity
+    tmux
+    units
+    unzip
+    vim
+    virt-viewer
+    vscode
+    weechat
+    wget
+    whois
+    winetricks
+    wineWowPackages.full
+    xclip
+    xdotool
+    xorg.xmodmap
+    youtube-dl
+    zip
 
     # https://nixos.wiki/wiki/Discord#Opening_Links_with_Firefox
     # https://github.com/NixOS/nixpkgs/issues/108995#issuecomment-826358042
