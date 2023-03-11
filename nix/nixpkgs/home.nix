@@ -16,8 +16,8 @@
     networkmanagerapplet termite geeqie smartmontools pavucontrol
     tmux htop vim fd pv neofetch ripgrep
 
-    atool unzip zip cabextract jq nmap dnsutils
-    weechat discord tdesktop okular remmina
+    atool unzip zip p7zip cabextract jq nmap dnsutils
+    weechat tdesktop okular remmina
     mpv gimp gnome3.gnome-font-viewer
     ffmpeg
     aria2 youtube-dl
@@ -50,6 +50,26 @@
     linuxKernel.packages.linux_5_15.perf
     #platformio
     steam-run
+    mc pcmanfm
+    exiftool
+    kdenlive
+    minicom
+    obsidian
+    xorg.xmodmap
+
+    xdotool
+    sqlite
+    inkscape
+    rnix-lsp
+    gdb
+
+    # https://nixos.wiki/wiki/Discord#Opening_Links_with_Firefox
+    # https://github.com/NixOS/nixpkgs/issues/108995#issuecomment-826358042
+    (discord.override { nss = nss_latest; })
+
+    (callPackage osu.nix {})
+    # (callPackage /home/delan/code/nixpkgs/pkgs/games/osu-lazer {})
+    # (callPackage /home/delan/code/nixpkgs/pkgs/games/osu-lazer/bin.nix {})
   ];
 
   services = {
@@ -64,6 +84,8 @@
         show-all-xerrors = true;
       '';
     };
+
+    # FIXME key bindings broken since NixOS 22.05?
     dunst = {
       enable = true;
       settings = {
@@ -127,7 +149,10 @@
   programs = {
     home-manager.enable = true;
     firefox.enable = true;
-    emacs.enable = true;
+    # emacs.enable = true;
+
+    # needed for NIX_AUTO_RUN etc in NixOS 22.05+
+    command-not-found.enable = true;
 
     git = {
       enable = true;

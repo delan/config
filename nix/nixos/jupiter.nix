@@ -5,7 +5,7 @@
     hostId = "E897B482";
     hostName = "jupiter";
     domain = "daz.cat";
-    luksDevice = "/dev/disk/by-uuid/00000000-0000-0000-0000-000000000000";
+    luksDevice = "/dev/disk/by-partlabel/${config.internal.hostName}.root";
     initialUser = "delan";
 
     interactive = true;
@@ -38,13 +38,13 @@
       allowedTCPPorts = [
         4000 8000 # default node/python dev
         9800 9801 9802 9803 # more dev (arbitrary)
-        13368 13369 # aria2 torrent (arbitrary)
         3128 3180 # oldssl-proxy
-        9222 # cros
-        3000 # bloomberg 2022-10-tks-scrolling-on-web-master
+        13367 # qbittorrent torrent (arbitrary)
+        13368 13369 # aria2 torrent (arbitrary)
       ];
 
       allowedUDPPorts = [
+        13367 # qbittorrent torrent (arbitrary)
         13368 13369 # aria2 torrent (arbitrary)
       ];
     };
@@ -67,4 +67,14 @@
   services.udev.extraRules = ''
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="2e8a", MODE:="0666"
   '';
+
+  # hashcat
+  hardware.opengl.extraPackages = with pkgs; [
+    rocm-opencl-icd
+    rocm-opencl-runtime
+  ];
+
+  # wireshark
+  programs.wireshark.enable = true;
+  users.users.delan.extraGroups = [ "wireshark" ];
 }

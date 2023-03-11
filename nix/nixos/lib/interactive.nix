@@ -15,7 +15,9 @@
 
     environment.systemPackages = with pkgs; [
       i3lock
-      fxlinuxprintutil
+
+      # FIXME uncomment in NixOS 22.11? https://github.com/NixOS/nixpkgs/pull/215160
+      # fxlinuxprintutil
     ];
 
     programs = {
@@ -30,7 +32,9 @@
       printing = {
         enable = true;
         startWhenNeeded = true;
-        drivers = with pkgs; [ fxlinuxprint ];
+
+        # FIXME uncomment in NixOS 22.11? https://github.com/NixOS/nixpkgs/pull/215160
+        # drivers = with pkgs; [ fxlinuxprint ];
       };
 
       xserver = {
