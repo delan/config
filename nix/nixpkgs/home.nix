@@ -1,4 +1,6 @@
 { config, pkgs, ... }: {
+  home.stateVersion = "22.11";
+
   home.sessionVariables = {
     # FIXME broken for like a year
     # https://www.reddit.com/r/linux/comments/72mfv8
@@ -109,11 +111,12 @@
       enable = false;
       vSync = true;
       backend = "xrender";
-      experimentalBackends = true;
-      extraOptions = ''
-        xrender-sync-fence = true;
-        show-all-xerrors = true;
-      '';
+
+      # FIXME replaced by services.picom.settings
+      # extraOptions = ''
+      #   xrender-sync-fence = true;
+      #   show-all-xerrors = true;
+      # '';
     };
 
     # FIXME key bindings broken since NixOS 22.05?

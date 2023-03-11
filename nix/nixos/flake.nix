@@ -1,5 +1,11 @@
 {
-  outputs = { self, nixpkgs }: {
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+    home-manager.url = "github:nix-community/home-manager/release-22.11";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+  };
+
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
     # servers
     nixosConfigurations.venus = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -9,15 +15,57 @@
     # workstations
     nixosConfigurations.uranus = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [ uranus/configuration.nix ];
+      modules = [
+        uranus/configuration.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.users.delan = import ../nixpkgs/home.nix;
+
+          # use same nixpkgs as system, which has allowUnfree
+          home-manager.useGlobalPkgs = true;
+
+          # TODO do we need this? affects path to hm-session-vars.sh!
+          # https://nix-community.github.io/home-manager/index.html#sec-install-nixos-module
+          # https://nix-community.github.io/home-manager/index.html#sec-flakes-nixos-module
+          # home-manager.useUserPackages = true;
+        }
+      ];
     };
     nixosConfigurations.saturn = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [ saturn/configuration.nix ];
+      modules = [
+        saturn/configuration.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.users.delan = import ../nixpkgs/home.nix;
+
+          # use same nixpkgs as system, which has allowUnfree
+          home-manager.useGlobalPkgs = true;
+
+          # TODO do we need this? affects path to hm-session-vars.sh!
+          # https://nix-community.github.io/home-manager/index.html#sec-install-nixos-module
+          # https://nix-community.github.io/home-manager/index.html#sec-flakes-nixos-module
+          # home-manager.useUserPackages = true;
+        }
+      ];
     };
     nixosConfigurations.jupiter = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [ jupiter/configuration.nix ];
+      modules = [
+        jupiter/configuration.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.users.delan = import ../nixpkgs/home.nix;
+
+          # use same nixpkgs as system, which has allowUnfree
+          home-manager.useGlobalPkgs = true;
+
+          # TODO do we need this? affects path to hm-session-vars.sh!
+          # https://nix-community.github.io/home-manager/index.html#sec-install-nixos-module
+          # https://nix-community.github.io/home-manager/index.html#sec-flakes-nixos-module
+          # home-manager.useUserPackages = true;
+        }
+      ];
     };
   };
 }
