@@ -23,5 +23,6 @@ volume master {
 }
 
 tztime local {
-	format = "%F %T"
+	# format = "%F %T"     # seconds
+	format = "%F %H:%M"  # minutes
 }

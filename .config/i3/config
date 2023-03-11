@@ -1,36 +1,49 @@
 focus_follows_mouse no
+mouse_warping none
 
+# xprop output is instance first class second
+# WM_CLASS(STRING) = "tk", "Tk"
 assign [class="^mpv$"] 7
 assign [class="^net-minecraft-bootstrap-Bootstrap$"] 8
 assign [class="^Minecraft "] 8
 assign [class="^Slack$"] 9
 assign [class="^discord$"] 9
 assign [class="^Termite$" instance="^weechat$"] 9
-
+assign [instance="^osu![.]exe$" class="^osu![.]exe$"] ":"
 for_window [instance="^qemu$" class="^Qemu-system-i386$"] floating enable
+for_window [instance="^qemu$" class="^Qemu-system-x86_64$"] floating enable
+for_window [instance="^remote-viewer$" class="^Remote-viewer$"] floating enable
+for_window [instance="^[.]qemu-system-x86_64-wrapped$" class="^[.]qemu-system-x86_64-wrapped$"] floating enable
 for_window [instance="^bochs$" class="^Bochs$"] floating enable
 for_window [instance="^fontforge$" class="^fontforge$"] floating enable
+for_window [instance="^java-lang-Thread$" class="^java-lang-Thread$"] floating enable
+for_window [instance="^tk$" class="^Tk$"] floating enable
 for_window [instance="^bochs$" class="^Bochs$"] move position 600 0
 # for_window [class="^mpv$"] floating enable
+for_window [class="^Wine$"] floating enable
+for_window [class="^explorer.exe$"] floating enable
+for_window [instance="^servo$" class="^servo$"] floating enable
+for_window [instance="^wbe$" class="^wbe$"] floating enable
 for_window [class="."] border pixel 1
 
 exec --no-startup-id nm-applet
-# exec --no-startup-id barriers -f -c barrier.conf --address :24800
-# exec --no-startup-id barrierc -f -n uranus 172.19.128.65
+exec --no-startup-id ssh-add /home/delan/.ssh/id_rsa
+exec --no-startup-id xmodmap /home/delan/.Xmodmap
 
 # https://bbs.archlinux.org/viewtopic.php?id=248862
-bindsym $mod+o exec light -U 5
-bindsym $mod+p exec light -A 5
-bindsym XF86MonBrightnessDown exec light -U 5
-bindsym XF86MonBrightnessUp exec light -A 5
+bindsym $mod+o exec --no-startup-id light -U 5
+bindsym $mod+p exec --no-startup-id light -A 5
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
 
-bindsym Print exec rofi-ss
+# FIXME replace this with maim / maim -s / maim -i $(xdotool getactivewindow)
+# bindsym Print exec rofi-ss
 # bindsym XF86AudioMute exec amixer -q set Master toggle, exec pkill -USR1 i3status
 # bindsym XF86AudioLowerVolume exec amixer -q set Master 5%-, exec pkill -USR1 i3status
 # bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+, exec pkill -USR1 i3status
 bindsym $mod+l exec --no-startup-id i3lock
 # bindsym $mod+c exec termite -e polishnt
-bindsym $mod+c exec termite -e 'zsh -c '\''nix run nixpkgs.bc -c bc -l <(echo scale=9)'\'
+bindsym $mod+c exec termite -e termite -e 'zsh -c '\''bc -l <(echo scale=9)'\'
 bindsym $mod+u exec termite -e units
 # bindsym $mod+e exec emacsclient -c
 # bindsym $mod+e exec emacsclient -c --socket-name $XDG_RUNTIME_DIR/emacs.socket
@@ -73,6 +86,7 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws0
+bindsym $mod+Shift+z move workspace to output left
 bindsym $mod+Up focus up
 bindsym $mod+Down focus down
 bindsym $mod+Left focus left
@@ -85,10 +99,10 @@ bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+a focus parent
-#bindsym $mod+d focus child
+bindsym $mod+Shift+a focus child
 bindsym $mod+h split h
 bindsym $mod+v split v
-bindsym $mod+z focus right
+bindsym $mod+z focus left
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+f fullscreen toggle
 bindsym $mod+Shift+q exec "i3-nagbar -t warning -m '' -b quit 'i3-msg exit'"
@@ -103,5 +117,7 @@ bar {
 	# status_command i3status
 	status_command ~/.config/i3/local.free.sh
 	separator_symbol " "
+
+	# enable when using osu!stable editor
 	# mode hide
 }

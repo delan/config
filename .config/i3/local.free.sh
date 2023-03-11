@@ -10,7 +10,13 @@ f() {
 g() {
     printf \[
     while read -r update; do
-        echo "$update" | jq -ec '[{"full_text": $x}] + .' --arg x "$(free -h | sed 2\!d | awk '{print $7}')"
+        echo "$update" | jq -ec '[{"full_text": $x}] + .' --arg x "$(
+            sort -u /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor | tr \\n ' '
+	    < /proc/cpuinfo rg --pcre2 -o '(?<=^cpu MHz		: )[^.]*' | sort -g | sed q | tr \\n ' '
+	    < /proc/cpuinfo rg --pcre2 -o '(?<=^cpu MHz		: )[^.]*' | sort -gr | sed q | tr \\n ' '
+            printf ' '
+            free -h | sed 2\!d | awk '{print $7}'
+        )"
         printf ,
     done
 }

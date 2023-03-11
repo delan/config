@@ -67,7 +67,7 @@
     # https://github.com/NixOS/nixpkgs/issues/108995#issuecomment-826358042
     (discord.override { nss = nss_latest; })
 
-    (callPackage osu.nix {})
+    (callPackage ./osu.nix {})
     # (callPackage /home/delan/code/nixpkgs/pkgs/games/osu-lazer {})
     # (callPackage /home/delan/code/nixpkgs/pkgs/games/osu-lazer/bin.nix {})
   ];
