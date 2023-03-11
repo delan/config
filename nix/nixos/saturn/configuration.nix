@@ -1,5 +1,5 @@
 { config, pkgs, lib, options, modulesPath, ... }: {
-  imports = [ <nixos-hardware/lenovo/thinkpad/x1-extreme/gen2> ./lib ];
+  imports = [ <nixos-hardware/lenovo/thinkpad/x1-extreme/gen2> ./hardware-configuration.nix ../lib ];
 
   internal = {
     hostId = "7A27D153";

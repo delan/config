@@ -1,5 +1,5 @@
 { config, pkgs, lib, options, modulesPath }: {
-  imports = [ ./lib ];
+  imports = [ ./hardware-configuration.nix ../lib ];
 
   internal = {
     hostId = "2C562D26";

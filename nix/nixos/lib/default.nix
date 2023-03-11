@@ -1,6 +1,5 @@
 { config, lib, options, modulesPath, pkgs, ... }: with lib; {
   imports = [
-    ../hardware-configuration.nix
     ./interactive.nix
     ./laptop.nix
     ./igalia.nix
