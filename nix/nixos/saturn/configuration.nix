@@ -1,5 +1,5 @@
 { config, pkgs, lib, options, modulesPath, ... }: {
-  imports = [ <nixos-hardware/lenovo/thinkpad/x1-extreme/gen2> ./hardware-configuration.nix ../lib ];
+  imports = [ /config/nix/nixos/saturn/hardware-configuration.nix ../lib ];
 
   internal = {
     hostId = "7A27D153";
@@ -60,6 +60,7 @@
 
       allowedUDPPorts = [
         13368 13369 # aria2 torrent (arbitrary)
+        34197 # factorio
       ];
     };
   };

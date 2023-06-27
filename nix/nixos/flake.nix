@@ -3,9 +3,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
     home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware, ... }: {
     # servers
     nixosConfigurations.venus = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -35,6 +36,7 @@
       system = "x86_64-linux";
       modules = [
         saturn/configuration.nix
+        nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen2
         home-manager.nixosModules.home-manager
         {
           home-manager.users.delan = import ../nixpkgs/home.nix;

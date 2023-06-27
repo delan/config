@@ -46,7 +46,7 @@
         libinput = {
           enable = true;
           touchpad.tapping = false;
-          touchpad.disableWhileTyping = true;
+          touchpad.disableWhileTyping = false;
           touchpad.naturalScrolling = true;
           # touchpad.accelProfile = "flat";
         };

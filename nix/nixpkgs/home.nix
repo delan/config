@@ -48,6 +48,8 @@
     minicom
     mpv
     neofetch
+    networkmanager-openvpn
+    gnome.networkmanager-openvpn
     networkmanagerapplet
     nix-diff
     nix-index
