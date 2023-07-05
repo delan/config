@@ -1,11 +1,14 @@
-@                                       60      IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2023070500 600 60 1814400 60 )
+@                                       60      IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2023070502 600 60 1814400 60 )
 @                                       60      IN  NS      opacus.daz.cat.
 @                                       60      IN  NS      ns2.he.net.
 @                                       60      IN  NS      ns2.afraid.org.
 home                                    60      IN  NS      opacus.daz.cat.
+acme                                    60      IN  NS      opacus.daz.cat.
 @                                       60      IN  CAA 128 issue "letsencrypt.org"
 @                                       60      IN  CAA 128 issuewild ";"
 @                                       60      IN  CAA 0   iodef "mailto:delan@azabani.com"
+_acme-challenge                         60      IN  CNAME   _acme-challenge.daz.cat.acme.daz.cat.
+_acme-challenge.colo                    60      IN  CNAME   _acme-challenge.colo.daz.cat.acme.daz.cat.
 @                                       60      IN  A       180.150.84.38
 opacus                                  60      IN  A       180.150.84.38
 stratus                                 60      IN  A       180.150.84.39

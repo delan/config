@@ -1,0 +1,40 @@
+#!/bin/sh
+set -eu
+
+printf '<%s> ' "$@" | logger -f /dev/stdin
+cd /var/nsd/zones
+zone=acme.daz.cat
+
+case "$1" in
+  (present)
+    ;;
+  (cleanup)
+    exit 0
+    ;;
+  (*)
+    >&2 printf 'fatal: unknown action: %s\n' "$1"
+    exit 1
+    ;;
+esac
+
+if ! mv $zone.serial $zone.lock; then
+  >&2 printf 'fatal: zone is locked: %s\n' "$zone"
+  exit 1
+fi
+oldserial=$(cat $zone.lock)
+newserial=$(date -u +\%Y\%m\%d00)
+while [ $newserial -le $oldserial ]; do
+  newserial=$((newserial+1))
+done
+
+> $zone.lock echo $newserial
+>> $zone.in printf '%s 60 IN TXT "%s"\n' "${2%.$zone.}" "$3"
+
+> $zone.new printf '@ 60 IN SOA opacus.daz.cat. delan.azabani.com. ( %s 600 60 1814400 60 )\n' "$newserial"
+>> $zone.new printf '@ 60 IN NS opacus.daz.cat.\n'
+>> $zone.new cat $zone.in
+
+colordiff -u $zone.zone $zone.new || :
+mv $zone.new $zone.zone
+doas rcctl reload nsd
+mv $zone.lock $zone.serial
