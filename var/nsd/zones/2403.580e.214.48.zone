@@ -1,7 +1,8 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2022020600 600 60 1814400 60 )
+@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2023070100 600 60 1814400 60 )
 @                                       3600    IN  NS      opacus.daz.cat.
 0.2.e.6.7.a.e.f.f.f.6.4.e.c.6.f.0.0.0.0 3600    IN  PTR     jane.daz.cat.
 3.2.0.8.e.e.e.f.f.f.f.f.c.c.c.c.0.0.0.0 3600    IN  PTR     bridge13.venus.daz.cat.
+b.8.6.4.e.e.e.f.f.f.f.f.c.c.c.c.0.0.0.0 3600    IN  PTR     bridge13.colo.daz.cat.
 8.1.0.4.1.0.e.f.f.f.0.0.4.5.0.5.0.0.0.0 3600    IN  PTR     vtnet0.storage.daz.cat.
 3.5.b.a.7.0.4.9.8.3.a.0.3.b.9.6.0.0.0.0 3600    IN  PTR     uranium.daz.cat.
 7.2.0.8.e.e.e.f.f.f.f.f.c.c.c.c.0.0.0.0 3600    IN  PTR     bridge13.saturn.daz.cat.
