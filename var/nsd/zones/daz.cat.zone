@@ -1,76 +1,76 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2023070100 600 60 1814400 60 )
-@                                       3600    IN  NS      opacus.daz.cat.
-@                                       3600    IN  NS      ns2.he.net.
-@                                       3600    IN  NS      ns2.afraid.org.
-home                                    3600    IN  NS      opacus.daz.cat.
-@                                       3600    IN  CAA 128 issue "letsencrypt.org"
-@                                       3600    IN  CAA 128 issuewild ";"
-@                                       3600    IN  CAA 0   iodef "mailto:delan@azabani.com"
-@                                       3600    IN  A       180.150.84.38
-opacus                                  3600    IN  A       180.150.84.38
-stratus                                 3600    IN  A       180.150.84.39
-cirrus                                  3600    IN  A       45.63.22.177
-bamboo                                  3600    IN  CNAME   stratus.daz.cat.
-flipflopper.stratus                     3600    IN  CNAME   stratus.daz.cat.
-jane                                    3600    IN  A       180.150.90.186
-virbr1.venus                            3600    IN  A       172.19.129.1
-vtnet1.storage                          3600    IN  A       172.19.129.205
-bmc.virbr1.venus                        3600    IN  A       172.19.129.155
-netkvm2.redmond                         3600    IN  A       172.19.129.240
-enp4s0.debalia                          3600    IN  A       172.19.129.218
-@                                       3600    IN  AAAA    2403:580e:214::5054:ff:fe09:6507
-opacus                                  3600    IN  AAAA    2403:580e:214::5054:ff:fe09:6507
-stratus                                 3600    IN  AAAA    2403:580e:214::5054:ff:fec4:8f04
-cirrus                                  3600    IN  AAAA    2001:19f0:5:2beb:5400:03ff:feb9:95bb
-mtu1500.stratus                         3600    IN  AAAA    2403:580e:214::8f04:1500
-mtu1280.stratus                         3600    IN  AAAA    2403:580e:214::8f04:1280
-jane                                    3600    IN  AAAA    2403:580e:0214:0000:f6ce:46ff:fea7:6e20
-venus                                   3600    IN  AAAA    2403:580e:0214:0000:cccc:ffff:feee:8023
-bridge13.venus                          3600    IN  AAAA    2403:580e:0214:0000:cccc:ffff:feee:8023
-colo                                    3600    IN  AAAA    2403:580e:0214:0000:cccc:ffff:feee:468b
-bridge13.colo                           3600    IN  AAAA    2403:580e:0214:0000:cccc:ffff:feee:468b
-storage                                 3600    IN  AAAA    2403:580e:0214:0000:5054:00ff:fe01:4018
-vtnet0.storage                          3600    IN  AAAA    2403:580e:0214:0000:5054:00ff:fe01:4018
-uranium                                 3600    IN  AAAA    2403:580e:0214:0000:69b3:0a38:9407:ab53
-saturn                                  3600    IN  AAAA    2403:580e:0214:0000:cccc:ffff:feee:8027
-bridge13.saturn                         3600    IN  AAAA    2403:580e:0214:0000:cccc:ffff:feee:8027
-uranus                                  3600    IN  AAAA    2403:580e:0214:0000:16da:e9ff:fe0c:223c
-enp5s0.uranus                           3600    IN  AAAA    2403:580e:0214:0000:16da:e9ff:fe0c:223c
-ark-1                                   3600    IN  AAAA    2403:580e:0214:0000:020b:abff:fe26:ed67
-eth0.ark-1                              3600    IN  AAAA    2403:580e:0214:0000:020b:abff:fe26:ed67
-ark-2                                   3600    IN  AAAA    2403:580e:0214:0000:02d0:c9ff:fea9:6da8
-eth0.ark-2                              3600    IN  AAAA    2403:580e:0214:0000:02d0:c9ff:fea9:6da8
-nyaaa                                   3600    IN  AAAA    2403:580e:0214:0000:02e0:81ff:fec8:8632
-ens5.nyaaa                              3600    IN  AAAA    2403:580e:0214:0000:02e0:81ff:fec8:8632
-redmond                                 3600    IN  AAAA    2403:580e:0214:0000:b18b:9a7f:22a4:ed4c
-netkvm1.redmond                         3600    IN  AAAA    2403:580e:0214:0000:b18b:9a7f:22a4:ed4c
-debalia                                 3600    IN  AAAA    2403:580e:0214:0000:5054:00ff:feea:1b5c
-enp3s0.debalia                          3600    IN  AAAA    2403:580e:0214:0000:5054:00ff:feea:1b5c
-deburn                                  3600    IN  AAAA    2403:580e:0214:0000:5054:00ff:fe7c:1f4e
-enp3s0.deburn                           3600    IN  AAAA    2403:580e:0214:0000:5054:00ff:fe7c:1f4e
-debium                                  3600    IN  AAAA    2403:580e:0214:0000:5054:00ff:fee4:a953
-enp1s0.debium                           3600    IN  AAAA    2403:580e:0214:0000:5054:00ff:fee4:a953
-virbr1.venus                            3600    IN  AAAA    fd36:09ef:4322:29ce::1
-bmc.virbr1.venus                        3600    IN  AAAA    fd36:09ef:4322:29ce:0ec4:7aff:fe77:4a14
-vtnet1.storage                          3600    IN  AAAA    fd36:09ef:4322:29ce:5054:00ff:fe11:6c8b
-netkvm2.redmond                         3600    IN  AAAA    fd36:09ef:4322:29ce:41d8:84ea:b1fe:fa17
-enp4s0.debalia                          3600    IN  AAAA    fd36:09ef:4322:29ce:5054:00ff:fe34:f713
-go                                      3600    IN  CNAME   opacus.daz.cat.
-bucket                                  3600    IN  CNAME   opacus.daz.cat.
-charming                                3600    IN  CNAME   opacus.daz.cat.
-toot                                    3600    IN  CNAME   opacus.daz.cat.
-funny.computer                          3600    IN  CNAME   opacus.daz.cat.
-xn--blhaj-nra                           3600    IN  CNAME   opacus.daz.cat.
-drafts.csswg                            3600    IN  CNAME   opacus.daz.cat.
-@                                       3600    IN  TXT     "keybase-site-verification=zzcGEacJisGLAhzLlZC1IQ_4swmfqh1XyRc0a5YLROc"
-@                                       3600    IN  TXT     "keybase-site-verification=0TvQVAHxVz9UqJ_ce5XC7HcDjm05AVbmGtTtjpIvKS0"
-opacus                                  3600    IN  TXT     "v=spf1 a -all"
-stratus                                 3600    IN  TXT     "v=spf1 a -all"
-cirrus                                  3600    IN  TXT     "v=spf1 a -all"
-daria                                   3600    IN  TXT     "v=spf1 a -all"
-_dmarc.opacus                           3600    IN  TXT     "v=DMARC1; p=reject; rua=mailto:delan+dmarc@azabani.com"
-_dmarc.daria                            3600    IN  TXT     "v=DMARC1; p=reject; rua=mailto:delan+dmarc@azabani.com"
-4D075BE531BD1._domainkey.opacus         3600    IN  TXT     (
+@                                       60      IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2023070500 600 60 1814400 60 )
+@                                       60      IN  NS      opacus.daz.cat.
+@                                       60      IN  NS      ns2.he.net.
+@                                       60      IN  NS      ns2.afraid.org.
+home                                    60      IN  NS      opacus.daz.cat.
+@                                       60      IN  CAA 128 issue "letsencrypt.org"
+@                                       60      IN  CAA 128 issuewild ";"
+@                                       60      IN  CAA 0   iodef "mailto:delan@azabani.com"
+@                                       60      IN  A       180.150.84.38
+opacus                                  60      IN  A       180.150.84.38
+stratus                                 60      IN  A       180.150.84.39
+cirrus                                  60      IN  A       45.63.22.177
+bamboo                                  60      IN  CNAME   stratus.daz.cat.
+flipflopper.stratus                     60      IN  CNAME   stratus.daz.cat.
+jane                                    60      IN  A       180.150.90.186
+virbr1.venus                            60      IN  A       172.19.129.1
+vtnet1.storage                          60      IN  A       172.19.129.205
+bmc.virbr1.venus                        60      IN  A       172.19.129.155
+netkvm2.redmond                         60      IN  A       172.19.129.240
+enp4s0.debalia                          60      IN  A       172.19.129.218
+@                                       60      IN  AAAA    2403:580e:214::5054:ff:fe09:6507
+opacus                                  60      IN  AAAA    2403:580e:214::5054:ff:fe09:6507
+stratus                                 60      IN  AAAA    2403:580e:214::5054:ff:fec4:8f04
+cirrus                                  60      IN  AAAA    2001:19f0:5:2beb:5400:03ff:feb9:95bb
+mtu1500.stratus                         60      IN  AAAA    2403:580e:214::8f04:1500
+mtu1280.stratus                         60      IN  AAAA    2403:580e:214::8f04:1280
+jane                                    60      IN  AAAA    2403:580e:0214:0000:f6ce:46ff:fea7:6e20
+venus                                   60      IN  AAAA    2403:580e:0214:0000:cccc:ffff:feee:8023
+bridge13.venus                          60      IN  AAAA    2403:580e:0214:0000:cccc:ffff:feee:8023
+colo                                    60      IN  AAAA    2403:580e:0214:0000:cccc:ffff:feee:468b
+bridge13.colo                           60      IN  AAAA    2403:580e:0214:0000:cccc:ffff:feee:468b
+storage                                 60      IN  AAAA    2403:580e:0214:0000:5054:00ff:fe01:4018
+vtnet0.storage                          60      IN  AAAA    2403:580e:0214:0000:5054:00ff:fe01:4018
+uranium                                 60      IN  AAAA    2403:580e:0214:0000:69b3:0a38:9407:ab53
+saturn                                  60      IN  AAAA    2403:580e:0214:0000:cccc:ffff:feee:8027
+bridge13.saturn                         60      IN  AAAA    2403:580e:0214:0000:cccc:ffff:feee:8027
+uranus                                  60      IN  AAAA    2403:580e:0214:0000:16da:e9ff:fe0c:223c
+enp5s0.uranus                           60      IN  AAAA    2403:580e:0214:0000:16da:e9ff:fe0c:223c
+ark-1                                   60      IN  AAAA    2403:580e:0214:0000:020b:abff:fe26:ed67
+eth0.ark-1                              60      IN  AAAA    2403:580e:0214:0000:020b:abff:fe26:ed67
+ark-2                                   60      IN  AAAA    2403:580e:0214:0000:02d0:c9ff:fea9:6da8
+eth0.ark-2                              60      IN  AAAA    2403:580e:0214:0000:02d0:c9ff:fea9:6da8
+nyaaa                                   60      IN  AAAA    2403:580e:0214:0000:02e0:81ff:fec8:8632
+ens5.nyaaa                              60      IN  AAAA    2403:580e:0214:0000:02e0:81ff:fec8:8632
+redmond                                 60      IN  AAAA    2403:580e:0214:0000:b18b:9a7f:22a4:ed4c
+netkvm1.redmond                         60      IN  AAAA    2403:580e:0214:0000:b18b:9a7f:22a4:ed4c
+debalia                                 60      IN  AAAA    2403:580e:0214:0000:5054:00ff:feea:1b5c
+enp3s0.debalia                          60      IN  AAAA    2403:580e:0214:0000:5054:00ff:feea:1b5c
+deburn                                  60      IN  AAAA    2403:580e:0214:0000:5054:00ff:fe7c:1f4e
+enp3s0.deburn                           60      IN  AAAA    2403:580e:0214:0000:5054:00ff:fe7c:1f4e
+debium                                  60      IN  AAAA    2403:580e:0214:0000:5054:00ff:fee4:a953
+enp1s0.debium                           60      IN  AAAA    2403:580e:0214:0000:5054:00ff:fee4:a953
+virbr1.venus                            60      IN  AAAA    fd36:09ef:4322:29ce::1
+bmc.virbr1.venus                        60      IN  AAAA    fd36:09ef:4322:29ce:0ec4:7aff:fe77:4a14
+vtnet1.storage                          60      IN  AAAA    fd36:09ef:4322:29ce:5054:00ff:fe11:6c8b
+netkvm2.redmond                         60      IN  AAAA    fd36:09ef:4322:29ce:41d8:84ea:b1fe:fa17
+enp4s0.debalia                          60      IN  AAAA    fd36:09ef:4322:29ce:5054:00ff:fe34:f713
+go                                      60      IN  CNAME   opacus.daz.cat.
+bucket                                  60      IN  CNAME   opacus.daz.cat.
+charming                                60      IN  CNAME   opacus.daz.cat.
+toot                                    60      IN  CNAME   opacus.daz.cat.
+funny.computer                          60      IN  CNAME   opacus.daz.cat.
+xn--blhaj-nra                           60      IN  CNAME   opacus.daz.cat.
+drafts.csswg                            60      IN  CNAME   opacus.daz.cat.
+@                                       60      IN  TXT     "keybase-site-verification=zzcGEacJisGLAhzLlZC1IQ_4swmfqh1XyRc0a5YLROc"
+@                                       60      IN  TXT     "keybase-site-verification=0TvQVAHxVz9UqJ_ce5XC7HcDjm05AVbmGtTtjpIvKS0"
+opacus                                  60      IN  TXT     "v=spf1 a -all"
+stratus                                 60      IN  TXT     "v=spf1 a -all"
+cirrus                                  60      IN  TXT     "v=spf1 a -all"
+daria                                   60      IN  TXT     "v=spf1 a -all"
+_dmarc.opacus                           60      IN  TXT     "v=DMARC1; p=reject; rua=mailto:delan+dmarc@azabani.com"
+_dmarc.daria                            60      IN  TXT     "v=DMARC1; p=reject; rua=mailto:delan+dmarc@azabani.com"
+4D075BE531BD1._domainkey.opacus         60      IN  TXT     (
         "v=DKIM1; g=*; k=rsa; p=MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA6"
         "ZODP6DTVkjobGjtpKP5tdmLDcfX2E4/VAtoJ714Mz836GJaClCGUwsqSMyVhiHMV8rn4"
         "0JsSQBbcDX+Adu/XSfhj4OB33tUe5UspuD6kCy6qYOjdEwm9fitRs8c95kC5lIw0LEsQ"
@@ -83,7 +83,7 @@ _dmarc.daria                            3600    IN  TXT     "v=DMARC1; p=reject;
         "5l17sX4SjDjRT6OihniO1sO6AzPOUhUM1THsk8dk1F04WP0TZAQ5+GKVSbSRdZ8ByL/V"
         "0zgtk1Lh4rIVcApl59L91N7LlYSPfRo/NhK8/hd1aBWwp2EyFgF/M0cqhwv7epOyq1xN"
         "5kCAwEAAQ==")
-ADFAF306CC552._domainkey.daria          3600    IN  TXT     (
+ADFAF306CC552._domainkey.daria          60      IN  TXT     (
         "v=DKIM1; k=rsa; p=MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAx1RCz7"
         "1Gwc5D+V4K8+LMIYXLpMLEDpcfY2YENndE/VHOw+ZtRQYwBpzNvYkZuXB1vG4AdYEYTK"
         "Nfhc8Ddxq+DYEfS0qGqf5Hdxxar8WczuI9YAyBHN1nYKesRkVuP6SO0SWNNk8IAmcoMn"

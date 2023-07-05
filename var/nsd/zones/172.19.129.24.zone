@@ -1,7 +1,7 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2022012600 600 60 1814400 60 )
-@                                       3600    IN  NS      opacus.daz.cat.
-1                                       3600    IN  PTR     virbr1.venus.daz.cat.
-155                                     3600    IN  PTR     bmc.virbr1.venus.daz.cat.
-205                                     3600    IN  PTR     vtnet1.storage.daz.cat.
-240                                     3600    IN  PTR     netkvm2.redmond.daz.cat.
-218                                     3600    IN  PTR     enp4s0.debalia.daz.cat.
+@                                       60      IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2023070500 600 60 1814400 60 )
+@                                       60      IN  NS      opacus.daz.cat.
+1                                       60      IN  PTR     virbr1.venus.daz.cat.
+155                                     60      IN  PTR     bmc.virbr1.venus.daz.cat.
+205                                     60      IN  PTR     vtnet1.storage.daz.cat.
+240                                     60      IN  PTR     netkvm2.redmond.daz.cat.
+218                                     60      IN  PTR     enp4s0.debalia.daz.cat.

@@ -1,33 +1,33 @@
-@                                       3600    IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2021121400 600 60 1814400 60 )
-@                                       3600    IN  NS      opacus.daz.cat.
-@                                       3600    IN  NS      ns2.he.net.
-@                                       3600    IN  NS      ns2.afraid.org.
-@                                       3600    IN  CAA 128 issue "letsencrypt.org"
-@                                       3600    IN  CAA 128 issuewild ";"
-@                                       3600    IN  CAA 0   iodef "mailto:delan@azabani.com"
-@                                       3600    IN  MX  10  in1-smtp.messagingengine.com.
-@                                       3600    IN  MX  20  in2-smtp.messagingengine.com.
-_submission._tcp                        3600    IN  SRV 0 1 587 smtp.fastmail.com.
-_imap._tcp                              3600    IN  SRV 0 0 0 .
-_imaps._tcp                             3600    IN  SRV 0 1 993 imap.fastmail.com.
-_pop3._tcp                              3600    IN  SRV 0 0 0 .
-_pop3s._tcp                             3600    IN  SRV 0 0 0 . ; 10 1 995 pop.fastmail.com.
-_jmap._tcp                              3600    IN  SRV 0 1 443 jmap.fastmail.com.
-@                                       3600    IN  A       180.150.84.38
-@                                       3600    IN  AAAA    2403:580e:214::5054:ff:fe09:6507
-www                                     3600    IN  CNAME   opacus.daz.cat.
-@                                       3600    IN  TXT     "v=spf1 include:spf.messagingengine.com -all"
-@                                       3600    IN  TXT     "keybase-site-verification=5qEBsukhu2N-Uw03F1DUyOCZ7RIYpMoqTZhGZCs-NZI"
-@                                       3600    IN  TXT     "keybase-site-verification=ITmFPa3_p1mKVpmqRzNJ50LOOUEoXV-SuZ4SUN4yzMw"
-@                                       3600    IN  TXT     "blitz=mu-25b8a55c-a9fee579-723dcc44-977ee1b9"
-@                                       3600    IN  TXT     "google-site-verification=Fxs8sBIBXdRUm75sZEEht9lZleROIJktSxiPUX_hwus"
-@                                       3600    IN  TXT     "waybackverify=2021-12-14; please allow this domain (azabani.com) and any subdomains to be included in the Wayback Machine"
-google._domainkey                       3600    IN  TXT     "v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCuO8HfUWjt1hdUts8rTl0gGxB52uC90R9RhbUfZhPKsJzxI1ZRB67ko9i7lAwNFR7fr7W/EJQlwqM6L/ntgr8fB23ZG9w7DEtv58qfkpIF5cp4JGB/zUwVFayn890pi0CnA2YLQ+dTj3xAKfYy98fmTzqUxdMp73m0izee9s29gwIDAQAB"
-fm1._domainkey                          3600    IN  CNAME   fm1.azabani.com.dkim.fmhosted.com.
-fm2._domainkey                          3600    IN  CNAME   fm2.azabani.com.dkim.fmhosted.com.
-fm3._domainkey                          3600    IN  CNAME   fm3.azabani.com.dkim.fmhosted.com.
-_dmarc                                  3600    IN  TXT     "v=DMARC1; p=none; rua=mailto:delan+dmarc@azabani.com"
-daz.cat._report._dmarc                  3600    IN  TXT     "v=DMARC1"
-*.daz.cat._report._dmarc                3600    IN  TXT     "v=DMARC1"
-comssa.org.au._report._dmarc            3600    IN  TXT     "v=DMARC1"
-*.comssa.org.au._report._dmarc          3600    IN  TXT     "v=DMARC1"
+@                                       60      IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2023070500 600 60 1814400 60 )
+@                                       60      IN  NS      opacus.daz.cat.
+@                                       60      IN  NS      ns2.he.net.
+@                                       60      IN  NS      ns2.afraid.org.
+@                                       60      IN  CAA 128 issue "letsencrypt.org"
+@                                       60      IN  CAA 128 issuewild ";"
+@                                       60      IN  CAA 0   iodef "mailto:delan@azabani.com"
+@                                       60      IN  MX  10  in1-smtp.messagingengine.com.
+@                                       60      IN  MX  20  in2-smtp.messagingengine.com.
+_submission._tcp                        60      IN  SRV 0 1 587 smtp.fastmail.com.
+_imap._tcp                              60      IN  SRV 0 0 0 .
+_imaps._tcp                             60      IN  SRV 0 1 993 imap.fastmail.com.
+_pop3._tcp                              60      IN  SRV 0 0 0 .
+_pop3s._tcp                             60      IN  SRV 0 0 0 . ; 10 1 995 pop.fastmail.com.
+_jmap._tcp                              60      IN  SRV 0 1 443 jmap.fastmail.com.
+@                                       60      IN  A       180.150.84.38
+@                                       60      IN  AAAA    2403:580e:214::5054:ff:fe09:6507
+www                                     60      IN  CNAME   opacus.daz.cat.
+@                                       60      IN  TXT     "v=spf1 include:spf.messagingengine.com -all"
+@                                       60      IN  TXT     "keybase-site-verification=5qEBsukhu2N-Uw03F1DUyOCZ7RIYpMoqTZhGZCs-NZI"
+@                                       60      IN  TXT     "keybase-site-verification=ITmFPa3_p1mKVpmqRzNJ50LOOUEoXV-SuZ4SUN4yzMw"
+@                                       60      IN  TXT     "blitz=mu-25b8a55c-a9fee579-723dcc44-977ee1b9"
+@                                       60      IN  TXT     "google-site-verification=Fxs8sBIBXdRUm75sZEEht9lZleROIJktSxiPUX_hwus"
+@                                       60      IN  TXT     "waybackverify=2021-12-14; please allow this domain (azabani.com) and any subdomains to be included in the Wayback Machine"
+google._domainkey                       60      IN  TXT     "v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCuO8HfUWjt1hdUts8rTl0gGxB52uC90R9RhbUfZhPKsJzxI1ZRB67ko9i7lAwNFR7fr7W/EJQlwqM6L/ntgr8fB23ZG9w7DEtv58qfkpIF5cp4JGB/zUwVFayn890pi0CnA2YLQ+dTj3xAKfYy98fmTzqUxdMp73m0izee9s29gwIDAQAB"
+fm1._domainkey                          60      IN  CNAME   fm1.azabani.com.dkim.fmhosted.com.
+fm2._domainkey                          60      IN  CNAME   fm2.azabani.com.dkim.fmhosted.com.
+fm3._domainkey                          60      IN  CNAME   fm3.azabani.com.dkim.fmhosted.com.
+_dmarc                                  60      IN  TXT     "v=DMARC1; p=none; rua=mailto:delan+dmarc@azabani.com"
+daz.cat._report._dmarc                  60      IN  TXT     "v=DMARC1"
+*.daz.cat._report._dmarc                60      IN  TXT     "v=DMARC1"
+comssa.org.au._report._dmarc            60      IN  TXT     "v=DMARC1"
+*.comssa.org.au._report._dmarc          60      IN  TXT     "v=DMARC1"
