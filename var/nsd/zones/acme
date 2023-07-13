@@ -9,7 +9,6 @@ case "$1" in
   (present)
     ;;
   (cleanup)
-    exit 0
     ;;
   (*)
     >&2 printf 'fatal: unknown action: %s\n' "$1"
@@ -28,7 +27,15 @@ while [ $newserial -le $oldserial ]; do
 done
 
 > $zone.lock echo $newserial
->> $zone.in printf '%s 60 IN TXT "%s"\n' "${2%.$zone.}" "$3"
+case "$1" in
+  (present)
+    >> $zone.in printf '%s 60 IN TXT "%s"\n' "${2%.$zone.}" "$3"
+    ;;
+  (cleanup)
+    > $zone.filtered fgrep -v '"'"$3"'"' $zone.in
+    mv $zone.filtered $zone.in
+    ;;
+esac
 
 > $zone.new printf '@ 60 IN SOA opacus.daz.cat. delan.azabani.com. ( %s 600 60 1814400 60 )\n' "$newserial"
 >> $zone.new printf '@ 60 IN NS opacus.daz.cat.\n'
