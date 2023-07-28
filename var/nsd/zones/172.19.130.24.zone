@@ -1,0 +1,5 @@
+@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2023072800 600 60 1814400 60 )
+@                                       60      IN  NS      ns.daz.cat.
+1                                       60      IN  NS      vm.colo.daz.cat.
+245                                     60      IN  PTR     opacus.colo.daz.cat.
+235                                     60      IN  PTR     stratus.colo.daz.cat.

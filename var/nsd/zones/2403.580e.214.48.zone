@@ -1,8 +1,7 @@
-@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2023071300 600 60 1814400 60 )
+@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2023072800 600 60 1814400 60 )
 @                                       60      IN  NS      ns.daz.cat.
 0.2.e.6.7.a.e.f.f.f.6.4.e.c.6.f.0.0.0.0 60      IN  PTR     jane.daz.cat.
 3.2.0.8.e.e.e.f.f.f.f.f.c.c.c.c.0.0.0.0 60      IN  PTR     bridge13.venus.daz.cat.
-b.8.6.4.e.e.e.f.f.f.f.f.c.c.c.c.0.0.0.0 60      IN  PTR     bridge13.colo.daz.cat.
 8.1.0.4.1.0.e.f.f.f.0.0.4.5.0.5.0.0.0.0 60      IN  PTR     vtnet0.storage.daz.cat.
 3.5.b.a.7.0.4.9.8.3.a.0.3.b.9.6.0.0.0.0 60      IN  PTR     uranium.daz.cat.
 7.2.0.8.e.e.e.f.f.f.f.f.c.c.c.c.0.0.0.0 60      IN  PTR     bridge13.saturn.daz.cat.
@@ -11,10 +10,6 @@ c.4.d.e.4.a.2.2.f.7.a.9.b.8.1.b.0.0.0.0 60      IN  PTR     netkvm1.redmond.daz.
 c.5.b.1.a.e.e.f.f.f.0.0.4.5.0.5.0.0.0.0 60      IN  PTR     enp3s0.debalia.daz.cat.
 e.4.f.1.c.7.e.f.f.f.0.0.4.5.0.5.0.0.0.0 60      IN  PTR     enp3s0.deburn.daz.cat.
 3.5.9.a.4.e.e.f.f.f.0.0.4.5.0.5.0.0.0.0 60      IN  PTR     enp1s0.debium.daz.cat.
-7.0.5.6.9.0.e.f.f.f.0.0.4.5.0.5.0.0.0.0 60      IN  PTR     opacus.daz.cat.
-4.0.f.8.4.c.e.f.f.f.0.0.4.5.0.5.0.0.0.0 60      IN  PTR     stratus.daz.cat.
-0.0.5.1.4.0.f.8.0.0.0.0.0.0.0.0.0.0.0.0 60      IN  PTR     mtu1500.stratus.daz.cat.
-0.8.2.1.4.0.f.8.0.0.0.0.0.0.0.0.0.0.0.0 60      IN  PTR     mtu1280.stratus.daz.cat.
 7.6.d.e.6.2.e.f.f.f.b.a.b.0.2.0.0.0.0.0 60      IN  PTR     eth0.ark-1.daz.cat.
 8.a.d.6.9.a.e.f.f.f.9.c.0.d.2.0.0.0.0.0 60      IN  PTR     eth0.ark-2.daz.cat.
 2.3.6.8.8.c.e.f.f.f.1.8.0.e.2.0.0.0.0.0 60      IN  PTR     ens5.nyaaa.daz.cat.

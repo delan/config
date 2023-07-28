@@ -1,12 +1,10 @@
-@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2023071300 600 60 1814400 60 )
+@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2023072800 600 60 1814400 60 )
 @                                       60      IN  NS      ns.daz.cat.
 1                                       60      IN  PTR     jane.home.daz.cat.
 2                                       60      IN  PTR     bridge13.venus.home.daz.cat.
 3                                       60      IN  PTR     vtnet0.storage.home.daz.cat.
 4                                       60      IN  PTR     uranium.home.daz.cat.
 5                                       60      IN  PTR     bridge13.saturn.home.daz.cat.
-6                                       60      IN  PTR     vio0.opacus.home.daz.cat.
-7                                       60      IN  PTR     enp1s0.stratus.home.daz.cat.
 8                                       60      IN  PTR     enp5s0.uranus.home.daz.cat.
 31                                      60      IN  PTR     eth0.ark-1.home.daz.cat.
 32                                      60      IN  PTR     eth0.ark-2.home.daz.cat.
