@@ -1,5 +1,5 @@
-@                                       60      IN  SOA     opacus.daz.cat. delan.azabani.com. ( 2023071300 600 60 1814400 60 )
-@                                       60      IN  NS      opacus.daz.cat.
+@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2023072101 600 60 1814400 60 )
+@                                       60      IN  NS      ns.daz.cat.
 ; @                                       60      IN  NS      ns2.he.net.
 @                                       60      IN  NS      ns2.afraid.org.
 @                                       60      IN  CAA 128 issue "letsencrypt.org"
@@ -15,9 +15,9 @@ _imaps._tcp                             60      IN  SRV 0 1 993 imap.fastmail.co
 _pop3._tcp                              60      IN  SRV 0 0 0 .
 _pop3s._tcp                             60      IN  SRV 0 0 0 . ; 10 1 995 pop.fastmail.com.
 _jmap._tcp                              60      IN  SRV 0 1 443 jmap.fastmail.com.
-@                                       60      IN  A       180.150.84.38
+@                                       60      IN  A       103.108.231.122
 @                                       60      IN  AAAA    2403:580e:214::5054:ff:fe09:6507
-www                                     60      IN  CNAME   opacus.daz.cat.
+www                                     60      IN  CNAME   colo.daz.cat.
 @                                       60      IN  TXT     "v=spf1 include:spf.messagingengine.com -all"
 @                                       60      IN  TXT     "keybase-site-verification=5qEBsukhu2N-Uw03F1DUyOCZ7RIYpMoqTZhGZCs-NZI"
 @                                       60      IN  TXT     "keybase-site-verification=ITmFPa3_p1mKVpmqRzNJ50LOOUEoXV-SuZ4SUN4yzMw"
