@@ -1,7 +1,7 @@
-@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2023072802 600 60 1814400 60 )
+@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2023072803 600 60 1814400 60 )
 @                                       60      IN  NS      ns.daz.cat.
-; @                                       60      IN  NS      ns2.he.net.
 @                                       60      IN  NS      ns2.afraid.org.
+@                                       60      IN  NS      ns2.he.net.
 home                                    60      IN  NS      ns.daz.cat.
 acme                                    60      IN  NS      ns.daz.cat.
 @                                       60      IN  CAA 128 issue "letsencrypt.org"
