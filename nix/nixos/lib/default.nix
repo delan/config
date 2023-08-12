@@ -58,7 +58,7 @@
         efi.canTouchEfiVariables = true;
       };
 
-      cleanTmpDir = true;
+      tmp.cleanOnBoot = true;
       supportedFilesystems = [ "zfs" "xfs" ];
 
       kernel.sysctl = {
