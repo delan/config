@@ -4,9 +4,16 @@
     home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware, unstable, ... }:
+  let
+    unstablePkgs = import unstable {
+      system = "x86_64-linux";
+      config = { allowUnfree = true; };
+    };
+  in {
     # servers
     nixosConfigurations.venus = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";

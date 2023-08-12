@@ -91,7 +91,8 @@
       '';
 
       unbound = {
-        enable = true;
+        # TODO add stub zones for vpn party and enable?
+        enable = false;
 
         # fuck DNSSEC
         enableRootTrustAnchor = false;

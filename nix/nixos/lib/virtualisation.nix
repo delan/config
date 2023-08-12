@@ -3,6 +3,7 @@
     libvirt = mkOption { type = types.bool; default = false; };
     docker = mkOption { type = types.bool; default = false; };
     virtualbox = mkOption { type = types.bool; default = false; };
+    vmware = mkOption { type = types.bool; default = false; };
   };
 
   config = let
@@ -14,6 +15,7 @@
           enable = true;
           qemu.runAsRoot = false;
           onShutdown = "shutdown";
+          allowedBridges = [ "virbr0" "bridge13" ];
         };
 
         users.users."${config.internal.initialUser}".extraGroups = [ "libvirtd" ];
@@ -41,6 +43,10 @@
       };
 
       users.users."${config.internal.initialUser}".extraGroups = [ "vboxusers" ];
+    })
+
+    (mkIf cfg.virtualisation.vmware {
+      virtualisation.vmware.host.enable = true;
     })
   ];
 }

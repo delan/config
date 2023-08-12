@@ -40,11 +40,13 @@
     inkscape
     jq
     kdenlive
+    libnotify
     libreoffice
     linuxKernel.packages.linux_5_15.perf
     maim
     man-pages
     mc
+    mercurialFull
     minicom
     mpv
     neofetch
@@ -54,6 +56,7 @@
     nix-diff
     nix-index
     nmap
+    nodejs
     obs-studio
     obsidian
     okular
@@ -76,6 +79,7 @@
     spotify
     sqlite
     sshfs-fuse
+    steam
     steam-run
     tdesktop
     termite
@@ -203,18 +207,51 @@
     };
 
     mercurial = {
-      enable = true;
+      enable = false;
       userName = "Delan Azabani";
       userEmail = "delan@azabani.com";
       extraConfig = ''
-        tweakdefaults = True
-
+        tweakdefaults = true
         [extensions]
         eol =
         strip =
-        rebase =
-        shelve =
+        [diff]
+        git = true
+        showfunc = true
+        [extensions]
+        absorb =
         histedit =
+        rebase =
+        evolve = /home/delan/.mozbuild/evolve/hgext3rd/evolve
+        shelve =
+        firefoxtree = /home/delan/.mozbuild/version-control-tools/hgext/firefoxtree
+        clang-format = /home/delan/.mozbuild/version-control-tools/hgext/clang-format
+        js-format = /home/delan/.mozbuild/version-control-tools/hgext/js-format
+        show =
+        push-to-try = /home/delan/.mozbuild/version-control-tools/hgext/push-to-try
+        [rebase]
+        experimental.inmemory = yes
+        [alias]
+        wip = log --graph --rev=wip --template=wip
+        smart-annotate = annotate -w --skip ignored_changesets
+        [revsetalias]
+        wip = (parents(not public()) or not public() or . or (head() and branch(default))) and (not obsolete() or orphan()^) and not closed() and not (fxheads() - date(-90))
+        ignored_changesets = desc("ignore-this-changeset") or extdata(get_ignored_changesets)
+        [templates]
+        wip = '{label("wip.branch", if(branches,"{branches} "))}{label(ifeq(graphnode,"x","wip.obsolete","wip.{phase}"),"{rev}:{node|short}")}{label("wip.user", " {author|user}")}{label("wip.tags", if(tags," {tags}"))}{label("wip.tags", if(fxheads," {fxheads}"))}{if(bookmarks," ")}{label("wip.bookmarks", if(bookmarks,bookmarks))}{label(ifcontains(rev, revset("parents()"), "wip.here"), " {desc|firstline}")}'
+        [color]
+        wip.bookmarks = yellow underline
+        wip.branch = yellow
+        wip.draft = green
+        wip.here = red
+        wip.obsolete = none
+        wip.public = blue
+        wip.tags = yellow
+        wip.user = magenta
+        [experimental]
+        graphshorten = true
+        [extdata]
+        get_ignored_changesets = shell:cat `hg root`/.hg-annotate-ignore-revs 2> /dev/null || true
       '';
     };
 
