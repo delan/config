@@ -1,11 +1,13 @@
 { config, pkgs, lib, options, modulesPath, ... }: {
-  imports = [ ./hardware-configuration.nix ../lib ];
+  imports = [ ../lib ];
 
   internal = {
     hostId = "E897B482";
     hostName = "jupiter";
     domain = "daz.cat";
     luksDevice = "/dev/disk/by-partlabel/${config.internal.hostName}.root";
+    bootDevice = "/dev/disk/by-uuid/B2F1-7DD3";
+    separateNix = true;
     initialUser = "delan";
 
     interactive = true;
@@ -18,11 +20,22 @@
     };
   };
 
+  # hardware-configuration.nix
+  swapDevices = [ { device = "/dev/disk/by-uuid/ea77bc52-0937-4695-be03-5ea459a5fba5"; } ];
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+  # merged below # boot.kernelModules = [ "kvm-amd" ];
+
   nix.settings.sandbox = true;
 
   hardware.opentabletdriver.enable = true;
 
-  boot.kernelModules = [ "vfio" "vfio_pci" "vfio_virqfd" "vfio_iommu_type1" ];
+  boot.kernelModules = [
+    "vfio" "vfio_pci" "vfio_virqfd" "vfio_iommu_type1"
+
+    # hardware-configuration.nix
+    "kvm-amd"
+  ];
   boot.kernelParams = [
     "intel_iommu=on" "default_hugepagesz=1G" "hugepagesz=1G"
     "kvm.ignore_msrs=1"
@@ -31,7 +44,6 @@
     # https://github.com/erpalma/throttled/issues/215
     "msr.allow_writes=on"
   ];
-  boot.extraModprobeConfig = "options kvm_intel nested=1";
 
   networking = {
     firewall = {

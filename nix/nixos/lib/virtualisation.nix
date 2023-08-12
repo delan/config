@@ -19,6 +19,11 @@
         };
 
         users.users."${config.internal.initialUser}".extraGroups = [ "libvirtd" ];
+
+        networking.firewall.allowedTCPPortRanges = [
+          # libvirt migration
+          { from = 49152; to = 49215; }
+        ];
       }
 
       (mkIf cfg.interactive {
