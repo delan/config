@@ -1,4 +1,4 @@
-@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2023081800 600 60 1814400 60 )
+@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2023081801 600 60 1814400 60 )
 @                                       60      IN  NS      ns.daz.cat.
 @                                       60      IN  NS      ns2.afraid.org.
 @                                       60      IN  NS      ns2.he.net.
@@ -28,7 +28,7 @@ google._domainkey                       60      IN  TXT     "v=DKIM1; k=rsa; p=M
 fm1._domainkey                          60      IN  CNAME   fm1.azabani.com.dkim.fmhosted.com.
 fm2._domainkey                          60      IN  CNAME   fm2.azabani.com.dkim.fmhosted.com.
 fm3._domainkey                          60      IN  CNAME   fm3.azabani.com.dkim.fmhosted.com.
-_dmarc                                  60      IN  TXT     "v=DMARC1; p=none; rua=mailto:delan+dmarc@azabani.com"
+_dmarc                                  60      IN  TXT     "v=DMARC1; p=quarantine; rua=mailto:delan+dmarc@azabani.com"
 daz.cat._report._dmarc                  60      IN  TXT     "v=DMARC1"
 *.daz.cat._report._dmarc                60      IN  TXT     "v=DMARC1"
 comssa.org.au._report._dmarc            60      IN  TXT     "v=DMARC1"
