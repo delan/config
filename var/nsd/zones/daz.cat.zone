@@ -1,4 +1,4 @@
-@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2023072803 600 60 1814400 60 )
+@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2023072804 600 60 1814400 60 )
 @                                       60      IN  NS      ns.daz.cat.
 @                                       60      IN  NS      ns2.afraid.org.
 @                                       60      IN  NS      ns2.he.net.
@@ -77,10 +77,11 @@ xn--blhaj-nra                           60      IN  CNAME   colo.daz.cat.
 drafts.csswg                            60      IN  CNAME   opacus.daz.cat.
 @                                       60      IN  TXT     "keybase-site-verification=zzcGEacJisGLAhzLlZC1IQ_4swmfqh1XyRc0a5YLROc"
 @                                       60      IN  TXT     "keybase-site-verification=0TvQVAHxVz9UqJ_ce5XC7HcDjm05AVbmGtTtjpIvKS0"
-opacus                                  60      IN  TXT     "v=spf1 a -all"
-stratus                                 60      IN  TXT     "v=spf1 a -all"
+opacus                                  60      IN  TXT     "v=spf1 a include:colo.daz.cat -all"
+stratus                                 60      IN  TXT     "v=spf1 a include:colo.daz.cat -all"
 cirrus                                  60      IN  TXT     "v=spf1 a -all"
 daria                                   60      IN  TXT     "v=spf1 a -all"
+colo                                    60      IN  TXT     "v=spf1 a -all"
 _dmarc.opacus                           60      IN  TXT     "v=DMARC1; p=reject; rua=mailto:delan+dmarc@azabani.com"
 _dmarc.daria                            60      IN  TXT     "v=DMARC1; p=reject; rua=mailto:delan+dmarc@azabani.com"
 4D075BE531BD1._domainkey.opacus         60      IN  TXT     (
