@@ -48,8 +48,8 @@
     interfaces.eno4.useDHCP = true;
 
     firewall = {
-      logRefusedUnicastsOnly = false;
-      logRefusedPackets = true;
+      # logRefusedUnicastsOnly = false;
+      # logRefusedPackets = true;
 
       extraCommands = ''
         extip=103.108.231.122
@@ -107,11 +107,11 @@
       allowedTCPPorts = [
         # nginx
         80 443
-
-        # libvirt migration
-        49152 49153 49154 49155 49156 49157 49158 49159 49160 49161 49162 49163 49164 49165 49166 49167 49168 49169 49170 49171 49172 49173 49174 49175 49176 49177 49178 49179 49180 49181 49182 49183 49184 49185 49186 49187 49188 49189 49190 49191 49192 49193 49194 49195 49196 49197 49198 49199 49200 49201 49202 49203 49204 49205 49206 49207 49208 49209 49210 49211 49212 49213 49214 49215
       ];
-
+      allowedTCPPortRanges = [
+        # libvirt migration
+        { from = 49152; to = 49215; }
+      ];
       allowedUDPPorts = [
         # dhcp
         67
