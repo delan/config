@@ -72,7 +72,10 @@
     hardware.keyboard.zsa.enable = true;
 
     networking = {
-      networkmanager.enable = true;
+      networkmanager = {
+        enable = true;
+        connectionConfig."ipv6.ip6-privacy" = 2;
+      };
 
       # fucking breaks everything
       dhcpcd.enable = false;
@@ -153,5 +156,9 @@
         { options = [ "NOPASSWD" ]; command = "/run/current-system/sw/bin/zfs"; }
       ];
     }];
+
+    environment.systemPackages = with pkgs; [
+      git # needed for nixos-rebuild with flakes
+    ];
   };
 }
