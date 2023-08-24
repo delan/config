@@ -169,6 +169,10 @@
               proxy_set_header X-Forwarded-Proto $scheme;
               proxy_set_header X-Forwarded-Host $host;
               proxy_set_header X-Forwarded-Server $host;
+
+              # https://github.com/curl/curl/issues/674
+              # https://trac.nginx.org/nginx/ticket/915
+              proxy_hide_header Upgrade;
           '';
         };
         opacus = {
