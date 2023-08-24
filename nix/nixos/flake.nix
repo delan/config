@@ -19,6 +19,10 @@
       system = "x86_64-linux";
       modules = [ venus/configuration.nix ];
     };
+    nixosConfigurations.colo = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [ colo/configuration.nix ];
+    };
 
     # workstations
     nixosConfigurations.uranus = nixpkgs.lib.nixosSystem {
