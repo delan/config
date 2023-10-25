@@ -128,6 +128,7 @@
       email = "delan@azabani.com";
       credentialsFile = "/etc/nixos/colo/acme-env.txt";
       dnsProvider = "exec";
+      postRun = "/etc/nixos/colo/deploy-to-opacus.sh";
       extraDomainNames = [
         "opacus.daz.cat"
         "stratus.daz.cat"
@@ -159,9 +160,14 @@
       enable = true;
       # inlined into extraConfig to override Host
       # recommendedProxySettings = true;
+      appendHttpConfig = ''
+        include /etc/nixos/colo/kate/dariox.club.conf;
+        include /etc/nixos/colo/kate/xenia-dashboard.conf;
+      '';
       virtualHosts = let
         proxy = {
           extraConfig = ''
+              # recommendedProxySettings
               # proxy_set_header Host $host.test;
               proxy_set_header Host $host;
               proxy_set_header X-Real-IP $remote_addr;
@@ -235,4 +241,17 @@
     # virt-clone(1)
     virtmanager
   ];
+
+  # kate
+  users.users.kate = {
+    isNormalUser = true;
+    uid = 1001;
+    shell = pkgs.bash;
+    extraGroups = [ "systemd-journal" ];
+    initialHashedPassword = "$6$4NkWaZ7Un5r.CR2C$I22bgLqKU2DxlNye4jEicYmV06BFjcwe60q.cigaTQjeviYK0Aq7MITV09koexPSBPdvsibIxYo0rYwOJ7dlg0";  # hunter2
+  };
+  services.udev.extraRules = ''
+    # https://www.complete.org/managing-zfs-zvol-permissions-with-udev/
+    KERNEL=="zd*" SUBSYSTEM=="block" ACTION=="add|change" PROGRAM="${pkgs.zfs.out}/lib/udev/zvol_id /dev/%k" RESULT=="cuffs/kate/*" OWNER="kate"
+  '';
 }
