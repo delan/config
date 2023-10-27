@@ -128,7 +128,10 @@
       email = "delan@azabani.com";
       credentialsFile = "/etc/nixos/colo/acme-env.txt";
       dnsProvider = "exec";
-      postRun = "/etc/nixos/colo/deploy-to-opacus.sh";
+      postRun = ''
+        /etc/nixos/colo/deploy-to-opacus.sh
+        /etc/nixos/colo/deploy-to-stratus.sh
+      '';
       extraDomainNames = [
         "opacus.daz.cat"
         "stratus.daz.cat"
@@ -240,6 +243,8 @@
 
     # virt-clone(1)
     virtmanager
+
+    ripgrep
   ];
 
   # kate
