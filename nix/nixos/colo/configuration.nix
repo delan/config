@@ -129,8 +129,8 @@
       credentialsFile = "/etc/nixos/colo/acme-env.txt";
       dnsProvider = "exec";
       postRun = ''
-        /etc/nixos/colo/deploy-to-opacus.sh
-        /etc/nixos/colo/deploy-to-stratus.sh
+        /etc/nixos/colo/deploy-acme-to-opacus.sh
+        /etc/nixos/colo/deploy-acme-to-stratus.sh
       '';
       extraDomainNames = [
         "opacus.daz.cat"
