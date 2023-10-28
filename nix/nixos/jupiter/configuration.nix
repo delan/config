@@ -99,4 +99,9 @@
   # wireshark
   programs.wireshark.enable = true;
   users.users.delan.extraGroups = [ "wireshark" ];
+
+  services.cron = {
+    enable = true;
+    systemCronJobs = ["0 21 * * * root BUSTED_WEBHOOK=https://discord.com/api/webhooks/1167804331068760064/redacted ~delan/bin/sync.sh"];
+  };
 }
