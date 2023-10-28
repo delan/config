@@ -1,0 +1,162 @@
+#!/usr/bin/env zsh
+# usage: $0 [--src-regex] [--bookmark]
+#           [--delete <none|old|all>] [--delete-yes]
+#           [--recv-options '...'] [--rsh '...']
+#           [--exclude path/to/dataset]
+#           [--incremental-source <-t receive_resume_token|@|#|...|>]
+#           <dest> <src> <snapname> <dry|wet>
+#
+#        --delete         default: none
+#        --recv-options   default: '-d'   example: '-e'
+#        --rsh            default: ''     example: 'ssh user@host sudo'
+set -euo shwordsplit  # split unquoted variables into words on use
+if [ $# -lt 5 ]; then >&2 < $0 sed -E '1d;s/^# ?//;11q'; exit 1; fi
+
+tty=$(tty)
+positional_only=0
+positional_index=0
+src_regex=0
+bookmark=0
+delete=none
+delete_yes=0
+recv_options=-d
+rsh=
+exclude=
+# intentionally not setting incremental_source=
+while [ $# -gt 0 ]; do
+  case "$positional_only:$1" in
+    (0:--) positional_only=1; shift ;;
+    (0:--src-regex) src_regex=1; shift ;;
+    (0:--bookmark) bookmark=1; shift ;;
+    (0:--delete)
+      case "$2" in
+        (none|old|all) delete=$2 ;;
+        (*)
+          >&2 echo 'fatal: --delete must be ‘none’ or ‘old’ or ‘all’'
+          exit 1
+          ;;
+      esac
+      shift 2
+      ;;
+    (0:--delete-yes) delete_yes=1; shift ;;
+    (0:--recv-options) recv_options=$2; shift 2 ;;
+    (0:--rsh) rsh=$2; shift 2 ;;
+    (0:--exclude) exclude="$exclude${exclude:+ }$2"; shift 2 ;;
+    (0:--incremental-source) incremental_source=$2; shift 2 ;;
+    (0:-*)
+      >&2 echo "fatal: bad option $1"
+      exit 1
+      ;;
+    (?:*)
+      case $positional_index in
+        (0) dest=$1 ;;
+        (1) src=$1 ;;
+        (2) snapname=$1 ;;
+        (3)
+          case "$1" in
+            (dry)
+              drywet=$1
+              dashn=-n
+              ;;
+            (wet)
+              drywet=$1
+              dashn=
+              ;;
+            (*)
+              >&2 echo 'fatal: positional argument 4 must be ‘dry’ or ‘wet’'
+              exit 1
+              ;;
+          esac
+          ;;
+        (*)
+          >&2 echo "fatal: bad argument $1"
+          exit 1
+          ;;
+      esac
+      positional_index=$((positional_index + 1))
+      shift
+      ;;
+  esac
+done
+
+if [ $src_regex -eq 1 ]; then
+  list_src() {
+    zfs list -Ho name "$@" | rg \^"$src"'([@#]|$)'
+  }
+else
+  list_src() {
+    zfs list -Ho name "$@" "$src"
+  }
+fi
+
+echo '>>> sending snapshots: "/" to continue with next dataset, "//" to skip the rest'
+list_src -t filesystem,volume | while read -r i; do
+  stop=0
+  while [ $stop -eq 0 ]; do
+    if [ "${incremental_source:+set}" = set ]; then
+      stop=1
+    fi
+
+    printf '=== %s incremental source (or empty for full send): ' "$i"
+
+    set -- $exclude
+    case " $* " in
+      (* "$i" *)
+        input=/
+        printf '/ [--exclude]\n'
+        continue
+        ;;
+    esac
+
+    if [ "${incremental_source:+set}" = set ]; then
+      input=$incremental_source
+      printf '%s [--incremental-source]\n' "$input"
+    else
+      < $tty read -r input
+    fi
+
+    case "$input" in
+      (/ | //) break ;;
+      (-*) set -- $input ;; # for -t $(zfs get -Ho receive_resume_token ...)
+      (#*) set -- -pi $input "$i@$snapname" ;; # Error: multiple snapshots cannot be sent from a bookmark.
+      (@*) set -- -pI $input "$i@$snapname" ;;
+      (?*) set -- -pI @$input "$i@$snapname" ;;
+      (*) set -- -p "$input@$snapname" ;;
+    esac
+    zfs send -v "$@" | $rsh zfs recv -Fuvs $dashn $recv_options "$dest"
+  done
+  if [ "$input" = // ]; then
+    break
+  fi
+done
+
+if [ $bookmark -eq 1 ]; then
+  echo '>>> creating bookmarks'
+  list_src -t snapshot | while read -r i; do
+    j=$(echo $i | tr @ \#)
+    printf '=== %s... ' "$j"
+    set -- zfs bookmark $i $j
+    case $drywet in
+      (dry) printf '\nwould run %s\n' "$*" ;;
+      (wet) "$@" && echo ok || : ;;
+    esac
+  done
+fi
+
+case "$drywet:$delete_yes" in
+  (dry:?) yn=''; set -- xargs -0rn 1 printf '%s %s %s?...N\n' zfs destroy ;;
+  (wet:0) yn=' [y/N]'; set -- xargs -0prn 1 zfs destroy ;;
+  (wet:1) yn=''; set -- xargs -0trn 1 zfs destroy ;;
+esac
+if [ $delete = old ]; then
+  echo ">>> deleting non-latest snapshots$yn"
+  list_src -t snapshot | sed -E 's/@.*//' | uniq | while read -r i; do
+    echo "=== latest: $(zfs list -Ht snapshot -o name | sed 's/^/@/' | fgrep "@$i@" | sed 's/^@//' | tail -1)"
+    zfs list -t snapshot -Ho name -d 1 "$i" | rg @ | sed \$d | rg @ | tr \\n \\0 | "$@"
+  done
+elif [ $delete = all ]; then
+  echo ">>> deleting all snapshots$yn"
+  list_src -t snapshot | sed -E 's/@.*//' | uniq | while read -r i; do
+    zfs list -t snapshot -Ho name -d 1 "$i" | rg @ | tr \\n \\0 | "$@"
+  done
+fi
