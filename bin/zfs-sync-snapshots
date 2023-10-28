@@ -12,7 +12,9 @@
 set -euo shwordsplit  # split unquoted variables into words on use
 if [ $# -lt 5 ]; then >&2 < $0 sed -E '1d;s/^# ?//;11q'; exit 1; fi
 
-tty=$(tty)
+if test -t 0; then
+  tty=$(tty)
+fi
 positional_only=0
 positional_index=0
 src_regex=0
