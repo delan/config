@@ -36,6 +36,14 @@
         authorizedKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICBvkS7z2RAWzqRByRsHHB8PoCjXrnyHtjpdTxmOdcom delan@azabani.com/2016-07-18/Ed25519" ];
         hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
       };
+      luks.devices = {
+        cuffs0x0 = {
+          device = "/dev/disk/by-partlabel/colo.cuffs0x0";
+        };
+        cuffs0x1 = {
+          device = "/dev/disk/by-partlabel/colo.cuffs0x1";
+        };
+      };
     };
   };
 
