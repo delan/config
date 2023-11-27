@@ -10,7 +10,7 @@
 #        --recv-options   default: '-d'   example: '-e'
 #        --rsh            default: ''     example: 'ssh user@host sudo'
 set -euo shwordsplit  # split unquoted variables into words on use
-if [ $# -lt 5 ]; then >&2 < $0 sed -E '1d;s/^# ?//;11q'; exit 1; fi
+if [ $# -lt 4 ]; then >&2 < $0 sed -E '1d;s/^# ?//;11q'; exit 1; fi
 
 if test -t 0; then
   tty=$(tty)
