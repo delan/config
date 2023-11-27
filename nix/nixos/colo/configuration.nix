@@ -165,6 +165,7 @@
         "*.v6ns.sixte.st"
         "isbtrfsstableyet.com"
         "kierang.ee.nroach44.id.au"
+        "cohost.org.doggirl.gay"
       ];
     };
   };
@@ -208,6 +209,11 @@
             proxyPass = "http://172.19.130.235";
           };
         };
+        passionfruitCohostEmbed = {
+          locations."/" = proxy // {
+            proxyPass = "http://172.19.130.182:10001";
+          };
+        };
         nyaaa = {
           locations."/" = proxy // {
             proxyPass = "http://172.19.42.33";
@@ -241,6 +247,7 @@
         ".sixte.st" = stratus // sslRelax;
         "isbtrfsstableyet.com" = opacus // sslRelax;
         "kierang.ee.nroach44.id.au" = opacus // sslRelax;
+        "cohost.org.doggirl.gay" = passionfruitCohostEmbed // sslForce;
       };
     };
   };
