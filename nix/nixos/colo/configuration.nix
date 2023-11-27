@@ -89,8 +89,8 @@
           $iptables -A own-forward -i $extif -o virbr1 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
         done
 
-        # port forward dns to opacus
         for proto in udp tcp; do
+          # port forward dns to opacus
           iptables -A own-forward -i $extif -o virbr1 -p $proto --dport 53 -m conntrack --ctstate NEW -j ACCEPT
           iptables -t nat -A own-output -d $extip -p $proto --dport 53 -j DNAT --to-destination 172.19.130.245 # loopback
           iptables -t nat -A own-prerouting -i $extif -d $extip -p $proto --dport 53 -j DNAT --to-destination 172.19.130.245
@@ -99,6 +99,12 @@
           ip6tables -t nat -A own-output -d $extip6 -p $proto --dport 53 -j DNAT --to-destination fdfd:4524:784c:106d::2 # loopback
           ip6tables -t nat -A own-prerouting -i $extif -d $extip6 -p $proto --dport 53 -j DNAT --to-destination fdfd:4524:784c:106d::2
           ip6tables -t nat -A own-postrouting -o virbr1 -p $proto --dport 53 -d fdfd:4524:784c:106d::2 -j SNAT --to-source fdfd:4524:784c:106d::1
+
+          # port forward for kate
+          iptables -A own-forward -i $extif -o virbr1 -p $proto --dport 27025 -m conntrack --ctstate NEW -j ACCEPT
+          iptables -t nat -A own-output -d $extip -p $proto --dport 27025 -j DNAT --to-destination 172.19.130.150 # loopback
+          iptables -t nat -A own-prerouting -i $extif -d $extip -p $proto --dport 27025 -j DNAT --to-destination 172.19.130.150
+          iptables -t nat -A own-postrouting -o virbr1 -p $proto --dport 27025 -d 172.19.130.150 -j SNAT --to-source 172.19.130.1
         done
 
         # nat outbound
