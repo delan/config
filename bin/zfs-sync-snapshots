@@ -4,6 +4,7 @@
 #           [--recv-options '...'] [--rsh '...']
 #           [--exclude path/to/dataset]
 #           [--incremental-source <-t receive_resume_token|@|#|...|>]
+#           [--replicate]
 #           <dest> <src> <snapname> <dry|wet>
 #
 #        --delete         default: none
@@ -25,6 +26,7 @@ recv_options=-d
 rsh=
 exclude=
 # intentionally not setting incremental_source=
+replicate=0
 while [ $# -gt 0 ]; do
   case "$positional_only:$1" in
     (0:--) positional_only=1; shift ;;
@@ -45,6 +47,7 @@ while [ $# -gt 0 ]; do
     (0:--rsh) rsh=$2; shift 2 ;;
     (0:--exclude) exclude="$exclude${exclude:+ }$2"; shift 2 ;;
     (0:--incremental-source) incremental_source=$2; shift 2 ;;
+    (0:--replicate) replicate=1; shift ;;
     (0:-*)
       >&2 echo "fatal: bad option $1"
       exit 1
@@ -117,13 +120,17 @@ list_src -t filesystem,volume | while read -r i; do
       < $tty read -r input
     fi
 
+    set --
+    if [ $replicate -eq 1 ]; then
+      set -- "$@" -R
+    fi
     case "$input" in
       (/ | //) break ;;
-      (-*) set -- $input ;; # for -t $(zfs get -Ho receive_resume_token ...)
-      (#*) set -- -pi $input "$i@$snapname" ;; # Error: multiple snapshots cannot be sent from a bookmark.
-      (@*) set -- -pI $input "$i@$snapname" ;;
-      (?*) set -- -pI @$input "$i@$snapname" ;;
-      (*) set -- -p "$i@$snapname" ;; # input is empty if it doesn’t match (?*)
+      (-*) set -- "$@" $input ;; # for -t $(zfs get -Ho receive_resume_token ...)
+      (#*) set -- "$@" -pi $input "$i@$snapname" ;; # Error: multiple snapshots cannot be sent from a bookmark.
+      (@*) set -- "$@" -pI $input "$i@$snapname" ;;
+      (?*) set -- "$@" -pI @$input "$i@$snapname" ;;
+      (*) set -- "$@" -p "$i@$snapname" ;; # input is empty if it doesn’t match (?*)
     esac
     zfs send -v "$@" | $rsh zfs recv -Fuvs $dashn $recv_options "$dest"
   done
