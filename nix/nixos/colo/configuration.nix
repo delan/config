@@ -36,6 +36,14 @@
         authorizedKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICBvkS7z2RAWzqRByRsHHB8PoCjXrnyHtjpdTxmOdcom delan@azabani.com/2016-07-18/Ed25519" ];
         hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
       };
+      luks.devices = {
+        cuffs0x0 = {
+          device = "/dev/disk/by-partlabel/colo.cuffs0x0";
+        };
+        cuffs0x1 = {
+          device = "/dev/disk/by-partlabel/colo.cuffs0x1";
+        };
+      };
     };
   };
 
@@ -89,8 +97,8 @@
           $iptables -A own-forward -i $extif -o virbr1 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
         done
 
-        # port forward dns to opacus
         for proto in udp tcp; do
+          # port forward dns to opacus
           iptables -A own-forward -i $extif -o virbr1 -p $proto --dport 53 -m conntrack --ctstate NEW -j ACCEPT
           iptables -t nat -A own-output -d $extip -p $proto --dport 53 -j DNAT --to-destination 172.19.130.245 # loopback
           iptables -t nat -A own-prerouting -i $extif -d $extip -p $proto --dport 53 -j DNAT --to-destination 172.19.130.245
@@ -99,6 +107,12 @@
           ip6tables -t nat -A own-output -d $extip6 -p $proto --dport 53 -j DNAT --to-destination fdfd:4524:784c:106d::2 # loopback
           ip6tables -t nat -A own-prerouting -i $extif -d $extip6 -p $proto --dport 53 -j DNAT --to-destination fdfd:4524:784c:106d::2
           ip6tables -t nat -A own-postrouting -o virbr1 -p $proto --dport 53 -d fdfd:4524:784c:106d::2 -j SNAT --to-source fdfd:4524:784c:106d::1
+
+          # port forward for kate
+          iptables -A own-forward -i $extif -o virbr1 -p $proto --dport 27025 -m conntrack --ctstate NEW -j ACCEPT
+          iptables -t nat -A own-output -d $extip -p $proto --dport 27025 -j DNAT --to-destination 172.19.130.150 # loopback
+          iptables -t nat -A own-prerouting -i $extif -d $extip -p $proto --dport 27025 -j DNAT --to-destination 172.19.130.150
+          iptables -t nat -A own-postrouting -o virbr1 -p $proto --dport 27025 -d 172.19.130.150 -j SNAT --to-source 172.19.130.1
         done
 
         # nat outbound
@@ -151,6 +165,7 @@
         "*.v6ns.sixte.st"
         "isbtrfsstableyet.com"
         "kierang.ee.nroach44.id.au"
+        "cohost.org.doggirl.gay"
       ];
     };
   };
@@ -194,6 +209,11 @@
             proxyPass = "http://172.19.130.235";
           };
         };
+        passionfruitCohostEmbed = {
+          locations."/" = proxy // {
+            proxyPass = "http://172.19.130.182:10001";
+          };
+        };
         nyaaa = {
           locations."/" = proxy // {
             proxyPass = "http://172.19.42.33";
@@ -227,6 +247,7 @@
         ".sixte.st" = stratus // sslRelax;
         "isbtrfsstableyet.com" = opacus // sslRelax;
         "kierang.ee.nroach44.id.au" = opacus // sslRelax;
+        "cohost.org.doggirl.gay" = passionfruitCohostEmbed // sslForce;
       };
     };
   };
@@ -249,10 +270,9 @@
 
   services.cron = {
     enable = true;
-    systemCronJobs = ["0 21 * * * root BUSTED_WEBHOOK=https://discord.com/api/webhooks/1167804331068760064/redacted ~delan/bin/sync.sh"];
+    systemCronJobs = ["0 22 * * * root BUSTED_WEBHOOK=https://discord.com/api/webhooks/1167804331068760064/redacted ~delan/bin/sync.sh"];
   };
 
-  # kate
   users.users.kate = {
     isNormalUser = true;
     uid = 1001;
@@ -260,8 +280,18 @@
     extraGroups = [ "systemd-journal" ];
     initialHashedPassword = "$6$4NkWaZ7Un5r.CR2C$I22bgLqKU2DxlNye4jEicYmV06BFjcwe60q.cigaTQjeviYK0Aq7MITV09koexPSBPdvsibIxYo0rYwOJ7dlg0";  # hunter2
   };
+
+  users.users.the6p4c = {
+    isNormalUser = true;
+    uid = 1002;
+    shell = pkgs.bash;
+    extraGroups = [ "systemd-journal" "wheel" ];
+    initialHashedPassword = "$6$4NkWaZ7Un5r.CR2C$I22bgLqKU2DxlNye4jEicYmV06BFjcwe60q.cigaTQjeviYK0Aq7MITV09koexPSBPdvsibIxYo0rYwOJ7dlg0";  # hunter2
+  };
+
   services.udev.extraRules = ''
     # https://www.complete.org/managing-zfs-zvol-permissions-with-udev/
     KERNEL=="zd*" SUBSYSTEM=="block" ACTION=="add|change" PROGRAM="${pkgs.zfs.out}/lib/udev/zvol_id /dev/%k" RESULT=="cuffs/kate/*" OWNER="kate"
+    KERNEL=="zd*" SUBSYSTEM=="block" ACTION=="add|change" PROGRAM="${pkgs.zfs.out}/lib/udev/zvol_id /dev/%k" RESULT=="cuffs/the6p4c/*" OWNER="the6p4c"
   '';
 }
