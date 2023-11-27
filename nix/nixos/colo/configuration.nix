@@ -266,7 +266,6 @@
     systemCronJobs = ["0 22 * * * root BUSTED_WEBHOOK=https://discord.com/api/webhooks/1167804331068760064/redacted ~delan/bin/sync.sh"];
   };
 
-  # kate
   users.users.kate = {
     isNormalUser = true;
     uid = 1001;
@@ -274,8 +273,18 @@
     extraGroups = [ "systemd-journal" ];
     initialHashedPassword = "$6$4NkWaZ7Un5r.CR2C$I22bgLqKU2DxlNye4jEicYmV06BFjcwe60q.cigaTQjeviYK0Aq7MITV09koexPSBPdvsibIxYo0rYwOJ7dlg0";  # hunter2
   };
+
+  users.users.the6p4c = {
+    isNormalUser = true;
+    uid = 1002;
+    shell = pkgs.bash;
+    extraGroups = [ "systemd-journal" "wheel" ];
+    initialHashedPassword = "$6$4NkWaZ7Un5r.CR2C$I22bgLqKU2DxlNye4jEicYmV06BFjcwe60q.cigaTQjeviYK0Aq7MITV09koexPSBPdvsibIxYo0rYwOJ7dlg0";  # hunter2
+  };
+
   services.udev.extraRules = ''
     # https://www.complete.org/managing-zfs-zvol-permissions-with-udev/
     KERNEL=="zd*" SUBSYSTEM=="block" ACTION=="add|change" PROGRAM="${pkgs.zfs.out}/lib/udev/zvol_id /dev/%k" RESULT=="cuffs/kate/*" OWNER="kate"
+    KERNEL=="zd*" SUBSYSTEM=="block" ACTION=="add|change" PROGRAM="${pkgs.zfs.out}/lib/udev/zvol_id /dev/%k" RESULT=="cuffs/the6p4c/*" OWNER="the6p4c"
   '';
 }
