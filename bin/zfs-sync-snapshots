@@ -95,7 +95,7 @@ echo '>>> sending snapshots: "/" to continue with next dataset, "//" to skip the
 list_src -t filesystem,volume | while read -r i; do
   stop=0
   while [ $stop -eq 0 ]; do
-    if [ "${incremental_source:+set}" = set ]; then
+    if [ "${incremental_source+set}" = set ]; then
       stop=1
     fi
 
@@ -110,7 +110,7 @@ list_src -t filesystem,volume | while read -r i; do
         ;;
     esac
 
-    if [ "${incremental_source:+set}" = set ]; then
+    if [ "${incremental_source+set}" = set ]; then
       input=$incremental_source
       printf '%s [--incremental-source]\n' "$input"
     else
@@ -123,7 +123,7 @@ list_src -t filesystem,volume | while read -r i; do
       (#*) set -- -pi $input "$i@$snapname" ;; # Error: multiple snapshots cannot be sent from a bookmark.
       (@*) set -- -pI $input "$i@$snapname" ;;
       (?*) set -- -pI @$input "$i@$snapname" ;;
-      (*) set -- -p "$input@$snapname" ;;
+      (*) set -- -p "$i@$snapname" ;; # input is empty if it doesn’t match (?*)
     esac
     zfs send -v "$@" | $rsh zfs recv -Fuvs $dashn $recv_options "$dest"
   done
