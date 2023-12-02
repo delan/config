@@ -260,6 +260,7 @@
     virtmanager
 
     ripgrep
+    tcpdump
   ];
 
   services.cron = {
