@@ -151,6 +151,15 @@
   security.pam.enableSSHAgentAuth = true;
   security.pam.services.sudo.sshAgentAuth = true;
 
+  security.acme = {
+    acceptTerms = true;
+    certs."venus.daz.cat" = {
+      email = "delan@azabani.com";
+      credentialsFile = "/etc/nixos/venus/acme-env.txt";
+      dnsProvider = "exec";
+      extraDomainNames = [];
+    };
+  };
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
@@ -163,7 +172,16 @@
           proxy_hide_header Upgrade;
         '';
       };
-      venus = {
+      ssl = {
+        useACMEHost = "venus.daz.cat";
+      };
+      sslRelax = ssl // {
+        addSSL = true;
+      };
+      sslForce = ssl // {
+        forceSSL = true;
+      };
+      venus = sslForce // {
         locations."/qbittorrent/" = proxy // {
           proxyPass = "http://127.0.0.1:20000/";
         };
