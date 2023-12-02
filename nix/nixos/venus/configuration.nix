@@ -77,6 +77,8 @@
     initrd.extraUtilsCommands = "copy_bin_and_libs ${pkgs.pciutils}/bin/setpci";
     # initrd.preDeviceCommands = "setpci -s0:14.0 0xd0.W=0x3ec7";
     # postBootCommands = "/run/current-system/sw/bin/setpci -s0:14.0 0xd0.W=0x3ec7";
+
+    zfs.extraPools = [ "ocean" ];
   };
 
   # fileSystems."/mnt/ocean/active" = {
