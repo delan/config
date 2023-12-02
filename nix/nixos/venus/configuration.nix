@@ -16,9 +16,7 @@
     };
 
     services = {
-      collectd = false;
-      jackett = false;
-      jellyfin = false;
+      qbittorrent = true;
     };
   };
 
