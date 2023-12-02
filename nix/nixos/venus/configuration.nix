@@ -108,10 +108,13 @@
     atool
     bc
     clang
+    gcc
     colordiff
+    file
     git
     gnumake
     iftop
+    lazygit
     # lsiutil # TODO upgrade nixos first?
     neofetch
     nmap
@@ -120,6 +123,8 @@
     ripgrep
     sg3_utils
     smartmontools
+    steam-run
+    unzip
   ];
 
   services.cron = {
