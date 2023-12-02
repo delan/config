@@ -29,7 +29,18 @@
       availableKernelModules = [ "igb" ];
       verbose = true;
       network.enable = true;
-      network.postCommands = "ip a";
+      network.postCommands = ''
+        for nic in eno1 eno2 eno3 eno4; do
+          if [ "$(cat /sys/class/net/$nic/carrier)" -eq 1 ]; then
+            >&2 echo $nic is connected
+            ip addr add 103.108.231.122/29 dev $nic
+            ip route add default via 103.108.231.121 dev $nic
+            break
+          else
+            >&2 echo $nic is not connected
+          fi
+        done
+      '';
       network.ssh = {
         enable = true;
         port = 22;
@@ -48,13 +59,6 @@
   };
 
   networking = {
-    # useDHCP = true; # for initrd
-    # FIXME
-    interfaces.eno1.useDHCP = true;
-    interfaces.eno2.useDHCP = true;
-    interfaces.eno3.useDHCP = true;
-    interfaces.eno4.useDHCP = true;
-
     firewall = {
       # logRefusedUnicastsOnly = false;
       # logRefusedPackets = true;
