@@ -182,11 +182,40 @@
     '';
   };
 
-  users.users.aria = {
-    isNormalUser = true;
-    uid = 1001;
-    shell = pkgs.zsh;
-    extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
-    initialHashedPassword = "$6$4NkWaZ7Un5r.CR2C$I22bgLqKU2DxlNye4jEicYmV06BFjcwe60q.cigaTQjeviYK0Aq7MITV09koexPSBPdvsibIxYo0rYwOJ7dlg0"; # hunter2
-  };
+  users = let
+    system = { name, id }: {
+      users."${name}" = {
+        uid = id;
+        group = name;
+        isSystemUser = true;
+      };
+      groups."${name}" = {
+        gid = id;
+      };
+    };
+  in builtins.foldl' lib.recursiveUpdate
+    {
+      users.nginx.extraGroups = [ "acme" ];
+      users.aria = {
+        isNormalUser = true;
+        uid = 1001;
+        shell = pkgs.zsh;
+        extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
+      };
+      users.hannah = {
+        isNormalUser = true;
+        uid = 13000;
+        shell = pkgs.zsh;
+        group = "hannah";
+        extraGroups = [ "systemd-journal" ];
+      };
+      groups.hannah = {
+        gid = 13000;
+      };
+    }
+    [
+      (system { name = "sonarr"; id = 2001; })
+      (system { name = "radarr"; id = 2002; })
+      (system { name = "recyclarr"; id = 2003; })
+    ];
 }
