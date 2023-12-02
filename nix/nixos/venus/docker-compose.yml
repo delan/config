@@ -67,5 +67,5 @@ services:
       - TZ=Australia/Perth
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /docker/appdata/bazarr:/config
+      - /ocean/active/services/bazarr:/config
       - /ocean/active:/ocean/active
