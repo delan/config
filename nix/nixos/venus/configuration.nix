@@ -145,6 +145,12 @@
     111 2049 # nfs
   ];
 
+  # allows you to authenticate sudo using your ssh private key
+  # use `ssh venus -A` (and maybe run `ssh-add` beforehand if things break)
+  # to get this to work
+  security.pam.enableSSHAgentAuth = true;
+  security.pam.services.sudo.sshAgentAuth = true;
+
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
