@@ -36,6 +36,15 @@
       virtualisation.docker = {
         enable = true;
         enableOnBoot = false;
+        daemon = {
+          settings = {
+            storage-driver = "overlay2";
+            ipv6 = true;
+            fixed-cidr-v6 = "fd39:9aa4:efad::/80";
+            experimental = true;
+            ip6tables = true;
+          };
+        };
       };
 
       users.users."${config.internal.initialUser}".extraGroups = [ "docker" ];
