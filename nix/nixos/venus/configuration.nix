@@ -185,6 +185,12 @@
         locations."/qbittorrent/" = proxy // {
           proxyPass = "http://127.0.0.1:20000/";
         };
+        locations."/sonarr/" = proxy // {
+          proxyPass = "http://127.0.0.1:20010";
+        };
+        locations."/radarr/" = proxy // {
+          proxyPass = "http://127.0.0.1:20020";
+        };
       };
     in {
       "venus.daz.cat" = venus;
