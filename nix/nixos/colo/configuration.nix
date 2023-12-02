@@ -180,8 +180,7 @@
     openvpn.servers.home.autoStart = false;
     nginx = {
       enable = true;
-      # inlined into extraConfig to override Host
-      # recommendedProxySettings = true;
+      recommendedProxySettings = true;
       appendHttpConfig = ''
         include /etc/nixos/colo/kate/dariox.club.conf;
         include /etc/nixos/colo/kate/xenia-dashboard.conf;
@@ -189,19 +188,19 @@
       virtualHosts = let
         proxy = {
           extraConfig = ''
-              # recommendedProxySettings
-              # proxy_set_header Host $host.test;
-              proxy_set_header Host $host;
-              proxy_set_header X-Real-IP $remote_addr;
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header X-Forwarded-Proto $scheme;
-              proxy_set_header X-Forwarded-Host $host;
-              proxy_set_header X-Forwarded-Server $host;
-
               # https://github.com/curl/curl/issues/674
               # https://trac.nginx.org/nginx/ticket/915
               proxy_hide_header Upgrade;
           '';
+        };
+        ssl = {
+          useACMEHost = "colo.daz.cat";
+        };
+        sslRelax = ssl // {
+          addSSL = true;
+        };
+        sslForce = ssl // {
+          forceSSL = true;
         };
         opacus = {
           locations."/" = proxy // {
@@ -222,15 +221,6 @@
           locations."/" = proxy // {
             proxyPass = "http://172.19.42.33";
           };
-        };
-        ssl = {
-          useACMEHost = "colo.daz.cat";
-        };
-        sslRelax = ssl // {
-          addSSL = true;
-        };
-        sslForce = ssl // {
-          forceSSL = true;
         };
       in {
         # "colo.daz.cat" = opacus // sslForce;
