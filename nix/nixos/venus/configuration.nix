@@ -58,8 +58,8 @@
     ];
 
     kernelParams = [
-      "intel_iommu=on" "vfio_pci.ids=1000:0072,10de:13c2,10de:0fbb"
-      "default_hugepagesz=1G" "hugepagesz=1G" "hugepages=20"
+      "intel_iommu=on" # "vfio_pci.ids=1000:0072"
+      "default_hugepagesz=1G" "hugepagesz=1G" # "hugepages=20"
       ####### "isolcpus=0,4,1,5" "nohz_full=0,4,1,5" "rcu_nocbs=0,4,1,5"
 
       # for GPU-Z https://www.reddit.com/r/VFIO/comments/ahg1ta
