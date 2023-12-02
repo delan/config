@@ -15,7 +15,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /ocean/active/services/sonarr:/config
-      - /ocean/active:/data
+      - /ocean/active:/ocean/active
   radarr:
     container_name: radarr
     image: ghcr.io/hotio/radarr:release # 5.1.3.8246
@@ -31,7 +31,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /ocean/active/services/radarr:/config
-      - /ocean/active:/data
+      - /ocean/active:/ocean/active
   recyclarr:
     image: ghcr.io/recyclarr/recyclarr # 6.0.2
     container_name: recyclarr
@@ -39,4 +39,5 @@ services:
     environment:
       - TZ=Australia/Perth
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - /ocean/active/services/recyclarr:/config
