@@ -53,6 +53,8 @@
       # for luks password
       "hid-microsoft"
 
+      "mpt3sas"
+
       # hardware-configuration.nix
       "xhci_pci" "ehci_pci" "ahci" "vfio_pci" "usbhid" "sd_mod"
     ];
