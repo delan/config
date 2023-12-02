@@ -26,20 +26,53 @@
   nix.settings.max-jobs = lib.mkDefault 8;
 
   boot = {
-    initrd.luks.devices = {
-      ocean0x0 = { device = "/dev/disk/by-partlabel/ocean0x0"; };
-      ocean0x1 = { device = "/dev/disk/by-partlabel/ocean0x1"; };
-      ocean1x0 = { device = "/dev/disk/by-partlabel/ocean1x0"; };
-      ocean1x1 = { device = "/dev/disk/by-partlabel/ocean1x1"; };
-      ocean2x0 = { device = "/dev/disk/by-partlabel/ocean2x0"; };
-      ocean2x2 = { device = "/dev/disk/by-partlabel/ocean2x2"; };
-      ocean3x0 = { device = "/dev/disk/by-partlabel/ocean3x0"; };
-      ocean3x1 = { device = "/dev/disk/by-partlabel/ocean3x1"; };
-      ocean4x0 = { device = "/dev/disk/by-partlabel/ocean4x0"; };
-      ocean4x1 = { device = "/dev/disk/by-partlabel/ocean4x1"; };
-      oceanSx0 = { device = "/dev/disk/by-partlabel/oceanSx0"; };
-      oceanSx1 = { device = "/dev/disk/by-partlabel/oceanSx1"; };
-      "ocean.arc" = { device = "/dev/disk/by-partlabel/ocean.arc"; };
+    initrd = {
+      availableKernelModules = [
+        # for luks local/remote unlock
+        "hid-microsoft" "igb"
+
+        "mpt3sas"
+
+        # hardware-configuration.nix
+        "xhci_pci" "ehci_pci" "ahci" "vfio_pci" "usbhid" "sd_mod"
+      ];
+
+      verbose = true;
+      network.enable = true;
+      network.postCommands = ''
+        for nic in eno1 eno2 eno3 eno4; do
+          ip link set $nic up
+          if [ "$(cat /sys/class/net/$nic/carrier)" -eq 1 ]; then
+            >&2 echo $nic is connected
+            ip addr add 172.19.42.2/24 dev $nic
+            ip route add default via 172.19.42.1 dev $nic
+            break
+          else
+            >&2 echo $nic is not connected
+          fi
+        done
+      '';
+      network.ssh = {
+        enable = true;
+        port = 22;
+        authorizedKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICBvkS7z2RAWzqRByRsHHB8PoCjXrnyHtjpdTxmOdcom delan@azabani.com/2016-07-18/Ed25519" ];
+        hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
+      };
+      luks.devices = {
+        ocean0x0 = { device = "/dev/disk/by-partlabel/ocean0x0"; };
+        ocean0x1 = { device = "/dev/disk/by-partlabel/ocean0x1"; };
+        ocean1x0 = { device = "/dev/disk/by-partlabel/ocean1x0"; };
+        ocean1x1 = { device = "/dev/disk/by-partlabel/ocean1x1"; };
+        ocean2x0 = { device = "/dev/disk/by-partlabel/ocean2x0"; };
+        ocean2x2 = { device = "/dev/disk/by-partlabel/ocean2x2"; };
+        ocean3x0 = { device = "/dev/disk/by-partlabel/ocean3x0"; };
+        ocean3x1 = { device = "/dev/disk/by-partlabel/ocean3x1"; };
+        ocean4x0 = { device = "/dev/disk/by-partlabel/ocean4x0"; };
+        ocean4x1 = { device = "/dev/disk/by-partlabel/ocean4x1"; };
+        oceanSx0 = { device = "/dev/disk/by-partlabel/oceanSx0"; };
+        oceanSx1 = { device = "/dev/disk/by-partlabel/oceanSx1"; };
+        "ocean.arc" = { device = "/dev/disk/by-partlabel/ocean.arc"; };
+      };
     };
 
     kernelModules = [
@@ -47,16 +80,6 @@
 
       # hardware-configuration.nix
       "kvm-intel"
-    ];
-
-    initrd.availableKernelModules = [
-      # for luks password
-      "hid-microsoft"
-
-      "mpt3sas"
-
-      # hardware-configuration.nix
-      "xhci_pci" "ehci_pci" "ahci" "vfio_pci" "usbhid" "sd_mod"
     ];
 
     kernelParams = [
@@ -77,6 +100,8 @@
     initrd.extraUtilsCommands = "copy_bin_and_libs ${pkgs.pciutils}/bin/setpci";
     # initrd.preDeviceCommands = "setpci -s0:14.0 0xd0.W=0x3ec7";
     # postBootCommands = "/run/current-system/sw/bin/setpci -s0:14.0 0xd0.W=0x3ec7";
+
+    zfs.extraPools = [ "ocean" ];
   };
 
   # fileSystems."/mnt/ocean/active" = {
