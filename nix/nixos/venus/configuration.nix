@@ -101,7 +101,7 @@
     pciutils usbutils ipmitool lm_sensors
 
     # virt-clone(1)
-    virtmanager
+    virt-manager
 
     atool
     bc
