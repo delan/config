@@ -134,15 +134,38 @@
   programs.fuse.userAllowOther = true;
 
   networking.firewall.allowedTCPPorts = [
+    80 443 # nginx
     8123 # home-assistant
     7474 # autobrr
     1313 # zfs send
-
     111 2049 # nfs
   ];
   networking.firewall.allowedUDPPorts = [
+    80 443 # nginx
     111 2049 # nfs
   ];
+
+  services.nginx = {
+    enable = true;
+    recommendedProxySettings = true;
+    clientMaxBodySize = "64M";
+    virtualHosts = let
+      proxy = {
+        extraConfig = ''
+          # https://github.com/curl/curl/issues/674
+          # https://trac.nginx.org/nginx/ticket/915
+          proxy_hide_header Upgrade;
+        '';
+      };
+      venus = {
+        locations."/qbittorrent/" = proxy // {
+          proxyPass = "http://127.0.0.1:20000/";
+        };
+      };
+    in {
+      "venus.daz.cat" = venus;
+    };
+  };
 
   services.nfs.server = {
     enable = true;
