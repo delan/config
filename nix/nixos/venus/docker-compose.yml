@@ -41,3 +41,31 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /ocean/active/services/recyclarr:/config
+  prowlarr:
+    container_name: prowlarr
+    image: ghcr.io/hotio/prowlarr
+    ports:
+      - "20040:9696"
+    environment:
+      - PUID=2004
+      - PGID=2004
+      - TZ=Australia/Perth
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /ocean/active/services/prowlarr:/config
+  bazarr:
+    container_name: bazarr
+    image: ghcr.io/hotio/bazarr:latest
+    restart: unless-stopped
+    logging:
+      driver: json-file
+    ports:
+      - 20050:6767
+    environment:
+      - PUID=2005
+      - PGID=2005
+      - TZ=Australia/Perth
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /docker/appdata/bazarr:/config
+      - /ocean/active:/ocean/active

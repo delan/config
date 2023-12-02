@@ -191,6 +191,12 @@
         locations."/radarr/" = proxy // {
           proxyPass = "http://127.0.0.1:20020";
         };
+        locations."/prowlarr/" = proxy // {
+          proxyPass = "http://127.0.0.1:20040";
+        };
+        locations."/bazarr/" = proxy // {
+          proxyPass = "http://127.0.0.1:20050";
+        };
       };
     in {
       "venus.daz.cat" = venus;
@@ -241,5 +247,7 @@
       (system { name = "sonarr"; id = 2001; })
       (system { name = "radarr"; id = 2002; })
       (system { name = "recyclarr"; id = 2003; })
+      (system { name = "prowlarr"; id = 2004; })
+      (system { name = "bazarr"; id = 2005; })
     ];
 }
