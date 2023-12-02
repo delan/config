@@ -16,9 +16,7 @@
     };
 
     services = {
-      collectd = false;
-      jackett = false;
-      jellyfin = false;
+      qbittorrent = true;
     };
   };
 
@@ -28,6 +26,22 @@
   nix.settings.max-jobs = lib.mkDefault 8;
 
   boot = {
+    initrd.luks.devices = {
+      ocean0x0 = { device = "/dev/disk/by-partlabel/ocean0x0"; };
+      ocean0x1 = { device = "/dev/disk/by-partlabel/ocean0x1"; };
+      ocean1x0 = { device = "/dev/disk/by-partlabel/ocean1x0"; };
+      ocean1x1 = { device = "/dev/disk/by-partlabel/ocean1x1"; };
+      ocean2x0 = { device = "/dev/disk/by-partlabel/ocean2x0"; };
+      ocean2x2 = { device = "/dev/disk/by-partlabel/ocean2x2"; };
+      ocean3x0 = { device = "/dev/disk/by-partlabel/ocean3x0"; };
+      ocean3x1 = { device = "/dev/disk/by-partlabel/ocean3x1"; };
+      ocean4x0 = { device = "/dev/disk/by-partlabel/ocean4x0"; };
+      ocean4x1 = { device = "/dev/disk/by-partlabel/ocean4x1"; };
+      oceanSx0 = { device = "/dev/disk/by-partlabel/oceanSx0"; };
+      oceanSx1 = { device = "/dev/disk/by-partlabel/oceanSx1"; };
+      "ocean.arc" = { device = "/dev/disk/by-partlabel/ocean.arc"; };
+    };
+
     kernelModules = [
       "vfio" "vfio_pci" "vfio_virqfd" "vfio_iommu_type1"
 
@@ -63,22 +77,22 @@
     # postBootCommands = "/run/current-system/sw/bin/setpci -s0:14.0 0xd0.W=0x3ec7";
   };
 
-  fileSystems."/mnt/ocean/active" = {
+  # fileSystems."/mnt/ocean/active" = {
     # device = "vtnet1.storage.daz.cat.:/ocean/active";
-    device = "172.19.129.205:/ocean/active";
-    fsType = "nfs";
-    options = [ "noauto" "ro" "vers=3" "soft" "bg" ];
-  };
+    # device = "172.19.129.205:/ocean/active";
+    # fsType = "nfs";
+    # options = [ "noauto" "ro" "vers=3" "soft" "bg" ];
+  # };
 
-  fileSystems."/mnt/ocean/public" = {
+  # fileSystems."/mnt/ocean/public" = {
     # device = "vtnet1.storage.daz.cat.:/ocean/public";
-    device = "172.19.129.205:/ocean/public";
-    fsType = "nfs";
-    options = [ "noauto" "ro" "vers=3" "soft" "bg" ];
-  };
+    # device = "127.0.0.1:/ocean/public";
+    # fsType = "nfs";
+    # options = [ "noauto" "ro" "vers=4" "soft" "bg" "sec=krb5p" ];
+  # };
 
   environment.systemPackages = with pkgs; [
-    tmux htop pv vim iperf3
+    tmux htop pv vim iperf3 neovim
 
     # nix-locate(1)
     nix-index
@@ -90,18 +104,25 @@
     virtmanager
 
     atool
+    bc
     clang
+    gcc
     colordiff
+    file
     git
     gnumake
     iftop
+    lazygit
     # lsiutil # TODO upgrade nixos first?
     neofetch
+    nmap
     ntfs3g
     openiscsi
     ripgrep
     sg3_utils
     smartmontools
+    steam-run
+    unzip
   ];
 
   services.cron = {
@@ -111,4 +132,114 @@
 
   # for sshfs -o allow_other,default_permissions,idmap=user
   programs.fuse.userAllowOther = true;
+
+  networking.firewall.allowedTCPPorts = [
+    80 443 # nginx
+    8123 # home-assistant
+    7474 # autobrr
+    1313 # zfs send
+    111 2049 # nfs
+  ];
+  networking.firewall.allowedUDPPorts = [
+    80 443 # nginx
+    111 2049 # nfs
+  ];
+
+  # allows you to authenticate sudo using your ssh private key
+  # use `ssh venus -A` (and maybe run `ssh-add` beforehand if things break)
+  # to get this to work
+  security.pam.enableSSHAgentAuth = true;
+  security.pam.services.sudo.sshAgentAuth = true;
+
+  security.acme = {
+    acceptTerms = true;
+    certs."venus.daz.cat" = {
+      email = "delan@azabani.com";
+      credentialsFile = "/etc/nixos/venus/acme-env.txt";
+      dnsProvider = "exec";
+      extraDomainNames = [];
+    };
+  };
+  services.nginx = {
+    enable = true;
+    recommendedProxySettings = true;
+    clientMaxBodySize = "64M";
+    virtualHosts = let
+      proxy = {
+        extraConfig = ''
+          # https://github.com/curl/curl/issues/674
+          # https://trac.nginx.org/nginx/ticket/915
+          proxy_hide_header Upgrade;
+        '';
+      };
+      ssl = {
+        useACMEHost = "venus.daz.cat";
+      };
+      sslRelax = ssl // {
+        addSSL = true;
+      };
+      sslForce = ssl // {
+        forceSSL = true;
+      };
+      venus = sslForce // {
+        locations."/qbittorrent/" = proxy // {
+          proxyPass = "http://127.0.0.1:20000/";
+        };
+        locations."/sonarr/" = proxy // {
+          proxyPass = "http://127.0.0.1:20010";
+        };
+        locations."/radarr/" = proxy // {
+          proxyPass = "http://127.0.0.1:20020";
+        };
+      };
+    in {
+      "venus.daz.cat" = venus;
+    };
+  };
+
+  services.nfs.server = {
+    enable = true;
+    exports = ''
+      # 172.19.42.33 = nyaaa
+      /ocean 172.19.42.33(ro,all_squash)
+      /ocean/active 172.19.42.33(ro,all_squash)
+    '';
+  };
+
+  users = let
+    system = { name, id }: {
+      users."${name}" = {
+        uid = id;
+        group = name;
+        isSystemUser = true;
+      };
+      groups."${name}" = {
+        gid = id;
+      };
+    };
+  in builtins.foldl' lib.recursiveUpdate
+    {
+      users.nginx.extraGroups = [ "acme" ];
+      users.aria = {
+        isNormalUser = true;
+        uid = 1001;
+        shell = pkgs.zsh;
+        extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
+      };
+      users.hannah = {
+        isNormalUser = true;
+        uid = 13000;
+        shell = pkgs.zsh;
+        group = "hannah";
+        extraGroups = [ "systemd-journal" ];
+      };
+      groups.hannah = {
+        gid = 13000;
+      };
+    }
+    [
+      (system { name = "sonarr"; id = 2001; })
+      (system { name = "radarr"; id = 2002; })
+      (system { name = "recyclarr"; id = 2003; })
+    ];
 }

@@ -3,6 +3,7 @@
     ./collectd.nix
     ./jackett.nix
     ./jellyfin.nix
+    ./qbittorrent.nix
     ./samba.nix
   ];
 }

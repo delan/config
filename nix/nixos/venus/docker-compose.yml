@@ -1,0 +1,42 @@
+version: "3.2"
+services:
+  sonarr:
+    container_name: sonarr
+    image: ghcr.io/hotio/sonarr:nightly # 4.0.0.733
+    restart: unless-stopped
+    logging:
+      driver: json-file
+    ports:
+      - 20010:8989
+    environment:
+      - PUID=2001
+      - PGID=2001
+      - TZ=Australia/Perth
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /ocean/active/services/sonarr:/config
+      - /ocean/active:/data
+  radarr:
+    container_name: radarr
+    image: ghcr.io/hotio/radarr:release # 5.1.3.8246
+    restart: unless-stopped
+    logging:
+      driver: json-file
+    ports:
+      - 20020:7878
+    environment:
+      - PUID=2002
+      - PGID=2002
+      - TZ=Australia/Perth
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /ocean/active/services/radarr:/config
+      - /ocean/active:/data
+  recyclarr:
+    image: ghcr.io/recyclarr/recyclarr # 6.0.2
+    container_name: recyclarr
+    user: 2003:2003
+    environment:
+      - TZ=Australia/Perth
+    volumes:
+      - /ocean/active/services/recyclarr:/config
