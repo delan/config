@@ -1,4 +1,4 @@
-@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2023101900 600 60 1814400 60 )
+@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2023120200 600 60 1814400 60 )
 @                                       60      IN  NS      ns.daz.cat.
 @                                       60      IN  NS      ns2.afraid.org.
 @                                       60      IN  NS      ns2.he.net.
@@ -16,6 +16,7 @@ _acme-challenge.charming                60      IN  CNAME   _acme-challenge.char
 _acme-challenge.funny.computer          60      IN  CNAME   _acme-challenge.funny.computer.daz.cat.acme
 _acme-challenge.go                      60      IN  CNAME   _acme-challenge.go.daz.cat.acme
 _acme-challenge.xn--blhaj-nra           60      IN  CNAME   _acme-challenge.xn--blhaj-nra.daz.cat.acme
+_acme-challenge.venus                   60      IN  CNAME   _acme-challenge.venus.daz.cat.acme
 colo                                    60      IN  HINFO   "AMD64" "NIXOS/22.11"
 australis                               60      IN  HINFO   "SUN4M" "SOLARIS/2.5.1"
 borealis                                60      IN  HINFO   "SUN4M" "NEXTSTEP/3.3"
