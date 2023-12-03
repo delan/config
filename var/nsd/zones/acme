@@ -29,7 +29,10 @@ done
 > $zone.lock echo $newserial
 case "$1" in
   (present)
-    >> $zone.in printf '%s 60 IN TXT "%s"\n' "${2%.$zone.}" "$3"
+    # strip any trailing . or .acme.daz.cat.
+    name=${2%.}
+    name=${name%.$zone}
+    >> $zone.in printf '%s 60 IN TXT "%s"\n' "$name" "$3"
     ;;
   (cleanup)
     > $zone.filtered fgrep -v '"'"$3"'"' $zone.in
@@ -43,5 +46,5 @@ esac
 
 colordiff -u $zone.zone $zone.new || :
 mv $zone.new $zone.zone
-doas rcctl reload nsd
+doas /usr/sbin/rcctl reload nsd
 mv $zone.lock $zone.serial
