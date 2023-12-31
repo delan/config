@@ -224,7 +224,11 @@
           };
         };
       in {
-        # "colo.daz.cat" = opacus // sslForce;
+        "\"\"" = {
+          locations."/" = {
+            return = "400";
+          };
+        };
         "103.108.231.122" = stratus // sslRelax;
         "2404:f780:8:3006:8f04::1500" = stratus // sslRelax;
         "opacus.daz.cat" = opacus // sslForce;
