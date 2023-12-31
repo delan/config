@@ -178,7 +178,7 @@
 
   services = {
     openvpn.servers.home.config = "config /etc/nixos/colo/home_colo.ovpn";
-    openvpn.servers.home.autoStart = false;
+    openvpn.servers.home.autoStart = true;
     nginx = {
       enable = true;
       recommendedProxySettings = true;
