@@ -250,6 +250,11 @@
         "cohost.doggirl.gay" = passionfruitCohostEmbed // sslForce;
       };
     };
+
+    fail2ban = {
+      enable = true;
+      ignoreIP = [ "144.6.130.75" ];
+    };
   };
 
   environment.systemPackages = with pkgs; [
