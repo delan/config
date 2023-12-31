@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+
+zone=acme.daz.cat
+
+mv $zone.lock $zone.serial
