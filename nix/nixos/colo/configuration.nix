@@ -1,3 +1,13 @@
+# manual setup after initial switch:
+# - provide ./home_colo.ovpn, root:root 600
+# - chown -R nginx:nginx ./nginx
+# - provide ./nginx/htpassword-memories-peb, nginx:nginx 600
+# - chown -R kate:users ./kate
+# - provide ./kate/dariox.club.conf, kate:users 644
+# - provide ./kate/xenia-dashboard.conf, kate:users 644
+# - sudo mkdir -p /var/www/memories/peb
+# - sudo setfacl -n --set 'u::rwX,g::0,o::0,m::rwX,nginx:5,delan:7' /var/www/memories/peb
+# - provide /var/www/memories/peb/**
 { config, lib, options, modulesPath, pkgs, specialArgs }: {
   imports = [ ./hardware-configuration.nix ../lib ];
 
@@ -181,6 +191,7 @@
     openvpn.servers.home.autoStart = true;
     nginx = {
       enable = true;
+      # logError = "stderr notice";
       recommendedProxySettings = true;
       appendHttpConfig = ''
         include /etc/nixos/colo/kate/dariox.club.conf;
@@ -248,6 +259,30 @@
         "kierang.ee.nroach44.id.au" = opacus // sslRelax;
         "cohost.org.doggirl.gay" = passionfruitCohostEmbed // sslForce;
         "cohost.doggirl.gay" = passionfruitCohostEmbed // sslForce;
+        "memories" = {
+          listen = [{
+            addr = "*";
+            port = 20000;
+            extraParameters = [ "default_server" ];
+          }];
+          locations."/" = {
+            root = "/var/www/memories";
+            extraConfig = ''
+              if ($remote_addr != "127.0.0.1") {
+                return 403;
+              }
+              # rewrite rules outside matching location do not apply!
+              location /peb/ {
+                auth_basic "/peb/";
+                auth_basic_user_file /etc/nixos/colo/nginx/htpasswd-memories-peb;
+                # rewrite_log on;
+                rewrite ^/([^/]+)/([^/]+/.*)$ /$1/$2 break;
+                rewrite ^/([^/]+)/(meta[.]txt)$ /$1/$2 break;
+                rewrite ^/([^/]+)/(.*)$ /$1/index.html break;
+              }
+            '';
+          };
+        };
       };
     };
 
