@@ -16,6 +16,7 @@
     };
 
     services = {
+      samba = true;
       qbittorrent = true;
     };
   };
