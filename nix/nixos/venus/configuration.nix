@@ -16,6 +16,7 @@
     };
 
     services = {
+      samba = true;
       qbittorrent = true;
     };
   };
@@ -41,6 +42,7 @@
       network.enable = true;
       network.postCommands = ''
         for nic in eno1 eno2 eno3 eno4; do
+          break
           ip link set $nic up
           if [ "$(cat /sys/class/net/$nic/carrier)" -eq 1 ]; then
             >&2 echo $nic is connected
@@ -101,7 +103,29 @@
     # initrd.preDeviceCommands = "setpci -s0:14.0 0xd0.W=0x3ec7";
     # postBootCommands = "/run/current-system/sw/bin/setpci -s0:14.0 0xd0.W=0x3ec7";
 
-    zfs.extraPools = [ "ocean" ];
+    # FIXME workaround for openzfs/zfs#15646
+    # zfs.extraPools = [ "ocean" ];
+    # zfs.devNodes = "/dev/mapper"; # prettier zpool list/status
+    postBootCommands = ''
+      (
+        set -eu -- ocean0x0 ocean0x1 ocean1x0 ocean1x1 ocean2x0 ocean2x2 ocean3x0 ocean3x1 ocean4x0 ocean4x1 oceanSx0 oceanSx1 ocean.arc
+        i=100
+        for j; do
+          shift
+          mknod -m 660 /dev/loop$i b 7 $i
+          tries=3
+          while ! [ -e /dev/loop$i ] || ! losetup --show /dev/loop$i /dev/mapper/$j; do
+            test $tries -gt 0
+            >&2 echo "waiting for /dev/loop$i to become ready"
+            sleep 1
+            tries=$((tries-1))
+          done
+          set -- "$@" -d /dev/loop$i
+          i=$((i+1))
+        done
+        ${config.boot.zfs.package}/bin/zpool import "$@" ocean
+      )
+    '';
   };
 
   # fileSystems."/mnt/ocean/active" = {
