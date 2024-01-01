@@ -41,6 +41,7 @@
       network.enable = true;
       network.postCommands = ''
         for nic in eno1 eno2 eno3 eno4; do
+          break
           ip link set $nic up
           if [ "$(cat /sys/class/net/$nic/carrier)" -eq 1 ]; then
             >&2 echo $nic is connected
