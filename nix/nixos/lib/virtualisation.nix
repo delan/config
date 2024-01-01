@@ -36,6 +36,10 @@
       virtualisation.docker = {
         enable = true;
         enableOnBoot = false;
+
+        # NixOS/nixpkgs#182916
+        liveRestore = false;
+
         daemon = {
           settings = {
             storage-driver = "overlay2";
