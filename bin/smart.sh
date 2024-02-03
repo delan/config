@@ -1,26 +1,32 @@
 #!/usr/bin/env zsh
 set -eu
 
+# smart id, row label, formatting prefix
 attributes=( \
-	5 Reallocated_Sector_Ct \
-	9 Power_On_Hours \
-	196 Reallocated_Event_Count \
-	197 Current_Pending_Sector \
-	198 Offline_Uncorrectable \
-	199 UDMA_CRC_Error_Count \
-	193 Load_Cycle_Count \
-	194 Temperature_Celsius \
+	5 Reallocated_Sector_Ct $(tput setaf 9) \
+	9 Power_On_Hours '' \
+	196 Reallocated_Event_Count $(tput setaf 9) \
+	197 Current_Pending_Sector $(tput setaf 9) \
+	198 Offline_Uncorrectable $(tput setaf 9) \
+	199 UDMA_CRC_Error_Count '' \
+	193 Load_Cycle_Count '' \
+	194 Temperature_Celsius '' \
 )
 
 printcol() {
 	printf \%-13s "$@"
 }
 
+printbar() {
+	printf \%s '-------------'
+}
+
 scratch=$(mktemp -d)
 n=$#
 
-i=0
-while [ $i -lt $n ]; do
+# print device headings and cache smartctl output
+tput bold
+i=0; while [ $i -lt $n ]; do
 	f=$1; shift
 	printcol ${f#/dev/}
 	e=0; > $scratch/$i sudo smartctl -a $f || e=$?
@@ -28,56 +34,41 @@ while [ $i -lt $n ]; do
 	set -- "$@" "$f"
 	i=$((i+1))
 done
-
 echo
+tput sgr0
 
-# i=0
-# while [ $i -lt $n ]; do
-# 	f=$1; shift
-# 	printcol $(sudo camcontrol devlist | sed -E 's/.*> + at //;s/ target / /;s/ lun /:/g;s/[()]//g;s/,/ /g;s/ pass[^ ]+//' | rg ' '${f#/dev/}'$' | while read -r k a d; do printf \%s\\n $(sudo camcontrol devlist -b | sed 's/ bus /:/;s/ on / /' | rg '^'$k' ' | cut -d ' ' -f2):$a; done)
-# 	set -- "$@" "$f"
-# 	i=$((i+1))
-# done
-
-# echo
-
-# i=0
-# while [ $i -lt $n ]; do
-# 	f=$1; shift
-# 	printcol $(geom part list $f | rg -o --pcre2 '(?<=^   label: ).*')
-# 	set -- "$@" "$f"
-# 	i=$((i+1))
-# done
-
-# echo
-
-i=0
-while [ $i -lt $n ]; do
+# print partlabel of a partition on each disk
+i=0; while [ $i -lt $n ]; do
 	f=$1; shift
-  printcol $(paste <(cd /dev/disk/by-partlabel; printf \%s\\n *) <(readlink /dev/disk/by-partlabel/*) | rg ${f#/dev/} | cut -f 1 | sed q)
+	printcol $(paste <(cd /dev/disk/by-partlabel; printf \%s\\n *) <(readlink /dev/disk/by-partlabel/*) | rg ${f#/dev/} | cut -f 1 | sed q)
 	set -- "$@" "$f"
 	i=$((i+1))
 done
-
 echo
 
-i=0
-while [ $i -lt $n ]; do
+i=0; while [ $i -lt $n ]; do
+	printbar
+	i=$((i+1))
+done
+echo
+
+i=0; while [ $i -lt $n ]; do
 	printcol $(< $scratch/$i sed -E '/^SMART overall-health self-assessment test result: /!d;s///')
 	i=$((i+1))
 done
-
 echo overall-health
 
 while [ $#attributes -gt 0 ]; do
 	id=$attributes[1]; shift 1 attributes
 	name=$attributes[1]; shift 1 attributes
+	formatting=$attributes[1]; shift 1 attributes
+	printf \%s "$formatting"
 
-	i=0
-	while [ $i -lt $n ]; do
+	i=0; while [ $i -lt $n ]; do
 		printcol $(< $scratch/$i egrep '^ {0,2}'$id | cut -c 88- | sed -E 's/ \(Min\/Max [^)]+\)//')
 		i=$((i+1))
 	done
 
 	echo $name
+	tput sgr0
 done
