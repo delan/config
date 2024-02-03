@@ -84,3 +84,16 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /ocean/active/services/bazarr:/config
       - /ocean/active:/ocean/active
+  flaresolverr:
+    container_name: flaresolverr
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    restart: unless-stopped
+    logging:
+      driver: json-file
+    ports:
+      - 20060:8191
+    environment:
+      - PUID=2006
+      - PGID=2006
+      - TZ=Australia/Perth
+      - LOG_LEVEL=info

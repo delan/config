@@ -302,5 +302,6 @@
       (system { name = "recyclarr"; id = 2003; })
       (system { name = "prowlarr"; id = 2004; })
       (system { name = "bazarr"; id = 2005; })
+      (system { name = "flaresolverr"; id = 2006; })
     ];
 }
