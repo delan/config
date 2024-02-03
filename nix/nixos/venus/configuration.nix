@@ -164,7 +164,9 @@
     gnumake
     iftop
     lazygit
-    # lsiutil # TODO upgrade nixos first?
+    lazydocker
+    lsiutil
+    lsof
     neofetch
     nmap
     ntfs3g
