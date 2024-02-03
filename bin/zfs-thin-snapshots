@@ -1,0 +1,61 @@
+#!/usr/bin/env zsh
+# usage: $0 <diskregex>
+set -eu
+
+now() {
+  date -u +\%FT\%RZ
+}
+
+isoToUnix() {
+  date -d "$1" +\%s
+}
+
+subtractDates() {
+  set -- $(isoToUnix "$1") $(isoToUnix "$2")
+  echo $(($1-$2))
+}
+
+now=$(now)
+cutoff=$(isoToUnix now)
+oldAge=0
+oldKeepAge=0
+result=
+
+zfs list -Ho name -t snapshot -d 1 "$1" \
+| sed -E 's/.+@//' \
+| rg '^[0-9]{4,}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}Z$' \
+| sort -r \
+| while read -r snap; do
+  unix=$(isoToUnix $snap)
+  age=$(subtractDates $now $snap)
+  if [ $unix -gt $cutoff ]; then
+    emoji='☑️ '
+    action=delete
+    result="$result,$snap"
+  else
+    emoji='🚮 '
+    action=keep
+    if [ $age -le $((86400*7)) ]; then
+      cutoff=$((unix-86400))
+    elif [ $age -le $((86400*30)) ]; then
+      cutoff=$((unix-86400*7))
+    else
+      cutoff=$((unix-86400*30))
+    fi
+  fi
+  emoji=  # disabled for now
+  printf '%s%s: %s days ago (+%s), %s (+%s)\n' \
+    "$emoji" "$snap" $((age/86400)) $(((age-oldAge)/86400)) $action $(((age-oldKeepAge)/86400))
+  oldAge=$age
+  if [ "$action" = keep ]; then
+    oldKeepAge=$age
+  fi
+done
+
+set -- "$1@${result#,}"
+zfs destroy -nv "$@"
+printf \%s 'ok? [y/N] '
+read -r yn < /dev/tty
+if [ "$yn" = y ]; then
+  zfs destroy -v "$@"
+fi
