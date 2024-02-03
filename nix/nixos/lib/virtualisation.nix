@@ -35,7 +35,7 @@
     (mkIf cfg.virtualisation.docker {
       virtualisation.docker = {
         enable = true;
-        enableOnBoot = false;
+        enableOnBoot = true;
 
         # NixOS/nixpkgs#182916
         liveRestore = false;
