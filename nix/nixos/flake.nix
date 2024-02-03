@@ -1,35 +1,45 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixos2211.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixos2305.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixos2311.url = "github:nixos/nixpkgs/nixos-23.11";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    hm2211.url = "github:nix-community/home-manager/release-22.11";
+    hm2211.inputs.nixpkgs.follows = "nixos2211";
+    hm2305.url = "github:nix-community/home-manager/release-23.05";
+    hm2305.inputs.nixpkgs.follows = "nixos2305";
+    hm2311.url = "github:nix-community/home-manager/release-23.11";
+    hm2311.inputs.nixpkgs.follows = "nixos2311";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware, unstable, ... }:
+  outputs = inputs@{ self, nixos2211, nixos2305, nixos2311, unstable, hm2211, hm2305, hm2311, nixos-hardware, ... }:
   let
-    unstablePkgs = import unstable {
+    pkgs2311 = import nixos2311 {
+      system = "x86_64-linux";
+      config = { allowUnfree = true; };
+    };
+    pkgsUnstable = import unstable {
       system = "x86_64-linux";
       config = { allowUnfree = true; };
     };
   in {
     # servers
-    nixosConfigurations.venus = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.venus = nixos2311.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [ venus/configuration.nix ];
     };
-    nixosConfigurations.colo = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.colo = nixos2211.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [ colo/configuration.nix ];
     };
 
     # workstations
-    nixosConfigurations.uranus = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.uranus = nixos2211.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         uranus/configuration.nix
-        home-manager.nixosModules.home-manager
+        hm2211.nixosModules.home-manager
         {
           home-manager.users.delan = import ../nixpkgs/home.nix;
 
@@ -43,12 +53,12 @@
         }
       ];
     };
-    nixosConfigurations.saturn = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.saturn = nixos2305.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         saturn/configuration.nix
         nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen2
-        home-manager.nixosModules.home-manager
+        hm2305.nixosModules.home-manager
         {
           home-manager.users.delan = import ../nixpkgs/home.nix;
 
@@ -62,11 +72,11 @@
         }
       ];
     };
-    nixosConfigurations.jupiter = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.jupiter = nixos2311.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         jupiter/configuration.nix
-        home-manager.nixosModules.home-manager
+        hm2311.nixosModules.home-manager
         {
           home-manager.users.delan = import ../nixpkgs/home.nix;
 

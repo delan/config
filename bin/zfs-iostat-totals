@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+# usage: $0 <diskregex>
+set -eu
+diskregex=$1; shift
+ndisks=$(zpool iostat -v | rg -- "$diskregex" | wc -l | tr -d ' ')
+
+select_columns='s/^ *([^ ]+) *.* +([^ ]+) +([^ ]+)$/\1 \2 \3/'
+sum_sizes() { tr ' ' \\n | sed -E 's/K$/*1024/;s/M$/*1048576/;s/G$/*1073741824/' | bc | sed 's/[.].*//' | awk '{x+=$1}END{print x}' | sed 's/^/scale=3;/;s@$@/1000000@' | bc; }
+zpool iostat -v 1 | tee /dev/stderr | rg --line-buffered -- "$diskregex" | while read -r l; do
+	<<< "$l" sed -E "$select_columns" | read -r f r w
+	printf 'first: %s\n' "$f"
+	: printf '<%s>\n' "$r" "$w"
+	set -- "$r" "$w"
+	for i in {2..$ndisks}; do
+		read -r l
+		<<< "$l" sed -E "$select_columns" | read -r f r w
+		set -- "$1 $r" "$2 $w"
+	done
+	: printf '[%s]\n' "$@"
+	printf 'read:  '
+	<<< "$1" sum_sizes
+	printf 'write: '
+	<<< "$2" sum_sizes
+done
