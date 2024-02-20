@@ -5,8 +5,8 @@
     hostId = "8FF7BF00";
     hostName = "tol";
     domain = "daz.cat";
-    luksDevice = "/dev/disk/by-uuid/tol.cuffs";
-    bootDevice = "/dev/disk/by-uuid/tol.esp";
+    luksDevice = "/dev/disk/by-partlabel/tol.cuffs";
+    bootDevice = "/dev/disk/by-partlabel/tol.esp";
     separateNix = true;
     initialUser = "delan";
 
@@ -18,6 +18,7 @@
     services = {};
   };
 
+  swapDevices = [ { device = "/dev/disk/by-partlabel/tol.swap"; } ];
   nix.settings.max-jobs = lib.mkDefault 4;
 
   boot = {
