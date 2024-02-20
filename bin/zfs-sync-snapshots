@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 # usage: $0 [--src-regex] [--bookmark]
-#           [--delete <none|old|all|this>] [--delete-yes]
+#           [--delete <none|old|all|this>] [--i-am-a-cron-job-fuck-me-up-and-delete-without-asking]
 #           [--recv-options '...'] [--rsh '...']
 #           [--exclude path/to/dataset]
 #           [--incremental-source <-t receive_resume_token|@|#|...|>]
@@ -42,7 +42,7 @@ while [ $# -gt 0 ]; do
       esac
       shift 2
       ;;
-    (0:--delete-yes) delete_yes=1; shift ;;
+    (0:--i-am-a-cron-job-fuck-me-up-and-delete-without-asking) delete_yes=1; shift ;;
     (0:--recv-options) recv_options=$2; shift 2 ;;
     (0:--rsh) rsh=$2; shift 2 ;;
     (0:--exclude) exclude="$exclude${exclude:+ }$2"; shift 2 ;;
