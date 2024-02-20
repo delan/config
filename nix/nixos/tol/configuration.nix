@@ -74,7 +74,7 @@
   };
 
   fileSystems."/ocean" = {
-    device = "venus.home.daz.cat.:/ocean/active";
+    device = "venus.home.daz.cat.:/ocean";
     fsType = "nfs";
     options = [ "noauto" "ro" "soft" "bg" ];
   };
