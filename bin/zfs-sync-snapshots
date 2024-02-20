@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 # usage: $0 [--src-regex] [--bookmark]
-#           [--delete <none|old|all|this>] [--i-am-a-cron-job-fuck-me-up-and-delete-without-asking]
+#           [--delete <none|this>] [--i-am-a-cron-job-fuck-me-up-and-delete-without-asking]
 #           [--recv-options '...'] [--rsh '...']
 #           [--exclude path/to/dataset]
 #           [--incremental-source <-t receive_resume_token|@|#|...|>]
@@ -34,7 +34,7 @@ while [ $# -gt 0 ]; do
     (0:--bookmark) bookmark=1; shift ;;
     (0:--delete)
       case "$2" in
-        (none|old|all|this) delete=$2 ;;
+        (none|this) delete=$2 ;;
         (*)
           >&2 echo 'fatal: --delete must be ‘none’ or ‘old’ or ‘all’'
           exit 1
@@ -157,18 +157,7 @@ case "$drywet:$delete_yes" in
   (wet:0) yn=' [y/N]'; set -- xargs -0prn 1 zfs destroy ;;
   (wet:1) yn=''; set -- xargs -0trn 1 zfs destroy ;;
 esac
-if [ $delete = old ]; then
-  echo ">>> deleting non-latest snapshots$yn"
-  list_src -t snapshot | sed -E 's/@.*//' | uniq | while read -r i; do
-    echo "=== latest: $(zfs list -Ht snapshot -o name | sed 's/^/@/' | fgrep "@$i@" | sed 's/^@//' | tail -1)"
-    zfs list -t snapshot -Ho name -d 1 "$i" | rg @ | sed \$d | rg @ | tr \\n \\0 | "$@"
-  done
-elif [ $delete = all ]; then
-  echo ">>> deleting all snapshots$yn"
-  list_src -t snapshot | sed -E 's/@.*//' | uniq | while read -r i; do
-    zfs list -t snapshot -Ho name -d 1 "$i" | rg @ | tr \\n \\0 | "$@"
-  done
-elif [ $delete = this ]; then
+if [ $delete = this ]; then
   echo ">>> deleting this snapshot ($snapname)$yn"
   list_src -t snapshot | sed -E 's/@.*//' | uniq | while read -r i; do
     zfs list -t snapshot -Ho name -d 1 "$i" | sed -E 's/$/@/' | fgrep "@$snapname@" | sed 's/@$//' | tr \\n \\0 | "$@"
