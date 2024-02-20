@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 # usage: $0 [--src-regex] [--bookmark]
-#           [--delete <none|old|all>] [--delete-yes]
+#           [--delete <none|old|all|this>] [--delete-yes]
 #           [--recv-options '...'] [--rsh '...']
 #           [--exclude path/to/dataset]
 #           [--incremental-source <-t receive_resume_token|@|#|...|>]
@@ -34,7 +34,7 @@ while [ $# -gt 0 ]; do
     (0:--bookmark) bookmark=1; shift ;;
     (0:--delete)
       case "$2" in
-        (none|old|all) delete=$2 ;;
+        (none|old|all|this) delete=$2 ;;
         (*)
           >&2 echo 'fatal: --delete must be ‘none’ or ‘old’ or ‘all’'
           exit 1
@@ -167,5 +167,10 @@ elif [ $delete = all ]; then
   echo ">>> deleting all snapshots$yn"
   list_src -t snapshot | sed -E 's/@.*//' | uniq | while read -r i; do
     zfs list -t snapshot -Ho name -d 1 "$i" | rg @ | tr \\n \\0 | "$@"
+  done
+elif [ $delete = this ]; then
+  echo ">>> deleting this snapshot ($snapname)$yn"
+  list_src -t snapshot | sed -E 's/@.*//' | uniq | while read -r i; do
+    zfs list -t snapshot -Ho name -d 1 "$i" | sed -E 's/$/@/' | fgrep "@$snapname@" | sed 's/@$//' | tr \\n \\0 | "$@"
   done
 fi
