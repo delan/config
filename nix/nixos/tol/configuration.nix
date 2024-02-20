@@ -129,8 +129,12 @@
   # for sshfs -o allow_other,default_permissions,idmap=user
   programs.fuse.userAllowOther = true;
 
-  networking.firewall.allowedTCPPorts = [];
-  networking.firewall.allowedUDPPorts = [];
+  networking.firewall.allowedTCPPorts = [
+    32400 # plex
+  ];
+  networking.firewall.allowedUDPPorts = [
+    32400 # plex
+  ];
 
   users = let
     system = { name, id }: {
