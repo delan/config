@@ -33,6 +33,10 @@
       system = "x86_64-linux";
       modules = [ colo/configuration.nix ];
     };
+    nixosConfigurations.tol = nixos2311.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [ tol/configuration.nix ];
+    };
 
     # workstations
     nixosConfigurations.uranus = nixos2211.lib.nixosSystem {
