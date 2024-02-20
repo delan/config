@@ -131,10 +131,27 @@
   networking.firewall.allowedTCPPorts = [];
   networking.firewall.allowedUDPPorts = [];
 
-  users.users.aria = {
-    isNormalUser = true;
-    uid = 1001;
-    shell = pkgs.zsh;
-    extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
-  };
+  users = let
+    system = { name, id }: {
+      users."${name}" = {
+        uid = id;
+        group = name;
+        isSystemUser = true;
+      };
+      groups."${name}" = {
+        gid = id;
+      };
+    };
+  in builtins.foldl' lib.recursiveUpdate
+    {
+      users.aria = {
+        isNormalUser = true;
+        uid = 1001;
+        shell = pkgs.zsh;
+        extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
+      };
+    }
+    [
+      (system { name = "plex"; id = 2101; })
+    ];
 }
