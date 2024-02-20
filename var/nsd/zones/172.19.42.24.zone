@@ -1,10 +1,11 @@
-@ 60 IN SOA ns.daz.cat. delan.azabani.com. ( 2024020200 600 60 1814400 60 )
+@ 60 IN SOA ns.daz.cat. delan.azabani.com. ( 2024022000 600 60 1814400 60 )
 @ 60 IN NS ns.daz.cat.
 1.42.19.172.in-addr.arpa. 60 IN PTR jane.home.daz.cat.
 2.42.19.172.in-addr.arpa. 60 IN PTR venus.home.daz.cat.
 3.42.19.172.in-addr.arpa. 60 IN PTR jupiter.home.daz.cat.
 4.42.19.172.in-addr.arpa. 60 IN PTR uranium.home.daz.cat.
 5.42.19.172.in-addr.arpa. 60 IN PTR saturn.home.daz.cat.
+6.42.19.172.in-addr.arpa. 60 IN PTR tol.home.daz.cat.
 9.42.19.172.in-addr.arpa. 60 IN PTR GOD2.home.daz.cat.
 31.42.19.172.in-addr.arpa. 60 IN PTR ark-1.home.daz.cat.
 32.42.19.172.in-addr.arpa. 60 IN PTR ark-2.home.daz.cat.
@@ -13,6 +14,4 @@
 35.42.19.172.in-addr.arpa. 60 IN PTR gnotagnuc.home.daz.cat.
 36.42.19.172.in-addr.arpa. 60 IN PTR solserv.home.daz.cat.
 46.42.19.172.in-addr.arpa. 60 IN PTR uranus.home.daz.cat.
-47.42.19.172.in-addr.arpa. 60 IN PTR stratus.home.daz.cat.
-48.42.19.172.in-addr.arpa. 60 IN PTR opacus.home.daz.cat.
 49.42.19.172.in-addr.arpa. 60 IN PTR storage.home.daz.cat.
