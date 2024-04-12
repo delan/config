@@ -268,6 +268,9 @@
       # 172.19.42.33 = nyaaa
       /ocean 172.19.42.33(ro,all_squash)
       /ocean/active 172.19.42.33(ro,all_squash)
+      # 172.19.42.6 = tol
+      /ocean 172.19.42.6(ro,all_squash)
+      /ocean/active 172.19.42.6(ro,all_squash)
     '';
   };
 
