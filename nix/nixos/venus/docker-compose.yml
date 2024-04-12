@@ -97,3 +97,14 @@ services:
       - PGID=2006
       - TZ=Australia/Perth
       - LOG_LEVEL=info
+  synclounge:
+    container_name: synclounge
+    image: synclounge/synclounge:latest
+    user: 2008:2008
+    restart: unless-stopped
+    logging:
+      driver: json-file
+    ports:
+      - 20080:8088
+    environment:
+      - TZ=Australia/Perth
