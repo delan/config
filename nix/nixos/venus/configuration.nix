@@ -1,3 +1,5 @@
+# manual setup after initial switch:
+# - sudo smbpasswd -a scanner
 { config, lib, options, modulesPath, pkgs, ... }: {
   imports = [ ../lib ];
 
@@ -285,6 +287,12 @@
         shell = pkgs.zsh;
         extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
       };
+      users.the6p4c = {
+        isNormalUser = true;
+        uid = 1002;
+        shell = pkgs.bash;
+        extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
+      };
       users.hannah = {
         isNormalUser = true;
         uid = 13000;
@@ -303,5 +311,6 @@
       (system { name = "prowlarr"; id = 2004; })
       (system { name = "bazarr"; id = 2005; })
       (system { name = "flaresolverr"; id = 2006; })
+      (system { name = "scanner"; id = 2007; })
     ];
 }
