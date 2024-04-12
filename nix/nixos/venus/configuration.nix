@@ -1,5 +1,6 @@
 # manual setup after initial switch:
 # - sudo smbpasswd -a scanner
+# - sed s/hunter2/.../ iscsi-etc-target-saveconfig.json | sudo tee /etc/target/saveconfig.json
 { config, lib, options, modulesPath, pkgs, ... }: {
   imports = [ ../lib ];
 
@@ -177,6 +178,7 @@
     sg3_utils
     smartmontools
     steam-run
+    targetcli
     unzip
   ];
 
@@ -194,6 +196,7 @@
     7474 # autobrr
     1313 # zfs send
     111 2049 # nfs
+    3260 # iscsi
   ];
   networking.firewall.allowedUDPPorts = [
     80 443 # nginx
@@ -257,6 +260,7 @@
       "venus.daz.cat" = venus;
     };
   };
+  services.target.enable = true;
 
   services.nfs.server = {
     enable = true;
