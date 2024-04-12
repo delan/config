@@ -44,10 +44,8 @@
         scanner = {
           path = "/ocean/active/scanner";
           "read only" = "no";
-          "guest ok" = "yes";
+          "guest ok" = "no";
           "hide dot files" = "no";
-          "force user" = "nobody";
-          "force group" = "nogroup";
         };
       };
     };

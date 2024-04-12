@@ -1,3 +1,6 @@
+# manual setup after initial switch:
+# - sudo smbpasswd -a scanner
+# - sed s/hunter2/.../ iscsi-etc-target-saveconfig.json | sudo tee /etc/target/saveconfig.json
 { config, lib, options, modulesPath, pkgs, ... }: {
   imports = [ ../lib ];
 
@@ -175,6 +178,7 @@
     sg3_utils
     smartmontools
     steam-run
+    targetcli
     unzip
   ];
 
@@ -192,6 +196,7 @@
     7474 # autobrr
     1313 # zfs send
     111 2049 # nfs
+    3260 # iscsi
   ];
   networking.firewall.allowedUDPPorts = [
     80 443 # nginx
@@ -250,11 +255,32 @@
         locations."/bazarr/" = proxy // {
           proxyPass = "http://127.0.0.1:20050";
         };
+        locations."/synclounge/" = proxy // {
+          proxyPass = "http://127.0.0.1:20080/";
+          extraConfig = ''
+            # https://github.com/synclounge/synclounge/blob/714ac01ec334c41a707c445bee32619e615550cf/README.md#subfolder-domaincomsomefolder
+            proxy_http_version 1.1;
+            proxy_socket_keepalive on;
+            proxy_redirect off;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-Host $server_name;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Port $server_port;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection $connection_upgrade;
+            proxy_set_header Sec-WebSocket-Extensions $http_sec_websocket_extensions;
+            proxy_set_header Sec-WebSocket-Key $http_sec_websocket_key;
+            proxy_set_header Sec-WebSocket-Version $http_sec_websocket_version;
+          '';
+        };
       };
     in {
       "venus.daz.cat" = venus;
     };
   };
+  services.target.enable = true;
 
   services.nfs.server = {
     enable = true;
@@ -262,6 +288,9 @@
       # 172.19.42.33 = nyaaa
       /ocean 172.19.42.33(ro,all_squash)
       /ocean/active 172.19.42.33(ro,all_squash)
+      # 172.19.42.6 = tol
+      /ocean 172.19.42.6(ro,all_squash)
+      /ocean/active 172.19.42.6(ro,all_squash)
     '';
   };
 
@@ -285,6 +314,12 @@
         shell = pkgs.zsh;
         extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
       };
+      users.the6p4c = {
+        isNormalUser = true;
+        uid = 1002;
+        shell = pkgs.bash;
+        extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
+      };
       users.hannah = {
         isNormalUser = true;
         uid = 13000;
@@ -303,5 +338,7 @@
       (system { name = "prowlarr"; id = 2004; })
       (system { name = "bazarr"; id = 2005; })
       (system { name = "flaresolverr"; id = 2006; })
+      (system { name = "scanner"; id = 2007; })
+      (system { name = "synclounge"; id = 2008; })
     ];
 }
