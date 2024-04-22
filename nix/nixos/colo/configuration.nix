@@ -7,6 +7,7 @@
 # - provide ./kate/xenia-dashboard.conf, kate:users 644
 # - sudo mkdir -p /var/www/memories/peb
 # - sudo setfacl -n --set 'u::rwX,g::0,o::0,m::rwX,nginx:5,delan:7' /var/www/memories/peb
+# - sudo setfacl -n --set 'u::rwX,g::0,o::0,m::rwX,nginx:5,delan:7' /var/www/memories
 # - provide /var/www/memories/peb/**
 { config, lib, options, modulesPath, pkgs, specialArgs }: {
   imports = [ ./hardware-configuration.nix ../lib ];
