@@ -170,6 +170,7 @@
     lazydocker
     lsiutil
     lsof
+    ncdu
     neofetch
     nmap
     ntfs3g
@@ -196,6 +197,7 @@
     7474 # autobrr
     1313 # zfs send
     111 2049 # nfs
+    8000 # python
     3260 # iscsi
   ];
   networking.firewall.allowedUDPPorts = [
