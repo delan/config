@@ -3,6 +3,7 @@
     nixos2211.url = "github:nixos/nixpkgs/nixos-22.11";
     nixos2305.url = "github:nixos/nixpkgs/nixos-23.05";
     nixos2311.url = "github:nixos/nixpkgs/nixos-23.11";
+    zfs_2_2_4.url = "github:nixos/nixpkgs/cec5812591bc6235f15b84bb55438661cb67f7d2";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     hm2211.url = "github:nix-community/home-manager/release-22.11";
     hm2211.inputs.nixpkgs.follows = "nixos2211";
@@ -13,9 +14,13 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = inputs@{ self, nixos2211, nixos2305, nixos2311, unstable, hm2211, hm2305, hm2311, nixos-hardware, ... }:
+  outputs = inputs@{ self, nixos2211, nixos2305, nixos2311, zfs_2_2_4, unstable, hm2211, hm2305, hm2311, nixos-hardware, ... }:
   let
     pkgs2311 = import nixos2311 {
+      system = "x86_64-linux";
+      config = { allowUnfree = true; };
+    };
+    pkgs_zfs_2_2_4 = import zfs_2_2_4 {
       system = "x86_64-linux";
       config = { allowUnfree = true; };
     };
@@ -27,7 +32,14 @@
     # servers
     nixosConfigurations.venus = nixos2311.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [ venus/configuration.nix ];
+      modules = [
+        venus/configuration.nix
+        {
+          boot.kernelPackages = pkgs_zfs_2_2_4.linuxPackages;
+          boot.zfs.package = pkgs_zfs_2_2_4.zfs;
+          boot.zfs.modulePackage = pkgs_zfs_2_2_4.linuxPackages.zfs;
+        }
+      ];
     };
     nixosConfigurations.colo = nixos2211.lib.nixosSystem {
       system = "x86_64-linux";
