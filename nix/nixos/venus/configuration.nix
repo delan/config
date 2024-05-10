@@ -73,8 +73,8 @@
         ocean3x0 = { device = "/dev/disk/by-partlabel/ocean3x0"; };
         ocean3x1 = { device = "/dev/disk/by-partlabel/ocean3x1"; };
         ocean4x0 = { device = "/dev/disk/by-partlabel/ocean4x0"; };
-        ocean4x1 = { device = "/dev/disk/by-partlabel/ocean4x1"; };
         ocean4x2 = { device = "/dev/disk/by-partlabel/ocean4x2"; };
+        ocean5x0 = { device = "/dev/disk/by-partlabel/ocean5x0"; };
         ocean5x1 = { device = "/dev/disk/by-partlabel/ocean5x1"; };
         oceanSx0 = { device = "/dev/disk/by-partlabel/oceanSx0"; };
         oceanSx1 = { device = "/dev/disk/by-partlabel/oceanSx1"; };
