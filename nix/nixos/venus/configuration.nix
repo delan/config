@@ -8,7 +8,7 @@
     hostId = "99D8468B";
     hostName = "venus";
     domain = "daz.cat";
-    luksDevice = "/dev/disk/by-uuid/62d52d15-c5ee-4143-816e-994b0ae4fec4";
+    luksDevice = "/dev/disk/by-partlabel/cuffs2x0";
     bootDevice = "/dev/disk/by-uuid/3A36-D233";
     separateNix = false;
     initialUser = "delan";
@@ -64,6 +64,7 @@
         hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
       };
       luks.devices = {
+        cuffs2x1 = { device = "/dev/disk/by-partlabel/cuffs2x1"; };
         ocean0x0 = { device = "/dev/disk/by-partlabel/ocean0x0"; };
         ocean0x1 = { device = "/dev/disk/by-partlabel/ocean0x1"; };
         ocean1x0 = { device = "/dev/disk/by-partlabel/ocean1x0"; };
