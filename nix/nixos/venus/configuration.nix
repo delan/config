@@ -73,7 +73,9 @@
         ocean3x0 = { device = "/dev/disk/by-partlabel/ocean3x0"; };
         ocean3x1 = { device = "/dev/disk/by-partlabel/ocean3x1"; };
         ocean4x0 = { device = "/dev/disk/by-partlabel/ocean4x0"; };
-        ocean4x1 = { device = "/dev/disk/by-partlabel/ocean4x1"; };
+        ocean4x2 = { device = "/dev/disk/by-partlabel/ocean4x2"; };
+        ocean5x0 = { device = "/dev/disk/by-partlabel/ocean5x0"; };
+        ocean5x1 = { device = "/dev/disk/by-partlabel/ocean5x1"; };
         oceanSx0 = { device = "/dev/disk/by-partlabel/oceanSx0"; };
         oceanSx1 = { device = "/dev/disk/by-partlabel/oceanSx1"; };
         "ocean.arc" = { device = "/dev/disk/by-partlabel/ocean.arc"; };
@@ -107,28 +109,28 @@
     # postBootCommands = "/run/current-system/sw/bin/setpci -s0:14.0 0xd0.W=0x3ec7";
 
     # FIXME workaround for openzfs/zfs#15646
-    # zfs.extraPools = [ "ocean" ];
-    # zfs.devNodes = "/dev/mapper"; # prettier zpool list/status
-    postBootCommands = ''
-      (
-        set -eu -- ocean0x0 ocean0x1 ocean1x0 ocean1x1 ocean2x0 ocean2x2 ocean3x0 ocean3x1 ocean4x0 ocean4x1 oceanSx0 oceanSx1 ocean.arc
-        i=100
-        for j; do
-          shift
-          mknod -m 660 /dev/loop$i b 7 $i
-          tries=3
-          while ! [ -e /dev/loop$i ] || ! losetup --show /dev/loop$i /dev/mapper/$j; do
-            test $tries -gt 0
-            >&2 echo "waiting for /dev/loop$i to become ready"
-            sleep 1
-            tries=$((tries-1))
-          done
-          set -- "$@" -d /dev/loop$i
-          i=$((i+1))
-        done
-        ${config.boot.zfs.package}/bin/zpool import "$@" ocean
-      )
-    '';
+    zfs.extraPools = [ "ocean" ];
+    zfs.devNodes = "/dev/mapper"; # prettier zpool list/status
+    # postBootCommands = ''
+    #   (
+    #     set -eu -- ocean0x0 ocean0x1 ocean1x0 ocean1x1 ocean2x0 ocean2x2 ocean3x0 ocean3x1 ocean4x0 ocean4x1 oceanSx0 oceanSx1 ocean.arc
+    #     i=100
+    #     for j; do
+    #       shift
+    #       mknod -m 660 /dev/loop$i b 7 $i
+    #       tries=3
+    #       while ! [ -e /dev/loop$i ] || ! losetup --show /dev/loop$i /dev/mapper/$j; do
+    #         test $tries -gt 0
+    #         >&2 echo "waiting for /dev/loop$i to become ready"
+    #         sleep 1
+    #         tries=$((tries-1))
+    #       done
+    #       set -- "$@" -d /dev/loop$i
+    #       i=$((i+1))
+    #     done
+    #     ${config.boot.zfs.package}/bin/zpool import "$@" ocean
+    #   )
+    # '';
   };
 
   # fileSystems."/mnt/ocean/active" = {
@@ -170,6 +172,7 @@
     lazydocker
     lsiutil
     lsof
+    ncdu
     neofetch
     nmap
     ntfs3g
@@ -196,6 +199,7 @@
     7474 # autobrr
     1313 # zfs send
     111 2049 # nfs
+    8000 # python
     3260 # iscsi
   ];
   networking.firewall.allowedUDPPorts = [
