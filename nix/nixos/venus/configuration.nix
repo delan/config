@@ -8,7 +8,7 @@
     hostId = "99D8468B";
     hostName = "venus";
     domain = "daz.cat";
-    luksDevice = "/dev/disk/by-uuid/62d52d15-c5ee-4143-816e-994b0ae4fec4";
+    luksDevice = "/dev/disk/by-partlabel/cuffs2x0";
     bootDevice = "/dev/disk/by-uuid/3A36-D233";
     separateNix = false;
     initialUser = "delan";
@@ -64,6 +64,7 @@
         hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
       };
       luks.devices = {
+        cuffs2x1 = { device = "/dev/disk/by-partlabel/cuffs2x1"; };
         ocean0x0 = { device = "/dev/disk/by-partlabel/ocean0x0"; };
         ocean0x1 = { device = "/dev/disk/by-partlabel/ocean0x1"; };
         ocean1x0 = { device = "/dev/disk/by-partlabel/ocean1x0"; };
@@ -98,8 +99,13 @@
       "kvm.ignore_msrs=1"
     ];
 
-    # for VMware https://docs.fedoraproject.org/en-US/quick-docs/using-nested-virtualization-in-kvm/
-    extraModprobeConfig = "options kvm_intel nested=1";
+    extraModprobeConfig = ''
+      # for VMware https://docs.fedoraproject.org/en-US/quick-docs/using-nested-virtualization-in-kvm/
+      options kvm_intel nested=1
+
+      # FIXME workaround for openzfs/zfs#15646
+      options zfs zfs_vdev_disk_classic=0
+    '';
 
     # https://sholland.org/2016/howto-pass-usb-ports-to-kvm/
     # (0x3ff7 /* webcam */ & 0x3fef /* mouse */ & 0x3fdf /* keyboard */ & 0x3eff /* dac */ /* & 0x3bff /* bmc */).toString(16)
