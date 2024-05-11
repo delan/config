@@ -99,8 +99,13 @@
       "kvm.ignore_msrs=1"
     ];
 
-    # for VMware https://docs.fedoraproject.org/en-US/quick-docs/using-nested-virtualization-in-kvm/
-    extraModprobeConfig = "options kvm_intel nested=1";
+    extraModprobeConfig = ''
+      # for VMware https://docs.fedoraproject.org/en-US/quick-docs/using-nested-virtualization-in-kvm/
+      options kvm_intel nested=1
+
+      # FIXME workaround for openzfs/zfs#15646
+      options zfs zfs_vdev_disk_classic=0
+    '';
 
     # https://sholland.org/2016/howto-pass-usb-ports-to-kvm/
     # (0x3ff7 /* webcam */ & 0x3fef /* mouse */ & 0x3fdf /* keyboard */ & 0x3eff /* dac */ /* & 0x3bff /* bmc */).toString(16)
