@@ -173,7 +173,9 @@
     file
     git
     gnumake
+    idle3tools
     iftop
+    jq
     lazygit
     lazydocker
     lsiutil
