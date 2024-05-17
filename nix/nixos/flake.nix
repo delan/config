@@ -36,8 +36,20 @@
         venus/configuration.nix
         {
           boot.kernelPackages = pkgs_zfs_2_2_4.linuxPackages;
-          boot.zfs.package = pkgs_zfs_2_2_4.zfs;
-          boot.zfs.modulePackage = pkgs_zfs_2_2_4.linuxPackages.zfs;
+          # boot.zfs.package = pkgs_zfs_2_2_4.zfs;
+          # boot.zfs.modulePackage = pkgs_zfs_2_2_4.linuxPackages.zfs;
+
+          # https://github.com/NixOS/nixpkgs/blob/cec5812591bc6235f15b84bb55438661cb67f7d2/pkgs/top-level/all-packages.nix#L29093
+          boot.zfs.package = pkgs_zfs_2_2_4.callPackage ./zfs_stable.nix {
+            configFile = "user";
+          };
+
+          # https://github.com/NixOS/nixpkgs/blob/cec5812591bc6235f15b84bb55438661cb67f7d2/pkgs/top-level/linux-kernels.nix#L572
+          boot.zfs.modulePackage = pkgs_zfs_2_2_4.callPackage ./zfs_stable.nix {
+            configFile = "kernel";
+            pkgs = pkgs_zfs_2_2_4;
+            kernel = pkgs_zfs_2_2_4.linuxPackages.kernel;
+          };
         }
       ];
     };
