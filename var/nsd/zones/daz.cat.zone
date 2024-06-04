@@ -1,4 +1,4 @@
-@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2024020201 600 60 1814400 60 )
+@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2024052301 600 60 1814400 60 )
 @                                       60      IN  NS      ns.daz.cat.
 @                                       60      IN  NS      ns2.afraid.org.
 @                                       60      IN  NS      ns2.he.net.
@@ -12,6 +12,7 @@ _acme-challenge.colo                    60      IN  CNAME   _acme-challenge.colo
 _acme-challenge.opacus                  60      IN  CNAME   _acme-challenge.opacus.daz.cat.acme
 _acme-challenge.stratus                 60      IN  CNAME   _acme-challenge.stratus.daz.cat.acme
 _acme-challenge.bucket                  60      IN  CNAME   _acme-challenge.bucket.daz.cat.acme
+_acme-challenge.memories                60      IN  CNAME   _acme-challenge.memories.daz.cat.acme
 _acme-challenge.charming                60      IN  CNAME   _acme-challenge.charming.daz.cat.acme
 _acme-challenge.funny.computer          60      IN  CNAME   _acme-challenge.funny.computer.daz.cat.acme
 _acme-challenge.go                      60      IN  CNAME   _acme-challenge.go.daz.cat.acme
@@ -55,6 +56,7 @@ vm.venus                                60      IN  AAAA    fd36:09ef:4322:29ce:
 storage.venus                           60      IN  AAAA    fd36:09ef:4322:29ce:5054:ff:fe11:6c8b
 go                                      60      IN  CNAME   colo.daz.cat.
 bucket                                  60      IN  CNAME   colo.daz.cat.
+memories                                60      IN  CNAME   colo.daz.cat.
 charming                                60      IN  CNAME   colo.daz.cat.
 toot                                    60      IN  CNAME   opacus.daz.cat.
 funny.computer                          60      IN  CNAME   colo.daz.cat.
