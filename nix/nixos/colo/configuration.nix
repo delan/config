@@ -173,7 +173,6 @@
         "azabani.com"
         "www.azabani.com"
         "ar1as.space"
-        "ariash.ar"
         "rlly.gay"
         "*.rlly.gay"
         "sixte.st"
