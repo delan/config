@@ -7,6 +7,7 @@
 # - provide ./kate/xenia-dashboard.conf, kate:users 644
 # - sudo mkdir -p /var/www/memories/peb
 # - sudo setfacl -n --set 'u::rwX,g::0,o::0,m::rwX,nginx:5,delan:7' /var/www/memories/peb
+# - sudo setfacl -n --set 'u::rwX,g::0,o::0,m::rwX,nginx:5,delan:7' /var/www/memories
 # - provide /var/www/memories/peb/**
 { config, lib, options, modulesPath, pkgs, specialArgs }: {
   imports = [ ./hardware-configuration.nix ../lib ];
@@ -164,6 +165,7 @@
         "opacus.daz.cat"
         "stratus.daz.cat"
         "bucket.daz.cat"
+        "memories.daz.cat"
         "charming.daz.cat"
         "funny.computer.daz.cat"
         "go.daz.cat"
@@ -171,7 +173,6 @@
         "azabani.com"
         "www.azabani.com"
         "ar1as.space"
-        "ariash.ar"
         "rlly.gay"
         "*.rlly.gay"
         "sixte.st"
@@ -181,6 +182,7 @@
         "kierang.ee.nroach44.id.au"
         "cohost.org.doggirl.gay"
         "cohost.doggirl.gay"
+        "payphone.doggirl.gay"
       ];
     };
   };
@@ -236,7 +238,7 @@
         };
       in {
         "\"\"" = {
-          locations."/" = {
+          locations."/disabled" = {
             return = "400";
           };
         };
@@ -245,6 +247,17 @@
         "opacus.daz.cat" = opacus // sslForce;
         "stratus.daz.cat" = stratus // sslForce;
         "bucket.daz.cat" = opacus // sslRelax;
+        "memories.daz.cat" = {
+          locations."/" = {
+            root = "/var/www/memories";
+            extraConfig = ''
+              # rewrite rules outside matching location do not apply!
+              location /peb/ {
+                return 403;
+              }
+            '';
+          };
+        } // sslForce;
         "charming.daz.cat" = opacus // sslForce;
         "funny.computer.daz.cat" = opacus // sslRelax;
         "go.daz.cat" = opacus // sslForce;
@@ -259,6 +272,7 @@
         "kierang.ee.nroach44.id.au" = opacus // sslRelax;
         "cohost.org.doggirl.gay" = passionfruitCohostEmbed // sslForce;
         "cohost.doggirl.gay" = passionfruitCohostEmbed // sslForce;
+        "payphone.doggirl.gay" = passionfruitCohostEmbed // sslForce;
         "memories" = {
           listen = [{
             addr = "*";
@@ -268,9 +282,6 @@
           locations."/" = {
             root = "/var/www/memories";
             extraConfig = ''
-              if ($remote_addr != "127.0.0.1") {
-                return 403;
-              }
               # rewrite rules outside matching location do not apply!
               location /peb/ {
                 auth_basic "/peb/";
@@ -279,6 +290,9 @@
                 rewrite ^/([^/]+)/([^/]+/.*)$ /$1/$2 break;
                 rewrite ^/([^/]+)/(meta[.]txt)$ /$1/$2 break;
                 rewrite ^/([^/]+)/(.*)$ /$1/index.html break;
+                if ($remote_addr != "127.0.0.1") {
+                  return 403;
+                }
               }
             '';
           };
