@@ -128,6 +128,22 @@
         "type": "github"
       }
     },
+    "nixos2405": {
+      "locked": {
+        "lastModified": 1719838683,
+        "narHash": "sha256-Zw9rQjHz1ilNIimEXFeVa1ERNRBF8DoXDhLAZq5B4pE=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d032c1a6dfad4eedec7e35e91986becc699d7d69",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-24.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "hm2211": "hm2211",
@@ -137,6 +153,7 @@
         "nixos2211": "nixos2211",
         "nixos2305": "nixos2305",
         "nixos2311": "nixos2311",
+        "nixos2405": "nixos2405",
         "unstable": "unstable",
         "zfs_2_2_4": "zfs_2_2_4"
       }

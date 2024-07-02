@@ -10,23 +10,34 @@
 # - sudo setfacl -n --set 'u::rwX,g::0,o::0,m::rwX,nginx:5,delan:7' /var/www/memories
 # - provide /var/www/memories/peb/**
 { config, lib, options, modulesPath, pkgs, specialArgs }: {
-  imports = [ ./hardware-configuration.nix ../lib ];
+  imports = [ ../lib ];
 
   internal = {
     hostId = "99D8468B";
     hostName = "colo";
     domain = "daz.cat";
     luksDevice = "/dev/disk/by-uuid/a8b6dd52-8f9f-42f8-badc-53b43aa9a4df";
+    bootDevice = "/dev/disk/by-uuid/0CA9-2BEC";
+    separateNix = true;
     initialUser = "delan";
 
     virtualisation = {
       libvirt = true;
-      docker = true;
+
+      # docker breaks ipv6 neighbor solicitation to libvirt guests on this server.
+      # it broke when we first tried to run cohost-embed on the host, and it broke
+      # again when we upgraded to nixos 24.05, even with that container stopped.
+      # i have no idea why.
+      docker = false;
     };
 
     services = {
     };
   };
+
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/1cc6aab2-3044-47c9-a478-e2ff04c0f480"; }
+  ];
 
   boot = {
     kernelModules = [ "vfio" "vfio_pci" "vfio_virqfd" "vfio_iommu_type1" ];
@@ -189,6 +200,9 @@
   users.users.nginx.extraGroups = [ "acme" ];
 
   services = {
+    # colo network doesn’t have dhcp or dns, so we need our own dns server
+    unbound.enable = true;
+
     openvpn.servers.home.config = "config /etc/nixos/colo/home_colo.ovpn";
     openvpn.servers.home.autoStart = true;
     nginx = {
@@ -317,7 +331,7 @@
     pciutils usbutils ipmitool lm_sensors
 
     # virt-clone(1)
-    virtmanager
+    virt-manager
 
     ripgrep
     tcpdump

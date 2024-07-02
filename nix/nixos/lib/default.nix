@@ -112,7 +112,7 @@
 
         unbound = {
           # TODO add stub zones for vpn party and enable?
-          enable = false;
+          enable = lib.mkDefault false;
 
           # fuck DNSSEC
           enableRootTrustAnchor = false;
