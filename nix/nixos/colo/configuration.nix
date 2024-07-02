@@ -182,6 +182,7 @@
         "kierang.ee.nroach44.id.au"
         "cohost.org.doggirl.gay"
         "cohost.doggirl.gay"
+        "payphone.doggirl.gay"
       ];
     };
   };
@@ -271,6 +272,7 @@
         "kierang.ee.nroach44.id.au" = opacus // sslRelax;
         "cohost.org.doggirl.gay" = passionfruitCohostEmbed // sslForce;
         "cohost.doggirl.gay" = passionfruitCohostEmbed // sslForce;
+        "payphone.doggirl.gay" = passionfruitCohostEmbed // sslForce;
         "memories" = {
           listen = [{
             addr = "*";
