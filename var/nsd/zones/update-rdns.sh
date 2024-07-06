@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# usage: update-rdns6.sh <path/to/zone> <suffix.daz.cat> <dry|wet>
+# usage: rg 192.0.2. path/to/forward/zone | update-rdns6.sh <path/to/reverse/zone> <suffix.daz.cat> <dry|wet>
 set -eu
 
 zone=$1
