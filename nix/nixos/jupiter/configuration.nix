@@ -5,8 +5,9 @@
     hostId = "E897B482";
     hostName = "jupiter";
     domain = "daz.cat";
-    luksDevice = "/dev/disk/by-partlabel/${config.internal.hostName}.root";
-    bootDevice = "/dev/disk/by-uuid/B2F1-7DD3";
+    luksDevice = "/dev/disk/by-partlabel/jupiter.root";
+    bootDevice = "/dev/disk/by-partlabel/B2F1-7DD3";
+    swapDevice = "/dev/disk/by-partlabel/jupiter.swap";
     separateNix = true;
     initialUser = "delan";
 

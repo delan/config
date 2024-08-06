@@ -103,11 +103,11 @@
         }
       ];
     };
-    nixosConfigurations.jupiter = nixos2311.lib.nixosSystem {
+    nixosConfigurations.jupiter = nixos2405.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         jupiter/configuration.nix
-        hm2311.nixosModules.home-manager
+        hm2405.nixosModules.home-manager
         {
           home-manager.users.delan = import ../nixpkgs/home.nix;
 
