@@ -12,10 +12,12 @@
     hm2305.inputs.nixpkgs.follows = "nixos2305";
     hm2311.url = "github:nix-community/home-manager/release-23.11";
     hm2311.inputs.nixpkgs.follows = "nixos2311";
+    hm2405.url = "github:nix-community/home-manager/release-24.05";
+    hm2405.inputs.nixpkgs.follows = "nixos2405";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = inputs@{ self, nixos2211, nixos2305, nixos2311, nixos2405, zfs_2_2_4, unstable, hm2211, hm2305, hm2311, nixos-hardware, ... }:
+  outputs = inputs@{ self, nixos2211, nixos2305, nixos2311, nixos2405, zfs_2_2_4, unstable, hm2211, hm2305, hm2311, hm2405, nixos-hardware, ... }:
   let
     pkgs2311 = import nixos2311 {
       system = "x86_64-linux";
@@ -82,12 +84,12 @@
         }
       ];
     };
-    nixosConfigurations.saturn = nixos2311.lib.nixosSystem {
+    nixosConfigurations.saturn = nixos2405.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         saturn/configuration.nix
         nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen2
-        hm2311.nixosModules.home-manager
+        hm2405.nixosModules.home-manager
         {
           home-manager.users.delan = import ../nixpkgs/home.nix;
 

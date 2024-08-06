@@ -16,6 +16,7 @@
       services.flatpak.enable = true;
       xdg.portal.enable = true;
       xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+      xdg.portal.config.common.default = "*";  # use first portal impl in lexicographic order
 
       # https://gitlab.igalia.com/support/people/selection-processes/-/blob/e0a5aa58626d22babcfd1f8e117864c49f658e4e/tools/import_issue.py
       services.gnome.gnome-keyring.enable = true;

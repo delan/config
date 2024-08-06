@@ -2,7 +2,6 @@
   home.stateVersion = "22.11";
 
   home.sessionVariables = {
-    # FIXME broken for like a year
     # https://www.reddit.com/r/linux/comments/72mfv8
     MOZ_USE_XINPUT2 = 1;
 
@@ -11,8 +10,6 @@
   };
 
   home.packages = with pkgs; let
-    # FIXME disabled while debugging X11 ABI problem?
-    # next = import <nixos-unstable> { config = { allowUnfree = true; }; };
   in [
     #binutils-unwrapped
     #jetbrains.idea-community
@@ -63,6 +60,7 @@
     openjdk17
     opentabletdriver
     openvpn
+    osu-lazer-bin
     p7zip
     patchelf
     pavucontrol
@@ -72,7 +70,6 @@
     python3
     remmina
     ripgrep
-    rnix-lsp
     rustup
     smartmontools
     soundfont-fluid
@@ -105,26 +102,14 @@
     # https://nixos.wiki/wiki/Discord#Opening_Links_with_Firefox
     # https://github.com/NixOS/nixpkgs/issues/108995#issuecomment-826358042
     (discord.override { nss = nss_latest; })
-
-    (callPackage ./osu.nix {})
-    # (callPackage /home/delan/code/nixpkgs/pkgs/games/osu-lazer {})
-    # (callPackage /home/delan/code/nixpkgs/pkgs/games/osu-lazer/bin.nix {})
   ];
 
   services = {
     picom = {
       enable = true;
       vSync = true;
-      # backend = "xrender";
-
-      # FIXME replaced by services.picom.settings
-      # extraOptions = ''
-      #   xrender-sync-fence = true;
-      #   show-all-xerrors = true;
-      # '';
     };
 
-    # FIXME key bindings broken since NixOS 22.05?
     dunst = {
       enable = true;
       settings = {
@@ -159,8 +144,8 @@
           icon_position = "left";
           frame_color = "#000000";
           frame_width = 1;
-        };
-        shortcuts = {
+
+          # shortcuts
           close = "ctrl+space";
           close_all = "ctrl+shift+space";
           context = "ctrl+shift+p";
@@ -188,7 +173,6 @@
   programs = {
     home-manager.enable = true;
     firefox.enable = true;
-    # emacs.enable = true;
 
     # needed for NIX_AUTO_RUN etc in NixOS 22.05+
     command-not-found.enable = true;

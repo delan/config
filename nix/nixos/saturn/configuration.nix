@@ -23,9 +23,6 @@
 
   nix.settings.sandbox = true;
 
-  # FIXME remove this on upgrade
-  nixpkgs.config.permittedInsecurePackages = [ "electron-25.9.0" ];
-
   # biggest(?) available font
   console.font = "iso01-12x22";
 
@@ -36,9 +33,6 @@
     nvidiaBusId = "PCI:1:0:0";
     intelBusId = "PCI:0:2:0";
   };
-
-  # FIXME only done for debugging X11 ABI problem?
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
 
   hardware.opentabletdriver.enable = true;
 
@@ -96,9 +90,6 @@
 
   # tdarr node
   programs.fuse.userAllowOther = true;
-
-  # FIXME remove once we figure out why udev rules don’t work?
-  users.users."${config.internal.initialUser}".extraGroups = [ "dialout" ];
 
   services.udev.extraRules = ''
     # raspberry pi pico
