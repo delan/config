@@ -97,6 +97,7 @@
         };
       };
 
+      hardware.enableAllFirmware = true;
       hardware.keyboard.zsa.enable = true;
 
       networking = {
