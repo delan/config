@@ -4,9 +4,8 @@
   };
 
   config = mkIf config.internal.interactive {
-    sound.enable = true;
     hardware = {
-      pulseaudio.enable = true;
+      pulseaudio.enable = mkDefault true;
 
       # 32-bit game support
       opengl.driSupport32Bit = true;
@@ -25,6 +24,8 @@
     };
 
     services = {
+      picom.enable = true;
+
       printing = {
         enable = true;
         startWhenNeeded = true;
@@ -60,6 +61,40 @@
         touchpad.naturalScrolling = true;
         # touchpad.accelProfile = "flat";
       };
+
+      xrdp = {
+        enable = false;
+        openFirewall = false;
+
+        # After changing this:
+        # $ sudo systemctl restart xrdp-sesman
+        defaultWindowManager = let
+          # Kill dunst, so we get notifications
+          pkillDunstWrapper = pkgs.writeScript "pkillDunstWrapper" ''
+            #!/bin/sh
+            pkill dunst
+            exec "$@"
+          '';
+        in let
+          session = pkgs.writeScript "session" ''
+            #!/bin/sh
+            set -eu
+            session_name=none+i3
+            rg='${pkgs.ripgrep}/bin/rg'
+            sessions_directory=$(< /etc/lightdm/lightdm.conf "$rg" -o --pcre2 '(?<=^sessions-directory = ).*')
+            session_wrapper=$(< /etc/lightdm/lightdm.conf "$rg" -o --pcre2 '(?<=^session-wrapper = ).*')
+            IFS=:
+            for dir in $sessions_directory; do
+                set -- -o --pcre2 '(?<=^Exec=).*' "$dir/$session_name.desktop"
+                if "$rg" -q "$@"; then
+                    session_exec=$("$rg" "$@")
+                    break
+                fi
+            done
+            exec "$session_wrapper" '${pkillDunstWrapper}' "$session_exec"
+          '';
+        in "${session}";
+      };
     };
 
     fonts = {
@@ -70,10 +105,13 @@
 
       packages = with pkgs; [
         inconsolata
-        helvetica-neue-lt-std
-        twemoji-color-font
+        # FIXME hollow fonts # helvetica-neue-lt-std
+        # twemoji-color-font
         noto-fonts noto-fonts-cjk
         corefonts
+        nanum  # for servo
+        takao  # for servo
+        wqy_microhei  # for servo
       ];
     };
   };

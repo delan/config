@@ -14,19 +14,24 @@
     #binutils-unwrapped
     #jetbrains.idea-community
     #platformio
+    alacritty
     aria2
+    ark
     atool
     bc
+    bore
     cabextract
     cdrkit
     clang
     clang-tools
+    darktable
     dnsutils
     exiftool
     fd
     ffmpeg
     gdb
     geeqie
+    gh
     gimp
     git-lfs
     gnome3.gnome-font-viewer
@@ -35,8 +40,10 @@
     htop
     imagemagick
     inkscape
+    jmtpfs
     jq
     kdenlive
+    kicad
     libnotify
     libreoffice
     linuxKernel.packages.linux_5_15.perf
@@ -65,10 +72,12 @@
     patchelf
     pavucontrol
     pcmanfm
+    prismlauncher
     pup
     pv
     python3
     remmina
+    rink
     ripgrep
     rustup
     smartmontools
@@ -79,7 +88,6 @@
     steam
     steam-run
     tdesktop
-    termite
     texlive.combined.scheme-full
     timidity
     tmux
@@ -96,7 +104,7 @@
     xclip
     xdotool
     xorg.xmodmap
-    youtube-dl
+    yt-dlp
     zip
 
     # https://nixos.wiki/wiki/Discord#Opening_Links_with_Firefox
@@ -246,7 +254,7 @@
         ssh-command = ''{terminal} -e "{ssh-client} {host}"'';
         combi-modi = "drun,ssh,run";
       };
-      terminal = "termite";
+      terminal = "alacritty";
       theme = "Monokai";
     };
 
