@@ -15,7 +15,7 @@
           enable = true;
           qemu.runAsRoot = false;
           onShutdown = "shutdown";
-          allowedBridges = [ "virbr0" "virbr1" "bridge13" ];
+          allowedBridges = [ "virbr0" "virbr1" "bridge13" "solserv" ];
         };
 
         users.users."${config.internal.initialUser}".extraGroups = [ "libvirtd" ];
