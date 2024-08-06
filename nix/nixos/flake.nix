@@ -57,12 +57,12 @@
         }
       ];
     };
-    nixosConfigurations.saturn = nixos2305.lib.nixosSystem {
+    nixosConfigurations.saturn = nixos2311.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         saturn/configuration.nix
         nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen2
-        hm2305.nixosModules.home-manager
+        hm2311.nixosModules.home-manager
         {
           home-manager.users.delan = import ../nixpkgs/home.nix;
 

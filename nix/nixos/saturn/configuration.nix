@@ -1,11 +1,14 @@
 { config, pkgs, lib, options, modulesPath, ... }: {
-  imports = [ /config/nix/nixos/saturn/hardware-configuration.nix ../lib ];
+  imports = [ ../lib ];
 
   internal = {
     hostId = "7A27D153";
     hostName = "saturn";
     domain = "daz.cat";
-    luksDevice = "/dev/disk/by-uuid/8efbbe49-29d8-4969-8d75-fbf822c6938f";
+    luksDevice = "/dev/disk/by-partlabel/saturn.cuffs";
+    bootDevice = "/dev/disk/by-partlabel/saturn.esp";
+    swapDevice = "/dev/disk/by-partlabel/saturn.swap";
+    separateNix = true;
     initialUser = "delan";
 
     interactive = true;
@@ -19,6 +22,9 @@
   };
 
   nix.settings.sandbox = true;
+
+  # FIXME remove this on upgrade
+  nixpkgs.config.permittedInsecurePackages = [ "electron-25.9.0" ];
 
   # biggest(?) available font
   console.font = "iso01-12x22";

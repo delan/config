@@ -14,6 +14,7 @@
     domain = mkOption { type = types.str; };
     luksDevice = mkOption { type = types.str; };
     bootDevice = mkOption { type = types.str; };
+    swapDevice = mkOption { type = types.nullOr types.str; };
     separateNix = mkOption { type = types.bool; };
     initialUser = mkOption { type = types.str; };
   };
@@ -21,6 +22,16 @@
   config = let
     cfg = config.internal;
   in mkMerge [
+    (mkIf (cfg.swapDevice != null) {
+      swapDevices = [ {
+        device = cfg.swapDevice;
+        randomEncryption = {
+          enable = true;
+          cipher = "aes-xts-plain64";
+          source = "/dev/random";
+        };
+      } ];
+    })
     (mkIf cfg.separateNix {
       fileSystems."/nix" =
         { device = "cuffs/nix";
