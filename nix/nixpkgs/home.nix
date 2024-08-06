@@ -113,10 +113,9 @@
 
   services = {
     picom = {
-      # FIXME disabled while debugging X11 ABI problem?
-      enable = false;
+      enable = true;
       vSync = true;
-      backend = "xrender";
+      # backend = "xrender";
 
       # FIXME replaced by services.picom.settings
       # extraOptions = ''

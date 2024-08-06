@@ -72,9 +72,11 @@
   };
 
   environment.systemPackages = with pkgs; [
+    cifs-utils
     colordiff
     efibootmgr
     file
+    gh  # for servo
     gnome3.networkmanager-openvpn
     hdparm
     iftop
@@ -84,6 +86,7 @@
     ncdu
     ntfs3g
     pciutils
+    samba
     tcpdump
     termite
     usbutils
@@ -94,8 +97,18 @@
   # tdarr node
   programs.fuse.userAllowOther = true;
 
-  # raspberry pi pico
+  # FIXME remove once we figure out why udev rules don’t work?
+  users.users."${config.internal.initialUser}".extraGroups = [ "dialout" ];
+
   services.udev.extraRules = ''
+    # raspberry pi pico
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="2e8a", MODE:="0666"
+
+    # luna usb debugger
+    SUBSYSTEMS=="usb", ATTR{idVendor}=="1d50", ATTR{idProduct}=="615c", MODE:="0666"
+    SUBSYSTEMS=="usb", ATTR{idVendor}=="1d50", ATTR{idProduct}=="615b", MODE:="0666"
+
+    # fx2la
+    SUBSYSTEMS=="usb", ATTR{idVendor}=="0925", ATTR{idProduct}=="3881", MODE:="0666"
   '';
 }
