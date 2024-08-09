@@ -22,6 +22,7 @@ for_window [instance="^fontforge$" class="^fontforge$"] floating enable
 for_window [instance="^java-lang-Thread$" class="^java-lang-Thread$"] floating enable
 for_window [instance="^tk$" class="^Tk$"] floating enable
 for_window [instance="^bochs$" class="^Bochs$"] move position 600 0
+for_window [instance="^[.]qemu-system-i386-wrapped$" class="^[.]qemu-system-i386-wrapped$"] floating enable
 # for_window [class="^mpv$"] floating enable
 for_window [class="^Wine$"] floating enable
 for_window [class="^explorer.exe$"] floating enable
@@ -43,6 +44,7 @@ for_window [class="."] title_window_icon yes
 exec --no-startup-id nm-applet
 exec --no-startup-id ssh-add /home/delan/.ssh/id_rsa
 exec --no-startup-id xmodmap /home/delan/.Xmodmap
+# exec --no-startup-id /home/delan/bin/midi.sh
 
 # ssg
 # bindsym F16 exec --no-startup-id ssg.sh
