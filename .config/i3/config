@@ -1,3 +1,5 @@
+# sway requires $mod to be set before used
+set $mod Mod4
 focus_follows_mouse no
 mouse_warping none
 
@@ -8,10 +10,11 @@ assign [class="^net-minecraft-bootstrap-Bootstrap$"] 8
 assign [class="^Minecraft "] 8
 assign [class="^Slack$"] 9
 assign [class="^discord$"] 9
-assign [class="^Termite$" instance="^weechat$"] 9
+assign [class="^Alacritty$" instance="^weechat$"] 9
 assign [instance="^osu![.]exe$" class="^osu![.]exe$"] ":"
 for_window [instance="^qemu$" class="^Qemu-system-i386$"] floating enable
 for_window [instance="^qemu$" class="^Qemu-system-x86_64$"] floating enable
+for_window [instance="^qemu$" class="^Qemu-system-sparc$"] floating enable
 for_window [instance="^remote-viewer$" class="^Remote-viewer$"] floating enable
 for_window [instance="^[.]qemu-system-x86_64-wrapped$" class="^[.]qemu-system-x86_64-wrapped$"] floating enable
 for_window [instance="^bochs$" class="^Bochs$"] floating enable
@@ -23,12 +26,30 @@ for_window [instance="^bochs$" class="^Bochs$"] move position 600 0
 for_window [class="^Wine$"] floating enable
 for_window [class="^explorer.exe$"] floating enable
 for_window [instance="^servo$" class="^servo$"] floating enable
+for_window [instance="^servoshell$" class="^servoshell$"] floating enable
 for_window [instance="^wbe$" class="^wbe$"] floating enable
-for_window [class="."] border pixel 1
+for_window [instance="^Live Caption$" class="^Live Caption$"] floating enable
+for_window [title="^Live Caption$"] floating enable
+for_window [instance="^ghidra-Ghidra$" class="^ghidra-Ghidra$" title="^Uses of "] floating enable
+for_window [instance="^ghidra-Ghidra$" class="^ghidra-Ghidra$" title="^Structure Editor "] floating enable
+for_window [instance="^ghidra-Ghidra$" class="^ghidra-Ghidra$" title="^Ghidra: "] floating enable
+for_window [instance="^ghidra-Ghidra$" class="^ghidra-Ghidra$" title="^win0$"] floating enable
+for_window [instance="^dashcam viewer[.]exe$" class="^dashcam viewer[.]exe$"] floating enable
+
+# title bar
+# for_window [class="."] border pixel 1
+for_window [class="."] title_window_icon yes
 
 exec --no-startup-id nm-applet
 exec --no-startup-id ssh-add /home/delan/.ssh/id_rsa
 exec --no-startup-id xmodmap /home/delan/.Xmodmap
+
+# ssg
+# bindsym F16 exec --no-startup-id ssg.sh
+# bindsym F19 exec --no-startup-id xdotool search --name '^LiveSplit$' key F19
+# bindsym F20 exec --no-startup-id xdotool search --name '^LiveSplit$' key F20
+# bindsym F21 exec --no-startup-id xdotool search --name '^LiveSplit$' key F21
+# bindsym F22 exec --no-startup-id xdotool search --name '^LiveSplit$' key F22
 
 # https://bbs.archlinux.org/viewtopic.php?id=248862
 bindsym $mod+o exec --no-startup-id light -U 5
@@ -36,22 +57,21 @@ bindsym $mod+p exec --no-startup-id light -A 5
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
 
-# FIXME replace this with maim / maim -s / maim -i $(xdotool getactivewindow)
-# bindsym Print exec rofi-ss
-# bindsym XF86AudioMute exec amixer -q set Master toggle, exec pkill -USR1 i3status
-# bindsym XF86AudioLowerVolume exec amixer -q set Master 5%-, exec pkill -USR1 i3status
-# bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+, exec pkill -USR1 i3status
-bindsym $mod+l exec --no-startup-id i3lock
-# bindsym $mod+c exec termite -e polishnt
-bindsym $mod+c exec termite -e termite -e 'zsh -c '\''bc -l <(echo scale=9)'\'
-bindsym $mod+u exec termite -e units
-# bindsym $mod+e exec emacsclient -c
-# bindsym $mod+e exec emacsclient -c --socket-name $XDG_RUNTIME_DIR/emacs.socket
+bindsym $mod+Shift+a exec --no-startup-id screenshot.sh all
+bindsym $mod+Shift+s exec --no-startup-id screenshot.sh select
+bindsym $mod+Shift+p exec --no-startup-id screenshot.sh primary
+bindsym $mod+Ctrl+Shift+a exec --no-startup-id screenshot.sh all 0.5
+bindsym $mod+Ctrl+Shift+s exec --no-startup-id screenshot.sh select 0.5
+bindsym $mod+Ctrl+Shift+p exec --no-startup-id screenshot.sh primary 0.5
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle, exec pkill -USR1 i3status
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%, exec pkill -USR1 i3status
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%, exec pkill -USR1 i3status
+bindsym $mod+l exec --no-startup-id "dunstctl set-paused true; i3lock -n -c 000000; dunstctl set-paused false"
+bindsym $mod+c exec alacritty -e zsh -c 'rink -V && rink'
 bindsym $mod+e exec code
 bindsym $mod+w exec firefox
-bindsym $mod+i exec termite --name weechat -e weechat
+bindsym $mod+i exec "alacritty --class Alacritty,weechat -e weechat"
 
-set $mod Mod4
 floating_modifier $mod
 font pango:monospace 16
 
@@ -98,8 +118,8 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+space floating toggle
-bindsym $mod+a focus parent
-bindsym $mod+Shift+a focus child
+bindsym $mod+n focus parent
+bindsym $mod+Shift+n focus child
 bindsym $mod+h split h
 bindsym $mod+v split v
 bindsym $mod+z focus left
@@ -110,7 +130,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+t layout toggle split
 bindsym $mod+Shift+w kill
 
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec alacritty
 bindsym $mod+r exec rofi -show combi
 
 bar {
