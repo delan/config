@@ -26,6 +26,7 @@ let
   , hash
   , kernelModuleAttribute
   , extraPatches ? [
+    ./zfs_vdev_disk_debug_bio_fill.patch
     # /home/delan/code/zfs/txg.patch
     ./ds3.patch
   ]
