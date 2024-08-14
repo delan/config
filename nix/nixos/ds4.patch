@@ -1,0 +1,93 @@
+diff --git a/module/zfs/dsl_scan.c b/module/zfs/dsl_scan.c
+index 34012db82..9f75c88e9 100644
+--- a/module/zfs/dsl_scan.c
++++ b/module/zfs/dsl_scan.c
+@@ -236,6 +236,8 @@ static int zfs_free_bpobj_enabled = 1;
+ /* Error blocks to be scrubbed in one txg. */
+ static uint_t zfs_scrub_error_blocks_per_txg = 1 << 12;
+ 
++static uint_t zfs_scan_only_that_sus_dataset = 0;
++
+ /* the order has to match pool_scan_type */
+ static scan_cb_t *scan_funcs[POOL_SCAN_FUNCS] = {
+ 	NULL,
+@@ -2733,6 +2735,18 @@ enqueue_clones_cb(dsl_pool_t *dp, dsl_dataset_t *hds, void *arg)
+ 	return (0);
+ }
+ 
++static boolean_t
++dsname_starts_with(const char *dsname, const char *prefix) {
++	if (!strcmp(dsname, prefix)) return B_TRUE;
++	size_t dsname_len = strlen(dsname);
++	size_t prefix_len = strlen(prefix);
++	if (dsname_len <= prefix_len) return B_FALSE;
++	if (!!strncmp(dsname, prefix, prefix_len)) return B_FALSE;
++	if (dsname[prefix_len] == '@' || dsname[prefix_len] == '/') return B_TRUE;
++	return B_FALSE;
++}
++
++
+ static void
+ dsl_scan_visitds(dsl_scan_t *scn, uint64_t dsobj, dmu_tx_t *tx)
+ {
+@@ -2741,6 +2755,23 @@ dsl_scan_visitds(dsl_scan_t *scn, uint64_t dsobj, dmu_tx_t *tx)
+ 
+ 	VERIFY3U(0, ==, dsl_dataset_hold_obj(dp, dsobj, FTAG, &ds));
+ 
++	boolean_t is_target_or_descendant = B_FALSE;
++	boolean_t is_potential_ancestor = B_FALSE;
++	char *dsname_ = kmem_alloc(ZFS_MAX_DATASET_NAME_LEN, KM_SLEEP);
++	dsl_dataset_name(ds, dsname_);
++	if (zfs_scan_only_that_sus_dataset == 0 || dsname_starts_with(dsname_, "ocean/dump/venus/root")) {
++		is_target_or_descendant = B_TRUE;
++		zfs_dbgmsg(">>> dataset %llu (%s)", (longlong_t)dsobj, dsname_);
++	} else if (dsname_starts_with(dsname_, "ocean/dump/venus")
++		|| dsname_starts_with(dsname_, "ocean/dump")
++		|| dsname_starts_with(dsname_, "ocean")) {
++		is_potential_ancestor = B_TRUE;
++		zfs_dbgmsg("??? dataset %llu (%s)", (longlong_t)dsobj, dsname_);
++	} else {
++		zfs_dbgmsg("--- dataset %llu (%s)", (longlong_t)dsobj, dsname_);
++	}
++	kmem_free(dsname_, ZFS_MAX_DATASET_NAME_LEN);
++
+ 	if (scn->scn_phys.scn_cur_min_txg >=
+ 	    scn->scn_phys.scn_max_txg) {
+ 		/*
+@@ -2803,10 +2834,16 @@ dsl_scan_visitds(dsl_scan_t *scn, uint64_t dsobj, dmu_tx_t *tx)
+ 	/*
+ 	 * Iterate over the bps in this ds.
+ 	 */
+-	dmu_buf_will_dirty(ds->ds_dbuf, tx);
+-	rrw_enter(&ds->ds_bp_rwlock, RW_READER, FTAG);
+-	dsl_scan_visit_rootbp(scn, ds, &dsl_dataset_phys(ds)->ds_bp, tx);
+-	rrw_exit(&ds->ds_bp_rwlock, FTAG);
++	if (is_target_or_descendant) {
++		dmu_buf_will_dirty(ds->ds_dbuf, tx);
++		rrw_enter(&ds->ds_bp_rwlock, RW_READER, FTAG);
++		dsl_scan_visit_rootbp(scn, ds, &dsl_dataset_phys(ds)->ds_bp, tx);
++		rrw_exit(&ds->ds_bp_rwlock, FTAG);
++	} else if (is_potential_ancestor) {
++		goto potential_ancestor;
++	} else {
++		goto out;
++	}
+ 
+ 	char *dsname = kmem_alloc(ZFS_MAX_DATASET_NAME_LEN, KM_SLEEP);
+ 	dsl_dataset_name(ds, dsname);
+@@ -2840,6 +2877,7 @@ dsl_scan_visitds(dsl_scan_t *scn, uint64_t dsobj, dmu_tx_t *tx)
+ 	/*
+ 	 * Add descendant datasets to work queue.
+ 	 */
++potential_ancestor:
+ 	if (dsl_dataset_phys(ds)->ds_next_snap_obj != 0) {
+ 		scan_ds_queue_insert(scn,
+ 		    dsl_dataset_phys(ds)->ds_next_snap_obj,
+@@ -5268,4 +5306,7 @@ ZFS_MODULE_PARAM(zfs, zfs_, resilver_disable_defer, INT, ZMOD_RW,
+ 
+ ZFS_MODULE_PARAM(zfs, zfs_, scrub_error_blocks_per_txg, UINT, ZMOD_RW,
+ 	"Error blocks to be scrubbed in one txg");
++
++ZFS_MODULE_PARAM(zfs, zfs_, scan_only_that_sus_dataset, UINT, ZMOD_RW,
++	"Scan only that sus dataset (openzfs/zfs#15646)");
+ /* END CSTYLED */
