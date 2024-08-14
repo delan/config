@@ -28,7 +28,8 @@ let
   , extraPatches ? [
     ./zfs-15646-patch2-for-2.2.4.patch
     # /home/delan/code/zfs/txg.patch
-    ./ds3.patch
+    # ./ds3.patch
+    ./ds4.patch
   ]
   , rev ? "zfs-${version}"
   , isUnstable ? false
