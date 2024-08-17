@@ -24,7 +24,7 @@
       description = "qBittorrent-nox service";
       documentation = [ "man:qbittorrent-nox(1)" ];
       after = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
+      # wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
         Type = "simple";
