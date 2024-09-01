@@ -142,6 +142,18 @@
     '';
   };
 
+  services.znapzend = {
+    enable = true;
+    pure = true;
+    zetup = {
+      "ocean" = {
+        timestampFormat = "znapzend-%Y-%m-%dT%H:%M:%SZ";
+        plan = "1h=>10min,1d=>1h,1m=>1d,1y=>1m";
+        recursive = true;
+      };
+    };
+  };
+
   # fileSystems."/mnt/ocean/active" = {
     # device = "vtnet1.storage.daz.cat.:/ocean/active";
     # device = "172.19.129.205:/ocean/active";
@@ -212,6 +224,7 @@
     111 2049 # nfs
     8000 # python
     3260 # iscsi
+    25565 # minecraft
   ];
   networking.firewall.allowedUDPPorts = [
     80 443 # nginx
@@ -335,6 +348,12 @@
         shell = pkgs.bash;
         extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
       };
+      users.lucatiel = {
+        isNormalUser = true;
+        uid = 1003;
+        shell = pkgs.bash;
+        extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
+      };
       users.hannah = {
         isNormalUser = true;
         uid = 13000;
@@ -355,5 +374,6 @@
       (system { name = "flaresolverr"; id = 2006; })
       (system { name = "scanner"; id = 2007; })
       (system { name = "synclounge"; id = 2008; })
+      (system { name = "gtnh"; id = 2009; })
     ];
 }
