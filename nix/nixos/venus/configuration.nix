@@ -142,6 +142,18 @@
     '';
   };
 
+  services.znapzend = {
+    enable = true;
+    pure = true;
+    zetup = {
+      "ocean" = {
+        timestampFormat = "znapzend-%Y-%m-%dT%H:%M:%SZ";
+        plan = "1h=>10min,1d=>1h,1m=>1d,1y=>1m";
+        recursive = true;
+      };
+    };
+  };
+
   # fileSystems."/mnt/ocean/active" = {
     # device = "vtnet1.storage.daz.cat.:/ocean/active";
     # device = "172.19.129.205:/ocean/active";
