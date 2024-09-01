@@ -336,6 +336,12 @@
         shell = pkgs.bash;
         extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
       };
+      users.lucatiel = {
+        isNormalUser = true;
+        uid = 1003;
+        shell = pkgs.bash;
+        extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
+      };
       users.hannah = {
         isNormalUser = true;
         uid = 13000;
