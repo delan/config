@@ -212,6 +212,7 @@
     111 2049 # nfs
     8000 # python
     3260 # iscsi
+    25565 # minecraft
   ];
   networking.firewall.allowedUDPPorts = [
     80 443 # nginx
@@ -355,5 +356,6 @@
       (system { name = "flaresolverr"; id = 2006; })
       (system { name = "scanner"; id = 2007; })
       (system { name = "synclounge"; id = 2008; })
+      (system { name = "gtnh"; id = 2009; })
     ];
 }
