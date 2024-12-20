@@ -5,7 +5,10 @@
     nixos2311.url = "github:nixos/nixpkgs/nixos-23.11";
     nixos2405.url = "github:nixos/nixpkgs/nixos-24.05";
     zfs_2_2_4.url = "github:nixos/nixpkgs/cec5812591bc6235f15b84bb55438661cb67f7d2";
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # Fix qemu crash on macOS guests (NixOS/nixpkgs#338598).
+    # See also: <https://gitlab.com/qemu-project/qemu/-/commit/a8e63ff289d137197ad7a701a587cc432872d798>
+    # Last version deployed before flakes was 68e7dce0a6532e876980764167ad158174402c6f.
+    unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     hm2211.url = "github:nix-community/home-manager/release-22.11";
     hm2211.inputs.nixpkgs.follows = "nixos2211";
     hm2305.url = "github:nix-community/home-manager/release-23.05";
@@ -14,10 +17,12 @@
     hm2311.inputs.nixpkgs.follows = "nixos2311";
     hm2405.url = "github:nix-community/home-manager/release-24.05";
     hm2405.inputs.nixpkgs.follows = "nixos2405";
+    hm.url = "github:nix-community/home-manager/master";
+    hm.inputs.nixpkgs.follows = "unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = inputs@{ self, nixos2211, nixos2305, nixos2311, nixos2405, zfs_2_2_4, unstable, hm2211, hm2305, hm2311, hm2405, nixos-hardware, ... }:
+  outputs = inputs@{ self, nixos2211, nixos2305, nixos2311, nixos2405, zfs_2_2_4, unstable, hm2211, hm2305, hm2311, hm2405, hm, nixos-hardware, ... }:
   let
     pkgs2311 = import nixos2311 {
       system = "x86_64-linux";
@@ -103,11 +108,11 @@
         }
       ];
     };
-    nixosConfigurations.jupiter = nixos2405.lib.nixosSystem {
+    nixosConfigurations.jupiter = unstable.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         jupiter/configuration.nix
-        hm2405.nixosModules.home-manager
+        hm.nixosModules.home-manager
         {
           home-manager.users.delan = import ../nixpkgs/home.nix;
 

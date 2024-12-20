@@ -48,9 +48,8 @@ in {
   # amdgpu
   services.xserver.videoDrivers = [ "amdgpu" ];
   hardware.enableRedistributableFirmware = true;
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
-  hardware.opengl.driSupport32Bit = true;
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
   # hardware.opengl.extraPackages = [
   #   # hashcat
   #   pkgs.rocm-opencl-icd
@@ -58,7 +57,7 @@ in {
   #
   #   pkgs.mesa.drivers pkgs.amdvlk
   # ];
-  hardware.opengl.extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+  hardware.graphics.extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
 
   nix.settings.sandbox = true;
 
@@ -108,7 +107,7 @@ in {
     efibootmgr
     file
     gh  # for servo/ci-runners
-    gnome3.networkmanager-openvpn
+    networkmanager-openvpn
     hdparm
     hivex  # for servo/ci-runners
     iftop
@@ -154,16 +153,17 @@ in {
   };
 
   users.groups.plugdev = {};
-  services.udev.packages = with import (builtins.fetchTarball {
-    # NixOS/nixpkgs#237313 = ppenguin:refactor-platformio-fix-ide
-    url = "https://github.com/NixOS/nixpkgs/archive/3592b10a67b518700002f1577e301d73905704fe.tar.gz";
-    sha256 = "135sxn5xxw4dl8hli4k6c9rwpllwghwh0pnhvn4bh988rzybzc6z";
-  }) {
-    system = "x86_64-linux";
-  }; [
-    platformio-core
-    openocd
-  ];
+  # FIXME this commit is now 404
+  # services.udev.packages = with import (builtins.fetchTarball {
+  #   # NixOS/nixpkgs#237313 = ppenguin:refactor-platformio-fix-ide
+  #   url = "https://github.com/NixOS/nixpkgs/archive/3592b10a67b518700002f1577e301d73905704fe.tar.gz";
+  #   sha256 = "135sxn5xxw4dl8hli4k6c9rwpllwghwh0pnhvn4bh988rzybzc6z";
+  # }) {
+  #   system = "x86_64-linux";
+  # }; [
+  #   platformio-core
+  #   openocd
+  # ];
 
   # TODO s/wheel/plugdev/
   services.udev.extraRules = ''

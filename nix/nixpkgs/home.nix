@@ -34,7 +34,7 @@
     gh
     gimp
     git-lfs
-    gnome3.gnome-font-viewer
+    gnome-font-viewer
     gnumake
     google-chrome
     htop
@@ -46,7 +46,6 @@
     kicad
     libnotify
     libreoffice
-    linuxKernel.packages.linux_5_15.perf
     maim
     man-pages
     mc
@@ -55,7 +54,6 @@
     mpv
     neofetch
     networkmanager-openvpn
-    gnome.networkmanager-openvpn
     networkmanagerapplet
     nix-diff
     nix-index
