@@ -1,5 +1,6 @@
 # manual setup after initial switch:
 # - provide ./home_colo.ovpn, root:root 600
+# - tailscale up
 # - chown -R nginx:nginx ./nginx
 # - provide ./nginx/htpassword-memories-peb, nginx:nginx 600
 # - chown -R kate:users ./kate
@@ -201,10 +202,23 @@
 
   services = {
     # colo network doesn’t have dhcp or dns, so we need our own dns server
-    unbound.enable = true;
+    unbound = {
+      enable = true;
+      settings.forward-zone = [
+        { name = "venus.tailcdc44b.ts.net"; forward-addr = "100.100.100.100"; }
+        # FIXME: try {64..127}.100.in-addr.arpa. to fix avahi rdns hang on ping
+      ];
+    };
 
-    openvpn.servers.home.config = "config /etc/nixos/colo/home_colo.ovpn";
-    openvpn.servers.home.autoStart = true;
+    openvpn.servers.home = {
+      config = "config /etc/nixos/colo/home_colo.ovpn";
+      autoStart = false;
+    };
+    tailscale = {
+      enable = true;
+      openFirewall = true;
+    };
+
     nginx = {
       enable = true;
       # logError = "stderr notice";
