@@ -1,6 +1,7 @@
 # manual setup after initial switch:
 # - sudo smbpasswd -a scanner
 # - sed s/hunter2/.../ iscsi-etc-target-saveconfig.json | sudo tee /etc/target/saveconfig.json
+# - cd /config/nix/nixos/venus; sudo tailscale up; sudo tailscale cert venus.tailcdc44b.ts.net
 { config, lib, options, modulesPath, pkgs, ... }: {
   imports = [ ../lib ];
 
@@ -217,7 +218,7 @@
   programs.fuse.userAllowOther = true;
 
   networking.firewall.allowedTCPPorts = [
-    80 443 # nginx
+    80 443 8443 # nginx
     8123 # home-assistant
     7474 # autobrr
     1313 # zfs send
@@ -227,7 +228,7 @@
     25565 # minecraft
   ];
   networking.firewall.allowedUDPPorts = [
-    80 443 # nginx
+    80 443 8443 # nginx
     111 2049 # nfs
   ];
 
@@ -258,32 +259,17 @@
           proxy_hide_header Upgrade;
         '';
       };
-      ssl = {
+      sslAcme = {
         useACMEHost = "venus.daz.cat";
       };
-      sslRelax = ssl // {
+      sslRelax = {
         addSSL = true;
       };
-      sslForce = ssl // {
+      sslForce = {
         forceSSL = true;
       };
-      venus = sslForce // {
-        locations."/qbittorrent/" = proxy // {
-          proxyPass = "http://127.0.0.1:20000/";
-        };
-        locations."/sonarr/" = proxy // {
-          proxyPass = "http://127.0.0.1:20010";
-        };
-        locations."/radarr/" = proxy // {
-          proxyPass = "http://127.0.0.1:20020";
-        };
-        locations."/prowlarr/" = proxy // {
-          proxyPass = "http://127.0.0.1:20040";
-        };
-        locations."/bazarr/" = proxy // {
-          proxyPass = "http://127.0.0.1:20050";
-        };
-        locations."/synclounge/" = proxy // {
+      syncloungeOnly = {
+        "/synclounge/" = proxy // {
           proxyPass = "http://127.0.0.1:20080/";
           extraConfig = ''
             # https://github.com/synclounge/synclounge/blob/714ac01ec334c41a707c445bee32619e615550cf/README.md#subfolder-domaincomsomefolder
@@ -304,8 +290,38 @@
           '';
         };
       };
+      venus = syncloungeOnly // {
+        "/qbittorrent/" = proxy // {
+          proxyPass = "http://127.0.0.1:20000/";
+        };
+        "/sonarr/" = proxy // {
+          proxyPass = "http://127.0.0.1:20010";
+        };
+        "/radarr/" = proxy // {
+          proxyPass = "http://127.0.0.1:20020";
+        };
+        "/prowlarr/" = proxy // {
+          proxyPass = "http://127.0.0.1:20040";
+        };
+        "/bazarr/" = proxy // {
+          proxyPass = "http://127.0.0.1:20050";
+        };
+      };
     in {
-      "venus.daz.cat" = venus;
+      "venus.daz.cat" = sslForce // sslAcme // {
+        locations = venus;
+      };
+      "venus.tailcdc44b.ts.net:8443" = {
+        listen = [{
+          addr = "venus.tailcdc44b.ts.net";
+          port = 8443;
+          ssl = true;
+        }];
+        sslCertificate = ./venus.tailcdc44b.ts.net.crt;
+        sslCertificateKey = ./venus.tailcdc44b.ts.net.key;
+        onlySSL = true;
+        locations = syncloungeOnly;
+      };
     };
   };
   services.target.enable = true;
@@ -320,6 +336,11 @@
       /ocean 172.19.42.6(ro,all_squash)
       /ocean/active 172.19.42.6(ro,all_squash)
     '';
+  };
+
+  services.tailscale = {
+    enable = true;
+    openFirewall = true;
   };
 
   users = let
