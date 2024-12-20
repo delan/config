@@ -225,7 +225,8 @@
     111 2049 # nfs
     8000 # python
     3260 # iscsi
-    25565 # minecraft
+    25565 # minecraft (gtnh)
+    25566 # minecraft (monifactory)
   ];
   networking.firewall.allowedUDPPorts = [
     80 443 8443 # nginx
