@@ -197,6 +197,16 @@
         "payphone.doggirl.gay"
       ];
     };
+    acme.certs."shuppy.org" = {
+      email = "letsencrypt.org@shuppy.org";
+      credentialsFile = "/etc/nixos/colo/acme-env.shuppy.txt";
+      dnsProvider = "exec";
+      postRun = ''
+      '';
+      extraDomainNames = [
+        "meet.shuppy.org"
+      ];
+    };
   };
   users.users.nginx.extraGroups = [ "acme" ];
 
@@ -242,6 +252,10 @@
           addSSL = true;
         };
         sslForce = ssl // {
+          forceSSL = true;
+        };
+        sslShuppy = {
+          useACMEHost = "shuppy.org";
           forceSSL = true;
         };
         opacus = {
@@ -301,6 +315,15 @@
         "cohost.org.doggirl.gay" = passionfruitCohostEmbed // sslForce;
         "cohost.doggirl.gay" = passionfruitCohostEmbed // sslForce;
         "payphone.doggirl.gay" = passionfruitCohostEmbed // sslForce;
+        "shuppy.org" = sslShuppy // {
+          locations."/" = {
+            root = "/var/www/shuppy.org";
+          };
+        };
+        "meet.shuppy.org" = {
+          enableACME = false;
+          useACMEHost = "shuppy.org";
+        };
         "memories" = {
           listen = [{
             addr = "*";
@@ -331,6 +354,31 @@
     fail2ban = {
       enable = true;
       ignoreIP = [ "144.6.130.75" ];
+    };
+    jitsi-meet = {
+      enable = true;
+      hostName = "meet.shuppy.org";
+      nginx.enable = true;
+      # https://jitsi.github.io/handbook/docs/devops-guide/secure-domain
+      secureDomain = {
+        enable = true;
+        authentication = "internal_hashed";
+      };
+      config = {
+        audioQuality = {
+          stereo = true;  # disable echo cancellation + noise suppression + AGC
+          opusMaxAverageBitrate = 262144;  # default seems to be ~64kbit/s
+        };
+        p2p = {
+          enabled = false;  # try to fix dropouts?
+        };
+      };
+    };
+    jitsi-videobridge = {
+      openFirewall = true;
+      extraProperties = {
+        "org.ice4j.ipv6.DISABLED" = "true";  # work around abb ipv6 dropouts
+      };
     };
   };
 

@@ -1,0 +1,2 @@
+EXEC_PATH=/etc/nixos/colo/acme-dns.shuppy.sh
+EXEC_SEQUENCE_INTERVAL=0
