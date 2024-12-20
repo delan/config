@@ -2,7 +2,7 @@
 # - provide ./home_colo.ovpn, root:root 600
 # - tailscale up
 # - chown -R nginx:nginx ./nginx
-# - provide ./nginx/htpassword-memories-peb, nginx:nginx 600
+# - provide ./nginx/htpasswd-memories-peb, nginx:nginx 600
 # - chown -R kate:users ./kate
 # - provide ./kate/dariox.club.conf, kate:users 644
 # - provide ./kate/xenia-dashboard.conf, kate:users 644
