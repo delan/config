@@ -59,6 +59,11 @@ in {
   # ];
   hardware.graphics.extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
 
+  # for servo amd disable boost
+  # https://docs.kernel.org/admin-guide/pm/cpufreq.html#frequency-boost-support
+  # https://lwn.net/Articles/979398/
+  boot.kernelPackages = pkgs.linuxPackages_6_11;
+
   nix.settings.sandbox = true;
 
   hardware.opentabletdriver.enable = true;
@@ -92,6 +97,7 @@ in {
         3128 3180 # oldssl-proxy
         13367 # qbittorrent torrent (arbitrary)
         13368 13369 # aria2 torrent (arbitrary)
+        20300 # servo ci monitor test (public!)
       ];
 
       allowedUDPPorts = [
@@ -102,7 +108,9 @@ in {
   };
 
   environment.systemPackages = with pkgs; [
+    cdrkit  # for servo/ci-runners
     colordiff
+    cpuset  # for servo perf testing
     dbus-sway-environment
     efibootmgr
     file
@@ -115,6 +123,7 @@ in {
     jq  # for servo/ci-runners
     lm_sensors
     lsof
+    mitmproxy  # for servo/perf-analysis-tools
     ncdu
     ntfs3g
     pciutils
@@ -203,4 +212,16 @@ in {
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="3297", MODE:="0666", SYMLINK+="ignition_dfu"
   '';
 
+  # servo benchmarking
+  users.groups.mitmproxy = {
+    members = [ "delan" ];
+  };
+
+  # servo/perf-analysis-tools
+  security.sudo.extraRules = [{
+    groups = [ "wheel" ];
+    commands = [
+      { options = [ "NOPASSWD" ]; command = "/home/delan/code/servo/attic/perf/analyse/isolate-cpu-for-shell.sh"; }
+    ];
+  }];
 }
