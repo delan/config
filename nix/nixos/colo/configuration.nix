@@ -402,6 +402,8 @@
 
     ripgrep
     tcpdump
+
+    kitty.terminfo  # for ruby
   ];
 
   services.cron = {
@@ -423,6 +425,15 @@
     shell = pkgs.bash;
     extraGroups = [ "systemd-journal" "wheel" ];
     initialHashedPassword = "$6$4NkWaZ7Un5r.CR2C$I22bgLqKU2DxlNye4jEicYmV06BFjcwe60q.cigaTQjeviYK0Aq7MITV09koexPSBPdvsibIxYo0rYwOJ7dlg0";  # hunter2
+  };
+
+  programs.fish.enable = true;
+  users.users.ruby = {
+    isNormalUser = true;
+    uid = 1003;
+    shell = pkgs.fish;
+    extraGroups = [ "systemd-journal" "wheel" ];
+    openssh.authorizedKeys.keys = ["sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBveMRzoY0e0F2c2f9N/gZ7zFBIXJGhNPSAGI5/XTaBMAAAABHNzaDo="];
   };
 
   services.udev.extraRules = ''
