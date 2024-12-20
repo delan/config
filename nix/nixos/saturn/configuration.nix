@@ -102,4 +102,9 @@
     # fx2la
     SUBSYSTEMS=="usb", ATTR{idVendor}=="0925", ATTR{idProduct}=="3881", MODE:="0666"
   '';
+
+  services.tailscale = {
+    enable = true;
+    openFirewall = true;
+  };
 }
