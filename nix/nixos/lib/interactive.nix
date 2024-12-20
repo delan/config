@@ -107,7 +107,7 @@
         inconsolata
         # FIXME hollow fonts # helvetica-neue-lt-std
         # twemoji-color-font
-        noto-fonts noto-fonts-cjk
+        noto-fonts noto-fonts-cjk-sans
         corefonts
         nanum  # for servo
         takao  # for servo

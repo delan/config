@@ -34,9 +34,10 @@
     gh
     gimp
     git-lfs
-    gnome3.gnome-font-viewer
+    gnome-font-viewer
     gnumake
     google-chrome
+    gwenview
     htop
     imagemagick
     inkscape
@@ -46,7 +47,6 @@
     kicad
     libnotify
     libreoffice
-    linuxKernel.packages.linux_5_15.perf
     maim
     man-pages
     mc
@@ -55,8 +55,8 @@
     mpv
     neofetch
     networkmanager-openvpn
-    gnome.networkmanager-openvpn
     networkmanagerapplet
+    nheko
     nix-diff
     nix-index
     nmap
@@ -73,6 +73,7 @@
     pavucontrol
     pcmanfm
     prismlauncher
+    pulseaudio  # for pactl in i3
     pup
     pv
     python3
@@ -110,6 +111,8 @@
     # https://nixos.wiki/wiki/Discord#Opening_Links_with_Firefox
     # https://github.com/NixOS/nixpkgs/issues/108995#issuecomment-826358042
     (discord.override { nss = nss_latest; })
+
+    (callPackage ../packages/git-diffie {})
   ];
 
   services = {
@@ -181,6 +184,8 @@
   programs = {
     home-manager.enable = true;
     firefox.enable = true;
+    thunderbird.enable = true;
+    thunderbird.profiles = {};
 
     # needed for NIX_AUTO_RUN etc in NixOS 22.05+
     command-not-found.enable = true;
