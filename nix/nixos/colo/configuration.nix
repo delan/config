@@ -194,7 +194,7 @@
         "kierang.ee.nroach44.id.au"
         "cohost.org.doggirl.gay"
         "cohost.doggirl.gay"
-        "payphone.doggirl.gay"
+        "payphones.doggirl.gay"
       ];
     };
     acme.certs."shuppy.org" = {
@@ -273,6 +273,11 @@
             proxyPass = "http://172.19.130.179:10001";
           };
         };
+        passionfruitPayphones = {
+          locations."/" = proxy // {
+            proxyPass = "http://172.19.130.179:10002";
+          };
+        };
         nyaaa = {
           locations."/" = proxy // {
             proxyPass = "http://172.19.42.33";
@@ -314,7 +319,7 @@
         "kierang.ee.nroach44.id.au" = opacus // sslRelax;
         "cohost.org.doggirl.gay" = passionfruitCohostEmbed // sslForce;
         "cohost.doggirl.gay" = passionfruitCohostEmbed // sslForce;
-        "payphone.doggirl.gay" = passionfruitCohostEmbed // sslForce;
+        "payphones.doggirl.gay" = passionfruitPayphones // sslForce;
         "shuppy.org" = sslShuppy // {
           locations."/" = {
             root = "/var/www/shuppy.org";
