@@ -194,6 +194,7 @@
       environment.systemPackages = with pkgs; [
         git # needed for nixos-rebuild with flakes
         ripgrep # needed for /root/sync.sh
+        nix-output-monitor # nixos-rebuild --log-format internal-json -v switch 2>&1 | nom --json
       ];
     }
   ];

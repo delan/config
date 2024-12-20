@@ -140,6 +140,7 @@ in {
 
   # wireshark
   programs.wireshark.enable = true;
+  programs.wireshark.package = pkgs.wireshark-qt;
   users.users.delan.extraGroups = [ "wireshark" ];
 
   services.cron = {
@@ -212,6 +213,8 @@ in {
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="3297", MODE:="0666", SYMLINK+="ignition_dfu"
   '';
 
+  services.openssh.settings.X11Forwarding = true;
+
   # servo benchmarking
   users.groups.mitmproxy = {
     members = [ "delan" ];
@@ -224,4 +227,9 @@ in {
       { options = [ "NOPASSWD" ]; command = "/home/delan/code/servo/attic/perf/analyse/isolate-cpu-for-shell.sh"; }
     ];
   }];
+
+  services.tailscale = {
+    enable = true;
+    openFirewall = true;
+  };
 }
