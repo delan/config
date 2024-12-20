@@ -145,7 +145,7 @@ in {
 
   services.cron = {
     enable = true;
-    systemCronJobs = ["0 21 * * * root BUSTED_WEBHOOK=https://discord.com/api/webhooks/1167804331068760064/redacted ~delan/bin/sync.sh"];
+    systemCronJobs = ["0 21 * * * root BUSTED_WEBHOOK=https://discord.com/api/webhooks/1167804331068760064/I7Aheu2RxY2E0heDztJp212NHGf1RVJKiPK8vo6uE-iLXZXZhf4TjPWegCBc8mjiEqaI ~delan/bin/sync.sh"];
   };
 
   programs.sway.enable = true;
