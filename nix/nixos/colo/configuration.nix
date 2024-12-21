@@ -1,7 +1,8 @@
 # manual setup after initial switch:
 # - provide ./home_colo.ovpn, root:root 600
+# - tailscale up
 # - chown -R nginx:nginx ./nginx
-# - provide ./nginx/htpassword-memories-peb, nginx:nginx 600
+# - provide ./nginx/htpasswd-memories-peb, nginx:nginx 600
 # - chown -R kate:users ./kate
 # - provide ./kate/dariox.club.conf, kate:users 644
 # - provide ./kate/xenia-dashboard.conf, kate:users 644
@@ -184,16 +185,21 @@
         "azabani.com"
         "www.azabani.com"
         "ar1as.space"
-        "rlly.gay"
-        "*.rlly.gay"
         "sixte.st"
         "*.sixte.st"
         "*.v6ns.sixte.st"
         "isbtrfsstableyet.com"
         "kierang.ee.nroach44.id.au"
-        "cohost.org.doggirl.gay"
-        "cohost.doggirl.gay"
-        "payphone.doggirl.gay"
+      ];
+    };
+    acme.certs."shuppy.org" = {
+      email = "letsencrypt.org@shuppy.org";
+      credentialsFile = "/etc/nixos/colo/acme-env.shuppy.txt";
+      dnsProvider = "exec";
+      postRun = ''
+      '';
+      extraDomainNames = [
+        "meet.shuppy.org"
       ];
     };
   };
@@ -201,10 +207,23 @@
 
   services = {
     # colo network doesn’t have dhcp or dns, so we need our own dns server
-    unbound.enable = true;
+    unbound = {
+      enable = true;
+      settings.forward-zone = [
+        { name = "venus.tailcdc44b.ts.net"; forward-addr = "100.100.100.100"; }
+        # FIXME: try {64..127}.100.in-addr.arpa. to fix avahi rdns hang on ping
+      ];
+    };
 
-    openvpn.servers.home.config = "config /etc/nixos/colo/home_colo.ovpn";
-    openvpn.servers.home.autoStart = true;
+    openvpn.servers.home = {
+      config = "config /etc/nixos/colo/home_colo.ovpn";
+      autoStart = false;
+    };
+    tailscale = {
+      enable = true;
+      openFirewall = true;
+    };
+
     nginx = {
       enable = true;
       # logError = "stderr notice";
@@ -230,6 +249,10 @@
         sslForce = ssl // {
           forceSSL = true;
         };
+        sslShuppy = {
+          useACMEHost = "shuppy.org";
+          forceSSL = true;
+        };
         opacus = {
           locations."/" = proxy // {
             proxyPass = "http://172.19.130.245";
@@ -238,16 +261,6 @@
         stratus = {
           locations."/" = proxy // {
             proxyPass = "http://172.19.130.235";
-          };
-        };
-        passionfruitCohostEmbed = {
-          locations."/" = proxy // {
-            proxyPass = "http://172.19.130.179:10001";
-          };
-        };
-        nyaaa = {
-          locations."/" = proxy // {
-            proxyPass = "http://172.19.42.33";
           };
         };
       in {
@@ -279,14 +292,18 @@
         "azabani.com" = opacus // sslForce;
         "www.azabani.com" = opacus // sslForce;
         "ar1as.space" = opacus // sslForce;
-        "ariash.ar" = stratus // sslRelax;
-        ".rlly.gay" = nyaaa // sslRelax;
         ".sixte.st" = stratus // sslRelax;
         "isbtrfsstableyet.com" = opacus // sslRelax;
         "kierang.ee.nroach44.id.au" = opacus // sslRelax;
-        "cohost.org.doggirl.gay" = passionfruitCohostEmbed // sslForce;
-        "cohost.doggirl.gay" = passionfruitCohostEmbed // sslForce;
-        "payphone.doggirl.gay" = passionfruitCohostEmbed // sslForce;
+        "shuppy.org" = sslShuppy // {
+          locations."/" = {
+            root = "/var/www/shuppy.org";
+          };
+        };
+        "meet.shuppy.org" = {
+          enableACME = false;
+          useACMEHost = "shuppy.org";
+        };
         "memories" = {
           listen = [{
             addr = "*";
@@ -318,6 +335,31 @@
       enable = true;
       ignoreIP = [ "144.6.130.75" ];
     };
+    jitsi-meet = {
+      enable = true;
+      hostName = "meet.shuppy.org";
+      nginx.enable = true;
+      # https://jitsi.github.io/handbook/docs/devops-guide/secure-domain
+      secureDomain = {
+        enable = true;
+        authentication = "internal_hashed";
+      };
+      config = {
+        audioQuality = {
+          stereo = true;  # disable echo cancellation + noise suppression + AGC
+          opusMaxAverageBitrate = 262144;  # default seems to be ~64kbit/s
+        };
+        p2p = {
+          enabled = false;  # try to fix dropouts?
+        };
+      };
+    };
+    jitsi-videobridge = {
+      openFirewall = true;
+      extraProperties = {
+        "org.ice4j.ipv6.DISABLED" = "true";  # work around abb ipv6 dropouts
+      };
+    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -335,6 +377,8 @@
 
     ripgrep
     tcpdump
+
+    kitty.terminfo  # for ruby
   ];
 
   services.cron = {
@@ -356,6 +400,15 @@
     shell = pkgs.bash;
     extraGroups = [ "systemd-journal" "wheel" ];
     initialHashedPassword = "$6$4NkWaZ7Un5r.CR2C$I22bgLqKU2DxlNye4jEicYmV06BFjcwe60q.cigaTQjeviYK0Aq7MITV09koexPSBPdvsibIxYo0rYwOJ7dlg0";  # hunter2
+  };
+
+  programs.fish.enable = true;
+  users.users.ruby = {
+    isNormalUser = true;
+    uid = 1003;
+    shell = pkgs.fish;
+    extraGroups = [ "systemd-journal" "wheel" ];
+    openssh.authorizedKeys.keys = ["sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBveMRzoY0e0F2c2f9N/gZ7zFBIXJGhNPSAGI5/XTaBMAAAABHNzaDo="];
   };
 
   services.udev.extraRules = ''
