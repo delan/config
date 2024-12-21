@@ -53,5 +53,6 @@ action all,private trace chown root:root /ocean/private
 action all,private trace chown -R root:root /ocean/private/2023
 action all,private,delanria private /ocean/private/delanria delan:7,aria:7
 action all,private,shouse private /ocean/private/shouse delan:7,aria:7,lucatiel:7,the6p4c:7
+action all,private,canidae private /ocean/private/canidae delan:7,the6p4c:7,ruby:7
 
 action all,public public /ocean/public delan:7,aria:7,the6p4c:7,hannah:7

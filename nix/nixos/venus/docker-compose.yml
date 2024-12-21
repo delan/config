@@ -161,3 +161,29 @@ services:
       - MAX_TICK_TIME=-1
     volumes:
       - /ocean/active/services/gtnh:/data
+  monifactory:
+    image: itzg/minecraft-server:java21-alpine
+    restart: unless-stopped
+    ports:
+      - 25566:25565
+    volumes:
+      - /ocean/active/services/monifactory:/data
+    environment:
+      EULA: true
+      TYPE: FORGE
+      VERSION: 1.20.1
+      FORGE_VERSION: 47.3.10
+      GENERIC_PACK: "https://github.com/ThePansmith/Monifactory/releases/download/0.9.10/Monifactory-Beta.0.9.10-server.zip"
+      UID: 2009
+      GID: 2009
+      TZ: Australia/Perth
+      MEMORY: 8G
+      USE_AIKAR_FLAGS: true
+      WHITELIST: ariashark,shuppyy
+      EXISTING_WHITELIST_FILE: MERGE
+      OPS: ariashark,shuppyy
+      EXISTING_OPS_FILE: MERGE
+      MAX_PLAYERS: 5
+      ALLOW_FLIGHT: true
+      DIFFICULTY: peaceful
+      MOTD: sharkuppy (ao!)

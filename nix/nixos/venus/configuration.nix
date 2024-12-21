@@ -1,6 +1,7 @@
 # manual setup after initial switch:
 # - sudo smbpasswd -a scanner
 # - sed s/hunter2/.../ iscsi-etc-target-saveconfig.json | sudo tee /etc/target/saveconfig.json
+# - cd /config/nix/nixos/venus; sudo tailscale up; sudo tailscale cert venus.tailcdc44b.ts.net
 { config, lib, options, modulesPath, pkgs, ... }: {
   imports = [ ../lib ];
 
@@ -105,7 +106,7 @@
 
       # FIXME testing for openzfs/zfs#15646
       options zfs zfs_vdev_disk_classic=0
-      options zfs zfs_vdev_disk_debug_bio_fill=1
+      # options zfs zfs_vdev_disk_debug_bio_fill=1  # set this at runtime
       # options zfs zfs_abd_page_iter_disable_compound=1  # set this at runtime
     '';
 
@@ -117,10 +118,11 @@
     # postBootCommands = "/run/current-system/sw/bin/setpci -s0:14.0 0xd0.W=0x3ec7";
 
     # FIXME workaround for openzfs/zfs#15646
-    # zfs.extraPools = [ "ocean" ];
-    # zfs.devNodes = "/dev/mapper"; # prettier zpool list/status
+    zfs.extraPools = [ "ocean" ];
+    zfs.devNodes = "/dev/mapper"; # prettier zpool list/status
     postBootCommands = ''
       (
+        exit
         set -eu -- ocean0x0 ocean0x1 ocean1x0 ocean1x1 ocean2x0 ocean2x2 ocean3x0 ocean3x1 ocean4x0 ocean4x2 ocean5x0 ocean5x1 oceanSx0 oceanSx1 ocean.arc
         i=100
         for j; do
@@ -217,17 +219,18 @@
   programs.fuse.userAllowOther = true;
 
   networking.firewall.allowedTCPPorts = [
-    80 443 # nginx
+    80 443 8443 # nginx
     8123 # home-assistant
     7474 # autobrr
     1313 # zfs send
     111 2049 # nfs
     8000 # python
     3260 # iscsi
-    25565 # minecraft
+    25565 # minecraft (gtnh)
+    25566 # minecraft (monifactory)
   ];
   networking.firewall.allowedUDPPorts = [
-    80 443 # nginx
+    80 443 8443 # nginx
     111 2049 # nfs
   ];
 
@@ -258,32 +261,17 @@
           proxy_hide_header Upgrade;
         '';
       };
-      ssl = {
+      sslAcme = {
         useACMEHost = "venus.daz.cat";
       };
-      sslRelax = ssl // {
+      sslRelax = {
         addSSL = true;
       };
-      sslForce = ssl // {
+      sslForce = {
         forceSSL = true;
       };
-      venus = sslForce // {
-        locations."/qbittorrent/" = proxy // {
-          proxyPass = "http://127.0.0.1:20000/";
-        };
-        locations."/sonarr/" = proxy // {
-          proxyPass = "http://127.0.0.1:20010";
-        };
-        locations."/radarr/" = proxy // {
-          proxyPass = "http://127.0.0.1:20020";
-        };
-        locations."/prowlarr/" = proxy // {
-          proxyPass = "http://127.0.0.1:20040";
-        };
-        locations."/bazarr/" = proxy // {
-          proxyPass = "http://127.0.0.1:20050";
-        };
-        locations."/synclounge/" = proxy // {
+      syncloungeOnly = {
+        "/synclounge/" = proxy // {
           proxyPass = "http://127.0.0.1:20080/";
           extraConfig = ''
             # https://github.com/synclounge/synclounge/blob/714ac01ec334c41a707c445bee32619e615550cf/README.md#subfolder-domaincomsomefolder
@@ -304,8 +292,38 @@
           '';
         };
       };
+      venus = syncloungeOnly // {
+        "/qbittorrent/" = proxy // {
+          proxyPass = "http://127.0.0.1:20000/";
+        };
+        "/sonarr/" = proxy // {
+          proxyPass = "http://127.0.0.1:20010";
+        };
+        "/radarr/" = proxy // {
+          proxyPass = "http://127.0.0.1:20020";
+        };
+        "/prowlarr/" = proxy // {
+          proxyPass = "http://127.0.0.1:20040";
+        };
+        "/bazarr/" = proxy // {
+          proxyPass = "http://127.0.0.1:20050";
+        };
+      };
     in {
-      "venus.daz.cat" = venus;
+      "venus.daz.cat" = sslForce // sslAcme // {
+        locations = venus;
+      };
+      "venus.tailcdc44b.ts.net:8443" = {
+        listen = [{
+          addr = "venus.tailcdc44b.ts.net";
+          port = 8443;
+          ssl = true;
+        }];
+        sslCertificate = ./venus.tailcdc44b.ts.net.crt;
+        sslCertificateKey = ./venus.tailcdc44b.ts.net.key;
+        onlySSL = true;
+        locations = syncloungeOnly;
+      };
     };
   };
   services.target.enable = true;
@@ -322,6 +340,12 @@
     '';
   };
 
+  services.tailscale = {
+    enable = true;
+    openFirewall = true;
+  };
+
+  programs.fish.enable = true;
   users = let
     system = { name, id }: {
       users."${name}" = {
@@ -343,7 +367,7 @@
         extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
       };
       users.the6p4c = {
-        isNormalUser = true;
+        isNormalUser = true;  # HACK: not true
         uid = 1002;
         shell = pkgs.bash;
         extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
@@ -353,6 +377,13 @@
         uid = 1003;
         shell = pkgs.bash;
         extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
+      };
+      users.ruby = {
+        isNormalUser = true;
+        uid = 1004;
+        shell = pkgs.fish;
+        extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
+        openssh.authorizedKeys.keys = ["sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBveMRzoY0e0F2c2f9N/gZ7zFBIXJGhNPSAGI5/XTaBMAAAABHNzaDo="];
       };
       users.hannah = {
         isNormalUser = true;
