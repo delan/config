@@ -19,6 +19,6 @@
 
   environment.systemPackages = with pkgs; [
     # for nm-applet (to store AnyConnect secrets)
-    gcr gnome3.defaultIconTheme
+    gcr gnome.defaultIconTheme
   ];
 }

@@ -26,6 +26,7 @@
   # biggest(?) available font
   console.font = "iso01-12x22";
 
+  hardware.nvidia.open = true;  # recommended for GTX 1650
   # https://nixos.wiki/wiki/Nvidia#sync_mode
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.prime = {
@@ -71,7 +72,7 @@
     efibootmgr
     file
     gh  # for servo
-    gnome3.networkmanager-openvpn
+    networkmanager-openvpn
     hdparm
     iftop
     iotop
@@ -85,6 +86,13 @@
     termite
     usbutils
   ];
+
+  hardware.pulseaudio.enable = false;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+  };
 
   fonts.fontconfig.defaultFonts.monospace = [ "monofur" ];
 

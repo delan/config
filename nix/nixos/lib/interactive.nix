@@ -8,7 +8,7 @@
       pulseaudio.enable = mkDefault true;
 
       # 32-bit game support
-      opengl.driSupport32Bit = true;
+      graphics.enable32Bit = true;
       pulseaudio.support32Bit = true;
     };
 
