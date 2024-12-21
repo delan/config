@@ -185,16 +185,11 @@
         "azabani.com"
         "www.azabani.com"
         "ar1as.space"
-        "rlly.gay"
-        "*.rlly.gay"
         "sixte.st"
         "*.sixte.st"
         "*.v6ns.sixte.st"
         "isbtrfsstableyet.com"
         "kierang.ee.nroach44.id.au"
-        "cohost.org.doggirl.gay"
-        "cohost.doggirl.gay"
-        "payphones.doggirl.gay"
       ];
     };
     acme.certs."shuppy.org" = {
@@ -268,21 +263,6 @@
             proxyPass = "http://172.19.130.235";
           };
         };
-        passionfruitCohostEmbed = {
-          locations."/" = proxy // {
-            proxyPass = "http://172.19.130.179:10001";
-          };
-        };
-        passionfruitPayphones = {
-          locations."/" = proxy // {
-            proxyPass = "http://172.19.130.179:10002";
-          };
-        };
-        nyaaa = {
-          locations."/" = proxy // {
-            proxyPass = "http://172.19.42.33";
-          };
-        };
       in {
         "\"\"" = {
           locations."/disabled" = {
@@ -312,14 +292,9 @@
         "azabani.com" = opacus // sslForce;
         "www.azabani.com" = opacus // sslForce;
         "ar1as.space" = opacus // sslForce;
-        "ariash.ar" = stratus // sslRelax;
-        ".rlly.gay" = nyaaa // sslRelax;
         ".sixte.st" = stratus // sslRelax;
         "isbtrfsstableyet.com" = opacus // sslRelax;
         "kierang.ee.nroach44.id.au" = opacus // sslRelax;
-        "cohost.org.doggirl.gay" = passionfruitCohostEmbed // sslForce;
-        "cohost.doggirl.gay" = passionfruitCohostEmbed // sslForce;
-        "payphones.doggirl.gay" = passionfruitPayphones // sslForce;
         "shuppy.org" = sslShuppy // {
           locations."/" = {
             root = "/var/www/shuppy.org";
