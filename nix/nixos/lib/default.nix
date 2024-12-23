@@ -66,14 +66,6 @@
         experimental-features = nix-command flakes
       '';
 
-      # pin nixpkgs flakeref to match our nixos config, to avoid constantly fetching unstable packages
-      # https://discourse.nixos.org/t/how-to-pin-nix-registry-nixpkgs-to-release-channel/14883/7
-      # TODO unwrap path in NixOS 22.11
-      nix.registry.nixpkgs.to = { type = "path"; path = "${pkgs.path}"; };
-
-      # pin nixpkgs channel to nixpkgs flakeref
-      nix.nixPath = ["nixpkgs=flake:nixpkgs"];
-
       console.keyMap = "us";
       i18n.defaultLocale = "en_AU.UTF-8";
       time.timeZone = "Australia/Perth";

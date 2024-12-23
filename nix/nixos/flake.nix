@@ -77,7 +77,7 @@
         uranus/configuration.nix
         hm2211.nixosModules.home-manager
         {
-          home-manager.users.delan = import ../nixpkgs/home.nix;
+          home-manager.users.delan = import ./home.nix;
 
           # use same nixpkgs as system, which has allowUnfree
           home-manager.useGlobalPkgs = true;
@@ -96,7 +96,7 @@
         nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen2
         hm2405.nixosModules.home-manager
         {
-          home-manager.users.delan = import ../nixpkgs/home.nix;
+          home-manager.users.delan = import ./home.nix;
 
           # use same nixpkgs as system, which has allowUnfree
           home-manager.useGlobalPkgs = true;
@@ -114,7 +114,7 @@
         jupiter/configuration.nix
         hm.nixosModules.home-manager
         {
-          home-manager.users.delan = import ../nixpkgs/home.nix;
+          home-manager.users.delan = import ./home.nix;
 
           # use same nixpkgs as system, which has allowUnfree
           home-manager.useGlobalPkgs = true;
