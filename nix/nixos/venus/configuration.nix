@@ -153,6 +153,11 @@
         plan = "1h=>10min,1d=>1h,1m=>1d,1y=>1m";
         recursive = true;
       };
+      "ocean/dump/aria" = {
+        enable = false;
+        plan = "";  # required by nixos
+        recursive = true;
+      };
     };
   };
 
