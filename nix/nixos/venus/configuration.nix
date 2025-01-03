@@ -334,12 +334,14 @@
   services.nfs.server = {
     enable = true;
     exports = ''
-      # 172.19.42.33 = nyaaa
-      /ocean 172.19.42.33(ro,all_squash)
-      /ocean/active 172.19.42.33(ro,all_squash)
       # 172.19.42.6 = tol
       /ocean 172.19.42.6(ro,all_squash)
       /ocean/active 172.19.42.6(ro,all_squash)
+
+      /ocean jupiter.tailcdc44b.ts.net.(rw)
+      /ocean/active jupiter.tailcdc44b.ts.net.(rw)
+      /ocean/private jupiter.tailcdc44b.ts.net.(rw)
+      /ocean/public jupiter.tailcdc44b.ts.net.(rw)
     '';
   };
 
