@@ -9,7 +9,7 @@
     hostId = "99D8468B";
     hostName = "venus";
     domain = "daz.cat";
-    luksDevice = "/dev/disk/by-partlabel/cuffs2x0";
+    luksDevice = "/dev/disk/by-partlabel/cuffs2x2";
     bootDevice = "/dev/disk/by-uuid/3A36-D233";
     separateNix = false;
     initialUser = "delan";
@@ -65,7 +65,6 @@
         hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
       };
       luks.devices = {
-        cuffs2x1 = { device = "/dev/disk/by-partlabel/cuffs2x1"; };
         ocean0x0 = { device = "/dev/disk/by-partlabel/ocean0x0"; };
         ocean0x1 = { device = "/dev/disk/by-partlabel/ocean0x1"; };
         ocean1x0 = { device = "/dev/disk/by-partlabel/ocean1x0"; };
@@ -80,7 +79,6 @@
         ocean5x1 = { device = "/dev/disk/by-partlabel/ocean5x1"; };
         oceanSx0 = { device = "/dev/disk/by-partlabel/oceanSx0"; };
         oceanSx1 = { device = "/dev/disk/by-partlabel/oceanSx1"; };
-        "ocean.arc" = { device = "/dev/disk/by-partlabel/ocean.arc"; };
       };
     };
 
@@ -151,6 +149,11 @@
       "ocean" = {
         timestampFormat = "znapzend-%Y-%m-%dT%H:%M:%SZ";
         plan = "1h=>10min,1d=>1h,1m=>1d,1y=>1m";
+        recursive = true;
+      };
+      "ocean/dump/aria" = {
+        enable = false;
+        plan = "";  # required by nixos
         recursive = true;
       };
     };
@@ -331,12 +334,14 @@
   services.nfs.server = {
     enable = true;
     exports = ''
-      # 172.19.42.33 = nyaaa
-      /ocean 172.19.42.33(ro,all_squash)
-      /ocean/active 172.19.42.33(ro,all_squash)
       # 172.19.42.6 = tol
       /ocean 172.19.42.6(ro,all_squash)
       /ocean/active 172.19.42.6(ro,all_squash)
+
+      /ocean jupiter.tailcdc44b.ts.net.(rw)
+      /ocean/active jupiter.tailcdc44b.ts.net.(rw)
+      /ocean/private jupiter.tailcdc44b.ts.net.(rw)
+      /ocean/public jupiter.tailcdc44b.ts.net.(rw)
     '';
   };
 
