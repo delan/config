@@ -187,19 +187,19 @@
         nix-output-monitor # nixos-rebuild --log-format internal-json -v switch 2>&1 | nom --json
         nix-doc
 
-        (writeScriptBin "midi.sh" (readFile ../../../bin/midi.sh))
-        (writeScriptBin "screenshot.sh" (readFile ../../../bin/screenshot.sh))
-        (writeScriptBin "smart.sh" (readFile ../../../bin/smart.sh))
-        (writeScriptBin "ssg.sh" (readFile ../../../bin/ssg.sh))
-        (writeScriptBin "sync.sh" (readFile ../../../bin/sync.sh))
-        (writeScriptBin "zfs-iostat-totals" (readFile ../../../bin/zfs-iostat-totals))
-        (writeScriptBin "zfs-sync-snapshots" (readFile ../../../bin/zfs-sync-snapshots))
-        (writeScriptBin "zfs-thin-snapshots" (readFile ../../../bin/zfs-thin-snapshots))
+        (writeScriptBin "midi.sh" (readFile ../bin/midi.sh))
+        (writeScriptBin "screenshot.sh" (readFile ../bin/screenshot.sh))
+        (writeScriptBin "smart.sh" (readFile ../bin/smart.sh))
+        (writeScriptBin "ssg.sh" (readFile ../bin/ssg.sh))
+        (writeScriptBin "sync.sh" (readFile ../bin/sync.sh))
+        (writeScriptBin "zfs-iostat-totals" (readFile ../bin/zfs-iostat-totals))
+        (writeScriptBin "zfs-sync-snapshots" (readFile ../bin/zfs-sync-snapshots))
+        (writeScriptBin "zfs-thin-snapshots" (readFile ../bin/zfs-thin-snapshots))
 
-        (writeScriptBin "sync-colo.sh" (readFile ../../../bin/sync-colo.sh))
-        (writeScriptBin "sync-jupiter.sh" (readFile ../../../bin/sync-jupiter.sh))
-        (writeScriptBin "sync-tol.sh" (readFile ../../../bin/sync-tol.sh))
-        (writeScriptBin "sync-venus.sh" (readFile ../../../bin/sync-venus.sh))
+        (writeScriptBin "sync-colo.sh" (readFile ../bin/sync-colo.sh))
+        (writeScriptBin "sync-jupiter.sh" (readFile ../bin/sync-jupiter.sh))
+        (writeScriptBin "sync-tol.sh" (readFile ../bin/sync-tol.sh))
+        (writeScriptBin "sync-venus.sh" (readFile ../bin/sync-venus.sh))
 
         # <https://git.isincredibly.gay/srxl/gemstone-labs.nix/src/commit/21e905f71929a54b5f5e25ce9dbe2e5cf0bc4fc9/deploy>
         fish

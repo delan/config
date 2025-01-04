@@ -112,7 +112,7 @@
     # https://github.com/NixOS/nixpkgs/issues/108995#issuecomment-826358042
     (discord.override { nss = nss_latest; })
 
-    (callPackage ../packages/git-diffie {})
+    (callPackage packages/git-diffie {})
   ];
 
   services = {
