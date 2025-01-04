@@ -64,8 +64,6 @@ in {
   # https://lwn.net/Articles/979398/
   boot.kernelPackages = pkgs.linuxPackages_6_11;
 
-  nix.settings.sandbox = true;
-
   hardware.opentabletdriver.enable = true;
 
   boot.kernelModules = [
@@ -86,6 +84,27 @@ in {
     cuffs1x0 = {
       device = "/dev/disk/by-partlabel/jupiter.cuffs1x0";
     };
+  };
+
+  fileSystems."/ocean" = {
+    device = "venus.tailcdc44b.ts.net.:/ocean";
+    fsType = "nfs";
+    options = [ "rw" "soft" "bg" ];
+  };
+  fileSystems."/ocean/active" = {
+    device = "venus.tailcdc44b.ts.net.:/ocean/active";
+    fsType = "nfs";
+    options = [ "rw" "soft" "bg" ];
+  };
+  fileSystems."/ocean/private" = {
+    device = "venus.tailcdc44b.ts.net.:/ocean/private";
+    fsType = "nfs";
+    options = [ "rw" "soft" "bg" ];
+  };
+  fileSystems."/ocean/public" = {
+    device = "venus.tailcdc44b.ts.net.:/ocean/public";
+    fsType = "nfs";
+    options = [ "rw" "soft" "bg" ];
   };
 
   networking = {

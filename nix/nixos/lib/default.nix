@@ -65,6 +65,15 @@
       nix.extraOptions = ''
         experimental-features = nix-command flakes
       '';
+      nix.settings = {
+        sandbox = true;
+        substituters = [
+          "https://autost.cachix.org"
+        ];
+        trusted-public-keys = [
+          "autost.cachix.org-1:zl/QINkEtBrk/TVeogtROIpQwQH6QjQWTPkbPNNsgpk="
+        ];
+      };
 
       console.keyMap = "us";
       i18n.defaultLocale = "en_AU.UTF-8";
@@ -136,17 +145,6 @@
           };
         };
 
-        avahi = {
-          enable = true;
-          nssmdns4 = true;
-          ipv6 = true;
-          publish = {
-            enable = true;
-            addresses = true;
-            domain = true;
-          };
-        };
-
         openiscsi = {
           enable = true;
           name = "iqn.2015-05.cat.daz.${config.internal.hostName}:initiator";
@@ -187,6 +185,7 @@
         git # needed for nixos-rebuild with flakes
         ripgrep # needed for /root/sync.sh
         nix-output-monitor # nixos-rebuild --log-format internal-json -v switch 2>&1 | nom --json
+        fish # needed for ~/bin/deploy.sh <https://git.isincredibly.gay/srxl/gemstone-labs.nix/src/commit/21e905f71929a54b5f5e25ce9dbe2e5cf0bc4fc9/deploy>
       ];
     }
   ];
