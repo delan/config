@@ -2,7 +2,7 @@
 set -euo shwordsplit
 # echo sync disabled; exit 1
 
-rsh='ssh delan@venus.home.daz.cat sudo'
+rsh='ssh delan@venus.tailcdc44b.ts.net sudo'
 src_prefix=cuffs
 dest_prefix=ocean/dump/colo
 
@@ -10,11 +10,11 @@ new=$(date -u +\%FT\%RZ)
 echo ">>> new: $new"
 
 zfs snapshot -r cuffs@$new
-for i in cuffs cuffs/{cache.nginx,nix}; do
+for i in cuffs cuffs/{cache.nginx,nix,the6p4c}; do
   zfs destroy -v $i@$new
 done
 
-for i in home kate{,/vm0} opacus{,.www} root stratus.{vda,vdb} the6p4c{,/vm0}; do
+for i in home kate{,/vm0} opacus{,.www} root stratus.{vda,vdb}; do
   echo ">>> syncing $src_prefix/$i"
   unset old
   set -- -t bookmark -Ho name -d 1 $src_prefix/$i

@@ -10,7 +10,7 @@ new=$(date -u +\%FT\%RZ)
 echo ">>> new: $new"
 
 zfs snapshot -r cuffs@$new
-for i in cuffs cuffs/{build,nix}; do
+zfs list -Ho name -r cuffs | rg '^cuffs/(base|build|ci|nix)(/|$)' | while read -r i; do
   zfs destroy -v $i@$new
 done
 

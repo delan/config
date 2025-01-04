@@ -10,11 +10,11 @@ new=$(date -u +\%FT\%RZ)
 echo ">>> new: $new"
 
 zfs snapshot -r cuffs@$new
-for i in cuffs cuffs/storage/swap; do
+for i in cuffs; do
   zfs destroy -v $i@$new
 done
 
-for i in home root storage{,/data}; do
+for i in home root; do
   echo ">>> syncing $src_prefix/$i"
   unset old
   set -- -t bookmark -Ho name -d 1 $src_prefix/$i
