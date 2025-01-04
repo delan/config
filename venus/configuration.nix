@@ -28,6 +28,17 @@
     };
   };
 
+  sops.secrets.tailscale-ssl-cert = {
+    sopsFile = ../secrets/venus/tailscale-ssl.yaml;
+    name = "venus.tailcdc44b.ts.net.crt";
+    owner = "nginx";
+  };
+  sops.secrets.tailscale-ssl-key = {
+    sopsFile = ../secrets/venus/tailscale-ssl.yaml;
+    name = "venus.tailcdc44b.ts.net.key";
+    owner = "nginx";
+  };
+
   # hardware-configuration.nix
   # merged below # boot.kernelModules = [ "kvm-intel" ];
   # merged below # boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "vfio_pci" "usbhid" "sd_mod" ];
@@ -325,8 +336,11 @@
           port = 8443;
           ssl = true;
         }];
-        sslCertificate = ./venus.tailcdc44b.ts.net.crt;
-        sslCertificateKey = ./venus.tailcdc44b.ts.net.key;
+        # FIXME: why doesn’t config.sops work here?
+        # sslCertificate = config.sops.secrets.tailscale-ssl-cert.path;
+        # sslCertificateKey = config.sops.secrets.tailscale-ssl-key.path;
+        sslCertificate = "/run/secrets/venus.tailcdc44b.ts.net.crt";
+        sslCertificateKey = "/run/secrets/venus.tailcdc44b.ts.net.key";
         onlySSL = true;
         locations = syncloungeOnly;
       };
