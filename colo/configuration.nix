@@ -383,7 +383,7 @@
 
   services.cron = {
     enable = true;
-    systemCronJobs = ["0 22 * * * root BUSTED_WEBHOOK=https://discord.com/api/webhooks/1167804331068760064/redacted ~delan/bin/sync.sh"];
+    systemCronJobs = ["0 22 * * * root ~delan/bin/sync.sh"];
   };
 
   users.users.kate = {

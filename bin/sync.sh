@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 set -euo shwordsplit -o pipefail
 
-webhook=$BUSTED_WEBHOOK
+webhook=${BUSTED_WEBHOOK-$(cat /run/secrets/BUSTED_WEBHOOK)}
 hostname=$(hostname | sed 's/[.].*//')
 log=sync-$hostname-$(date -u +\%FT\%RZ).log
 cd ~

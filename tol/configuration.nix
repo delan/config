@@ -124,7 +124,7 @@
 
   services.cron = {
     enable = true;
-    systemCronJobs = ["0 21 * * * root BUSTED_WEBHOOK=https://discord.com/api/webhooks/1167804331068760064/redacted ~delan/bin/sync.sh"];
+    systemCronJobs = ["0 21 * * * root ~delan/bin/sync.sh"];
   };
 
   # for sshfs -o allow_other,default_permissions,idmap=user

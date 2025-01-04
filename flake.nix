@@ -20,9 +20,11 @@
     hm.url = "github:nix-community/home-manager/master";
     hm.inputs.nixpkgs.follows = "unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "unstable";
   };
 
-  outputs = inputs@{ self, nixos2211, nixos2305, nixos2311, nixos2405, zfs_2_2_4, unstable, hm2211, hm2305, hm2311, hm2405, hm, nixos-hardware, ... }:
+  outputs = inputs@{ self, nixos2211, nixos2305, nixos2311, nixos2405, zfs_2_2_4, unstable, hm2211, hm2305, hm2311, hm2405, hm, nixos-hardware, sops-nix, ... }:
   let
     pkgs2311 = import nixos2311 {
       system = "x86_64-linux";
@@ -44,16 +46,23 @@
       system = "x86_64-linux";
       modules = [
         venus/configuration.nix
+        sops-nix.nixosModules.sops
       ];
     };
     nixosConfigurations.colo = nixos2405.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [ colo/configuration.nix ];
+      modules = [
+        colo/configuration.nix
+        sops-nix.nixosModules.sops
+      ];
     };
     nixosConfigurations.tol = unstable.lib.nixosSystem {
       # deployified
       system = "x86_64-linux";
-      modules = [ tol/configuration.nix ];
+      modules = [
+        tol/configuration.nix
+        sops-nix.nixosModules.sops
+      ];
     };
 
     # workstations
@@ -99,6 +108,7 @@
       system = "x86_64-linux";
       modules = [
         jupiter/configuration.nix
+        sops-nix.nixosModules.sops
         hm.nixosModules.home-manager
         {
           home-manager.users.delan = import ./home.nix;

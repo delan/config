@@ -39,6 +39,8 @@
         };
     })
     {
+      sops.secrets.BUSTED_WEBHOOK.sopsFile = ../secrets/BUSTED_WEBHOOK.yaml;
+
       networking.hostId = config.internal.hostId;
       networking.hostName = config.internal.hostName;
       networking.domain = config.internal.domain;
