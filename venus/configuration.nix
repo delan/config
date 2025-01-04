@@ -225,6 +225,8 @@
     steam-run
     targetcli
     unzip
+
+    (writeScriptBin "acme-dns.daz.sh" (readFile ./acme-dns.daz.sh))
   ];
 
   services.cron = {
@@ -261,7 +263,10 @@
     acceptTerms = true;
     certs."venus.daz.cat" = {
       email = "delan@azabani.com";
-      credentialsFile = "/etc/nixos/venus/acme-env.txt";
+      # copyPathToStore gives the file its own store path, which gets copied to the machine.
+      # without copyPathToStore, the path refers into the flake, which does not get copied
+      # (it only exists in the deploying machine’s store).
+      credentialsFile = pkgs.copyPathToStore ./acme-env.daz.txt;
       dnsProvider = "exec";
       extraDomainNames = [];
     };

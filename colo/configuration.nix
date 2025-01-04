@@ -9,7 +9,7 @@
 # - sudo setfacl -n --set 'u::rwX,g::0,o::0,m::rwX,nginx:5,delan:7' /var/www/memories/peb
 # - sudo setfacl -n --set 'u::rwX,g::0,o::0,m::rwX,nginx:5,delan:7' /var/www/memories
 # - provide /var/www/memories/peb/**
-{ config, lib, options, modulesPath, pkgs, specialArgs }: {
+{ config, lib, options, modulesPath, pkgs, specialArgs }: with lib; {
   imports = [ ../lib ];
 
   internal = {
@@ -188,11 +188,14 @@
     acme.acceptTerms = true;
     acme.certs."colo.daz.cat" = {
       email = "delan@azabani.com";
-      credentialsFile = "/etc/nixos/colo/acme-env.txt";
+      # copyPathToStore gives the file its own store path, which gets copied to the machine.
+      # without copyPathToStore, the path refers into the flake, which does not get copied
+      # (it only exists in the deploying machine’s store).
+      credentialsFile = pkgs.copyPathToStore ./acme-env.daz.txt;
       dnsProvider = "exec";
       postRun = ''
-        /etc/nixos/colo/deploy-acme-to-opacus.sh
-        /etc/nixos/colo/deploy-acme-to-stratus.sh
+        /run/current-system/sw/bin/deploy-acme-to-opacus.sh
+        /run/current-system/sw/bin/deploy-acme-to-stratus.sh
       '';
       extraDomainNames = [
         "opacus.daz.cat"
@@ -215,7 +218,10 @@
     };
     acme.certs."shuppy.org" = {
       email = "letsencrypt.org@shuppy.org";
-      credentialsFile = "/etc/nixos/colo/acme-env.shuppy.txt";
+      # copyPathToStore gives the file its own store path, which gets copied to the machine.
+      # without copyPathToStore, the path refers into the flake, which does not get copied
+      # (it only exists in the deploying machine’s store).
+      credentialsFile = pkgs.copyPathToStore ./acme-env.shuppy.txt;
       dnsProvider = "exec";
       postRun = ''
       '';
@@ -386,6 +392,11 @@
     tcpdump
 
     kitty.terminfo  # for ruby
+
+    (writeScriptBin "acme-dns.daz.sh" (readFile ./acme-dns.daz.sh))
+    (writeScriptBin "acme-dns.shuppy.sh" (readFile ./acme-dns.shuppy.sh))
+    (writeScriptBin "deploy-acme-to-opacus.sh" (readFile ./deploy-acme-to-opacus.sh))
+    (writeScriptBin "deploy-acme-to-stratus.sh" (readFile ./deploy-acme-to-stratus.sh))
   ];
 
   services.cron = {

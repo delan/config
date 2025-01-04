@@ -1,0 +1,2 @@
+EXEC_PATH=/run/current-system/sw/bin/acme-dns.sh
+EXEC_SEQUENCE_INTERVAL=0

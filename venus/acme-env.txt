@@ -1,2 +1,0 @@
-EXEC_PATH=/etc/nixos/venus/acme-dns.sh
-EXEC_SEQUENCE_INTERVAL=0
