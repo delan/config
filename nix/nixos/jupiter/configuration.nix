@@ -64,8 +64,6 @@ in {
   # https://lwn.net/Articles/979398/
   boot.kernelPackages = pkgs.linuxPackages_6_11;
 
-  nix.settings.sandbox = true;
-
   hardware.opentabletdriver.enable = true;
 
   boot.kernelModules = [

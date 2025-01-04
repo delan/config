@@ -65,6 +65,15 @@
       nix.extraOptions = ''
         experimental-features = nix-command flakes
       '';
+      nix.settings = {
+        sandbox = true;
+        substituters = [
+          "https://autost.cachix.org"
+        ];
+        trusted-public-keys = [
+          "autost.cachix.org-1:zl/QINkEtBrk/TVeogtROIpQwQH6QjQWTPkbPNNsgpk="
+        ];
+      };
 
       console.keyMap = "us";
       i18n.defaultLocale = "en_AU.UTF-8";
