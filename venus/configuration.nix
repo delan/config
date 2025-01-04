@@ -2,7 +2,7 @@
 # - sudo smbpasswd -a scanner
 # - sed s/hunter2/.../ iscsi-etc-target-saveconfig.json | sudo tee /etc/target/saveconfig.json
 # - cd /config/nix/nixos/venus; sudo tailscale up; sudo tailscale cert venus.tailcdc44b.ts.net
-{ config, lib, options, modulesPath, pkgs, ... }: {
+{ config, lib, options, modulesPath, pkgs, ... }: with lib; {
   imports = [ ../lib ];
 
   internal = {
@@ -227,6 +227,8 @@
     unzip
 
     (writeScriptBin "acme-dns.daz.sh" (readFile ./acme-dns.daz.sh))
+    (writeScriptBin "fix-ocean-perms.sh" (readFile ./fix-ocean-perms.sh))
+    (writeScriptBin "ocean-dfree.sh" (readFile ./ocean-dfree.sh))
   ];
 
   services.cron = {
@@ -434,4 +436,180 @@
       (system { name = "synclounge"; id = 2008; })
       (system { name = "gtnh"; id = 2009; })
     ];
+
+  virtualisation.oci-containers.containers = {
+    homeassistant = {
+      image = "ghcr.io/home-assistant/home-assistant:stable";  # 2024.1.5
+      environment = {
+        TZ = "Australia/Perth";
+      };
+      volumes = [
+        "/etc/localtime:/etc/localtime:ro"
+        "/ocean/active/services/homeassistant:/config"
+      ];
+      extraOptions = [
+        "--device=/dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_a49962d47e45ed11a3dac68f0a86e0b4-if00-port0:/dev/ttyUSB0"  # zigbee controller
+        "--network=host"  # network_mode: host
+        # "--privileged"  # privileged: true (FIXME: do we really need this?)
+      ];
+    };
+    sonarr = {
+      image = "ghcr.io/hotio/sonarr:latest";  # release-4.0.1.929
+      ports = ["20010:8989"];
+      environment = {
+        TZ = "Australia/Perth";
+        PUID = "2001";
+        PGID = "2001";
+      };
+      volumes = [
+        "/etc/localtime:/etc/localtime:ro"
+        "/ocean/active/services/sonarr:/config"
+        "/ocean/active:/ocean/active"
+      ];
+    };
+    radarr = {
+      image = "ghcr.io/hotio/radarr:release";  # release-5.2.6.8376
+      ports = ["20020:7878"];
+      environment = {
+        TZ = "Australia/Perth";
+        PUID = "2002";
+        PGID = "2002";
+      };
+      volumes = [
+        "/etc/localtime:/etc/localtime:ro"
+        "/ocean/active/services/radarr:/config"
+        "/ocean/active:/ocean/active"
+      ];
+    };
+    recyclarr = {
+      image = "ghcr.io/recyclarr/recyclarr";  # 6.0.2
+      user = "2003:2003";
+      environment = {
+        TZ = "Australia/Perth";
+      };
+      volumes = [
+        "/etc/localtime:/etc/localtime:ro"
+        "/ocean/active/services/recyclarr:/config"
+      ];
+    };
+    prowlarr = {
+      image = "ghcr.io/hotio/prowlarr";  # release-1.12.2.4211
+      ports = ["20040:9696"];
+      environment = {
+        TZ = "Australia/Perth";
+        PUID = "2004";
+        PGID = "2004";
+      };
+      volumes = [
+        "/etc/localtime:/etc/localtime:ro"
+        "/ocean/active/services/prowlarr:/config"
+      ];
+    };
+    bazarr = {
+      image = "ghcr.io/hotio/bazarr:latest";  # release-1.4.0
+      ports = ["20050:6767"];
+      environment = {
+        TZ = "Australia/Perth";
+        PUID = "2005";
+        PGID = "2005";
+      };
+      volumes = [
+        "/etc/localtime:/etc/localtime:ro"
+        "/ocean/active/services/bazarr:/config"
+        "/ocean/active:/ocean/active"
+      ];
+    };
+    flaresolverr = {
+      image = "ghcr.io/flaresolverr/flaresolverr:latest";
+      ports = ["20060:8191"];
+      environment = {
+        TZ = "Australia/Perth";
+        PUID = "2006";
+        PGID = "2006";
+        LOG_LEVEL = "info";
+      };
+      volumes = [
+        "/etc/localtime:/etc/localtime:ro"
+        "/ocean/active/services/bazarr:/config"
+        "/ocean/active:/ocean/active"
+      ];
+    };
+    synclounge = {
+      image = "synclounge/synclounge:latest";
+      ports = ["20080:8088"];
+      user = "2008:2008";
+      environment = {
+        TZ = "Australia/Perth";
+      };
+      volumes = [
+        "/etc/localtime:/etc/localtime:ro"
+        "/ocean/active/services/bazarr:/config"
+        "/ocean/active:/ocean/active"
+      ];
+    };
+    gtnh = {
+      image = "itzg/minecraft-server:java21-alpine";
+      ports = ["25565:25565"];
+      environment = {
+        SETUP_ONLY = "false";
+
+        TYPE = "CUSTOM";
+        CUSTOM_SERVER = "/data/lwjgl3ify-forgePatches.jar";
+        VERSION = "1.7.10";
+        MOTD = "GTNH Shouse";
+        DIFFICULTY = "2";
+        LEVEL_TYPE = "RTG";
+        SEED = "";
+        JVM_OPTS = "-Dfml.readTimeout=180 @java9args.txt";
+
+        INIT_MEMORY = "6G";
+        MAX_MEMORY = "8G";
+        ENABLE_AUTOPAUSE = "true";
+        AUTOPAUSE_TIMEOUT_EST = "300";
+        AUTOPAUSE_TIMEOUT_INIT = "60";
+        VIEW_DISTANCE = "14";
+
+        UID = "2009";
+        GID = "2009";
+        TZ = "Australia/Perth";
+        EULA = "true";
+        ONLINE_MODE = "true";
+        ALLOW_FLIGHT = "true";
+        ENFORCE_WHITELIST = "true";
+        MAX_PLAYERS = "5";
+        OVERRIDE_SERVER_PROPERTIES = "true";
+        MAX_TICK_TIME = "-1";
+      };
+      volumes = [
+        "/ocean/active/services/gtnh:/data"
+      ];
+    };
+    monifactory = {
+      image = "itzg/minecraft-server:java21-alpine";
+      ports = ["25566:25565"];
+      environment = {
+        EULA = "true";
+        TYPE = "FORGE";
+        VERSION = "1.20.1";
+        FORGE_VERSION = "47.3.10";
+        GENERIC_PACK = "https://github.com/ThePansmith/Monifactory/releases/download/0.9.10/Monifactory-Beta.0.9.10-server.zip";
+        UID = "2009";
+        GID = "2009";
+        TZ = "Australia/Perth";
+        MEMORY = "8G";
+        USE_AIKAR_FLAGS = "true";
+        WHITELIST = "ariashark,shuppyy";
+        EXISTING_WHITELIST_FILE = "MERGE";
+        OPS = "ariashark,shuppyy";
+        EXISTING_OPS_FILE = "MERGE";
+        MAX_PLAYERS = "5";
+        ALLOW_FLIGHT = "true";
+        DIFFICULTY = "peaceful";
+        MOTD = "sharkuppy (ao!)";
+      };
+      volumes = [
+        "/ocean/active/services/monifactory:/data"
+      ];
+    };
+  };
 }

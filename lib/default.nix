@@ -117,6 +117,9 @@
         dhcpcd.enable = false;
       };
 
+      # default since 22.05, but our stateVersion is 18.09
+      virtualisation.oci-containers.backend = "podman";
+
       services = {
         fwupd.enable = true;
 

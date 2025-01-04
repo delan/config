@@ -161,7 +161,6 @@
       (system { name = "plex"; id = 2101; })
     ];
 
-  virtualisation.oci-containers.backend = "podman";
   virtualisation.oci-containers.containers = {
     plex = {
       # https://github.com/plexinc/pms-docker/blob/c7dd9df342c5b998042cae75179e24dd8f887630/docker-compose-host.yml.template
