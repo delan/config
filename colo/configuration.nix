@@ -383,7 +383,7 @@
 
   services.cron = {
     enable = true;
-    systemCronJobs = ["0 22 * * * root ~delan/bin/sync.sh"];
+    systemCronJobs = ["0 22 * * * root sync.sh"];
   };
 
   users.users.kate = {

@@ -218,7 +218,7 @@
 
   services.cron = {
     enable = true;
-    systemCronJobs = ["0 21 * * * root ~delan/bin/sync.sh"];
+    systemCronJobs = ["0 21 * * * root sync.sh"];
   };
 
   # for sshfs -o allow_other,default_permissions,idmap=user

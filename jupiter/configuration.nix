@@ -164,7 +164,7 @@ in {
 
   services.cron = {
     enable = true;
-    systemCronJobs = ["0 21 * * * root ~delan/bin/sync.sh"];
+    systemCronJobs = ["0 21 * * * root sync.sh"];
   };
 
   programs.sway.enable = true;

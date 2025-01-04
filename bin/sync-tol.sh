@@ -35,5 +35,5 @@ for i in home plex{,/config} root; do
     exit 1
   fi
   echo "=== old: $old"
-  ~delan/bin/zfs-sync-snapshots --bookmark --delete this --i-am-a-cron-job-fuck-me-up-and-delete-without-asking --rsh "$rsh" $dest_prefix $src_prefix/$i --incremental-source \#$old $new wet
+  zfs-sync-snapshots --bookmark --delete this --i-am-a-cron-job-fuck-me-up-and-delete-without-asking --rsh "$rsh" $dest_prefix $src_prefix/$i --incremental-source \#$old $new wet
 done
