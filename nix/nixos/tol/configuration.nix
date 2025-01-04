@@ -160,4 +160,34 @@
     [
       (system { name = "plex"; id = 2101; })
     ];
+
+  virtualisation.oci-containers.backend = "podman";
+  virtualisation.oci-containers.containers = {
+    plex = {
+      # https://github.com/plexinc/pms-docker/blob/c7dd9df342c5b998042cae75179e24dd8f887630/docker-compose-host.yml.template
+      # https://github.com/plexinc/pms-docker/blob/c7dd9df342c5b998042cae75179e24dd8f887630/README.md#parameters
+      image = "plexinc/pms-docker";
+      environment = {
+        TZ = "Australia/Perth";
+        PLEX_UID = "2101";
+        PLEX_GID = "2101";
+      };
+      hostname = "plex.daz.cat";
+      volumes = [
+        "/cuffs/plex/config:/config"
+        "/cuffs/plex/transcode:/transcode"
+        "/ocean/active/sonarr:/sonarr"
+        "/ocean/active/radarr:/radarr"
+        "/ocean/active/plex/videos:/videos"
+      ];
+      extraOptions = [
+        # https://docs.podman.io/en/latest/markdown/podman-run.1.html
+        "--network=host"  # network_mode: host
+        "--device=/dev/dri:/dev/dri"  # devices: - /dev/dri:/dev/dri
+        # no restart, because it conflicts with --rm;
+        # containers in this module are managed by systemd
+        # "--restart=unless-stopped"  # restart: unless-stopped
+      ];
+    };
+  };
 }
