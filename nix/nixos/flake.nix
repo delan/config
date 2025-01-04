@@ -37,8 +37,10 @@
       config = { allowUnfree = true; };
     };
   in {
+    # NOTE: deployified machines use <https://git.isincredibly.gay/srxl/gemstone-labs.nix/src/commit/21e905f71929a54b5f5e25ce9dbe2e5cf0bc4fc9/deploy>
     # servers
     nixosConfigurations.venus = unstable.lib.nixosSystem {
+      # deployified
       system = "x86_64-linux";
       modules = [
         venus/configuration.nix
@@ -48,7 +50,8 @@
       system = "x86_64-linux";
       modules = [ colo/configuration.nix ];
     };
-    nixosConfigurations.tol = nixos2311.lib.nixosSystem {
+    nixosConfigurations.tol = unstable.lib.nixosSystem {
+      # deployified
       system = "x86_64-linux";
       modules = [ tol/configuration.nix ];
     };
@@ -92,6 +95,7 @@
       ];
     };
     nixosConfigurations.jupiter = unstable.lib.nixosSystem {
+      # deployified
       system = "x86_64-linux";
       modules = [
         jupiter/configuration.nix

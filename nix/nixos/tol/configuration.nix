@@ -7,6 +7,7 @@
     domain = "daz.cat";
     luksDevice = "/dev/disk/by-partlabel/tol.cuffs";
     bootDevice = "/dev/disk/by-partlabel/tol.esp";
+    swapDevice = null;
     separateNix = true;
     initialUser = "delan";
 
