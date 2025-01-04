@@ -1,4 +1,0 @@
-#!/bin/sh
-
-netstat -n | sed '2q;d'
-netstat -an | egrep '\*\.\*'
