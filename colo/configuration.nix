@@ -3,8 +3,8 @@
 # - tailscale up
 # - chown -R nginx:nginx ./nginx
 # - chown -R kate:users ./kate
-# - provide ./kate/dariox.club.conf, kate:users 644
-# - provide ./kate/xenia-dashboard.conf, kate:users 644
+# - provide /config/kate/dariox.club.conf, kate:users 644
+# - provide /config/kate/xenia-dashboard.conf, kate:users 644
 # - sudo mkdir -p /var/www/memories/peb
 # - sudo setfacl -n --set 'u::rwX,g::0,o::0,m::rwX,nginx:5,delan:7' /var/www/memories/peb
 # - sudo setfacl -n --set 'u::rwX,g::0,o::0,m::rwX,nginx:5,delan:7' /var/www/memories
@@ -256,8 +256,8 @@
       # logError = "stderr notice";
       recommendedProxySettings = true;
       appendHttpConfig = ''
-        include /etc/nixos/colo/kate/dariox.club.conf;
-        include /etc/nixos/colo/kate/xenia-dashboard.conf;
+        include /config/kate/dariox.club.conf;
+        include /config/kate/xenia-dashboard.conf;
       '';
       virtualHosts = let
         proxy = {
