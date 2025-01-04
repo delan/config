@@ -13,6 +13,11 @@ creation_rules:
         - *server_jupiter
         - *server_tol
         - *server_venus
+  - path_regex: secrets/colo/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+        - *admin_delan
+        - *server_colo
   - path_regex: secrets/venus/[^/]+\.(yaml|json|env|ini)$
     key_groups:
     - age:

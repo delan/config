@@ -2,7 +2,6 @@
 # - provide ./home_colo.ovpn, root:root 600
 # - tailscale up
 # - chown -R nginx:nginx ./nginx
-# - provide ./nginx/htpasswd-memories-peb, nginx:nginx 600
 # - chown -R kate:users ./kate
 # - provide ./kate/dariox.club.conf, kate:users 644
 # - provide ./kate/xenia-dashboard.conf, kate:users 644
@@ -19,6 +18,7 @@
     domain = "daz.cat";
     luksDevice = "/dev/disk/by-uuid/a8b6dd52-8f9f-42f8-badc-53b43aa9a4df";
     bootDevice = "/dev/disk/by-uuid/0CA9-2BEC";
+    swapDevice = null;
     separateNix = true;
     initialUser = "delan";
 
@@ -39,6 +39,27 @@
   swapDevices = [
     { device = "/dev/disk/by-uuid/1cc6aab2-3044-47c9-a478-e2ff04c0f480"; }
   ];
+
+  sops.secrets = {
+    memories-external-vhosts = {
+      sopsFile = ../secrets/colo/memories.yaml;
+      name = "memories-external-vhosts.conf";
+      owner = "nginx";
+    };
+    memories-internal-vhosts = {
+      sopsFile = ../secrets/colo/memories.yaml;
+      name = "memories-internal-vhosts.conf";
+      owner = "nginx";
+    };
+    memories-htpasswd-f = {
+      sopsFile = ../secrets/colo/memories.yaml;
+      owner = "nginx";
+    };
+    memories-htpasswd-p = {
+      sopsFile = ../secrets/colo/memories.yaml;
+      owner = "nginx";
+    };
+  };
 
   boot = {
     kernelModules = [ "vfio" "vfio_pci" "vfio_virqfd" "vfio_iommu_type1" ];
@@ -278,10 +299,7 @@
           locations."/" = {
             root = "/var/www/memories";
             extraConfig = ''
-              # rewrite rules outside matching location do not apply!
-              location /peb/ {
-                return 403;
-              }
+              include /run/secrets/memories-external-vhosts.conf;
             '';
           };
         } // sslForce;
@@ -313,18 +331,7 @@
           locations."/" = {
             root = "/var/www/memories";
             extraConfig = ''
-              # rewrite rules outside matching location do not apply!
-              location /peb/ {
-                auth_basic "/peb/";
-                auth_basic_user_file /etc/nixos/colo/nginx/htpasswd-memories-peb;
-                # rewrite_log on;
-                rewrite ^/([^/]+)/([^/]+/.*)$ /$1/$2 break;
-                rewrite ^/([^/]+)/(meta[.]txt)$ /$1/$2 break;
-                rewrite ^/([^/]+)/(.*)$ /$1/index.html break;
-                if ($remote_addr != "127.0.0.1") {
-                  return 403;
-                }
-              }
+              include /run/secrets/memories-internal-vhosts.conf;
             '';
           };
         };

@@ -49,7 +49,8 @@
         sops-nix.nixosModules.sops
       ];
     };
-    nixosConfigurations.colo = nixos2405.lib.nixosSystem {
+    nixosConfigurations.colo = unstable.lib.nixosSystem {
+      # deployified
       system = "x86_64-linux";
       modules = [
         colo/configuration.nix
