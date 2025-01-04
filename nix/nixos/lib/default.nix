@@ -145,17 +145,6 @@
           };
         };
 
-        avahi = {
-          enable = true;
-          nssmdns4 = true;
-          ipv6 = true;
-          publish = {
-            enable = true;
-            addresses = true;
-            domain = true;
-          };
-        };
-
         openiscsi = {
           enable = true;
           name = "iqn.2015-05.cat.daz.${config.internal.hostName}:initiator";
