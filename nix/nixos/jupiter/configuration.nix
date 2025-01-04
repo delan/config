@@ -86,6 +86,27 @@ in {
     };
   };
 
+  fileSystems."/ocean" = {
+    device = "venus.tailcdc44b.ts.net.:/ocean";
+    fsType = "nfs";
+    options = [ "rw" "soft" "bg" ];
+  };
+  fileSystems."/ocean/active" = {
+    device = "venus.tailcdc44b.ts.net.:/ocean/active";
+    fsType = "nfs";
+    options = [ "rw" "soft" "bg" ];
+  };
+  fileSystems."/ocean/private" = {
+    device = "venus.tailcdc44b.ts.net.:/ocean/private";
+    fsType = "nfs";
+    options = [ "rw" "soft" "bg" ];
+  };
+  fileSystems."/ocean/public" = {
+    device = "venus.tailcdc44b.ts.net.:/ocean/public";
+    fsType = "nfs";
+    options = [ "rw" "soft" "bg" ];
+  };
+
   networking = {
     firewall = {
       allowedTCPPorts = [
