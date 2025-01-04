@@ -77,13 +77,13 @@
   fileSystems."/ocean" = {
     device = "venus.home.daz.cat.:/ocean";
     fsType = "nfs";
-    options = [ "noauto" "ro" "soft" "bg" ];
+    options = [ "ro" "soft" "bg" ];
   };
 
   fileSystems."/ocean/active" = {
     device = "venus.home.daz.cat.:/ocean/active";
     fsType = "nfs";
-    options = [ "noauto" "ro" "soft" "bg" ];
+    options = [ "ro" "soft" "bg" ];
   };
 
   environment.systemPackages = with pkgs; [
