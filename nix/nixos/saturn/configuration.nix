@@ -26,14 +26,8 @@
   # biggest(?) available font
   console.font = "iso01-12x22";
 
-  hardware.nvidia.open = true;  # recommended for GTX 1650
-  # https://nixos.wiki/wiki/Nvidia#sync_mode
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.prime = {
-    sync.enable = true;
-    nvidiaBusId = "PCI:1:0:0";
-    intelBusId = "PCI:0:2:0";
-  };
+  # https://nixos.wiki/wiki/Nvidia#Disable_Nvidia_dGPU_completely
+  boot.blacklistedKernelModules = [ "nouveau" "nvidia" "nvidia_drm" "nvidia_modeset" ];
 
   hardware.opentabletdriver.enable = true;
 
@@ -46,7 +40,13 @@
     # https://github.com/erpalma/throttled/issues/215
     "msr.allow_writes=on"
   ];
-  boot.extraModprobeConfig = "options kvm_intel nested=1";
+  boot.extraModprobeConfig = ''
+    options kvm_intel nested=1
+
+    # https://nixos.wiki/wiki/Nvidia#Disable_Nvidia_dGPU_completely
+    blacklist nouveau
+    options nouveau modeset=0
+  '';
 
   networking = {
     firewall = {
@@ -109,6 +109,16 @@
 
     # fx2la
     SUBSYSTEMS=="usb", ATTR{idVendor}=="0925", ATTR{idProduct}=="3881", MODE:="0666"
+
+    # https://nixos.wiki/wiki/Nvidia#Disable_Nvidia_dGPU_completely
+    # Remove NVIDIA USB xHCI Host Controller devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
+    # Remove NVIDIA USB Type-C UCSI devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000", ATTR{power/control}="auto", ATTR{remove}="1"
+    # Remove NVIDIA Audio devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{power/control}="auto", ATTR{remove}="1"
+    # Remove NVIDIA VGA/3D controller devices
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
   '';
 
   services.tailscale = {
