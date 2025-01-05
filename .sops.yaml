@@ -2,6 +2,7 @@ keys:
   - &admin_delan age1pc7cmkdfey3jhed2vhesc75fuqql2ugf8h7hzsspsal3h8uhvefsdpy4rh
   - &server_colo age1wv47cgcly0s6au7kdxuf4gahstae2wvjwdeavxqdav26u2k6jfhsslzqrp
   - &server_jupiter age1mqmchmvxy28r7c7das55fnq3wjq4lxl3mena7tj0fcfx04zc49jqnsf4jp
+  - &server_saturn age17rmypwg9jxz5jxcplcxywj45mjtdt8uwf668x7d4vfsw55k25yks7n5s8l
   - &server_tol age12k7znvp242p8dwnmwxas47498wkm5tvt0jgs65wh3kaluuvnzv3q5586z8
   - &server_venus age1422x8d7a3sr48xz9ttfqw5f4sfy8j8zfle9msfjl9u905tk9e4tq4du8yc
 creation_rules:
@@ -11,6 +12,7 @@ creation_rules:
         - *admin_delan
         - *server_colo
         - *server_jupiter
+        - *server_saturn
         - *server_tol
         - *server_venus
   - path_regex: secrets/colo/[^/]+\.(yaml|json|env|ini)$

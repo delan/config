@@ -86,9 +86,11 @@
       ];
     };
     nixosConfigurations.saturn = unstable.lib.nixosSystem {
+      # deployified
       system = "x86_64-linux";
       modules = [
         saturn/configuration.nix
+        sops-nix.nixosModules.sops
         nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen2
         hm.nixosModules.home-manager
         {
