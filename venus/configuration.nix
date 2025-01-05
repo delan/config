@@ -364,10 +364,15 @@
       /ocean 172.19.42.6(ro,all_squash)
       /ocean/active 172.19.42.6(ro,all_squash)
 
-      /ocean jupiter.tailcdc44b.ts.net.(rw)
-      /ocean/active jupiter.tailcdc44b.ts.net.(rw)
-      /ocean/private jupiter.tailcdc44b.ts.net.(rw)
-      /ocean/public jupiter.tailcdc44b.ts.net.(rw)
+      # jupiter.tailcdc44b.ts.net.
+      # if nfs-mountd.service starts before tailscale is up, names will fail to
+      # resolve here, breaking the exports. mount -v will fail with “mount(2):
+      # Permission denied” and “access denied by server while mounting”.
+      # <https://github.com/tailscale/tailscale/issues/11504>
+      /ocean 100.64.202.115(rw)
+      /ocean/active 100.64.202.115(rw)
+      /ocean/private 100.64.202.115(rw)
+      /ocean/public 100.64.202.115(rw)
     '';
   };
 
