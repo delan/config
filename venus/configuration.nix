@@ -2,6 +2,7 @@
 # - sudo smbpasswd -a scanner
 # - sed s/hunter2/.../ iscsi-etc-target-saveconfig.json | sudo tee /etc/target/saveconfig.json
 # - cd /config/nix/nixos/venus; sudo tailscale up; sudo tailscale cert venus.tailcdc44b.ts.net
+# - sudo podman network create arr
 { config, lib, options, modulesPath, pkgs, ... }: with lib; {
   imports = [ ../lib ];
 
@@ -463,6 +464,7 @@
     sonarr = {
       image = "ghcr.io/hotio/sonarr:latest";  # release-4.0.1.929
       ports = ["20010:8989"];
+      networks = ["arr"];
       environment = {
         TZ = "Australia/Perth";
         PUID = "2001";
@@ -477,6 +479,7 @@
     radarr = {
       image = "ghcr.io/hotio/radarr:release";  # release-5.2.6.8376
       ports = ["20020:7878"];
+      networks = ["arr"];
       environment = {
         TZ = "Australia/Perth";
         PUID = "2002";
@@ -491,6 +494,7 @@
     recyclarr = {
       image = "ghcr.io/recyclarr/recyclarr";  # 6.0.2
       user = "2003:2003";
+      networks = ["arr"];
       environment = {
         TZ = "Australia/Perth";
       };
@@ -502,6 +506,7 @@
     prowlarr = {
       image = "ghcr.io/hotio/prowlarr";  # release-1.12.2.4211
       ports = ["20040:9696"];
+      networks = ["arr"];
       environment = {
         TZ = "Australia/Perth";
         PUID = "2004";
@@ -515,6 +520,7 @@
     bazarr = {
       image = "ghcr.io/hotio/bazarr:latest";  # release-1.4.0
       ports = ["20050:6767"];
+      networks = ["arr"];
       environment = {
         TZ = "Australia/Perth";
         PUID = "2005";
@@ -529,6 +535,7 @@
     flaresolverr = {
       image = "ghcr.io/flaresolverr/flaresolverr:latest";
       ports = ["20060:8191"];
+      networks = ["arr"];
       environment = {
         TZ = "Australia/Perth";
         PUID = "2006";
