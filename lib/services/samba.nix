@@ -39,7 +39,7 @@
           # “No child processes” error?
           # make sure samba can find the shebang (/bin/sh works, /usr/bin/env zsh does not)
           # otherwise make sure you chown root + chmod 755
-          "dfree command" = "/etc/nixos/venus/ocean-dfree.sh";
+          "dfree command" = "/run/current-system/sw/bin/ocean-dfree.sh";
         };
         scanner = {
           path = "/ocean/active/scanner";
