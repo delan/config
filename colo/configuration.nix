@@ -369,6 +369,13 @@
     };
     jitsi-videobridge = {
       openFirewall = true;
+      nat = {
+        # work around “No valid IP addresses available for harvesting.”
+        # see also <https://github.com/jitsi/jitsi-meet/issues/14287>
+        # <https://github.com/NixOS/nixpkgs/commit/61cf88212df30c8758a621086b9dafd06e7a551f>
+        publicAddress = "103.108.231.122";
+        localAddress = "103.108.231.122";
+      };
       extraProperties = {
         "org.ice4j.ipv6.DISABLED" = "true";  # work around abb ipv6 dropouts
       };
