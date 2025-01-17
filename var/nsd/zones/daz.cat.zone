@@ -1,4 +1,4 @@
-@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2024061900 600 60 1814400 60 )
+@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2025011700 600 60 1814400 60 )
 @                                       60      IN  NS      ns.daz.cat.
 @                                       60      IN  NS      ns2.afraid.org.
 @                                       60      IN  NS      ns2.he.net.
@@ -55,6 +55,7 @@ nyaaa                                   60      IN  AAAA    2403:580e:214:0:2e0:
 debium                                  60      IN  AAAA    2403:580e:214:0:5054:00ff:fee4:a953
 vm.venus                                60      IN  AAAA    fd36:09ef:4322:29ce::1
 storage.venus                           60      IN  AAAA    fd36:09ef:4322:29ce:5054:ff:fe11:6c8b
+test                                    60      IN  CNAME   colo.daz.cat.
 go                                      60      IN  CNAME   colo.daz.cat.
 bucket                                  60      IN  CNAME   colo.daz.cat.
 memories                                60      IN  CNAME   colo.daz.cat.
