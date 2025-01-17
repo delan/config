@@ -3,7 +3,22 @@ set -eu
 
 printf '<%s> ' "$@" | logger -f /dev/stdin
 cd /var/nsd/zones
-zone=acme.daz.cat
+zone=$1; shift
+
+case "$zone" in
+  (acme.daz.cat)
+    ns=ns.daz.cat.
+    contact=delan.azabani.com.
+    ;;
+  (acme.shuppy.org)
+    ns=ns.shuppy.org.
+    contact=shuppy.fastmail.com.
+    ;;
+  (*)
+    >&2 printf 'fatal: bad zone %s' "$zone"
+    exit 1
+    ;;
+esac
 
 case "$1" in
   (present)
@@ -40,8 +55,8 @@ case "$1" in
     ;;
 esac
 
-> $zone.new printf '@ 60 IN SOA ns.daz.cat. delan.azabani.com. ( %s 600 60 1814400 60 )\n' "$newserial"
->> $zone.new printf '@ 60 IN NS ns.daz.cat.\n'
+> $zone.new printf '@ 60 IN SOA %s %s ( %s 600 60 1814400 60 )\n' "$ns" "$contact" "$newserial"
+>> $zone.new printf '@ 60 IN NS %s\n' "$ns"
 >> $zone.new cat $zone.in
 
 colordiff -u $zone.zone $zone.new || :

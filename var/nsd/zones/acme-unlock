@@ -1,6 +1,6 @@
 #!/bin/sh
 set -eu
 
-zone=acme.daz.cat
+zone=$1; shift
 
 mv $zone.lock $zone.serial
