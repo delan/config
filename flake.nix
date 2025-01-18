@@ -106,6 +106,27 @@
         }
       ];
     };
+    nixosConfigurations.frappetop = unstable.lib.nixosSystem {
+      # deployified
+      system = "x86_64-linux";
+      modules = [
+        frappetop/configuration.nix
+        sops-nix.nixosModules.sops
+        # nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen2
+        hm.nixosModules.home-manager
+        {
+          home-manager.users.delan = import ./home.nix;
+
+          # use same nixpkgs as system, which has allowUnfree
+          home-manager.useGlobalPkgs = true;
+
+          # TODO do we need this? affects path to hm-session-vars.sh!
+          # https://nix-community.github.io/home-manager/index.html#sec-install-nixos-module
+          # https://nix-community.github.io/home-manager/index.html#sec-flakes-nixos-module
+          # home-manager.useUserPackages = true;
+        }
+      ];
+    };
     nixosConfigurations.jupiter = unstable.lib.nixosSystem {
       # deployified
       system = "x86_64-linux";
