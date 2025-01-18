@@ -198,6 +198,7 @@
         /run/current-system/sw/bin/deploy-acme-to-stratus.sh
       '';
       extraDomainNames = [
+        "test.daz.cat"
         "opacus.daz.cat"
         "stratus.daz.cat"
         "bucket.daz.cat"
@@ -313,6 +314,11 @@
         "funny.computer.daz.cat" = opacus // sslRelax;
         "go.daz.cat" = opacus // sslForce;
         "xn--blhaj-nra.daz.cat" = opacus // sslForce;
+        "test.daz.cat" = {
+          locations."/" = proxy // {
+            proxyPass = "http://100.64.202.115:8000";
+          };
+        } // sslForce;
         "azabani.com" = opacus // sslForce;
         "www.azabani.com" = opacus // sslForce;
         "ar1as.space" = opacus // sslForce;
