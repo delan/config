@@ -593,6 +593,7 @@
         MAX_PLAYERS = "5";
         OVERRIDE_SERVER_PROPERTIES = "true";
         MAX_TICK_TIME = "-1";
+        CREATE_CONSOLE_IN_PIPE = "true";
       };
       volumes = [
         "/ocean/active/services/gtnh:/data"
