@@ -1,4 +1,4 @@
-@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2025011701 600 60 1814400 60 )
+@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2025011800 600 60 1814400 60 )
 @                                       60      IN  NS      ns.daz.cat.
 @                                       60      IN  NS      ns2.afraid.org.
 @                                       60      IN  NS      ns2.he.net.
@@ -49,6 +49,7 @@ storage                                 60      IN  AAAA    2403:580e:214:0:5054
 uranium                                 60      IN  AAAA    2403:580e:214:0:69b3:0a38:9407:ab53
 saturn                                  60      IN  AAAA    2403:580e:214:0:cccc:ffff:feee:5
 wifi.saturn                             60      IN  AAAA    2403:580e:214:0:fae4:e3ff:fe40:75e
+frappetop                               60      IN  AAAA    2403:580e:214:0:e30b:b24b:761d:c76b
 uranus                                  60      IN  AAAA    2403:580e:214:0:16da:e9ff:fe0c:223c
 ark-1                                   60      IN  AAAA    2403:580e:214:0:20b:abff:fe26:ed67
 ark-2                                   60      IN  AAAA    2403:580e:214:0:2d0:c9ff:fea9:6da8
