@@ -194,6 +194,7 @@
 
         (writeScriptBin "midi.sh" (readFile ../bin/midi.sh))
         (writeScriptBin "screenshot.sh" (readFile ../bin/screenshot.sh))
+        (writeScriptBin "slock" (readFile ../bin/slock))
         (writeScriptBin "smart.sh" (readFile ../bin/smart.sh))
         (writeScriptBin "ssg.sh" (readFile ../bin/ssg.sh))
         (writeScriptBin "sync.sh" (readFile ../bin/sync.sh))
