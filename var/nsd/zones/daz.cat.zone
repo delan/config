@@ -1,4 +1,4 @@
-@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2025011700 600 60 1814400 60 )
+@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2025011701 600 60 1814400 60 )
 @                                       60      IN  NS      ns.daz.cat.
 @                                       60      IN  NS      ns2.afraid.org.
 @                                       60      IN  NS      ns2.he.net.
@@ -8,6 +8,7 @@ acme                                    60      IN  NS      ns.daz.cat.
 @                                       60      IN  CAA 128 issuewild ";"
 @                                       60      IN  CAA 0   iodef "mailto:delan@azabani.com"
 _acme-challenge                         60      IN  CNAME   _acme-challenge.daz.cat.acme
+_acme-challenge.test                    60      IN  CNAME   _acme-challenge.test.daz.cat.acme
 _acme-challenge.colo                    60      IN  CNAME   _acme-challenge.colo.daz.cat.acme
 _acme-challenge.opacus                  60      IN  CNAME   _acme-challenge.opacus.daz.cat.acme
 _acme-challenge.stratus                 60      IN  CNAME   _acme-challenge.stratus.daz.cat.acme
