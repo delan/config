@@ -50,6 +50,10 @@
         "/" = { device = "cuffs/root"; fsType = "zfs"; };
         "/home" = { device = "cuffs/home"; fsType = "zfs"; };
         "/boot" = { device = cfg.bootDevice; fsType = "vfat"; };
+        "/mnt/sd" = {
+          device = "/dev/disk/by-uuid/4662-B6FE"; fsType = "vfat";
+          options = ["user" "noauto" "time_offset=480"];  # UTC+8
+        };
       };
 
       users.users."${config.internal.initialUser}" = {
