@@ -150,6 +150,7 @@ in {
     termite
     unzip  # for servo/ci-runners
     usbutils
+    uv
   ];
 
   fonts.fontconfig.defaultFonts.monospace = [ "monofur" ];
