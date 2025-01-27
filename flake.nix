@@ -22,9 +22,11 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "unstable";
+    git-diffie.url = "github:the6p4c/git-diffie";
+    git-diffie.inputs.nixpkgs.follows = "unstable";
   };
 
-  outputs = inputs@{ self, nixos2211, nixos2305, nixos2311, nixos2405, zfs_2_2_4, unstable, hm2211, hm2305, hm2311, hm2405, hm, nixos-hardware, sops-nix, ... }:
+  outputs = inputs@{ self, nixos2211, nixos2305, nixos2311, nixos2405, zfs_2_2_4, unstable, hm2211, hm2305, hm2311, hm2405, hm, nixos-hardware, sops-nix, git-diffie, ... }:
   let
     pkgs2311 = import nixos2311 {
       system = "x86_64-linux";
@@ -38,6 +40,10 @@
       system = "x86_64-linux";
       config = { allowUnfree = true; };
     };
+    git-diffie-module = { pkgs, ... }: {
+      nixpkgs.overlays = [ git-diffie.overlays.default ];
+      environment.systemPackages = [ pkgs.git-diffie ];
+    };
   in {
     # NOTE: deployified machines use <https://git.isincredibly.gay/srxl/gemstone-labs.nix/src/commit/21e905f71929a54b5f5e25ce9dbe2e5cf0bc4fc9/deploy>
     # servers
@@ -47,6 +53,7 @@
       modules = [
         venus/configuration.nix
         sops-nix.nixosModules.sops
+        git-diffie-module
       ];
     };
     nixosConfigurations.colo = unstable.lib.nixosSystem {
@@ -55,6 +62,7 @@
       modules = [
         colo/configuration.nix
         sops-nix.nixosModules.sops
+        git-diffie-module
       ];
     };
     nixosConfigurations.tol = unstable.lib.nixosSystem {
@@ -63,6 +71,7 @@
       modules = [
         tol/configuration.nix
         sops-nix.nixosModules.sops
+        git-diffie-module
       ];
     };
 
@@ -91,6 +100,7 @@
       modules = [
         saturn/configuration.nix
         sops-nix.nixosModules.sops
+        git-diffie-module
         nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen2
         hm.nixosModules.home-manager
         {
@@ -112,6 +122,7 @@
       modules = [
         frappetop/configuration.nix
         sops-nix.nixosModules.sops
+        git-diffie-module
         # nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen2
         hm.nixosModules.home-manager
         {
@@ -133,6 +144,7 @@
       modules = [
         jupiter/configuration.nix
         sops-nix.nixosModules.sops
+        git-diffie-module
         hm.nixosModules.home-manager
         {
           home-manager.users.delan = import ./home.nix;
