@@ -14,6 +14,20 @@
 
     environment.systemPackages = with pkgs; [
       i3lock
+
+      # script that ~/.xinitrc (home.nix) runs to start i3. by registering it
+      # as a nixos window manager and running it with the nixos session wrapper,
+      # we get a bunch of helpful features for free, like loading ~/.profile and
+      # ~/.Xresources, piping output to syslog, and setting up dbus correctly.
+      # see <nixpkgs>/nixos/modules/services/x11/display-managers/default.nix,
+      # `let` `xsessionWrapper` and `xsession`.
+      (writeScriptBin "xinitrc" ''
+        #!/bin/sh
+        set -eu
+        session_name=none+i3-unset-shell
+        session_exec=$('${pkgs.ripgrep}/bin/rg' -o --pcre2 '(?<=^Exec=).*' '${config.services.xserver.displayManager.sessionData.desktops}'/share/xsessions/"$session_name.desktop")
+        exec '${config.services.xserver.displayManager.sessionData.wrapper}' "$session_exec"
+      '')
     ];
 
     programs = {
@@ -52,6 +66,19 @@
         '';
 
         windowManager.i3.enable = true;
+        displayManager.startx.enable = true;  # don’t install lightdm
+
+        # FIXME: alacritty opens with bash instead of zsh unless we register a
+        # window manager that unsets $SHELL, which for some reason is unset by
+        # lightdm but set to bash by startx
+        displayManager.session = [{
+          manage = "window";
+          name = "i3-unset-shell";
+          start = ''
+            env -u SHELL -- ${pkgs.i3}/bin/i3 &
+            waitPID=$!
+          '';
+        }];
       };
 
       libinput = {

@@ -267,4 +267,9 @@
       enable = true;
     };
   };
+
+  # see environment.systemPackages in lib/interactive.nix
+  home.file.".xinitrc".text = ''
+    xinitrc
+  '';
 }

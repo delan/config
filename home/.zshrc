@@ -42,3 +42,12 @@ compinit
 
 # NixOS: interactive
 export NIX_AUTO_RUN=1
+
+# if we are an interactive login shell on tty1, startx instead
+case "$-" in
+(*i*l*)
+	case "$(tty)" in
+	(*/tty1) exec startx ;;
+	esac
+	;;
+esac
