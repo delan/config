@@ -1,5 +1,9 @@
 {
   inputs = {
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
+      inputs.nixpkgs.follows = "unstable";
+    };
     nixos2211.url = "github:nixos/nixpkgs/nixos-22.11";
     nixos2305.url = "github:nixos/nixpkgs/nixos-23.05";
     nixos2311.url = "github:nixos/nixpkgs/nixos-23.11";
@@ -26,7 +30,7 @@
     git-diffie.inputs.nixpkgs.follows = "unstable";
   };
 
-  outputs = inputs@{ self, nixos2211, nixos2305, nixos2311, nixos2405, zfs_2_2_4, unstable, hm2211, hm2305, hm2311, hm2405, hm, nixos-hardware, sops-nix, git-diffie, ... }:
+  outputs = inputs@{ self, lix-module, nixos2211, nixos2305, nixos2311, nixos2405, zfs_2_2_4, unstable, hm2211, hm2305, hm2311, hm2405, hm, nixos-hardware, sops-nix, git-diffie, ... }:
   let
     pkgs2311 = import nixos2311 {
       system = "x86_64-linux";
@@ -52,6 +56,7 @@
       system = "x86_64-linux";
       modules = [
         venus/configuration.nix
+        lix-module.nixosModules.default
         sops-nix.nixosModules.sops
         git-diffie-module
       ];
@@ -61,6 +66,7 @@
       system = "x86_64-linux";
       modules = [
         colo/configuration.nix
+        lix-module.nixosModules.default
         sops-nix.nixosModules.sops
         git-diffie-module
       ];
@@ -70,6 +76,7 @@
       system = "x86_64-linux";
       modules = [
         tol/configuration.nix
+        lix-module.nixosModules.default
         sops-nix.nixosModules.sops
         git-diffie-module
       ];
@@ -99,6 +106,7 @@
       system = "x86_64-linux";
       modules = [
         saturn/configuration.nix
+        lix-module.nixosModules.default
         sops-nix.nixosModules.sops
         git-diffie-module
         nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen2
@@ -121,6 +129,7 @@
       system = "x86_64-linux";
       modules = [
         frappetop/configuration.nix
+        lix-module.nixosModules.default
         sops-nix.nixosModules.sops
         git-diffie-module
         # nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen2
@@ -143,6 +152,7 @@
       system = "x86_64-linux";
       modules = [
         jupiter/configuration.nix
+        lix-module.nixosModules.default
         sops-nix.nixosModules.sops
         git-diffie-module
         hm.nixosModules.home-manager
