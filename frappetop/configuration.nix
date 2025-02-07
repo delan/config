@@ -42,12 +42,14 @@
     nfsOverTailscale = {
       after = ["tailscaled.service"];
       bindsTo = ["tailscaled.service"];
+      wantedBy = ["remote-fs.target"];
       # make sure we get the Default Dependencies for network mounts (see systemd.mount(5)),
       # ensuring network-online.target shows up in `systemctl list-dependencies ocean.mount`;
       # this is more “correct” but probably not critical since `After=tailscaled.service`
       type = "nfs";
-      # removed `bg` because systemd.automount(5) can do something similar much more easily,
-      # and it only really works correctly when specified in fstab(5); per systemd.mount(5)...
+      # translated the fstab(5) `rw,soft,bg` to systemd.mount(5); systemd.automount(5) sounds like
+      # it would be nice here, but i get ordering cycles with `WantedBy=remote-fs.target` for some
+      # reason. these ordering cycles cause random services to not longer get started on boot :):)
       # “The NFS mount option bg for NFS background mounts as documented in nfs(5) is detected by
       # systemd-fstab-generator and the options are transformed so that systemd fulfills the
       # job-control implications of that option. Specifically systemd-fstab-generator acts as
@@ -55,7 +57,10 @@
       # "fg,nofail" was appended. Depending on specific requirements, it may be appropriate to
       # provide some of these options explicitly, or to make use of the "x-systemd.automount"
       # option described below instead of using "bg".”
-      options = "rw,soft";
+      options = "retry=10000,rw,soft,fg,nofail";
+      mountConfig = {
+        TimeoutSec = "infinity";
+      };
     };
   in [
     (nfsOverTailscale // {
@@ -78,26 +83,6 @@
       what = "100.95.253.127:/ocean/public";
       where = "/ocean/public";
     })
-  ];
-  # `WantedBy=remote-fs.target` enables automatic mounting on boot; automount units (as opposed to
-  # normal mount units) enable lazy mounting on filesystem access?
-  systemd.automounts = [
-    {
-      where = "/ocean";
-      wantedBy = ["remote-fs.target"];
-    }
-    {
-      where = "/ocean/active";
-      wantedBy = ["remote-fs.target"];
-    }
-    {
-      where = "/ocean/private";
-      wantedBy = ["remote-fs.target"];
-    }
-    {
-      where = "/ocean/public";
-      wantedBy = ["remote-fs.target"];
-    }
   ];
 
   nix.settings.sandbox = true;
