@@ -177,6 +177,8 @@
         };
       };
     };
+
+    blueman-applet.enable = true;
   };
 
   programs = {

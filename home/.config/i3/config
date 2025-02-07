@@ -42,6 +42,7 @@ for_window [instance="^dashcam viewer[.]exe$" class="^dashcam viewer[.]exe$"] fl
 for_window [class="."] title_window_icon yes
 
 exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
 exec --no-startup-id ssh-add /home/delan/.ssh/id_rsa
 exec --no-startup-id xmodmap /home/delan/.Xmodmap
 # exec --no-startup-id /home/delan/bin/midi.sh
