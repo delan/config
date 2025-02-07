@@ -71,6 +71,7 @@ bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%, exec
 bindsym $mod+l exec --no-startup-id "dunstctl set-paused true; i3lock -n -c 000000; dunstctl set-paused false"
 bindsym $mod+c exec alacritty -e zsh -c 'rink -V && rink'
 bindsym $mod+e exec code
+bindsym $mod+Shift+e exec pcmanfm
 bindsym $mod+w exec firefox
 bindsym $mod+i exec "alacritty --class Alacritty,weechat -e weechat"
 
