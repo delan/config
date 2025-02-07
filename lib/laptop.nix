@@ -17,6 +17,17 @@
         logind.extraConfig = ''
           HandleLidSwitchExternalPower=ignore
         '';
+
+        # Energy Performance Preference control for modern cpus
+        # <https://wiki.archlinux.org/title/CPU_frequency_scaling#Autonomous_frequency_scaling>
+        cpupower-gui.enable = true;
+        auto-epp = {
+          enable = true;
+          settings.Settings = {
+            epp_state_for_AC = "balance_performance";  # same as firmware default
+            epp_state_for_BAT = "power";  # firmware default is balance_power
+          };
+        };
       };
 
       hardware.bluetooth = {
