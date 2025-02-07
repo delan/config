@@ -47,6 +47,7 @@
     kicad
     libnotify
     libreoffice
+    lxappearance
     maim
     man-pages
     mc
@@ -266,6 +267,17 @@
     feh = {
       enable = true;
     };
+  };
+
+  gtk.enable = true;
+  gtk.iconTheme = {
+    package = pkgs.kdePackages.breeze-icons;
+    name = "breeze";
+  };
+  qt.enable = true;
+  qt.style = {
+    package = pkgs.kdePackages.breeze;
+    name = "breeze";
   };
 
   # see environment.systemPackages in lib/interactive.nix
