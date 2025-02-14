@@ -239,9 +239,6 @@
     systemCronJobs = ["0 21 * * * root sync.sh"];
   };
 
-  # for sshfs -o allow_other,default_permissions,idmap=user
-  programs.fuse.userAllowOther = true;
-
   networking.firewall.allowedTCPPorts = [
     80 443 8443 # nginx
     8123 # home-assistant

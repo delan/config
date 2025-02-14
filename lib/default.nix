@@ -180,6 +180,9 @@
         };
 
         ssh.startAgent = true;
+
+        # for sshfs -o allow_other,default_permissions,idmap=user
+        fuse.userAllowOther = true;
       };
 
       security.sudo.extraRules = [{
