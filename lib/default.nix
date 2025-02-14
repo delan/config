@@ -197,6 +197,7 @@
         nix-output-monitor # nixos-rebuild --log-format internal-json -v switch 2>&1 | nom --json
         nix-doc
 
+        (writeScriptBin "darktable-exported.sh" (readFile ../bin/darktable-exported.sh))
         (writeScriptBin "midi.sh" (readFile ../bin/midi.sh))
         (writeScriptBin "nef2jpg.sh" (readFile ../bin/nef2jpg.sh))
         (writeScriptBin "screenshot.sh" (readFile ../bin/screenshot.sh))
