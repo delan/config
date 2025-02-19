@@ -16,7 +16,6 @@
     #platformio
     alacritty
     aria2
-    ark
     atool
     bc
     bore
@@ -37,13 +36,15 @@
     gnome-font-viewer
     gnumake
     google-chrome
-    gwenview
     htop
     imagemagick
     inkscape
     jmtpfs
     jq
-    kdenlive
+    kdePackages.ark
+    kdePackages.gwenview
+    kdePackages.kdenlive
+    kdePackages.okular
     kicad
     libnotify
     libreoffice
@@ -64,7 +65,6 @@
     nodejs
     obs-studio
     obsidian
-    okular
     openjdk17
     opentabletdriver
     openvpn

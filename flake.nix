@@ -8,7 +8,6 @@
     nixos2305.url = "github:nixos/nixpkgs/nixos-23.05";
     nixos2311.url = "github:nixos/nixpkgs/nixos-23.11";
     nixos2405.url = "github:nixos/nixpkgs/nixos-24.05";
-    zfs_2_2_4.url = "github:nixos/nixpkgs/cec5812591bc6235f15b84bb55438661cb67f7d2";
     # Fix qemu crash on macOS guests (NixOS/nixpkgs#338598).
     # See also: <https://gitlab.com/qemu-project/qemu/-/commit/a8e63ff289d137197ad7a701a587cc432872d798>
     # Last version deployed before flakes was 68e7dce0a6532e876980764167ad158174402c6f.
@@ -30,13 +29,9 @@
     git-diffie.inputs.nixpkgs.follows = "unstable";
   };
 
-  outputs = inputs@{ self, lix-module, nixos2211, nixos2305, nixos2311, nixos2405, zfs_2_2_4, unstable, hm2211, hm2305, hm2311, hm2405, hm, nixos-hardware, sops-nix, git-diffie, ... }:
+  outputs = inputs@{ self, lix-module, nixos2211, nixos2305, nixos2311, nixos2405, unstable, hm2211, hm2305, hm2311, hm2405, hm, nixos-hardware, sops-nix, git-diffie, ... }:
   let
     pkgs2311 = import nixos2311 {
-      system = "x86_64-linux";
-      config = { allowUnfree = true; };
-    };
-    pkgs_zfs_2_2_4 = import zfs_2_2_4 {
       system = "x86_64-linux";
       config = { allowUnfree = true; };
     };
