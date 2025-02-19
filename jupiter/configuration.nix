@@ -169,12 +169,6 @@ in {
   };
 
   programs.sway.enable = true;
-  hardware.pulseaudio.enable = false;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
-  };
   services.dbus.enable = true;
   xdg.portal = {
     enable = true;

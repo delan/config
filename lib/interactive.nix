@@ -4,12 +4,17 @@
   };
 
   config = mkIf config.internal.interactive {
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      pulse.enable = true;
+    };
+
     hardware = {
-      pulseaudio.enable = mkDefault true;
+      pulseaudio.enable = false;
 
       # 32-bit game support
       graphics.enable32Bit = true;
-      pulseaudio.support32Bit = true;
     };
 
     environment.systemPackages = with pkgs; [
