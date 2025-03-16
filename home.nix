@@ -200,6 +200,9 @@
         github = {
           user = "delan";
         };
+        merge = {
+          conflictstyle = "diff3";
+        };
       };
     };
 
