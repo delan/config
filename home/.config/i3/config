@@ -46,6 +46,7 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id ssh-add /home/delan/.ssh/id_rsa
 exec --no-startup-id xmodmap /home/delan/.Xmodmap
 # exec --no-startup-id /home/delan/bin/midi.sh
+exec --no-startup-id feh --bg-fill .background-image
 
 # ssg
 # bindsym F16 exec --no-startup-id ssg.sh
