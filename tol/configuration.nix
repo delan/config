@@ -162,7 +162,7 @@
     plex = {
       # https://github.com/plexinc/pms-docker/blob/c7dd9df342c5b998042cae75179e24dd8f887630/docker-compose-host.yml.template
       # https://github.com/plexinc/pms-docker/blob/c7dd9df342c5b998042cae75179e24dd8f887630/README.md#parameters
-      image = "plexinc/pms-docker";
+      image = "plexinc/pms-docker:1.41.5.9522-a96edc606";
       environment = {
         TZ = "Australia/Perth";
         PLEX_UID = "2101";
