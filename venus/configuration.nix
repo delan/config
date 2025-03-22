@@ -39,6 +39,12 @@
     name = "venus.tailcdc44b.ts.net.key";
     owner = "nginx";
   };
+  sops.secrets.radarr-api-key = {
+    sopsFile = ../secrets/venus/containers.yaml;
+  };
+  sops.secrets.sonarr-api-key = {
+    sopsFile = ../secrets/venus/containers.yaml;
+  };
 
   # hardware-configuration.nix
   # merged below # boot.kernelModules = [ "kvm-intel" ];
@@ -444,6 +450,7 @@
       (system { name = "synclounge"; id = 2008; })
       (system { name = "gtnh"; id = 2009; })
       (system { name = "homepage"; id = 2010; })
+      (system { name = "decluttarr"; id = 2011; })
     ];
 
   virtualisation.oci-containers.containers = {
@@ -561,6 +568,50 @@
         PUID = "2010";
         PGID = "2010";
       };
+    };
+    decluttarr = {
+      image = "ghcr.io/manimatter/decluttarr:v1.50.2";
+      networks = ["arr"];
+      environment = {
+        TZ = "Australia/Perth";
+        PUID = "2011";
+        PGID = "2011";
+        REMOVE_TIMER = "10";
+        REMOVE_FAILED = "True";
+        REMOVE_FAILED_IMPORTS = "True";
+        REMOVE_METADATA_MISSING = "True";
+        REMOVE_MISSING_FILES = "True";
+        REMOVE_ORPHANS = "True";
+        REMOVE_SLOW = "True";
+        REMOVE_STALLED = "True";
+        REMOVE_UNMONITORED = "True";
+        RUN_PERIODIC_RESCANS = ''
+        {
+          "SONARR": {"MISSING": true, "CUTOFF_UNMET": true, "MAX_CONCURRENT_SCANS": 3, "MIN_DAYS_BEFORE_RESCAN": 7},
+          "RADARR": {"MISSING": true, "CUTOFF_UNMET": true, "MAX_CONCURRENT_SCANS": 3, "MIN_DAYS_BEFORE_RESCAN": 7}
+        }
+        '';
+
+        # Feature Settings
+        PERMITTED_ATTEMPTS = "3";
+        NO_STALLED_REMOVAL_QBIT_TAG = "Don't Kill";
+        MIN_DOWNLOAD_SPEED = "100";
+        FAILED_IMPORT_MESSAGE_PATTERNS = ''
+        [
+        "Not a Custom Format upgrade for existing",
+        "Not an upgrade for existing"
+        ]
+        '';
+
+        RADARR_URL = "http://radarr:7878/radarr";
+        # RADARR_KEY = "";
+
+        SONARR_URL = "http://sonarr:8989/sonarr";
+        # SONARR_KEY = "";
+
+        QBITTORRENT_URL = "http://172.19.42.2:20000";
+      };
+      environmentFiles = [config.sops.secrets.radarr-api-key.path config.sops.secrets.sonarr-api-key.path];
     };
     synclounge = {
       image = "synclounge/synclounge:5.2.35";
