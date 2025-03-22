@@ -77,13 +77,15 @@
   fileSystems."/ocean" = {
     device = "venus.home.daz.cat.:/ocean";
     fsType = "nfs";
-    options = [ "ro" "soft" "bg" ];
+    # <https://unix.stackexchange.com/questions/349264/fstab-mount-wait-for-network>
+    options = [ "ro" "soft" "bg" "_netdev" "x-systemd.after=network-online.target" ];
   };
 
   fileSystems."/ocean/active" = {
     device = "venus.home.daz.cat.:/ocean/active";
     fsType = "nfs";
-    options = [ "ro" "soft" "bg" ];
+    # <https://unix.stackexchange.com/questions/349264/fstab-mount-wait-for-network>
+    options = [ "ro" "soft" "bg" "_netdev" "x-systemd.after=network-online.target" ];
   };
 
   environment.systemPackages = with pkgs; [
