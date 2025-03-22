@@ -276,7 +276,9 @@
       # (it only exists in the deploying machine’s store).
       credentialsFile = pkgs.copyPathToStore ./acme-env.daz.txt;
       dnsProvider = "exec";
-      extraDomainNames = [];
+      extraDomainNames = [
+        "homepage.venus.daz.cat"
+      ];
     };
   };
   services.nginx = {
@@ -338,13 +340,17 @@
         "/bazarr/" = proxy // {
           proxyPass = "http://127.0.0.1:20050";
         };
-        "/homepage/" = proxy // {
-          proxyPass = "http://127.0.0.1:20070";
-        };
       };
     in {
       "venus.daz.cat" = sslForce // sslAcme // {
         locations = venus;
+      };
+      "homepage.venus.daz.cat" = sslForce // sslAcme // {
+        locations = {
+          "/" = proxy // {
+            proxyPass = "http://127.0.0.1:20070";
+          };
+        };
       };
       "venus.tailcdc44b.ts.net:8443" = {
         listen = [{
@@ -564,7 +570,7 @@
         "/ocean/active/services/homepage:/app/config"
       ];
       environment = {
-        HOMEPAGE_ALLOWED_HOSTS = "venus.daz.cat,venus.home.daz.cat";
+        HOMEPAGE_ALLOWED_HOSTS = "homepage.venus.daz.cat";
         PUID = "2010";
         PGID = "2010";
       };
