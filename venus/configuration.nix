@@ -444,7 +444,7 @@
 
   virtualisation.oci-containers.containers = {
     homeassistant = {
-      image = "ghcr.io/home-assistant/home-assistant:stable";  # 2024.1.5
+      image = "ghcr.io/home-assistant/home-assistant:2025.3.4";  
       environment = {
         TZ = "Australia/Perth";
       };
@@ -459,7 +459,7 @@
       ];
     };
     sonarr = {
-      image = "ghcr.io/hotio/sonarr:latest";  # release-4.0.1.929
+      image = "ghcr.io/hotio/sonarr:release-4.0.14.2939";
       ports = ["20010:8989"];
       networks = ["arr"];
       environment = {
@@ -474,7 +474,7 @@
       ];
     };
     radarr = {
-      image = "ghcr.io/hotio/radarr:release";  # release-5.2.6.8376
+      image = "ghcr.io/hotio/radarr:release-5.20.2.9777";
       ports = ["20020:7878"];
       networks = ["arr"];
       environment = {
@@ -489,7 +489,7 @@
       ];
     };
     recyclarr = {
-      image = "ghcr.io/recyclarr/recyclarr";  # 6.0.2
+      image = "ghcr.io/recyclarr/recyclarr:7.4.1";
       user = "2003:2003";
       networks = ["arr"];
       environment = {
@@ -501,7 +501,7 @@
       ];
     };
     prowlarr = {
-      image = "ghcr.io/hotio/prowlarr";  # release-1.12.2.4211
+      image = "ghcr.io/hotio/prowlarr:release-1.32.2.4987";
       ports = ["20040:9696"];
       networks = ["arr"];
       environment = {
@@ -515,7 +515,7 @@
       ];
     };
     bazarr = {
-      image = "ghcr.io/hotio/bazarr:latest";  # release-1.4.0
+      image = "ghcr.io/hotio/bazarr:release-1.5.1";
       ports = ["20050:6767"];
       networks = ["arr"];
       environment = {
@@ -530,7 +530,7 @@
       ];
     };
     flaresolverr = {
-      image = "ghcr.io/flaresolverr/flaresolverr:latest";
+      image = "ghcr.io/flaresolverr/flaresolverr:v3.3.21";
       ports = ["20060:8191"];
       networks = ["arr"];
       environment = {
@@ -546,7 +546,7 @@
       ];
     };
     synclounge = {
-      image = "synclounge/synclounge:latest";
+      image = "synclounge/synclounge:5.2.35";
       ports = ["20080:8088"];
       user = "2008:2008";
       environment = {
