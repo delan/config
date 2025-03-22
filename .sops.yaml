@@ -1,5 +1,6 @@
 keys:
   - &admin_delan age1pc7cmkdfey3jhed2vhesc75fuqql2ugf8h7hzsspsal3h8uhvefsdpy4rh
+  - &admin_aria age1572x5d8d0svqkw70ah74774f7uq9u59fjhp8exfx0u3t49m09smqdj8ls0
   - &server_colo age1wv47cgcly0s6au7kdxuf4gahstae2wvjwdeavxqdav26u2k6jfhsslzqrp
   - &server_jupiter age1mqmchmvxy28r7c7das55fnq3wjq4lxl3mena7tj0fcfx04zc49jqnsf4jp
   - &server_saturn age17rmypwg9jxz5jxcplcxywj45mjtdt8uwf668x7d4vfsw55k25yks7n5s8l
@@ -11,6 +12,7 @@ creation_rules:
     key_groups:
     - age:
         - *admin_delan
+        - *admin_aria
         - *server_colo
         - *server_jupiter
         - *server_saturn
@@ -21,9 +23,11 @@ creation_rules:
     key_groups:
     - age:
         - *admin_delan
+        - *admin_aria
         - *server_colo
   - path_regex: secrets/venus/[^/]+\.(yaml|json|env|ini)$
     key_groups:
     - age:
         - *admin_delan
+        - *admin_aria
         - *server_venus
