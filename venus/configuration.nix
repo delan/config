@@ -332,6 +332,9 @@
         "/bazarr/" = proxy // {
           proxyPass = "http://127.0.0.1:20050";
         };
+        "/homepage/" = proxy // {
+          proxyPass = "http://127.0.0.1:20070";
+        };
       };
     in {
       "venus.daz.cat" = sslForce // sslAcme // {
@@ -440,6 +443,7 @@
       (system { name = "scanner"; id = 2007; })
       (system { name = "synclounge"; id = 2008; })
       (system { name = "gtnh"; id = 2009; })
+      (system { name = "homepage"; id = 2010; })
     ];
 
   virtualisation.oci-containers.containers = {
@@ -544,6 +548,19 @@
         "/ocean/active/services/bazarr:/config"
         "/ocean/active:/ocean/active"
       ];
+    };
+    homepage = {
+      image = "ghcr.io/gethomepage/homepage:v1.0.4";
+      ports = ["20070:3000"];
+      networks = ["arr"];
+      volumes = [
+        "/ocean/active/services/homepage:/app/config"
+      ];
+      environment = {
+        HOMEPAGE_ALLOWED_HOSTS = "venus.daz.cat,venus.home.daz.cat";
+        PUID = "2010";
+        PGID = "2010";
+      };
     };
     synclounge = {
       image = "synclounge/synclounge:5.2.35";
