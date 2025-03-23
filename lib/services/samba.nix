@@ -47,6 +47,12 @@
           "guest ok" = "no";
           "hide dot files" = "no";
         };
+        paperless = {
+          path = "/ocean/active/services/paperless/inbox";
+          "read only" = "no";
+          "guest ok" = "no";
+          "hide dot files" = "no";
+        };
       };
     };
 
