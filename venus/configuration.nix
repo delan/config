@@ -630,10 +630,23 @@
         "/ocean/active/services/paperless/redisdata:/data"
       ];
     };
+    paperlessdb = {
+      image = "docker.io/library/postgres:16.8";
+      networks = ["paperless"];
+      user = "2012:2012";
+      volumes = [
+        "/ocean/active/services/paperless/pgdata:/var/lib/postgresql/data"
+      ];
+      environment = {
+        POSTGRES_DB = "paperless";
+        POSTGRES_USER = "paperless";
+        POSTGRES_PASSWORD = "paperless";
+      };
+    };
     paperless = {
       # <https://github.com/paperless-ngx/paperless-ngx/blob/main/docker/compose/docker-compose.sqlite.yml>
       image = "ghcr.io/paperless-ngx/paperless-ngx:2.14.7";
-      dependsOn = [ "broker" ];
+      dependsOn = [ "broker" "paperlessdb" ];
       networks = ["paperless"];
       ports = ["20090:8000"];
       volumes = [
@@ -653,7 +666,7 @@
         USE_X_FORWARD_PORT = "true";
         PAPERLESS_PROXY_SSL_HEADER = ''["HTTP_X_FORWARDED_PROTO", "https"]'';
         PAPERLESS_FORCE_SCRIPT_NAME = "/paperless";
-        # PAPERLESS_STATIC_URL = "/paperless/static/";
+        PAPERLESS_DBHOST = "paperlessdb";
       };
     };
     synclounge = {

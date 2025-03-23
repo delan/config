@@ -54,8 +54,8 @@ action all,active,scanner private /ocean/active/scanner scanner:7,delan:7,aria:7
 action all,active,torrents public /ocean/active/torrents qbittorrent:7,delan:7,aria:7,the6p4c:7,hannah:7,sonarr:7,radarr:7
 action all,active,sonarr public /ocean/active/sonarr sonarr:7,bazarr:7,delan:7,aria:7,the6p4c:7,hannah:7
 action all,active,radarr public /ocean/active/radarr radarr:7,bazarr:7,delan:7,aria:7,the6p4c:7,hannah:7
-action all,active,paperless trace chmod 700 /ocean/active/services/paperless/{data,export,media,redisdata}
-action all,active,paperless private /ocean/active/services/paperless/inbox paperless:7,delan:7,aria:7
+action all,active,paperless trace chmod 700 /ocean/active/services/paperless/{data,export,media,redisdata,pgdata}
+action all,active,paperless private /ocean/active/services/paperless/inbox paperless:7,delan:7,aria:7,scanner:7
 
 action all,private trace chown root:root /ocean/private
 action all,private trace chown -R root:root /ocean/private/2023
