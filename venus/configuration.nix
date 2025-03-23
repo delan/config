@@ -552,15 +552,8 @@
       networks = ["arr"];
       environment = {
         TZ = "Australia/Perth";
-        PUID = "2006";
-        PGID = "2006";
         LOG_LEVEL = "info";
       };
-      volumes = [
-        "/etc/localtime:/etc/localtime:ro"
-        "/ocean/active/services/bazarr:/config"
-        "/ocean/active:/ocean/active"
-      ];
     };
     homepage = {
       image = "ghcr.io/gethomepage/homepage:v1.0.4";
