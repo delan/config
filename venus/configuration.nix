@@ -340,6 +340,14 @@
         "/bazarr/" = proxy // {
           proxyPass = "http://127.0.0.1:20050";
         };
+        "/paperless/" = proxy // {
+          proxyPass = "http://127.0.0.1:20090";
+          extraConfig = ''
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+          '';
+        };
       };
     in {
       "venus.daz.cat" = sslForce // sslAcme // {
@@ -457,6 +465,7 @@
       (system { name = "gtnh"; id = 2009; })
       (system { name = "homepage"; id = 2010; })
       (system { name = "decluttarr"; id = 2011; })
+      (system { name = "paperless"; id = 2012; })
     ];
 
   virtualisation.oci-containers.containers = {
@@ -611,6 +620,39 @@
         QBITTORRENT_URL = "http://172.19.42.2:20000";
       };
       environmentFiles = [config.sops.secrets.radarr-api-key.path config.sops.secrets.sonarr-api-key.path];
+    };
+    broker = {
+      # for paperless-ngx
+      image = "docker.io/library/redis:7.4.2";
+      volumes = [
+        "/ocean/active/services/paperless/redisdata:/data"
+      ];
+    };
+    paperless = {
+      # <https://github.com/paperless-ngx/paperless-ngx/blob/main/docker/compose/docker-compose.sqlite.yml>
+      image = "ghcr.io/paperless-ngx/paperless-ngx:2.14.7";
+      dependsOn = [ "broker" ];
+      ports = ["20090:8000"];
+      volumes = [
+        "/ocean/active/services/paperless/data:/usr/src/paperless/data"
+        "/ocean/active/services/paperless/media:/usr/src/paperless/media"
+        "/ocean/active/services/paperless/export:/usr/src/paperless/export"
+        "/ocean/active/services/paperless/inbox:/usr/src/paperless/consume"
+      ];
+      user = "paperless";
+      environment = {
+        PAPERLESS_REDIS = "redis://broker:6379";
+        USERMAP_UID = "2012";
+        USERMAP_GID = "2012";
+        PAPERLESS_TIME_ZONE = "Australia/Perth";
+        PAPERLESS_OCR_LANGUAGE = "eng";
+        PAPERLESS_URL = "https://venus.daz.cat";
+        USE_X_FORWARD_HOST = "true";
+        USE_X_FORWARD_PORT = "true";
+        PAPERLESS_PROXY_SSL_HEADER = ''["HTTP_X_FORWARDED_PROTO", "https"]'';
+        PAPERLESS_FORCE_SCRIPT_NAME = "/paperless";
+        # PAPERLESS_STATIC_URL = "/paperless/static/";
+      };
     };
     synclounge = {
       image = "synclounge/synclounge:5.2.35";
