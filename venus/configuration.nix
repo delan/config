@@ -1,5 +1,6 @@
 # manual setup after initial switch:
 # - sudo smbpasswd -a scanner
+# - sudo smbpasswd -a paperless
 # - sed s/hunter2/.../ iscsi-etc-target-saveconfig.json | sudo tee /etc/target/saveconfig.json
 # - cd /config/nix/nixos/venus; sudo tailscale up; sudo tailscale cert venus.tailcdc44b.ts.net
 # - sudo podman network create arr
