@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 set -eu
-action=${1-all}
+action=${1-help}
 
 trace() {
 	printf >&2 \%s\\n "$(
@@ -40,6 +40,12 @@ private() {
 	root_with_acl "$1" "u::rwX,g::0,o::0,m::rwX,$2"
 }
 
+help() {
+  echo 'Specify target: fix-ocean-perms.sh <all|active|sonarr|...>' >&2
+  exit 1
+}
+
+action help help
 action all echo 'fixing all perms' >&2
 
 action all,active trace chown root:root /ocean/active /ocean/active/services
@@ -48,6 +54,8 @@ action all,active,scanner private /ocean/active/scanner scanner:7,delan:7,aria:7
 action all,active,torrents public /ocean/active/torrents qbittorrent:7,delan:7,aria:7,the6p4c:7,hannah:7,sonarr:7,radarr:7
 action all,active,sonarr public /ocean/active/sonarr sonarr:7,bazarr:7,delan:7,aria:7,the6p4c:7,hannah:7
 action all,active,radarr public /ocean/active/radarr radarr:7,bazarr:7,delan:7,aria:7,the6p4c:7,hannah:7
+action all,active,paperless trace chmod 700 /ocean/active/services/paperless/{data,export,media,redisdata}
+action all,active,paperless private /ocean/active/services/paperless/inbox paperless:7,delan:7,aria:7
 
 action all,private trace chown root:root /ocean/private
 action all,private trace chown -R root:root /ocean/private/2023
