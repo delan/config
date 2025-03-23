@@ -3,6 +3,7 @@
 # - sed s/hunter2/.../ iscsi-etc-target-saveconfig.json | sudo tee /etc/target/saveconfig.json
 # - cd /config/nix/nixos/venus; sudo tailscale up; sudo tailscale cert venus.tailcdc44b.ts.net
 # - sudo podman network create arr
+# - sudo podman network create paperless
 { config, lib, options, modulesPath, pkgs, ... }: with lib; {
   imports = [ ../lib ];
 
@@ -624,6 +625,7 @@
     broker = {
       # for paperless-ngx
       image = "docker.io/library/redis:7.4.2";
+      networks = ["paperless"];
       volumes = [
         "/ocean/active/services/paperless/redisdata:/data"
       ];
@@ -632,6 +634,7 @@
       # <https://github.com/paperless-ngx/paperless-ngx/blob/main/docker/compose/docker-compose.sqlite.yml>
       image = "ghcr.io/paperless-ngx/paperless-ngx:2.14.7";
       dependsOn = [ "broker" ];
+      networks = ["paperless"];
       ports = ["20090:8000"];
       volumes = [
         "/ocean/active/services/paperless/data:/usr/src/paperless/data"
