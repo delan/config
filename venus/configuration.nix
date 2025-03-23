@@ -639,7 +639,6 @@
         "/ocean/active/services/paperless/export:/usr/src/paperless/export"
         "/ocean/active/services/paperless/inbox:/usr/src/paperless/consume"
       ];
-      user = "paperless";
       environment = {
         PAPERLESS_REDIS = "redis://broker:6379";
         USERMAP_UID = "2012";
