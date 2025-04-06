@@ -74,7 +74,9 @@
       nix.settings = {
         sandbox = true;
         substituters = [
-          "https://autost.cachix.org"
+          # Lower than cache.nixos.org, to avoid wasting time hitting this cache for non-autost packages
+          # <https://github.com/NixOS/nixpkgs/issues/158356#issuecomment-1030859958>
+          "https://autost.cachix.org?priority=41"
         ];
         trusted-public-keys = [
           "autost.cachix.org-1:zl/QINkEtBrk/TVeogtROIpQwQH6QjQWTPkbPNNsgpk="
