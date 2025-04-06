@@ -188,6 +188,15 @@ in {
   #   platformio-core
   #   openocd
   # ];
+  users.users.ruby = {
+    isNormalUser = true;
+    uid = 1004;
+    shell = pkgs.fish;
+    extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
+    openssh.authorizedKeys.keys = ["sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBveMRzoY0e0F2c2f9N/gZ7zFBIXJGhNPSAGI5/XTaBMAAAABHNzaDo="];
+  };
+  programs.fish.enable = true;
+  nix.settings.trusted-users = ["ruby"];
 
   # TODO s/wheel/plugdev/
   services.udev.extraRules = ''
