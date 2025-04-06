@@ -125,10 +125,8 @@
       # for VMware https://docs.fedoraproject.org/en-US/quick-docs/using-nested-virtualization-in-kvm/
       options kvm_intel nested=1
 
-      # FIXME testing for openzfs/zfs#15646
+      # openzfs/zfs#15646
       options zfs zfs_vdev_disk_classic=0
-      # options zfs zfs_vdev_disk_debug_bio_fill=1  # set this at runtime
-      # options zfs zfs_abd_page_iter_disable_compound=1  # set this at runtime
     '';
 
     # https://sholland.org/2016/howto-pass-usb-ports-to-kvm/
@@ -138,31 +136,8 @@
     # initrd.preDeviceCommands = "setpci -s0:14.0 0xd0.W=0x3ec7";
     # postBootCommands = "/run/current-system/sw/bin/setpci -s0:14.0 0xd0.W=0x3ec7";
 
-    # FIXME workaround for openzfs/zfs#15646
     zfs.extraPools = [ "ocean" ];
     zfs.devNodes = "/dev/mapper"; # prettier zpool list/status
-    postBootCommands = ''
-      (
-        exit
-        set -eu -- ocean0x0 ocean0x1 ocean1x0 ocean1x1 ocean2x0 ocean2x2 ocean3x0 ocean3x1 ocean4x0 ocean4x2 ocean5x0 ocean5x1 oceanSx0 oceanSx1 ocean.arc
-        i=100
-        for j; do
-          shift
-          mknod -m 660 /dev/loop$i b 7 $i
-          tries=3
-          while ! [ -e /dev/loop$i ] || ! losetup --show /dev/loop$i /dev/mapper/$j; do
-            test $tries -gt 0
-            >&2 echo "waiting for /dev/loop$i to become ready"
-            sleep 1
-            tries=$((tries-1))
-          done
-          set -- "$@" -d /dev/loop$i
-          i=$((i+1))
-        done
-        # /!\ import manually for now
-        # ${config.boot.zfs.package}/bin/zpool import "$@" ocean
-      )
-    '';
   };
 
   services.znapzend = {
