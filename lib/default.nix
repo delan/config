@@ -8,7 +8,7 @@
     ./programs
   ];
 
-  options.internal = {
+  options.internal = with types; {
     hostId = mkOption { type = types.str; };
     hostName = mkOption { type = types.str; };
     domain = mkOption { type = types.str; };
@@ -17,6 +17,15 @@
     swapDevice = mkOption { type = types.nullOr types.str; };
     separateNix = mkOption { type = types.bool; };
     initialUser = mkOption { type = types.str; };
+    ids = mkOption {
+      type = attrsOf (submodule {
+        options = {
+          id = mkOption { type = types.int; };
+          port = mkOption { type = types.int; };
+        };
+      });
+      default = {};
+    };
   };
 
   config = let
@@ -226,6 +235,22 @@
         fish
         (writeScriptBin "deploy" (readFile ../bin/deploy))
       ];
+    }
+    {
+      users = foldl' lib.recursiveUpdate {} (
+        map
+        (name: {
+          users."${name}" = {
+            uid = config.internal.ids."${name}".id;
+            group = name;
+            isSystemUser = true;
+          };
+          groups."${name}" = {
+            gid = config.internal.ids."${name}".id;
+          };
+        })
+        (attrNames config.internal.ids)
+      );
     }
   ];
 }

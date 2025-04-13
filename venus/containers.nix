@@ -19,12 +19,12 @@
   sonarr = {
     inherit autoStart;
     image = "ghcr.io/hotio/sonarr:release-4.0.14.2939";
-    ports = ["20010:8989"];
+    ports = ["${toString config.internal.ids.sonarr.port}:8989"];
     networks = ["arr"];
     environment = {
       TZ = "Australia/Perth";
-      PUID = "2001";
-      PGID = "2001";
+      PUID = "${toString config.internal.ids.sonarr.id}";
+      PGID = "${toString config.internal.ids.sonarr.id}";
     };
     volumes = [
       "/etc/localtime:/etc/localtime:ro"
@@ -35,12 +35,12 @@
   radarr = {
     inherit autoStart;
     image = "ghcr.io/hotio/radarr:release-5.20.2.9777";
-    ports = ["20020:7878"];
+    ports = ["${toString config.internal.ids.radarr.port}:7878"];
     networks = ["arr"];
     environment = {
       TZ = "Australia/Perth";
-      PUID = "2002";
-      PGID = "2002";
+      PUID = "${toString config.internal.ids.radarr.id}";
+      PGID = "${toString config.internal.ids.radarr.id}";
     };
     volumes = [
       "/etc/localtime:/etc/localtime:ro"
@@ -51,7 +51,7 @@
   recyclarr = {
     inherit autoStart;
     image = "ghcr.io/recyclarr/recyclarr:7.4.1";
-    user = "2003:2003";
+    user = "${toString config.internal.ids.recyclarr.id}:${toString config.internal.ids.recyclarr.id}";
     networks = ["arr"];
     environment = {
       TZ = "Australia/Perth";
@@ -64,12 +64,12 @@
   prowlarr = {
     inherit autoStart;
     image = "ghcr.io/hotio/prowlarr:release-1.32.2.4987";
-    ports = ["20040:9696"];
+    ports = ["${toString config.internal.ids.prowlarr.port}:9696"];
     networks = ["arr"];
     environment = {
       TZ = "Australia/Perth";
-      PUID = "2004";
-      PGID = "2004";
+      PUID = "${toString config.internal.ids.prowlarr.id}";
+      PGID = "${toString config.internal.ids.prowlarr.id}";
     };
     volumes = [
       "/etc/localtime:/etc/localtime:ro"
@@ -79,12 +79,12 @@
   bazarr = {
     inherit autoStart;
     image = "ghcr.io/hotio/bazarr:release-1.5.1";
-    ports = ["20050:6767"];
+    ports = ["${toString config.internal.ids.bazarr.port}:6767"];
     networks = ["arr"];
     environment = {
       TZ = "Australia/Perth";
-      PUID = "2005";
-      PGID = "2005";
+      PUID = "${toString config.internal.ids.bazarr.id}";
+      PGID = "${toString config.internal.ids.bazarr.id}";
     };
     volumes = [
       "/etc/localtime:/etc/localtime:ro"
@@ -95,7 +95,7 @@
   flaresolverr = {
     inherit autoStart;
     image = "ghcr.io/flaresolverr/flaresolverr:v3.3.21";
-    ports = ["20060:8191"];
+    ports = ["${toString config.internal.ids.flaresolverr.port}:8191"];
     networks = ["arr"];
     environment = {
       TZ = "Australia/Perth";
@@ -105,15 +105,15 @@
   homepage = {
     inherit autoStart;
     image = "ghcr.io/gethomepage/homepage:v1.0.4";
-    ports = ["20070:3000"];
+    ports = ["${toString config.internal.ids.homepage.port}:3000"];
     networks = ["arr"];
     volumes = [
       "/ocean/active/services/homepage:/app/config"
     ];
     environment = {
       HOMEPAGE_ALLOWED_HOSTS = "homepage.venus.daz.cat";
-      PUID = "2010";
-      PGID = "2010";
+      PUID = "${toString config.internal.ids.homepage.id}";
+      PGID = "${toString config.internal.ids.homepage.id}";
     };
   };
   decluttarr = {
@@ -122,8 +122,8 @@
     networks = ["arr"];
     environment = {
       TZ = "Australia/Perth";
-      PUID = "2011";
-      PGID = "2011";
+      PUID = "${toString config.internal.ids.decluttarr.id}";
+      PGID = "${toString config.internal.ids.decluttarr.id}";
       REMOVE_TIMER = "10";
       REMOVE_FAILED = "True";
       REMOVE_FAILED_IMPORTS = "True";
@@ -157,7 +157,7 @@
       SONARR_URL = "http://sonarr:8989/sonarr";
       # SONARR_KEY = "";
 
-      QBITTORRENT_URL = "http://172.19.42.2:20000";
+      QBITTORRENT_URL = "http://172.19.42.2:${toString config.internal.ids.qbittorrent.port}";
     };
     environmentFiles = [config.sops.secrets.radarr-api-key.path config.sops.secrets.sonarr-api-key.path];
   };
@@ -174,7 +174,7 @@
     inherit autoStart;
     image = "docker.io/library/postgres:16.8";
     networks = ["paperless"];
-    user = "2012:2012";
+    user = "${toString config.internal.ids.paperless.id}:${toString config.internal.ids.paperless.id}";
     volumes = [
       "/ocean/active/services/paperless/pgdata:/var/lib/postgresql/data"
     ];
@@ -190,7 +190,7 @@
     image = "ghcr.io/paperless-ngx/paperless-ngx:2.14.7";
     dependsOn = [ "broker" "paperlessdb" ];
     networks = ["paperless"];
-    ports = ["20090:8000"];
+    ports = ["${toString config.internal.ids.paperless.port}:8000"];
     volumes = [
       "/ocean/active/services/paperless/data:/usr/src/paperless/data"
       "/ocean/active/services/paperless/media:/usr/src/paperless/media"
@@ -199,8 +199,8 @@
     ];
     environment = {
       PAPERLESS_REDIS = "redis://broker:6379";
-      USERMAP_UID = "2012";
-      USERMAP_GID = "2012";
+      USERMAP_UID = "${toString config.internal.ids.paperless.id}";
+      USERMAP_GID = "${toString config.internal.ids.paperless.id}";
       PAPERLESS_TIME_ZONE = "Australia/Perth";
       PAPERLESS_OCR_LANGUAGE = "eng";
       PAPERLESS_URL = "https://venus.daz.cat";
@@ -214,8 +214,8 @@
   synclounge = {
     inherit autoStart;
     image = "synclounge/synclounge:5.2.35";
-    ports = ["20080:8088"];
-    user = "2008:2008";
+    ports = ["${toString config.internal.ids.synclounge.port}:8088"];
+    user = "${toString config.internal.ids.synclounge.id}:${toString config.internal.ids.synclounge.id}";
     environment = {
       TZ = "Australia/Perth";
     };
@@ -248,8 +248,8 @@
       AUTOPAUSE_TIMEOUT_INIT = "60";
       VIEW_DISTANCE = "14";
 
-      UID = "2009";
-      GID = "2009";
+      UID = "${toString config.internal.ids.gtnh.id}";
+      GID = "${toString config.internal.ids.gtnh.id}";
       TZ = "Australia/Perth";
       EULA = "true";
       ONLINE_MODE = "true";
@@ -274,8 +274,8 @@
       VERSION = "1.20.1";
       FORGE_VERSION = "47.3.10";
       GENERIC_PACK = "https://github.com/ThePansmith/Monifactory/releases/download/0.9.10/Monifactory-Beta.0.9.10-server.zip";
-      UID = "2009";
-      GID = "2009";
+      UID = "${toString config.internal.ids.gtnh.id}";
+      GID = "${toString config.internal.ids.gtnh.id}";
       TZ = "Australia/Perth";
       MEMORY = "8G";
       USE_AIKAR_FLAGS = "true";

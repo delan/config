@@ -29,6 +29,22 @@
       samba = true;
       qbittorrent = true;
     };
+
+    ids = {
+      "qbittorrent" = { id = 2000; port = 20000; };
+      "sonarr" = { id = 2001; port = 20010; };
+      "radarr" = { id = 2002; port = 20020; };
+      "recyclarr" = { id = 2003; };
+      "prowlarr" = { id = 2004; port = 20040; };
+      "bazarr" = { id = 2005; port = 20050; };
+      "flaresolverr" = { id = 2006; port = 20060; };
+      "scanner" = { id = 2007; };
+      "synclounge" = { id = 2008; port = 20080; };
+      "gtnh" = { id = 2009; };
+      "homepage" = { id = 2010; port = 20070; };
+      "decluttarr" = { id = 2011; };
+      "paperless" = { id = 2012; port = 20090; };
+    };
   };
 
   sops.secrets.tailscale-ssl-cert = {
@@ -296,7 +312,7 @@
       };
       syncloungeOnly = {
         "/synclounge/" = proxy // {
-          proxyPass = "http://127.0.0.1:20080/";
+          proxyPass = "http://127.0.0.1:${toString config.internal.ids.synclounge.port}/";
           extraConfig = ''
             # https://github.com/synclounge/synclounge/blob/714ac01ec334c41a707c445bee32619e615550cf/README.md#subfolder-domaincomsomefolder
             proxy_http_version 1.1;
@@ -318,22 +334,22 @@
       };
       venus = syncloungeOnly // {
         "/qbittorrent/" = proxy // {
-          proxyPass = "http://127.0.0.1:20000/";
+          proxyPass = "http://127.0.0.1:${toString config.internal.ids.qbittorrent.port}/";
         };
         "/sonarr/" = proxy // {
-          proxyPass = "http://127.0.0.1:20010";
+          proxyPass = "http://127.0.0.1:${toString config.internal.ids.sonarr.port}";
         };
         "/radarr/" = proxy // {
-          proxyPass = "http://127.0.0.1:20020";
+          proxyPass = "http://127.0.0.1:${toString config.internal.ids.radarr.port}";
         };
         "/prowlarr/" = proxy // {
-          proxyPass = "http://127.0.0.1:20040";
+          proxyPass = "http://127.0.0.1:${toString config.internal.ids.prowlarr.port}";
         };
         "/bazarr/" = proxy // {
-          proxyPass = "http://127.0.0.1:20050";
+          proxyPass = "http://127.0.0.1:${toString config.internal.ids.bazarr.port}";
         };
         "/paperless/" = proxy // {
-          proxyPass = "http://127.0.0.1:20090";
+          proxyPass = "http://127.0.0.1:${toString config.internal.ids.paperless.port}";
           extraConfig = ''
             proxy_http_version 1.1;
             proxy_set_header Upgrade $http_upgrade;
@@ -348,7 +364,7 @@
       "homepage.venus.daz.cat" = sslForce // sslAcme // {
         locations = {
           "/" = proxy // {
-            proxyPass = "http://127.0.0.1:20070";
+            proxyPass = "http://127.0.0.1:${toString config.internal.ids.homepage.port}";
           };
         };
       };
@@ -395,70 +411,44 @@
   };
 
   programs.fish.enable = true;
-  users = let
-    system = { name, id }: {
-      users."${name}" = {
-        uid = id;
-        group = name;
-        isSystemUser = true;
-      };
-      groups."${name}" = {
-        gid = id;
-      };
+  users = {
+    users.nginx.extraGroups = [ "acme" ];
+    users.aria = {
+      isNormalUser = true;
+      uid = 1001;
+      shell = pkgs.zsh;
+      extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
     };
-  in builtins.foldl' lib.recursiveUpdate
-    {
-      users.nginx.extraGroups = [ "acme" ];
-      users.aria = {
-        isNormalUser = true;
-        uid = 1001;
-        shell = pkgs.zsh;
-        extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
-      };
-      users.the6p4c = {
-        isNormalUser = true;  # HACK: not true
-        uid = 1002;
-        shell = pkgs.bash;
-        extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
-      };
-      users.lucatiel = {
-        isNormalUser = true;
-        uid = 1003;
-        shell = pkgs.bash;
-        extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
-      };
-      users.ruby = {
-        isNormalUser = true;
-        uid = 1004;
-        shell = pkgs.fish;
-        extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
-        openssh.authorizedKeys.keys = ["sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBveMRzoY0e0F2c2f9N/gZ7zFBIXJGhNPSAGI5/XTaBMAAAABHNzaDo="];
-      };
-      users.hannah = {
-        isNormalUser = true;
-        uid = 13000;
-        shell = pkgs.zsh;
-        group = "hannah";
-        extraGroups = [ "systemd-journal" ];
-      };
-      groups.hannah = {
-        gid = 13000;
-      };
-    }
-    [
-      (system { name = "sonarr"; id = 2001; })
-      (system { name = "radarr"; id = 2002; })
-      (system { name = "recyclarr"; id = 2003; })
-      (system { name = "prowlarr"; id = 2004; })
-      (system { name = "bazarr"; id = 2005; })
-      (system { name = "flaresolverr"; id = 2006; })
-      (system { name = "scanner"; id = 2007; })
-      (system { name = "synclounge"; id = 2008; })
-      (system { name = "gtnh"; id = 2009; })
-      (system { name = "homepage"; id = 2010; })
-      (system { name = "decluttarr"; id = 2011; })
-      (system { name = "paperless"; id = 2012; })
-    ];
+    users.the6p4c = {
+      isNormalUser = true;  # HACK: not true
+      uid = 1002;
+      shell = pkgs.bash;
+      extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
+    };
+    users.lucatiel = {
+      isNormalUser = true;
+      uid = 1003;
+      shell = pkgs.bash;
+      extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
+    };
+    users.ruby = {
+      isNormalUser = true;
+      uid = 1004;
+      shell = pkgs.fish;
+      extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
+      openssh.authorizedKeys.keys = ["sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBveMRzoY0e0F2c2f9N/gZ7zFBIXJGhNPSAGI5/XTaBMAAAABHNzaDo="];
+    };
+    users.hannah = {
+      isNormalUser = true;
+      uid = 13000;
+      shell = pkgs.zsh;
+      group = "hannah";
+      extraGroups = [ "systemd-journal" ];
+    };
+    groups.hannah = {
+      gid = 13000;
+    };
+  };
 
   virtualisation.oci-containers.containers = import ./containers.nix {
     inherit config;

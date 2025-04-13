@@ -6,12 +6,8 @@
   config = let
     cfg = config.internal.services;
     home = "/var/lib/qbittorrent";
-    user = "qbittorrent";
-    group = "qbittorrent";
-    uid = 2000;
-    gid = 2000;
-    webuiPort = 20000;
-    torrentPort = 20001;
+    webuiPort = config.internal.ids.qbittorrent.port;
+    torrentPort = config.internal.ids.qbittorrent.port + 1;
   in mkIf cfg.qbittorrent {
     networking.firewall = {
       allowedTCPPorts = [ webuiPort torrentPort ];
@@ -28,28 +24,14 @@
 
       serviceConfig = {
         Type = "simple";
-        User = user;
-        Group = group;
+        User = "qbittorrent";
+        Group = "qbittorrent";
         ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox";
       };
 
       environment = {
         QBT_PROFILE = home;
         QBT_WEBUI_PORT = toString webuiPort;
-      };
-    };
-
-    users.users = {
-      "${user}" = {
-        uid = uid;
-        group = group;
-        isSystemUser = true;
-      };
-    };
-
-    users.groups = {
-      "${group}" = {
-        gid = gid;
       };
     };
   };
