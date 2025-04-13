@@ -1,4 +1,4 @@
-@                                       60      IN  SOA     ns.shuppy.org. shuppy.fastmail.com. ( 2024110100 600 60 1814400 60 )
+@                                       60      IN  SOA     ns.shuppy.org. shuppy.fastmail.com. ( 2025041200 600 60 1814400 60 )
 @                                       60      IN  NS      ns.shuppy.org.
 @                                       60      IN  NS      ns2.he.net.
 @                                       60      IN  NS      ns2.afraid.org.
@@ -12,6 +12,7 @@ ns                                      60      IN  AAAA    2404:f780:8:3006:ccc
 acme                                    60      IN  NS      ns.shuppy.org.
 _acme-challenge                         60      IN  CNAME   _acme-challenge.shuppy.org.acme.shuppy.org.
 _acme-challenge.meet                    60      IN  CNAME   _acme-challenge.meet.shuppy.org.acme.shuppy.org.
+_acme-challenge.fedi                    60      IN  CNAME   _acme-challenge.fedi.shuppy.org.acme.shuppy.org.
 
 @                                       60      IN  MX  10  in1-smtp.messagingengine.com.
 @                                       60      IN  MX  20  in2-smtp.messagingengine.com.
