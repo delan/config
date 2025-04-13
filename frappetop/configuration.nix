@@ -14,6 +14,7 @@
     interactive = true;
     laptop = true;
     igalia = true;
+    tailscale = true;
 
     virtualisation = {
       libvirt = true;
@@ -21,21 +22,6 @@
     };
   };
 
-  # make anything that depends on tailscaled.service wait for its network to come up;
-  # see https://github.com/tailscale/tailscale/issues/11504#issuecomment-2113331262
-  systemd.services.tailscaled = {
-    postStart = ''
-      i=0; while [ $i -lt 15 ]; do
-        echo Waiting for tailscale0 to come up... $((15-i))
-        if /run/current-system/sw/bin/ip addr show dev tailscale0 | grep -q 'inet '; then
-          exit 0
-        fi
-        sleep 1
-        i=$((i+1))
-      done
-      exit 1
-    '';
-  };
   # systemd.mount(5) units for ocean nfs (venus.tailcdc44b.ts.net.); we can’t use `fileSystems` and
   # fstab(5) because there’s no `x-systemd` option for arbitrary `BindsTo=`
   systemd.mounts = let
@@ -111,9 +97,4 @@
   ];
 
   fonts.fontconfig.defaultFonts.monospace = [ "monofur" ];
-
-  services.tailscale = {
-    enable = true;
-    openFirewall = true;
-  };
 }

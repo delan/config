@@ -33,6 +33,7 @@ in {
     interactive = true;
     laptop = false;
     igalia = true;
+    tailscale = true;
 
     virtualisation = {
       libvirt = true;
@@ -250,9 +251,4 @@ in {
       { options = [ "NOPASSWD" ]; command = "/home/delan/code/servo/attic/perf/analyse/isolate-cpu-for-shell.sh"; }
     ];
   }];
-
-  services.tailscale = {
-    enable = true;
-    openFirewall = true;
-  };
 }

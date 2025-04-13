@@ -34,6 +34,8 @@
 
     services = {
     };
+
+    tailscale = true;
   };
 
   swapDevices = [
@@ -219,10 +221,6 @@
     openvpn.servers.home = {
       config = "config /etc/nixos/colo/home_colo.ovpn";
       autoStart = false;
-    };
-    tailscale = {
-      enable = true;
-      openFirewall = true;
     };
 
     nginx = {

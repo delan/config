@@ -30,6 +30,8 @@
       qbittorrent = true;
     };
 
+    tailscale = true;
+
     ids = {
       "qbittorrent" = { id = 2000; port = 20000; };
       "sonarr" = { id = 2001; port = 20010; };
@@ -411,11 +413,6 @@
       /ocean/private -rw 100.64.202.115 172.19.42.3 100.119.186.118
       /ocean/public -rw 100.64.202.115 172.19.42.3 100.119.186.118
     '';
-  };
-
-  services.tailscale = {
-    enable = true;
-    openFirewall = true;
   };
 
   programs.fish.enable = true;

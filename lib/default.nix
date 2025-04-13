@@ -17,6 +17,7 @@
     swapDevice = mkOption { type = types.nullOr types.str; };
     separateNix = mkOption { type = types.bool; };
     initialUser = mkOption { type = types.str; };
+    tailscale = mkOption { type = types.bool; default = false; };
     ids = mkOption {
       type = attrsOf (submodule {
         options = {
@@ -47,6 +48,17 @@
         { device = "cuffs/nix";
           fsType = "zfs";
         };
+    })
+    (mkIf cfg.tailscale {
+      services.tailscale = {
+        enable = true;
+        openFirewall = true;
+      };
+
+      # Make tailscaled.service not come up until tailscale actually connects
+      # Fix for <https://github.com/tailscale/tailscale/issues/11504>
+      systemd.services.tailscaled.postStart = "until ${pkgs.tailscale}/bin/tailscale status; do sleep 1; done";
+      systemd.services.tailscaled.serviceConfig.TimeoutStartSec = "10";
     })
     {
       sops.secrets.BUSTED_WEBHOOK.sopsFile = ../secrets/BUSTED_WEBHOOK.yaml;
