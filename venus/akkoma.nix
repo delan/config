@@ -20,7 +20,11 @@
         };
 
         # federation
-        ":mrf".transparency = true;
+        ":mrf".transparency = false;
+        # FIXME transparency_obfuscate_domains is busted
+        # ** (FunctionClauseError) no function clause matching in Pleroma.Web.ActivityPub.MRF.subdomains_regex/1
+        # (pleroma 3.15.2) lib/pleroma/web/activity_pub/mrf.ex:181: Pleroma.Web.ActivityPub.MRF.subdomains_regex(true)
+        # ":mrf".transparency_obfuscate_domains = true;
         ":mrf".policies = map mkRaw [
           "Pleroma.Web.ActivityPub.MRF.SimplePolicy"
         ];
