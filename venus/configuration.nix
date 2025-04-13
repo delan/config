@@ -45,6 +45,13 @@
       "decluttarr" = { id = 2011; };
       "paperless" = { id = 2012; port = 20120; };
       "akkoma" = { id = 2013; port = 20130; };
+      "postgres" = {
+        id = 2014;
+        # override the deprecated static uid
+        # https://github.com/NixOS/nixpkgs/blob/f9ebe33a928b5d529c895202263a5ce46bdf12f7/nixos/modules/services/databases/postgresql.nix#L575-L584
+        # https://github.com/NixOS/nixpkgs/blob/f9ebe33a928b5d529c895202263a5ce46bdf12f7/nixos/modules/misc/ids.nix#L110
+        force = true;
+      };
     };
   };
 

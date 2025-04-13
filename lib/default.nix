@@ -21,6 +21,7 @@
       type = attrsOf (submodule {
         options = {
           id = mkOption { type = types.int; };
+          force = mkOption { type = types.bool; default = false; };
           port = mkOption { type = types.int; };
         };
       });
@@ -239,14 +240,19 @@
     {
       users = foldl' lib.recursiveUpdate {} (
         map
-        (name: {
+        (name: let
+          mkPriority = if config.internal.ids."${name}".force
+            then lib.mkForce
+            else lib.trivial.id;
+          id = config.internal.ids."${name}".id;
+        in {
           users."${name}" = {
-            uid = config.internal.ids."${name}".id;
+            uid = mkPriority id;
             group = name;
             isSystemUser = true;
           };
           groups."${name}" = {
-            gid = config.internal.ids."${name}".id;
+            gid = mkPriority id;
           };
         })
         (attrNames config.internal.ids)
