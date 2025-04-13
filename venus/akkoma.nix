@@ -6,14 +6,16 @@
     # https://nixos.org/manual/nixos/stable/#module-services-akkoma
     # https://information.websiteleague.org/books/akkoma-setup-guide
     # https://git.isincredibly.gay/srxl/posting.isincredibly.gay/src/commit/a739448d8c467a1fd0ce1c2ae4627c8f49688079/configuration/akkoma.nix
-    config = {
+    config = let
+      upload_dir = "/ocean/active/services/akkoma/uploads";
+    in {
       ":pleroma" = with (pkgs.formats.elixirConf { }).lib; {
         ":instance" = {
           name = "shuppy";
           description = "ao!!";
           email = "akkoma@shuppy.org";
           registration_open = false;
-          upload_dir = "/ocean/active/services/akkoma/uploads";
+          inherit upload_dir;
           federating = false;
         };
 
@@ -48,6 +50,8 @@
             # Dedupe should be at the end
             "Pleroma.Upload.Filter.Dedupe"
           ];
+
+        "Pleroma.Uploaders.Local".uploads = upload_dir;
       };
     };
   } (
