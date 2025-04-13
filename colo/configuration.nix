@@ -200,6 +200,7 @@
       extraDomainNames = [
         "meet.shuppy.org"
         "fedi.shuppy.org"
+        "fedi-media.shuppy.org"
       ];
     };
   };
@@ -322,6 +323,11 @@
           useACMEHost = "shuppy.org";
         };
         "fedi.shuppy.org" = sslShuppy // recursiveUpdate (venus 20130) {
+          locations."/" = {
+            proxyWebsockets = true;
+          };
+        };
+        "fedi-media.shuppy.org" = sslShuppy // recursiveUpdate (venus 20130) {
           locations."/" = {
             proxyWebsockets = true;
           };
