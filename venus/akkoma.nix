@@ -30,8 +30,7 @@
         "Pleroma.Web.Endpoint" = {
           url.host = "fedi.shuppy.org";
           http = {
-            # FIXME <https://github.com/tailscale/tailscale/issues/11504>
-            ip = "0.0.0.0";
+            ip = "100.95.253.127";
             port = config.internal.ids.akkoma.port;
           };
           # hardening: send cookies over https only
@@ -127,4 +126,7 @@
 
   users.users.akkoma.uid = config.internal.ids.akkoma.id;
   users.groups.akkoma.gid = config.internal.ids.akkoma.id;
+
+  systemd.services.akkoma.wants = [ "tailscaled.service" ];
+  systemd.services.akkoma.after = [ "tailscaled.service" ];
 }

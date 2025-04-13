@@ -394,6 +394,9 @@
       };
     };
   };
+  systemd.services.nginx.wants = [ "tailscaled.service" ];
+  systemd.services.nginx.after = [ "tailscaled.service" ];
+
   services.target.enable = true;
 
   services.nfs.server = {
