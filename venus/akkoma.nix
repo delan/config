@@ -41,6 +41,13 @@
           in mkMap blocks'';
         };
 
+        # require login for instance and federated timelines.
+        # otherwise anyone can snoop on the union of our timelines.
+        ":restrict_unauthenticated" = {
+          timelines.local = true;
+          timelines.federated = true;
+        };
+
         "Pleroma.Web.Endpoint" = {
           url.host = "fedi.shuppy.org";
           http = {
