@@ -1,4 +1,4 @@
-@                                       60      IN  SOA     ns.shuppy.org. shuppy.fastmail.com. ( 2025041300 600 60 1814400 60 )
+@                                       60      IN  SOA     ns.shuppy.org. shuppy.fastmail.com. ( 2025041301 600 60 1814400 60 )
 @                                       60      IN  NS      ns.shuppy.org.
 @                                       60      IN  NS      ns2.he.net.
 @                                       60      IN  NS      ns2.afraid.org.
@@ -29,3 +29,4 @@ fm3._domainkey                          60      IN  CNAME   fm3.shuppy.org.dkim.
 _dmarc                                  60      IN  TXT     "v=DMARC1; p=reject; rua=mailto:shuppy+dmarc@shuppy.org"
 
 meet                                    60      IN  CNAME   shuppy.org.
+fedi                                    60      IN  CNAME   shuppy.org.
