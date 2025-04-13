@@ -263,6 +263,12 @@
             proxyPass = "http://172.19.130.235";
           };
         };
+        jupiter = port: {
+          locations."/" = proxy // {
+            # jupiter.tailcdc44b.ts.net
+            proxyPass = "http://100.64.202.115:${toString port}";
+          };
+        };
       in {
         "\"\"" = {
           locations."/disabled" = {
@@ -286,11 +292,7 @@
         "funny.computer.daz.cat" = opacus // sslRelax;
         "go.daz.cat" = opacus // sslForce;
         "xn--blhaj-nra.daz.cat" = opacus // sslForce;
-        "test.daz.cat" = {
-          locations."/" = proxy // {
-            proxyPass = "http://100.64.202.115:8000";
-          };
-        } // sslForce;
+        "test.daz.cat" = jupiter 8000 // sslForce;
         "azabani.com" = opacus // sslForce;
         "www.azabani.com" = opacus // sslForce;
         "ar1as.space" = opacus // sslForce;
