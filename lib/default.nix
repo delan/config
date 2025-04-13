@@ -123,6 +123,9 @@
         dhcpcd.enable = false;
       };
 
+      # <https://github.com/NixOS/nixpkgs/issues/375352>
+      environment.etc."strongswan.conf".text = "";
+
       # default since 22.05, but our stateVersion is 18.09
       virtualisation.oci-containers.backend = "podman";
 
