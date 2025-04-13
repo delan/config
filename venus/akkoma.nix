@@ -52,6 +52,11 @@
           ];
 
         "Pleroma.Uploaders.Local".uploads = upload_dir;
+
+        # for security <https://docs.akkoma.dev/stable/configuration/hardening/#pleromaupload-uploader-base_url>
+        # it seems the subdirectory must be /media/, anything else is a 404. i think if we want to
+        # change the subdirectory, we need to configure a rewrite in nginx accordingly.
+        "Pleroma.Upload".base_url = "https://fedi-media.shuppy.org/media";
       };
     };
   } (
