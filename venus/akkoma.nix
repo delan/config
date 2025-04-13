@@ -14,6 +14,7 @@
           email = "akkoma@shuppy.org";
           registration_open = false;
           upload_dir = "/ocean/active/services/akkoma/uploads";
+          federating = false;
         };
 
         # federation
@@ -22,9 +23,6 @@
         ];
         ":mrf_simple" = {
           # TODO define federation policy
-          allow = mkMap {
-            "fedi.shuppy.org" = "self (just to enable allowlist federation)";
-          };
         };
 
         "Pleroma.Web.Endpoint" = {
