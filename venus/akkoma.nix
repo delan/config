@@ -20,11 +20,25 @@
         };
 
         # federation
+        ":mrf".transparency = true;
         ":mrf".policies = map mkRaw [
           "Pleroma.Web.ActivityPub.MRF.SimplePolicy"
         ];
         ":mrf_simple" = {
-          # TODO define federation policy
+          reject = let
+            csv = pkgs.fetchFromGitHub {
+              owner = "gardenfence";
+              repo = "blocklist";
+              rev = "00c5388b61c71c2b69e6a38e5e1bb466895c9dab";
+              hash = "sha256-3upDhvQ20Q2+JpcMECxoNfiy/8CfNT3OhNQ0kJkAt/o=";
+            };
+            json = pkgs.runCommand "gardenfence-fediblocksync.json" {} ''
+              ${pkgs.csvkit}/bin/csvjson ${csv}/gardenfence-fediblocksync.csv > $out
+            '';
+            blocks = builtins.fromJSON (readFile json);
+            blocks' = map ({ domain, private_comment, ... }: { "${domain}" = private_comment; }) blocks;
+            blocks'' = foldl' lib.mergeAttrs {} blocks';
+          in mkMap blocks'';
         };
 
         "Pleroma.Web.Endpoint" = {
