@@ -33,6 +33,21 @@
           };
         };
         "Pleroma.Web.WebFinger".domain = "shuppy.org";
+
+        # https://docs.akkoma.dev/stable/configuration/cheatsheet/#upload-filters
+        "Pleroma.Upload".filters =
+          map (pkgs.formats.elixirConf { }).lib.mkRaw [
+            # calculate blurhash
+            # https://akkoma.dev/AkkomaGang/akkoma/src/commit/6a6d4254d52d4617ff0a0eaa38e28bbf3551acfd/lib/pleroma/upload/filter/analyze_metadata.ex
+            "Pleroma.Upload.Filter.AnalyzeMetadata"
+
+            # ReadDescription must happen before StripMetadata
+            "Pleroma.Upload.Filter.Exiftool.ReadDescription"
+            "Pleroma.Upload.Filter.Exiftool.StripMetadata"
+
+            # Dedupe should be at the end
+            "Pleroma.Upload.Filter.Dedupe"
+          ];
       };
     };
   } (
