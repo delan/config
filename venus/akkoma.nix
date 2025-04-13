@@ -30,11 +30,21 @@
         "Pleroma.Web.Endpoint" = {
           url.host = "fedi.shuppy.org";
           http = {
+            # FIXME <https://github.com/tailscale/tailscale/issues/11504>
             ip = "0.0.0.0";
             port = config.internal.ids.akkoma.port;
           };
+          # hardening: send cookies over https only
+          secure_cookie_flag = true;
         };
         "Pleroma.Web.WebFinger".domain = "shuppy.org";
+
+        # hardening: enable hsts, csp, etc
+        ":http_security" = {
+          enable = true;
+          sts = true;
+          referrer_policy = "same-origin";
+        };
 
         # https://docs.akkoma.dev/stable/configuration/cheatsheet/#upload-filters
         "Pleroma.Upload".filters =
