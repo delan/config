@@ -40,7 +40,7 @@
       "flaresolverr" = { id = 2006; port = 20060; };
       "scanner" = { id = 2007; };
       "synclounge" = { id = 2008; port = 20080; };
-      "gtnh" = { id = 2009; };
+      "minecraft" = { id = 2009; };
       "homepage" = { id = 2010; port = 20100; };
       "decluttarr" = { id = 2011; };
       "paperless" = { id = 2012; port = 20120; };

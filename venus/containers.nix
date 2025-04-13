@@ -248,8 +248,8 @@
       AUTOPAUSE_TIMEOUT_INIT = "60";
       VIEW_DISTANCE = "14";
 
-      UID = "${toString config.internal.ids.gtnh.id}";
-      GID = "${toString config.internal.ids.gtnh.id}";
+      UID = "${toString config.internal.ids.minecraft.id}";
+      GID = "${toString config.internal.ids.minecraft.id}";
       TZ = "Australia/Perth";
       EULA = "true";
       ONLINE_MODE = "true";
@@ -274,8 +274,8 @@
       VERSION = "1.20.1";
       FORGE_VERSION = "47.3.10";
       GENERIC_PACK = "https://github.com/ThePansmith/Monifactory/releases/download/0.9.10/Monifactory-Beta.0.9.10-server.zip";
-      UID = "${toString config.internal.ids.gtnh.id}";
-      GID = "${toString config.internal.ids.gtnh.id}";
+      UID = "${toString config.internal.ids.minecraft.id}";
+      GID = "${toString config.internal.ids.minecraft.id}";
       TZ = "Australia/Perth";
       MEMORY = "8G";
       USE_AIKAR_FLAGS = "true";
