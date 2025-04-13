@@ -31,7 +31,7 @@
           url.host = "fedi.shuppy.org";
           http = {
             ip = "0.0.0.0";
-            port = 20130;
+            port = config.internal.ids.akkoma.port;
           };
         };
         "Pleroma.Web.WebFinger".domain = "shuppy.org";
@@ -70,4 +70,7 @@
 
   networking.firewall.allowedTCPPorts = [ 20130 ];
   networking.firewall.allowedUDPPorts = [ 20130 ];
+
+  users.users.akkoma.uid = config.internal.ids.akkoma.id;
+  users.groups.akkoma.gid = config.internal.ids.akkoma.id;
 }

@@ -44,6 +44,7 @@
       "homepage" = { id = 2010; port = 20100; };
       "decluttarr" = { id = 2011; };
       "paperless" = { id = 2012; port = 20120; };
+      "akkoma" = { id = 2013; port = 20130; };
     };
   };
 
