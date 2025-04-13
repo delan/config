@@ -199,6 +199,7 @@
       '';
       extraDomainNames = [
         "meet.shuppy.org"
+        "fedi.shuppy.org"
       ];
     };
   };
