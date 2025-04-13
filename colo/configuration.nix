@@ -107,79 +107,61 @@
       # logRefusedUnicastsOnly = false;
       # logRefusedPackets = true;
 
-      extraCommands = ''
-        extip=103.108.231.122
-        extip6=2404:f780:8:3006:cccc:ffff:feee:468b
-        extif=bridge13
-
-        for iptables in iptables ip6tables; do
-          $iptables -P FORWARD DROP
-
-          # iptables -A is not idempotent, so we need a way to remove old rules when we reload firewall.service.
-          # we can’t just write our rules in -D/-A pairs because our old rules may be different to our new ones,
-          # and we can’t just -F to flush the built-in chains because there are also rules added by libvirt etc.
-          # if we instead encapsulate our rules in our own chains, then we can safely -F to flush any old rules.
-          $iptables -N own-input || :
-          $iptables -N own-output || :
-          $iptables -N own-forward || :
-          $iptables -t nat -N own-output || :
-          $iptables -t nat -N own-prerouting || :
-          $iptables -t nat -N own-postrouting || :
-          $iptables -C INPUT -j own-input || $iptables -I INPUT -j own-input
-          $iptables -C OUTPUT -j own-output || $iptables -A OUTPUT -j own-output
-          $iptables -C FORWARD -j own-forward || $iptables -A FORWARD -j own-forward
-          $iptables -t nat -C OUTPUT -j own-output || $iptables -t nat -A OUTPUT -j own-output
-          $iptables -t nat -C PREROUTING -j own-prerouting || $iptables -t nat -A PREROUTING -j own-prerouting
-          $iptables -t nat -C POSTROUTING -j own-postrouting || $iptables -t nat -A POSTROUTING -j own-postrouting
-          $iptables -F own-input
-          $iptables -F own-output
-          $iptables -F own-forward
-          $iptables -t nat -F own-output
-          $iptables -t nat -F own-prerouting
-          $iptables -t nat -F own-postrouting
-
-          # accept forwarding virbr1 to extif
-          $iptables -A own-forward -o $extif -i virbr1 -j ACCEPT
-
-          # accept forwarding extif to virbr1 if established/related
-          $iptables -A own-forward -i $extif -o virbr1 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-        done
-
-        for proto in udp tcp; do
-          # port forward dns to opacus
-          iptables -A own-forward -i $extif -o virbr1 -p $proto --dport 53 -m conntrack --ctstate NEW -j ACCEPT
-          iptables -t nat -A own-output -d $extip -p $proto --dport 53 -j DNAT --to-destination 172.19.130.245 # loopback
-          iptables -t nat -A own-prerouting -i $extif -d $extip -p $proto --dport 53 -j DNAT --to-destination 172.19.130.245
-          iptables -t nat -A own-postrouting -o virbr1 -p $proto --dport 53 -d 172.19.130.245 -j SNAT --to-source 172.19.130.1
-          ip6tables -A own-forward -i $extif -o virbr1 -p $proto --dport 53 -m conntrack --ctstate NEW -j ACCEPT
-          ip6tables -t nat -A own-output -d $extip6 -p $proto --dport 53 -j DNAT --to-destination fdfd:4524:784c:106d::2 # loopback
-          ip6tables -t nat -A own-prerouting -i $extif -d $extip6 -p $proto --dport 53 -j DNAT --to-destination fdfd:4524:784c:106d::2
-          ip6tables -t nat -A own-postrouting -o virbr1 -p $proto --dport 53 -d fdfd:4524:784c:106d::2 -j SNAT --to-source fdfd:4524:784c:106d::1
-
-          # port forward for kate
-          iptables -A own-forward -i $extif -o virbr1 -p $proto --dport 27025 -m conntrack --ctstate NEW -j ACCEPT
-          iptables -t nat -A own-output -d $extip -p $proto --dport 27025 -j DNAT --to-destination 172.19.130.150 # loopback
-          iptables -t nat -A own-prerouting -i $extif -d $extip -p $proto --dport 27025 -j DNAT --to-destination 172.19.130.150
-          iptables -t nat -A own-postrouting -o virbr1 -p $proto --dport 27025 -d 172.19.130.150 -j SNAT --to-source 172.19.130.1
-        done
-
-        # nat outbound
-        iptables -t nat -A own-postrouting -o bridge13 -j SNAT --to-source $extip
-      '';
       allowedTCPPorts = [
+        # dns
+        53
+
         # nginx
         80 443
+
+        # kate
+        27025
       ];
       allowedTCPPortRanges = [
         # libvirt migration
         { from = 49152; to = 49215; }
       ];
       allowedUDPPorts = [
+        # dns
+        53
+
         # dhcp
         67
 
         # nginx
         80 443
+
+        # kate
+        27025
+      ];
+    };
+    nat = {
+      enable = true;
+      internalInterfaces = [ "virbr1" ];
+      externalInterface = "bridge13";
+      forwardPorts = [
+        # port forward dns to opacus
+        {
+          sourcePort = 53;
+          proto = "udp";
+          destination = "172.19.130.245:53";
+        }
+        {
+          sourcePort = 53;
+          proto = "tcp";
+          destination = "172.19.130.245:53";
+        }
+        # port forward for kate
+        {
+          sourcePort = 27025;
+          proto = "udp";
+          destination = "172.19.130.150:27025";
+        }
+        {
+          sourcePort = 27025;
+          proto = "tcp";
+          destination = "172.19.130.150:27025";
+        }
       ];
     };
   };
