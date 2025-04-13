@@ -228,6 +228,10 @@
       enable = true;
       # logError = "stderr notice";
       recommendedProxySettings = true;
+      recommendedTlsSettings = true;
+      recommendedOptimisation = true;
+      recommendedGzipSettings = true;
+      recommendedBrotliSettings = true;
       appendHttpConfig = ''
         include /config/kate/dariox.club.conf;
         include /config/kate/xenia-dashboard.conf;
@@ -269,6 +273,12 @@
             proxyPass = "http://100.64.202.115:${toString port}";
           };
         };
+        venus = port: {
+          locations."/" = proxy // {
+            # venus.tailcdc44b.ts.net
+            proxyPass = "http://100.95.253.127:${toString port}";
+          };
+        };
       in {
         "\"\"" = {
           locations."/disabled" = {
@@ -303,10 +313,18 @@
           locations."/" = {
             root = "/var/www/shuppy.org";
           };
+          locations."= /.well-known/host-meta" = {
+            return = "303 https://fedi.shuppy.org$request_uri";
+          };
         };
         "meet.shuppy.org" = {
           enableACME = false;
           useACMEHost = "shuppy.org";
+        };
+        "fedi.shuppy.org" = sslShuppy // recursiveUpdate (venus 20130) {
+          locations."/" = {
+            proxyWebsockets = true;
+          };
         };
         "memories" = {
           listen = [{

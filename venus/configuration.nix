@@ -6,7 +6,7 @@
 # - sudo podman network create arr
 # - sudo podman network create paperless
 { config, lib, options, modulesPath, pkgs, ... }: with lib; {
-  imports = [ ../lib ];
+  imports = [ ../lib ./akkoma.nix ];
 
   internal = {
     hostId = "99D8468B";
