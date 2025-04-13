@@ -16,7 +16,7 @@
           email = "akkoma@shuppy.org";
           registration_open = false;
           inherit upload_dir;
-          federating = false;
+          federating = true;
         };
 
         # federation
