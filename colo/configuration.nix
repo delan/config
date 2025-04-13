@@ -274,8 +274,8 @@
             proxyPass = "http://100.64.202.115:${toString port}";
           };
         };
-        venus = port: {
-          locations."/" = proxy // {
+        venus = location: port: {
+          locations."${location}" = proxy // {
             # venus.tailcdc44b.ts.net
             proxyPass = "http://100.95.253.127:${toString port}";
           };
@@ -322,13 +322,13 @@
           enableACME = false;
           useACMEHost = "shuppy.org";
         };
-        "fedi.shuppy.org" = sslShuppy // recursiveUpdate (venus 20130) {
+        "fedi.shuppy.org" = sslShuppy // recursiveUpdate (venus "/" 20130) {
           locations."/" = {
             proxyWebsockets = true;
           };
         };
-        "fedi-media.shuppy.org" = sslShuppy // recursiveUpdate (venus 20130) {
-          locations."/" = {
+        "fedi-media.shuppy.org" = sslShuppy // recursiveUpdate (venus "/media/" 20130) {
+          locations."/media/" = {
             proxyWebsockets = true;
           };
         };
