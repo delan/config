@@ -36,9 +36,8 @@
               ${pkgs.csvkit}/bin/csvjson ${csv}/gardenfence-fediblocksync.csv > $out
             '';
             blocks = builtins.fromJSON (readFile json);
-            blocks' = map ({ domain, private_comment, ... }: { "${domain}" = private_comment; }) blocks;
-            blocks'' = foldl' lib.mergeAttrs {} blocks';
-          in mkMap blocks'';
+            blocks' = map ({ domain, private_comment, ... }: mkTuple [ domain private_comment ]) blocks;
+          in blocks';
         };
 
         # require login for instance and federated timelines.
