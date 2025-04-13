@@ -151,17 +151,6 @@
           proto = "tcp";
           destination = "172.19.130.245:53";
         }
-        # port forward for kate
-        {
-          sourcePort = 27025;
-          proto = "udp";
-          destination = "172.19.130.150:27025";
-        }
-        {
-          sourcePort = 27025;
-          proto = "tcp";
-          destination = "172.19.130.150:27025";
-        }
       ];
     };
   };
