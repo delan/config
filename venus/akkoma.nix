@@ -63,6 +63,28 @@
     enable = true;
     package = pkgs.postgresql_17;
     dataDir = "/ocean/active/services/postgres";
+    settings = {
+      # https://pgtune.leopard.in.ua/?dbVersion=17&osType=linux&dbType=web&cpuNum=&totalMemory=1&totalMemoryUnit=GB&connectionNum=20&hdType=hdd
+      # DB Version: 17
+      # OS Type: linux
+      # DB Type: web
+      # Total Memory (RAM): 1 GB
+      # Connections num: 20
+      # Data Storage: hdd
+      max_connections = 20;
+      shared_buffers = "256MB";
+      effective_cache_size = "768MB";
+      maintenance_work_mem = "64MB";
+      checkpoint_completion_target = 0.9;
+      wal_buffers = "7864kB";
+      default_statistics_target = 100;
+      random_page_cost = 4;
+      effective_io_concurrency = 2 * 6;  # 6 top-level vdevs in ocean
+      work_mem = "655kB";
+      huge_pages = "off";
+      min_wal_size = "1GB";
+      max_wal_size = "4GB";
+    };
   };
 
   # at least as large as the upload limit (default 15M)
