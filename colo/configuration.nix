@@ -9,6 +9,8 @@
 # - sudo setfacl -n --set 'u::rwX,g::0,o::0,m::rwX,nginx:5,delan:7' /var/www/memories/peb
 # - sudo setfacl -n --set 'u::rwX,g::0,o::0,m::rwX,nginx:5,delan:7' /var/www/memories
 # - provide /var/www/memories/peb/**
+# - sudo mkdir -p /var/cache/nginx/fedi-media-proxy.shuppy.org
+# - sudo chown nginx:nginx /var/cache/nginx/fedi-media-proxy.shuppy.org
 { config, lib, options, modulesPath, pkgs, specialArgs }: with lib; {
   imports = [ ../lib ];
 
@@ -234,6 +236,16 @@
       recommendedBrotliSettings = true;
       # avoid downtime if configuration has errors
       enableReload = true;
+
+      # for akkoma
+      # https://nixos.org/manual/nixos/stable/#modules-services-akkoma-media-proxy
+      package = pkgs.nginxStable.override { withSlice = true; };
+      commonHttpConfig = ''
+        proxy_cache_path /var/cache/nginx/fedi-media-proxy.shuppy.org
+          levels= keys_zone=fedi-media-proxy.shuppy.org:16m max_size=16g
+          inactive=1y use_temp_path=off;
+      '';
+
       appendHttpConfig = ''
         include /config/kate/dariox.club.conf;
         include /config/kate/xenia-dashboard.conf;
@@ -331,6 +343,31 @@
         "fedi-media.shuppy.org" = sslShuppy // recursiveUpdate (venus "/media/" 20130) {
           locations."/media/" = {
             proxyWebsockets = true;
+          };
+        };
+        "fedi-media-proxy.shuppy.org" = sslShuppy // recursiveUpdate (venus "/proxy" 20130) {
+          # https://nixos.org/manual/nixos/stable/#modules-services-akkoma-media-proxy
+          locations."/proxy" = {
+            extraConfig = ''
+              proxy_cache fedi-media-proxy.shuppy.org;
+
+              # Cache objects in slices of 1 MiB
+              slice 1m;
+              proxy_cache_key $host$uri$is_args$args$slice_range;
+              proxy_set_header Range $slice_range;
+
+              # Decouple proxy and upstream responses
+              proxy_buffering on;
+              proxy_cache_lock on;
+              proxy_ignore_client_abort on;
+
+              # Default cache times for various responses
+              proxy_cache_valid 200 1y;
+              proxy_cache_valid 206 301 304 1h;
+
+              # Allow serving of stale items
+              proxy_cache_use_stale error timeout invalid_header updating;
+            '';
           };
         };
         "memories" = {

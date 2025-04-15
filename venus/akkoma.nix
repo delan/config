@@ -90,6 +90,14 @@
         # it seems the subdirectory must be /media/, anything else is a 404. i think if we want to
         # change the subdirectory, we need to configure a rewrite in nginx accordingly.
         "Pleroma.Upload".base_url = "https://fedi-media.shuppy.org/media";
+
+        # https://nixos.org/manual/nixos/stable/#modules-services-akkoma-media-proxy
+        # https://docs.akkoma.dev/stable/configuration/howto_mediaproxy/
+        ":media_proxy" = {
+          enabled = true;
+          proxy_opts.redirect_on_failure = true;
+          base_url = "https://fedi-media-proxy.shuppy.org";
+        };
       };
     };
   } (
