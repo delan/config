@@ -203,6 +203,7 @@
         "meet.shuppy.org"
         "fedi.shuppy.org"
         "fedi-media.shuppy.org"
+        "fedi-media-proxy.shuppy.org"
       ];
     };
   };
