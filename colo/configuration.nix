@@ -232,6 +232,8 @@
       recommendedOptimisation = true;
       recommendedGzipSettings = true;
       recommendedBrotliSettings = true;
+      # avoid downtime if configuration has errors
+      enableReload = true;
       appendHttpConfig = ''
         include /config/kate/dariox.club.conf;
         include /config/kate/xenia-dashboard.conf;
