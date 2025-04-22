@@ -86,6 +86,7 @@
     soundfont-fluid
     spotify
     sqlite
+    sqlitebrowser
     sshfs-fuse
     steam
     steam-run
