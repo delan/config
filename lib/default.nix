@@ -76,6 +76,10 @@
           device = "/dev/disk/by-uuid/4662-B6FE"; fsType = "vfat";
           options = ["user" "noauto" "time_offset=480"];  # UTC+8
         };
+        "/mnt/scsi" = {
+          device = "/dev/disk/by-uuid/42A6-41C6"; fsType = "vfat";
+          options = ["user" "noauto"];
+        };
       };
 
       users.users."${config.internal.initialUser}" = {
