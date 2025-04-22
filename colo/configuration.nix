@@ -330,6 +330,12 @@
           locations."= /.well-known/host-meta" = {
             return = "303 https://fedi.shuppy.org$request_uri";
           };
+          locations."~ ^/https://?cohost[.]org/[^/]+/post/([0-9]+)" = {
+            return = "302 https://shuppy.org/posts/$1.html";
+          };
+          locations."~ ^/https://?kolektiva[.]social/[^/]+/([0-9]+)" = {
+            return = "302 https://shuppy.org/posts/$1.html";
+          };
         };
         "meet.shuppy.org" = {
           enableACME = false;
