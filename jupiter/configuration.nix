@@ -80,6 +80,10 @@ in {
     # https://github.com/NixOS/nixos-hardware/pull/115
     # https://github.com/erpalma/throttled/issues/215
     "msr.allow_writes=on"
+
+    # same as badram=0x00000007de600000,0xfffffffffff00000
+    # but our kernel supports memmap= only, not badram=
+    "memmap=1M$32230M"
   ];
   boot.initrd.luks.devices = {
     cuffs1x0 = {
