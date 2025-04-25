@@ -82,6 +82,7 @@
     rink
     ripgrep
     rustup
+    signal-desktop
     smartmontools
     soundfont-fluid
     spotify
