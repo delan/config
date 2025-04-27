@@ -73,6 +73,7 @@
     patchelf
     pavucontrol
     pcmanfm
+    picard
     prismlauncher
     pulseaudio  # for pactl in i3
     pup
