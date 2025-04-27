@@ -228,6 +228,7 @@
 
     nginx = {
       enable = true;
+      clientMaxBodySize = "34M";
       # logError = "stderr notice";
       recommendedProxySettings = true;
       recommendedTlsSettings = true;

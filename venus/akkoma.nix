@@ -17,6 +17,7 @@
           registration_open = false;
           inherit upload_dir;
           federating = true;
+          upload_limit = 33554432;
         };
 
         # federation
@@ -150,8 +151,8 @@
     };
   };
 
-  # at least as large as the upload limit (default 15M)
-  services.nginx.clientMaxBodySize = mkDefault "16M";
+  # at least as large as the upload limit (default 15M, currently 32M)
+  services.nginx.clientMaxBodySize = mkDefault "33M";
 
   networking.firewall.allowedTCPPorts = [ 20130 ];
   networking.firewall.allowedUDPPorts = [ 20130 ];
