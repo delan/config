@@ -41,6 +41,21 @@ in {
     };
   };
 
+  specialisation.swap-gpu.configuration = with lib; {
+    services.xserver.videoDrivers = mkForce [ "nouveau" ];
+    boot.kernelParams = mkForce [
+      "intel_iommu=on" "default_hugepagesz=1G" "hugepagesz=1G"
+      "kvm.ignore_msrs=1"
+
+      # https://github.com/NixOS/nixos-hardware/pull/115
+      # https://github.com/erpalma/throttled/issues/215
+      "msr.allow_writes=on"
+
+      # radeon rx 6650 xt
+      "vfio_pci.ids=1002:73ef,1002:ab28"
+    ];
+  };
+
   # hardware-configuration.nix
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
@@ -84,6 +99,9 @@ in {
     # same as badram=0x00000007de600000,0xfffffffffff00000
     # but our kernel supports memmap= only, not badram=
     # "memmap=1M$32230M"
+
+    # nvidia 7300 le
+    "vfio_pci.ids=10de:01df"
   ];
   boot.initrd.luks.devices = {
     cuffs1x0 = {
