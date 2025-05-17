@@ -242,6 +242,7 @@
         (writeScriptBin "smart.sh" (readFile ../bin/smart.sh))
         (writeScriptBin "ssg.sh" (readFile ../bin/ssg.sh))
         (writeScriptBin "sync.sh" (readFile ../bin/sync.sh))
+        (writeScriptBin "wine.sh" (readFile ../bin/wine.sh))
         (writeScriptBin "zfs-iostat-totals" (readFile ../bin/zfs-iostat-totals))
         (writeScriptBin "zfs-sync-snapshots" (readFile ../bin/zfs-sync-snapshots))
         (writeScriptBin "zfs-thin-snapshots" (readFile ../bin/zfs-thin-snapshots))
