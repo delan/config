@@ -15,6 +15,11 @@
 
       # 32-bit game support
       graphics.enable32Bit = true;
+
+      bluetooth = {
+        enable = true;
+        powerOnBoot = false;
+      };
     };
 
     environment.systemPackages = with pkgs; [

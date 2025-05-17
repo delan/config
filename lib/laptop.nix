@@ -30,11 +30,6 @@
         };
       };
 
-      hardware.bluetooth = {
-        enable = true;
-        powerOnBoot = false;
-      };
-
       programs.light.enable = true;
       users.users."${config.internal.initialUser}".extraGroups = [ "video" ];
     })
