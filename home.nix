@@ -118,6 +118,11 @@
   ];
 
   services = {
+    udiskie = {
+      enable = true;
+      automount = false;
+    };
+
     picom = {
       enable = true;
       vSync = true;
