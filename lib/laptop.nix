@@ -8,7 +8,8 @@
   in mkMerge [
     (mkIf cfg.laptop {
       services = {
-        tlp.enable = true;
+        # conflicts with plasma5 and also is discouraged on modern amd?
+        tlp.enable = false;
 
         # https://bugzilla.kernel.org/show_bug.cgi?id=198931
         # https://askubuntu.com/questions/1044127
@@ -24,7 +25,8 @@
         auto-epp = {
           enable = true;
           settings.Settings = {
-            epp_state_for_AC = "balance_performance";  # same as firmware default
+            # epp_state_for_AC = "balance_performance";  # same as firmware default
+            epp_state_for_AC = "power";  # firmware default is balance_performance
             epp_state_for_BAT = "power";  # firmware default is balance_power
           };
         };
