@@ -76,6 +76,17 @@
   # biggest(?) available font
   console.font = "iso01-12x22";
 
+  networking = {
+    firewall = {
+      allowedTCPPorts = [
+        8000 # for servo ci monitor
+      ];
+
+      allowedUDPPorts = [
+      ];
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     cifs-utils
     colordiff
@@ -94,6 +105,12 @@
     samba
     tcpdump
     usbutils
+
+    cdrkit  # for servo/ci-runners
+    gh  # for servo/ci-runners
+    hivex  # for servo/ci-runners
+    jq  # for servo/ci-runners
+    unzip  # for servo/ci-runners
   ];
 
   fonts.fontconfig.defaultFonts.monospace = [ "monofur" ];
