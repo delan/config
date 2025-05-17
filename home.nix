@@ -115,6 +115,10 @@
     # https://nixos.wiki/wiki/Discord#Opening_Links_with_Firefox
     # https://github.com/NixOS/nixpkgs/issues/108995#issuecomment-826358042
     (discord.override { nss = nss_latest; })
+
+    (callPackage ./86box.nix {
+      unfreeEnableRoms = true;
+    })
   ];
 
   services = {
