@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-cd ~/opt/ssg
+if ! [ -e ssgwin32.exe ]; then cd ~/opt/ssg; fi
 WINEPREFIX=${WINEPREFIX-$(pwd)/wine} wine ${1-ssgwin32}

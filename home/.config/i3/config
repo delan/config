@@ -36,6 +36,7 @@ for_window [instance="^ghidra-Ghidra$" class="^ghidra-Ghidra$" title="^Structure
 for_window [instance="^ghidra-Ghidra$" class="^ghidra-Ghidra$" title="^Ghidra: "] floating enable
 for_window [instance="^ghidra-Ghidra$" class="^ghidra-Ghidra$" title="^win0$"] floating enable
 for_window [instance="^dashcam viewer[.]exe$" class="^dashcam viewer[.]exe$"] floating enable
+for_window [instance="^ssgwin32[.]exe$" class="^ssgwin32[.]exe$"] floating enable
 
 # title bar
 # for_window [class="."] border pixel 1
