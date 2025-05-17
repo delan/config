@@ -31,6 +31,7 @@
     gdb
     geeqie
     gh
+    ghidra
     gimp
     git-lfs
     gnome-font-viewer
