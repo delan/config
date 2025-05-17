@@ -89,16 +89,12 @@ in {
     "kvm-amd"
   ];
   boot.kernelParams = [
-    "intel_iommu=on" "default_hugepagesz=1G" "hugepagesz=1G" # "hugepages=72"
+    "intel_iommu=on" "default_hugepagesz=1G" "hugepagesz=1G" "hugepages=48"
     "kvm.ignore_msrs=1"
 
     # https://github.com/NixOS/nixos-hardware/pull/115
     # https://github.com/erpalma/throttled/issues/215
     "msr.allow_writes=on"
-
-    # same as badram=0x00000007de600000,0xfffffffffff00000
-    # but our kernel supports memmap= only, not badram=
-    # "memmap=1M$32230M"
 
     # nvidia 7300 le
     "vfio_pci.ids=10de:01df"
