@@ -9,5 +9,5 @@ export WINEPREFIX=~/opt/$prefix_name/wine
 
 case "$command" in
     (-*) "${command#-}" "$@" ;;
-    (*) wine "$@" ;;
+    (*) wine "$command" "$@" ;;
 esac
