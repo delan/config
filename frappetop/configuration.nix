@@ -117,7 +117,30 @@
     hivex  # for servo/ci-runners
     jq  # for servo/ci-runners
     unzip  # for servo/ci-runners
+
+    mitmproxy  # for servo/perf-analysis-tools
   ];
 
   fonts.fontconfig.defaultFonts.monospace = [ "monofur" ];
+
+  # for servo
+  programs.wireshark.enable = true;
+  # programs.wireshark.package = pkgs.wireshark-qt;
+  users.users."${config.internal.initialUser}".extraGroups = [ "wireshark" ];
+
+  # for servo benchmarking
+  users.groups.mitmproxy = {
+    members = [ "delan" ];
+  };
+
+  # for servo testing
+  services.orca.enable = true;
+  services.gnome.at-spi2-core.enable = true;
+
+  security.sudo.extraRules = [{
+    groups = [ "wheel" ];
+    commands = [
+      { options = [ "NOPASSWD" ]; command = "/home/delan/code/perf-analysis-tools/isolate-cpu-for-shell.sh"; }
+    ];
+  }];
 }

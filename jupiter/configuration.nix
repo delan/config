@@ -90,7 +90,7 @@ in {
     "kvm-amd"
   ];
   boot.kernelParams = [
-    "intel_iommu=on" "default_hugepagesz=1G" "hugepagesz=1G" "hugepages=48"
+    "intel_iommu=on" "default_hugepagesz=1G" "hugepagesz=1G" "hugepages=96"
     "kvm.ignore_msrs=1"
 
     # https://github.com/NixOS/nixos-hardware/pull/115
