@@ -15,6 +15,7 @@
     #jetbrains.idea-community
     #platformio
     alacritty
+    arandr
     aria2
     atool
     bc
@@ -84,6 +85,7 @@
     ripgrep
     rustup
     signal-desktop
+    slop
     smartmontools
     soundfont-fluid
     spotify

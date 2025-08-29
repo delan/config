@@ -16,7 +16,7 @@ case "$1" in
     maim -i $(xdotool getactivewindow) | xclip -sel clip -t image/png
     ;;
   (select)
-    maim -s | xclip -sel clip -t image/png
+    maim -g $(slop -r crosshair) | xclip -sel clip -t image/png
     ;;
 esac
 

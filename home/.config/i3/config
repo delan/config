@@ -62,12 +62,9 @@ bindsym $mod+p exec --no-startup-id light -A 5
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
 
-bindsym $mod+Shift+a exec --no-startup-id screenshot.sh all
-bindsym $mod+Shift+s exec --no-startup-id screenshot.sh select
-bindsym $mod+Shift+p exec --no-startup-id screenshot.sh primary
-bindsym $mod+Ctrl+Shift+a exec --no-startup-id screenshot.sh all 0.5
-bindsym $mod+Ctrl+Shift+s exec --no-startup-id screenshot.sh select 0.5
-bindsym $mod+Ctrl+Shift+p exec --no-startup-id screenshot.sh primary 0.5
+bindsym --release $mod+Shift+a exec --no-startup-id screenshot.sh all
+bindsym --release $mod+Shift+s exec --no-startup-id screenshot.sh select
+bindsym --release $mod+Shift+p exec --no-startup-id screenshot.sh primary
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle, exec pkill -USR1 i3status
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%, exec pkill -USR1 i3status
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%, exec pkill -USR1 i3status
@@ -76,7 +73,7 @@ bindsym $mod+c exec alacritty -e zsh -c 'rink -V && rink'
 bindsym $mod+e exec code
 bindsym $mod+Shift+e exec pcmanfm
 bindsym $mod+w exec firefox
-bindsym $mod+i exec "alacritty --class Alacritty,weechat -e weechat"
+bindsym $mod+Shift+i sticky toggle
 
 floating_modifier $mod
 font pango:monospace 16
