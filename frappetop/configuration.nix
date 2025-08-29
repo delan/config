@@ -23,6 +23,11 @@
     };
   };
 
+  hardware.graphics.extraPackages = [
+    # for darktable; check with nixpkgs#clinfo
+    pkgs.rocmPackages.clr.icd
+  ];
+
   # systemd.mount(5) units for ocean nfs (venus.tailcdc44b.ts.net.); we can’t use `fileSystems` and
   # fstab(5) because there’s no `x-systemd` option for arbitrary `BindsTo=`
   systemd.mounts = let

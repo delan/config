@@ -78,6 +78,10 @@
           device = "/dev/disk/by-uuid/4662-B6FE"; fsType = "vfat";
           options = ["user" "noauto" "time_offset=480"];  # UTC+8
         };
+        "/mnt/sd2" = {
+          device = "/dev/disk/by-uuid/EE71-3FB8"; fsType = "vfat";
+          options = ["user" "noauto" "time_offset=480"];  # UTC+8
+        };
         "/mnt/scsi" = {
           device = "/dev/disk/by-uuid/42A6-41C6"; fsType = "vfat";
           options = ["user" "noauto"];

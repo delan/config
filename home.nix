@@ -23,7 +23,6 @@
     cdrkit
     clang
     clang-tools
-    darktable
     dnsutils
     exiftool
     fd
@@ -120,6 +119,7 @@
     (callPackage ./86box.nix {
       unfreeEnableRoms = true;
     })
+    (callPackage ./darktable.nix {})
   ];
 
   services = {
