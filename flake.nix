@@ -78,47 +78,6 @@
     };
 
     # workstations
-    nixosConfigurations.uranus = nixos2211.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        uranus/configuration.nix
-        hm2211.nixosModules.home-manager
-        {
-          home-manager.users.delan = import ./home.nix;
-
-          # use same nixpkgs as system, which has allowUnfree
-          home-manager.useGlobalPkgs = true;
-
-          # TODO do we need this? affects path to hm-session-vars.sh!
-          # https://nix-community.github.io/home-manager/index.html#sec-install-nixos-module
-          # https://nix-community.github.io/home-manager/index.html#sec-flakes-nixos-module
-          # home-manager.useUserPackages = true;
-        }
-      ];
-    };
-    nixosConfigurations.saturn = unstable.lib.nixosSystem {
-      # deployified
-      system = "x86_64-linux";
-      modules = [
-        saturn/configuration.nix
-        lix-module.nixosModules.default
-        sops-nix.nixosModules.sops
-        git-diffie-module
-        nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen2
-        hm.nixosModules.home-manager
-        {
-          home-manager.users.delan = import ./home.nix;
-
-          # use same nixpkgs as system, which has allowUnfree
-          home-manager.useGlobalPkgs = true;
-
-          # TODO do we need this? affects path to hm-session-vars.sh!
-          # https://nix-community.github.io/home-manager/index.html#sec-install-nixos-module
-          # https://nix-community.github.io/home-manager/index.html#sec-flakes-nixos-module
-          # home-manager.useUserPackages = true;
-        }
-      ];
-    };
     nixosConfigurations.frappetop = unstable.lib.nixosSystem {
       # deployified
       system = "x86_64-linux";
