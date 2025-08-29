@@ -16,6 +16,7 @@
     bootDevice = mkOption { type = types.str; };
     swapDevice = mkOption { type = types.nullOr types.str; };
     separateNix = mkOption { type = types.bool; };
+    oldCuffsNames = mkOption { type = types.bool; };
     initialUser = mkOption { type = types.str; };
     tailscale = mkOption { type = types.bool; default = false; };
     ids = mkOption {
@@ -32,6 +33,7 @@
 
   config = let
     cfg = config.internal;
+    rootZpool = if cfg.oldCuffsNames then "cuffs" else "${cfg.hostName}";
   in mkMerge [
     (mkIf (cfg.swapDevice != null) {
       swapDevices = [ {
@@ -45,7 +47,7 @@
     })
     (mkIf cfg.separateNix {
       fileSystems."/nix" =
-        { device = "cuffs/nix";
+        { device = "${rootZpool}/nix";
           fsType = "zfs";
         };
     })
@@ -69,8 +71,8 @@
       system.stateVersion = "18.09";
 
       fileSystems = {
-        "/" = { device = "cuffs/root"; fsType = "zfs"; };
-        "/home" = { device = "cuffs/home"; fsType = "zfs"; };
+        "/" = { device = "${rootZpool}/root"; fsType = "zfs"; };
+        "/home" = { device = "${rootZpool}/home"; fsType = "zfs"; };
         "/boot" = { device = cfg.bootDevice; fsType = "vfat"; };
         "/mnt/sd" = {
           device = "/dev/disk/by-uuid/4662-B6FE"; fsType = "vfat";
@@ -115,7 +117,7 @@
 
       boot = {
         initrd.luks.devices = {
-          cuffs = {
+          "${rootZpool}" = {
             device = config.internal.luksDevice;
           };
         };

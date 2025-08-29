@@ -5,6 +5,7 @@
     hostId = "8FF7BF00";
     hostName = "tol";
     domain = "daz.cat";
+    oldCuffsNames = true;
     luksDevice = "/dev/disk/by-partlabel/tol.cuffs";
     bootDevice = "/dev/disk/by-partlabel/tol.esp";
     swapDevice = null;

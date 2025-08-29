@@ -5,7 +5,8 @@
     hostId = "6336419C";
     hostName = "frappetop";
     domain = "daz.cat";
-    luksDevice = "/dev/disk/by-partlabel/frappetop.cuffs";
+    oldCuffsNames = false;
+    luksDevice = "/dev/disk/by-partlabel/frappetop";
     bootDevice = "/dev/disk/by-partlabel/frappetop.esp";
     swapDevice = "/dev/disk/by-partlabel/frappetop.swap";
     separateNix = true;
