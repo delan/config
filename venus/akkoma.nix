@@ -14,7 +14,7 @@
           name = "shuppy";
           description = "ao!!";
           email = "akkoma@shuppy.org";
-          registration_open = false;
+          registrations_open = false;
           inherit upload_dir;
           federating = true;
           upload_limit = 33554432;
