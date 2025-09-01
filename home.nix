@@ -121,8 +121,7 @@
     (callPackage ./86box.nix {
       unfreeEnableRoms = true;
     })
-    # FIXME: busted after last update
-    # (callPackage ./darktable.nix {})
+    (callPackage ./darktable.nix {})
   ];
 
   services = {
