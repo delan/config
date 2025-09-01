@@ -172,9 +172,9 @@
           startWhenNeeded = true;
         };
 
-        logind.extraConfig = ''
-          HandlePowerKey=ignore
-        '';
+        logind.settings.Login = {
+          HandlePowerKey = "ignore";
+        };
 
         unbound = {
           # TODO add stub zones for vpn party and enable?
@@ -213,12 +213,7 @@
 
         gnupg.agent = {
           enable = true;
-
-          # incompatible with ssh.startAgent
-          # enableSSHSupport = true;
         };
-
-        ssh.startAgent = true;
 
         # for sshfs -o allow_other,default_permissions,idmap=user
         fuse.userAllowOther = true;
