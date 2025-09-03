@@ -5,10 +5,10 @@
 # - chown -R kate:users ./kate
 # - provide /config/kate/dariox.club.conf, kate:users 644
 # - provide /config/kate/xenia-dashboard.conf, kate:users 644
-# - sudo mkdir -p /var/www/memories/peb
-# - sudo setfacl -n --set 'u::rwX,g::0,o::0,m::rwX,nginx:5,delan:7' /var/www/memories/peb
+# - sudo mkdir -p /var/www/memories/pebble
+# - sudo setfacl -n --set 'u::rwX,g::0,o::0,m::rwX,nginx:5,delan:7' /var/www/memories/pebble
 # - sudo setfacl -n --set 'u::rwX,g::0,o::0,m::rwX,nginx:5,delan:7' /var/www/memories
-# - provide /var/www/memories/peb/**
+# - provide /var/www/memories/pebble/**
 # - sudo mkdir -p /var/cache/nginx/fedi-media-proxy.shuppy.org
 # - sudo chown nginx:nginx /var/cache/nginx/fedi-media-proxy.shuppy.org
 { config, lib, options, modulesPath, pkgs, specialArgs }: with lib; {
@@ -216,7 +216,7 @@
     unbound = {
       enable = true;
       settings.forward-zone = [
-        { name = "venus.tailcdc44b.ts.net"; forward-addr = "100.100.100.100"; }
+        { name = "tailcdc44b.ts.net"; forward-addr = "100.100.100.100"; }
         # FIXME: try {64..127}.100.in-addr.arpa. to fix avahi rdns hang on ping
       ];
     };
@@ -377,11 +377,10 @@
             '';
           };
         };
-        "memories" = {
+        "colo.tailcdc44b.ts.net" = {
+          # TODO tailscale ssl
           listen = [{
-            addr = "*";
-            port = 20000;
-            extraParameters = [ "default_server" ];
+            addr = "colo.tailcdc44b.ts.net";
           }];
           locations."/" = {
             root = "/var/www/memories";
