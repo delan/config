@@ -212,7 +212,7 @@
     ];
   };
   gtnh = {
-    inherit autoStart;
+    autoStart = false;
     image = "itzg/minecraft-server:java21-alpine";
     ports = ["25565:25565"];
     environment = {
@@ -251,7 +251,7 @@
     ];
   };
   monifactory = {
-    inherit autoStart;
+    autoStart = false;
     image = "itzg/minecraft-server:java21-alpine";
     ports = ["25566:25565"];
     environment = {
