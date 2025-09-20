@@ -18,6 +18,8 @@
     hostId = "99D8468B";
     hostName = "colo";
     domain = "daz.cat";
+    oldCuffsNames = true;
+    unstableWorkstationsCompat = false;
     luksDevice = "/dev/disk/by-uuid/a8b6dd52-8f9f-42f8-badc-53b43aa9a4df";
     bootDevice = "/dev/disk/by-uuid/0CA9-2BEC";
     swapDevice = null;

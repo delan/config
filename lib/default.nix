@@ -17,6 +17,7 @@
     swapDevice = mkOption { type = types.nullOr types.str; };
     separateNix = mkOption { type = types.bool; };
     oldCuffsNames = mkOption { type = types.bool; };
+    unstableWorkstationsCompat = mkOption { type = types.bool; };
     initialUser = mkOption { type = types.str; };
     tailscale = mkOption { type = types.bool; default = false; };
     ids = mkOption {
@@ -172,9 +173,16 @@
           startWhenNeeded = true;
         };
 
-        logind.settings.Login = {
-          HandlePowerKey = "ignore";
-        };
+        logind =
+          if cfg.unstableWorkstationsCompat
+          then {
+            settings.Login.HandlePowerKey = "ignore";
+          }
+          else {
+            extraConfig = mkIf (!cfg.unstableWorkstationsCompat) ''
+              HandlePowerKey=ignore
+            '';
+          };
 
         unbound = {
           # TODO add stub zones for vpn party and enable?

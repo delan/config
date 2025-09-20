@@ -6,6 +6,7 @@
     hostName = "frappetop";
     domain = "daz.cat";
     oldCuffsNames = false;
+    unstableWorkstationsCompat = true;
     luksDevice = "/dev/disk/by-partlabel/frappetop";
     bootDevice = "/dev/disk/by-partlabel/frappetop.esp";
     swapDevice = "/dev/disk/by-partlabel/frappetop.swap";

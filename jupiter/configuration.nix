@@ -25,6 +25,7 @@ in {
     hostName = "jupiter";
     domain = "daz.cat";
     oldCuffsNames = true;
+    unstableWorkstationsCompat = true;
     luksDevice = "/dev/disk/by-partlabel/jupiter.root";
     bootDevice = "/dev/disk/by-uuid/B2F1-7DD3";
     swapDevice = "/dev/disk/by-partlabel/jupiter.swap";

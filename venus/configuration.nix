@@ -13,6 +13,7 @@
     hostName = "venus";
     domain = "daz.cat";
     oldCuffsNames = true;
+    unstableWorkstationsCompat = false;
     luksDevice = "/dev/disk/by-partlabel/cuffs2x2";
     bootDevice = "/dev/disk/by-uuid/3A36-D233";
     # TODO: use swap <https://chrisdown.name/2018/01/02/in-defence-of-swap.html>

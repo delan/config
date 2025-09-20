@@ -15,9 +15,16 @@
         # https://askubuntu.com/questions/1044127
         tlp.settings = { USB_BLACKLIST = "17ef:3082"; };
 
-        logind.settings.Login = {
-          HandleLidSwitchExternalPower = "ignore";
-        };
+        logind =
+          if cfg.unstableWorkstationsCompat
+          then {
+            settings.Login.HandleLidSwitchExternalPower = "ignore";
+          }
+          else {
+            extraConfig = ''
+              HandleLidSwitchExternalPower=ignore
+            '';
+          };
 
         # Energy Performance Preference control for modern cpus
         # <https://wiki.archlinux.org/title/CPU_frequency_scaling#Autonomous_frequency_scaling>
