@@ -102,20 +102,6 @@
       LOG_LEVEL = "info";
     };
   };
-  homepage = {
-    inherit autoStart;
-    image = "ghcr.io/gethomepage/homepage:v1.0.4";
-    ports = ["${toString config.internal.ids.homepage.port}:3000"];
-    networks = ["arr"];
-    volumes = [
-      "/ocean/active/services/homepage:/app/config"
-    ];
-    environment = {
-      HOMEPAGE_ALLOWED_HOSTS = "homepage.venus.daz.cat";
-      PUID = "${toString config.internal.ids.homepage.id}";
-      PGID = "${toString config.internal.ids.homepage.id}";
-    };
-  };
   decluttarr = {
     inherit autoStart;
     image = "ghcr.io/manimatter/decluttarr:v1.50.2";

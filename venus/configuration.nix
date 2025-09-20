@@ -373,13 +373,6 @@
       "venus.daz.cat" = sslForce // sslAcme // {
         locations = venus;
       };
-      "homepage.venus.daz.cat" = sslForce // sslAcme // {
-        locations = {
-          "/" = proxy // {
-            proxyPass = "http://127.0.0.1:${toString config.internal.ids.homepage.port}";
-          };
-        };
-      };
       "venus.tailcdc44b.ts.net:8443" = {
         listen = [{
           addr = "venus.tailcdc44b.ts.net";
