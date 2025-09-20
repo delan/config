@@ -266,7 +266,7 @@
   };
 
   networking.firewall.allowedTCPPorts = [
-    80 443 8443 # nginx
+    80 443 # nginx
     8123 # home-assistant
     7474 # autobrr
     1313 # zfs send
@@ -277,7 +277,7 @@
     25566 # minecraft (monifactory)
   ];
   networking.firewall.allowedUDPPorts = [
-    80 443 8443 # nginx
+    80 443 # nginx
     111 2049 # nfs
   ];
 
@@ -375,20 +375,6 @@
       };
       "venus.tailcdc44b.ts.net" = sslForce // sslAcme // {
         locations = venus;
-      };
-      "venus.tailcdc44b.ts.net:8443" = {
-        listen = [{
-          addr = "venus.tailcdc44b.ts.net";
-          port = 8443;
-          ssl = true;
-        }];
-        # FIXME: why doesn’t config.sops work here?
-        # sslCertificate = config.sops.secrets.tailscale-ssl-cert.path;
-        # sslCertificateKey = config.sops.secrets.tailscale-ssl-key.path;
-        sslCertificate = "/run/secrets/venus.tailcdc44b.ts.net.crt";
-        sslCertificateKey = "/run/secrets/venus.tailcdc44b.ts.net.key";
-        onlySSL = true;
-        locations = syncloungeOnly;
       };
     };
   };
