@@ -373,6 +373,9 @@
       "venus.daz.cat" = sslForce // sslAcme // {
         locations = venus;
       };
+      "venus.tailcdc44b.ts.net" = sslForce // sslAcme // {
+        locations = venus;
+      };
       "venus.tailcdc44b.ts.net:8443" = {
         listen = [{
           addr = "venus.tailcdc44b.ts.net";
