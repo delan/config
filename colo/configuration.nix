@@ -181,6 +181,7 @@
         "bucket.daz.cat"
         "memories.daz.cat"
         "charming.daz.cat"
+        "twitter.daz.cat"
         "funny.computer.daz.cat"
         "go.daz.cat"
         "xn--blhaj-nra.daz.cat"
@@ -315,6 +316,11 @@
           };
         } // sslForce;
         "charming.daz.cat" = opacus // sslForce;
+        "twitter.daz.cat" = sslForce // {
+          locations."/" = {
+            root = "/var/www/twitter.daz.cat";
+          };
+        };
         "funny.computer.daz.cat" = opacus // sslRelax;
         "go.daz.cat" = opacus // sslForce;
         "xn--blhaj-nra.daz.cat" = opacus // sslForce;
