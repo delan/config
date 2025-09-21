@@ -190,7 +190,6 @@
         "sixte.st"
         "*.sixte.st"
         "*.v6ns.sixte.st"
-        "isbtrfsstableyet.com"
         "kierang.ee.nroach44.id.au"
       ];
     };
@@ -324,7 +323,7 @@
         "www.azabani.com" = opacus // sslForce;
         "ar1as.space" = opacus // sslForce;
         ".sixte.st" = stratus // sslRelax;
-        "isbtrfsstableyet.com" = opacus // sslRelax;
+        "isbtrfsstableyet.com" = opacus;
         "kierang.ee.nroach44.id.au" = opacus // sslRelax;
         "shuppy.org" = sslShuppy // {
           locations."/" = {
