@@ -251,6 +251,7 @@
         (writeScriptBin "screenshot.sh" (readFile ../bin/screenshot.sh))
         (writeScriptBin "slock" (readFile ../bin/slock))
         (writeScriptBin "smart.sh" (readFile ../bin/smart.sh))
+          smartmontools
         (writeScriptBin "ssg.sh" (readFile ../bin/ssg.sh))
         (writeScriptBin "sync.sh" (readFile ../bin/sync.sh))
         (writeScriptBin "wine.sh" (readFile ../bin/wine.sh))
