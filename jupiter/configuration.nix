@@ -76,11 +76,7 @@ in {
   #   pkgs.mesa.drivers pkgs.amdvlk
   # ];
   hardware.graphics.extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
-
-  # for servo amd disable boost
-  # https://docs.kernel.org/admin-guide/pm/cpufreq.html#frequency-boost-support
-  # https://lwn.net/Articles/979398/
-  boot.kernelPackages = pkgs.linuxPackages_6_11;
+  boot.kernelPackages = pkgs.linuxPackages_6_16;
 
   hardware.opentabletdriver.enable = true;
 
