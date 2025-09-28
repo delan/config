@@ -241,6 +241,7 @@
         ripgrep # needed for /root/sync.sh
         nix-output-monitor # nixos-rebuild --log-format internal-json -v switch 2>&1 | nom --json
         nix-doc
+        bore
 
         (writeScriptBin "darktable-exported.sh" (readFile ../bin/darktable-exported.sh))
         (writeScriptBin "markdown-photos.sh" (readFile ../bin/markdown-photos.sh))
