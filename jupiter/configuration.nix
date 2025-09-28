@@ -108,21 +108,6 @@ in {
     fsType = "nfs";
     options = [ "rw" "soft" "bg" ];
   };
-  fileSystems."/ocean/active" = {
-    device = "venus.home.daz.cat.:/ocean/active";
-    fsType = "nfs";
-    options = [ "rw" "soft" "bg" ];
-  };
-  fileSystems."/ocean/private" = {
-    device = "venus.home.daz.cat.:/ocean/private";
-    fsType = "nfs";
-    options = [ "rw" "soft" "bg" ];
-  };
-  fileSystems."/ocean/public" = {
-    device = "venus.home.daz.cat.:/ocean/public";
-    fsType = "nfs";
-    options = [ "rw" "soft" "bg" ];
-  };
 
   networking = {
     firewall = {

@@ -61,21 +61,6 @@
       what = "100.95.253.127:/ocean";
       where = "/ocean";
     })
-    (nfsOverTailscale // {
-      name = "ocean-active.mount";
-      what = "100.95.253.127:/ocean/active";
-      where = "/ocean/active";
-    })
-    (nfsOverTailscale // {
-      name = "ocean-private.mount";
-      what = "100.95.253.127:/ocean/private";
-      where = "/ocean/private";
-    })
-    (nfsOverTailscale // {
-      name = "ocean-public.mount";
-      what = "100.95.253.127:/ocean/public";
-      where = "/ocean/public";
-    })
   ];
 
   nix.settings.sandbox = true;

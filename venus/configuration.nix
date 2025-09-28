@@ -401,10 +401,7 @@
       # resolve here, breaking the exports. mount -v will fail with “mount(2):
       # Permission denied” and “access denied by server while mounting”.
       # <https://github.com/tailscale/tailscale/issues/11504>
-      /ocean -rw 100.64.202.115 172.19.42.3 100.119.186.118
-      /ocean/active -rw 100.64.202.115 172.19.42.3 100.119.186.118
-      /ocean/private -rw 100.64.202.115 172.19.42.3 100.119.186.118
-      /ocean/public -rw 100.64.202.115 172.19.42.3 100.119.186.118
+      /ocean -rw,crossmnt 100.64.202.115 172.19.42.3 100.119.186.118
     '';
   };
 
