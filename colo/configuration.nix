@@ -12,7 +12,7 @@
 # - sudo mkdir -p /var/cache/nginx/fedi-media-proxy.shuppy.org
 # - sudo chown nginx:nginx /var/cache/nginx/fedi-media-proxy.shuppy.org
 { config, lib, options, modulesPath, pkgs, specialArgs }: with lib; {
-  imports = [ ../lib ];
+  imports = [ ../lib ./dns.nix ];
 
   internal = {
     hostId = "99D8468B";
