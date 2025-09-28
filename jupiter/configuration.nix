@@ -148,6 +148,7 @@ in {
     colordiff
     cpuset  # for servo perf testing
     dbus-sway-environment
+    ddrescue
     efibootmgr
     file
     gh  # for servo/ci-runners
@@ -212,6 +213,16 @@ in {
     extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
     openssh.authorizedKeys.keys = ["sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBveMRzoY0e0F2c2f9N/gZ7zFBIXJGhNPSAGI5/XTaBMAAAABHNzaDo="];
   };
+  users.users.the6p4c = {
+    isNormalUser = true;
+    uid = 1002;
+    shell = pkgs.bash;
+    extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP4DLGOYx1MAvEl3eED/PKj4w6YrucuRVVnpTAEWnqS2 the6p4c@dragonfruit"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII0WIc6t7qaz/y86Xoi+0G0i9J4vHmLct9u+sASj5cDh the6p4c@starfruit"
+    ];
+  };
   programs.fish.enable = true;
   nix.settings.trusted-users = ["ruby"];
 
@@ -265,6 +276,7 @@ in {
     groups = [ "wheel" ];
     commands = [
       { options = [ "NOPASSWD" ]; command = "/home/delan/code/servo/attic/perf/analyse/isolate-cpu-for-shell.sh"; }
+      { options = [ "NOPASSWD" ]; command = "/home/delan/code/perf-analysis-tools/isolate-cpu-for-shell.sh"; }
     ];
   }];
 }
