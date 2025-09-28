@@ -145,6 +145,8 @@
         ocean4x2 = { device = "/dev/disk/by-partlabel/ocean4x2"; };
         ocean5x0 = { device = "/dev/disk/by-partlabel/ocean5x0"; };
         ocean5x2 = { device = "/dev/disk/by-partlabel/ocean5x2"; };
+        ocean6x0 = { device = "/dev/disk/by-partlabel/ocean6x0"; };
+        ocean6x1 = { device = "/dev/disk/by-partlabel/ocean6x1"; };
         oceanSx0 = { device = "/dev/disk/by-partlabel/oceanSx0"; };
         oceanSx1 = { device = "/dev/disk/by-partlabel/oceanSx1"; };
       };
