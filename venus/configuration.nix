@@ -89,6 +89,8 @@
       inherit config;
       autoStart = false;
     });
+    internal.services.qbittorrent = mkForce false;
+    services.akkoma.enable = mkForce false;
   };
 
   # hardware-configuration.nix
@@ -273,12 +275,14 @@
     111 2049 # nfs
     8000 # python
     3260 # iscsi
+    5201 5202 # iperf3
     25565 # minecraft (gtnh)
     25566 # minecraft (monifactory)
   ];
   networking.firewall.allowedUDPPorts = [
     80 443 # nginx
     111 2049 # nfs
+    5201 5202 # iperf3
   ];
 
   # allows you to authenticate sudo using your ssh private key
