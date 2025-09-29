@@ -83,14 +83,15 @@
   systemd.services.pdns = {
     after = ["pdns-acme.service"];
     preStart = ''
-      rm -f /var/lib/shuppy/pdns-acme/pdns-acme.sqlite
-      ${pkgs.sqlite}/bin/sqlite3 -init ${pkgs.copyPathToStore ../colo/pdns-acme.sql} /var/lib/shuppy/pdns-acme/pdns-acme.sqlite
+      # keep existing database if possible, to avoid rewinding SOA serials
+      if ! [ -e /var/lib/shuppy/pdns-acme/pdns-acme.sqlite ]; then
+        ${pkgs.sqlite}/bin/sqlite3 -init ${pkgs.copyPathToStore ../colo/pdns-acme.sql} /var/lib/shuppy/pdns-acme/pdns-acme.sqlite
+        ${pkgs.pdns}/bin/pdnsutil create-zone acme.daz.cat
+        ${pkgs.pdns}/bin/pdnsutil load-zone acme.daz.cat ${pkgs.copyPathToStore ../daria/var/nsd/zones/acme.daz.cat.zone}
+        ${pkgs.pdns}/bin/pdnsutil create-zone acme.shuppy.org
+        ${pkgs.pdns}/bin/pdnsutil load-zone acme.shuppy.org ${pkgs.copyPathToStore ../daria/var/nsd/zones/acme.shuppy.org.zone}
+      fi
       chmod 600 /var/lib/shuppy/pdns-acme/pdns-acme.sqlite
-
-      ${pkgs.pdns}/bin/pdnsutil create-zone acme.daz.cat
-      ${pkgs.pdns}/bin/pdnsutil load-zone acme.daz.cat ${pkgs.copyPathToStore ../daria/var/nsd/zones/acme.daz.cat.zone}
-      ${pkgs.pdns}/bin/pdnsutil create-zone acme.shuppy.org
-      ${pkgs.pdns}/bin/pdnsutil load-zone acme.shuppy.org ${pkgs.copyPathToStore ../daria/var/nsd/zones/acme.shuppy.org.zone}
     '';
   };
 }
