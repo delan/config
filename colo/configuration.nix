@@ -326,7 +326,9 @@
             root = "/var/www/twitter.daz.cat";
           };
         };
-        "funny.computer.daz.cat" = opacus // sslRelax;
+        "funny.computer.daz.cat" = sslRelax // {
+          root = "/var/www/funny.computer.daz.cat/production";
+        };
         "go.daz.cat" = opacus // sslForce;
         "xn--blhaj-nra.daz.cat" = opacus // sslForce;
         "test.daz.cat" = jupiter 8000 // sslForce;
