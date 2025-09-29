@@ -1,2 +1,1 @@
-EXEC_PATH=/run/current-system/sw/bin/acme-dns.daz.sh
-EXEC_SEQUENCE_INTERVAL=0
+RFC2136_NAMESERVER=127.0.0.1:55

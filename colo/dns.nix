@@ -1,7 +1,7 @@
 { config, lib, options, modulesPath, pkgs, specialArgs }: with lib; {
   services.nsd = {
     enable = true;
-    port = 54;
+    interfaces = ["103.108.231.122" "2404:f780:8:3006:cccc:ffff:feee:468b"];
     zones = let
       zone = name: filename: options: {
         name = "${name}.";
@@ -67,6 +67,8 @@
       launch=gsqlite3
       gsqlite3-database=/var/lib/shuppy/pdns-acme/pdns-acme.sqlite
       dnsupdate=yes
+      # venus.tailcdc44b.ts.net. = 100.95.253.127
+      allow-dnsupdate-from=127.0.0.1/32 100.95.253.127/32
     '';
   };
 

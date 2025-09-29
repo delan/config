@@ -145,19 +145,7 @@
       enable = true;
       internalInterfaces = [ "virbr1" ];
       externalInterface = "bridge13";
-      forwardPorts = [
-        # port forward dns to opacus
-        {
-          sourcePort = 53;
-          proto = "udp";
-          destination = "172.19.130.245:53";
-        }
-        {
-          sourcePort = 53;
-          proto = "tcp";
-          destination = "172.19.130.245:53";
-        }
-      ];
+      forwardPorts = [];
     };
   };
 
@@ -168,8 +156,8 @@
       # copyPathToStore gives the file its own store path, which gets copied to the machine.
       # without copyPathToStore, the path refers into the flake, which does not get copied
       # (it only exists in the deploying machine’s store).
-      credentialsFile = pkgs.copyPathToStore ./acme-env.daz.txt;
-      dnsProvider = "exec";
+      environmentFile = pkgs.copyPathToStore ./acme-env.daz.txt;
+      dnsProvider = "rfc2136";
       postRun = ''
         /run/current-system/sw/bin/deploy-acme-to-opacus.sh
         /run/current-system/sw/bin/deploy-acme-to-stratus.sh
@@ -199,8 +187,8 @@
       # copyPathToStore gives the file its own store path, which gets copied to the machine.
       # without copyPathToStore, the path refers into the flake, which does not get copied
       # (it only exists in the deploying machine’s store).
-      credentialsFile = pkgs.copyPathToStore ./acme-env.shuppy.txt;
-      dnsProvider = "exec";
+      environmentFile = pkgs.copyPathToStore ./acme-env.shuppy.txt;
+      dnsProvider = "rfc2136";
       postRun = ''
       '';
       extraDomainNames = [

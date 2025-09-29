@@ -300,10 +300,10 @@
       # copyPathToStore gives the file its own store path, which gets copied to the machine.
       # without copyPathToStore, the path refers into the flake, which does not get copied
       # (it only exists in the deploying machine’s store).
-      credentialsFile = pkgs.copyPathToStore ./acme-env.daz.txt;
-      dnsProvider = "exec";
+      environmentFile = pkgs.copyPathToStore ./acme-env.daz.txt;
+      dnsProvider = "rfc2136";
       extraDomainNames = [
-        "homepage.venus.daz.cat"
+        "test.daz.cat"
       ];
     };
   };
