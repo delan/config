@@ -354,6 +354,10 @@
         "shuppy.org" = sslShuppy // {
           locations."/" = {
             root = "/var/www/shuppy.org";
+            extraConfig = ''
+              # Cache-Control: no-cache (max-age=0, must-revalidate)
+              expires -1h;
+            '';
           };
           locations."= /.well-known/host-meta" = {
             return = "303 https://fedi.shuppy.org$request_uri";
