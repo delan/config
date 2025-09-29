@@ -259,11 +259,6 @@
           useACMEHost = "shuppy.org";
           forceSSL = true;
         };
-        opacus = {
-          locations."/" = proxy // {
-            proxyPass = "http://172.19.130.245";
-          };
-        };
         stratus = {
           locations."/" = proxy // {
             proxyPass = "http://172.19.130.235";
