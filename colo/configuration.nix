@@ -1,8 +1,7 @@
 # manual setup after initial switch:
 # - provide ./home_colo.ovpn, root:root 600
 # - tailscale up
-# - chown -R nginx:nginx ./nginx
-# - chown -R kate:users ./kate
+# - provide /config/nginx/go.daz.cat.conf, delan:users 644
 # - provide /config/kate/dariox.club.conf, kate:users 644
 # - provide /config/kate/xenia-dashboard.conf, kate:users 644
 # - sudo mkdir -p /var/www/memories/pebble
@@ -329,7 +328,11 @@
         "funny.computer.daz.cat" = sslRelax // {
           root = "/var/www/funny.computer.daz.cat/production";
         };
-        "go.daz.cat" = opacus // sslForce;
+        "go.daz.cat" = sslForce // {
+          extraConfig = ''
+            include /config/nginx/go.daz.cat.conf;
+          '';
+        };
         "xn--blhaj-nra.daz.cat" = opacus // sslForce;
         "test.daz.cat" = jupiter 8000 // sslForce;
         "azabani.com" = opacus // sslForce;
