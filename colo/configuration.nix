@@ -291,7 +291,27 @@
         "2404:f780:8:3006:8f04::1500" = stratus // sslRelax;
         "opacus.daz.cat" = opacus // sslForce;
         "stratus.daz.cat" = stratus // sslForce;
-        "bucket.daz.cat" = opacus // sslRelax;
+        "bucket.daz.cat" = sslRelax // {
+          root = "/var/www/bucket.daz.cat";
+          extraConfig = ''
+            autoindex on;
+          '';
+          locations."= /" = {
+            # trailing slash required
+            alias = "/var/www/bucket.daz.cat/pub/";
+            extraConfig = ''
+              charset utf-8;
+            '';
+          };
+          locations."/old/" = {
+            return = "403";
+          };
+          locations."/private/" = {
+            extraConfig = ''
+              autoindex off;
+            '';
+          };
+        };
         "memories.daz.cat" = {
           locations."/" = {
             root = "/var/www/memories";
