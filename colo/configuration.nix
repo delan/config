@@ -335,8 +335,18 @@
         };
         "xn--blhaj-nra.daz.cat" = opacus // sslForce;
         "test.daz.cat" = jupiter 8000 // sslForce;
-        "azabani.com" = opacus // sslForce;
-        "www.azabani.com" = opacus // sslForce;
+        "azabani.com" = sslForce // {
+          locations."/" = {
+            return = "301 https://www.azabani.com$request_uri";
+          };
+        };
+        "www.azabani.com" = sslForce // {
+          root = "/var/www/www.azabani.com/_production/_site";
+          extraConfig = ''
+            # Cache-Control: no-cache (max-age=0, must-revalidate)
+            expires -1h;
+          '';
+        };
         "ar1as.space" = opacus // sslForce;
         ".sixte.st" = stratus // sslRelax;
         "isbtrfsstableyet.com" = opacus;
