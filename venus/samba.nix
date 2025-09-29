@@ -1,11 +1,5 @@
 { config, lib, options, modulesPath, pkgs, ... }: with lib; {
-  options.internal.services = {
-    samba = mkOption { type = types.bool; default = false; };
-  };
-
-  config = let
-    cfg = config.internal;
-  in mkIf cfg.services.samba {
+  config = {
     services.samba = {
       enable = true;
       package = pkgs.samba4Full;

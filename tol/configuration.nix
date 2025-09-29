@@ -17,8 +17,6 @@
       libvirt = true;
       docker = true;
     };
-
-    services = {};
   };
 
   swapDevices = [ { device = "/dev/disk/by-partlabel/tol.swap"; } ];

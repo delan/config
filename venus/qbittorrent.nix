@@ -1,14 +1,10 @@
-{ config, lib, options, modulesPath, pkgs, ... }: with lib; {
-  options.internal.services = {
-    qbittorrent = mkOption { type = types.bool; default = false; };
-  };
-
-  config = let
-    cfg = config.internal.services;
-    home = "/var/lib/qbittorrent";
-    webuiPort = config.internal.ids.qbittorrent.port;
-    torrentPort = config.internal.ids.qbittorrent.port + 1;
-  in mkIf cfg.qbittorrent {
+{ config, lib, options, modulesPath, pkgs, ... }: with lib; let
+  cfg = config.internal.services;
+  home = "/var/lib/qbittorrent";
+  webuiPort = config.internal.ids.qbittorrent.port;
+  torrentPort = config.internal.ids.qbittorrent.port + 1;
+in {
+  config = {
     networking.firewall = {
       allowedTCPPorts = [ webuiPort torrentPort ];
       allowedUDPPorts = [ webuiPort torrentPort ];

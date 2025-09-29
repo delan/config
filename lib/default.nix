@@ -4,8 +4,6 @@
     ./laptop.nix
     ./igalia.nix
     ./virtualisation.nix
-    ./services
-    ./programs
   ];
 
   options.internal = with types; {

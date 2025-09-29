@@ -36,9 +36,6 @@
       docker = false;
     };
 
-    services = {
-    };
-
     tailscale = true;
   };
 
