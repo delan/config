@@ -1,10 +1,13 @@
 daria.daz.cat
 =============
 
-Home router, now decommissioned in favour of **jane.daz.cat** (OPNsense).
+OpenBSD [home router config](https://www.azabani.com/2015/08/06/modern-openbsd-home-router.html), initially deployed in 2015:
 
-* /var/nsd continues to be maintained, but lives on **opacus.daz.cat**
-* more details: <https://www.azabani.com/2015/08/06/modern-openbsd-home-router.html>
+- nsd(8) was run on **opacus.daz.cat** (OpenBSD) between 2016-12 and 2018-11
+- nsd(8) moved to **opacus.daz.cat** (OpenBSD) in 2021-09
+- nsd(8) moved to **colo.daz.cat** (NixOS) in 2025-09
+- everything else replaced with **jane.daz.cat** (OPNsense) in 2021-09
+- config merged into [main config repo](https://github.com/delan/config.git) in 2025-09
 
 how to commit changes
 =====================
