@@ -7,7 +7,7 @@
         name = "${name}.";
         value = {
           data = readFile ../daria/var/nsd/zones/${filename};
-        };
+        } // options;
       };
       provideXFR = [
         "144.6.130.75 NOKEY" # home.daz.cat
@@ -25,11 +25,19 @@
       (zone "home.daz.cat" "home.daz.cat.zone" {
         inherit provideXFR;
       })
+      (zone "acme.daz.cat" "acme.daz.cat.zone" {
+        # do not provideXFR here!
+        requestXFR = ["127.0.0.1@55 NOKEY"];
+      })
       (zone "azabani.com" "azabani.com.zone" {
         inherit provideXFR notify;
       })
       (zone "shuppy.org" "shuppy.org.zone" {
         inherit provideXFR notify;
+      })
+      (zone "acme.shuppy.org" "acme.shuppy.org.zone" {
+        # do not provideXFR here!
+        requestXFR = ["127.0.0.1@55 NOKEY"];
       })
       (zone "42.19.172.in-addr.arpa" "172.19.42.24.zone" {
         inherit provideXFR;
