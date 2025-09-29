@@ -1,0 +1,66 @@
+#!/bin/sh
+set -eu
+
+printf '<%s> ' "$@" | logger -f /dev/stdin
+cd /var/nsd/zones
+zone=$1; shift
+
+case "$zone" in
+  (acme.daz.cat)
+    ns=ns.daz.cat.
+    contact=delan.azabani.com.
+    ;;
+  (acme.shuppy.org)
+    ns=ns.shuppy.org.
+    contact=shuppy.fastmail.com.
+    ;;
+  (*)
+    >&2 printf 'fatal: bad zone %s\n' "$zone"
+    exit 1
+    ;;
+esac
+
+case "$1" in
+  (present)
+    ;;
+  (cleanup)
+    ;;
+  (*)
+    >&2 printf 'fatal: unknown action: %s\n' "$1"
+    exit 1
+    ;;
+esac
+
+if ! mv $zone.serial $zone.lock; then
+  >&2 printf 'fatal: zone is locked: %s\n' "$zone"
+  exit 1
+fi
+oldserial=$(cat $zone.lock)
+newserial=$(date -u +\%Y\%m\%d00)
+while [ $newserial -le $oldserial ]; do
+  newserial=$((newserial+1))
+done
+
+> $zone.lock echo $newserial
+case "$1" in
+  (present)
+    # strip any trailing . or .acme.daz.cat.
+    name=${2%.}
+    name=${name%.$zone}
+    printf '%s 60 IN TXT "%s"\n' "$name" "$3" | logger -f /dev/stdin
+    >> $zone.in printf '%s 60 IN TXT "%s"\n' "$name" "$3"
+    ;;
+  (cleanup)
+    > $zone.filtered fgrep -v '"'"$3"'"' $zone.in
+    mv $zone.filtered $zone.in
+    ;;
+esac
+
+> $zone.new printf '@ 60 IN SOA %s %s ( %s 600 60 1814400 60 )\n' "$ns" "$contact" "$newserial"
+>> $zone.new printf '@ 60 IN NS %s\n' "$ns"
+>> $zone.new cat $zone.in
+
+colordiff -u $zone.zone $zone.new || :
+mv $zone.new $zone.zone
+doas /usr/sbin/rcctl reload nsd
+mv $zone.lock $zone.serial

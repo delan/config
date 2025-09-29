@@ -1,0 +1,3 @@
+lladdr ce:cc:ff:ee:80:01
+inet6 -soii
+inet 172.19.128.1 255.255.255.0

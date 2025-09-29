@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+
+zone=$1; shift
+
+mv $zone.lock $zone.serial
