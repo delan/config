@@ -339,7 +339,9 @@
             include /config/nginx/go.daz.cat.conf;
           '';
         };
-        "xn--blhaj-nra.daz.cat" = opacus // sslForce;
+        "xn--blhaj-nra.daz.cat" = sslForce // {
+          root = "/var/www/blåhaj.daz.cat";
+        };
         "test.daz.cat" = jupiter 8000 // sslForce;
         "azabani.com" = sslForce // {
           locations."/" = {
