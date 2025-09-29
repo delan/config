@@ -289,7 +289,6 @@
         };
         "103.108.231.122" = stratus // sslRelax;
         "2404:f780:8:3006:8f04::1500" = stratus // sslRelax;
-        "opacus.daz.cat" = opacus // sslForce;
         "stratus.daz.cat" = stratus // sslForce;
         "bucket.daz.cat" = sslRelax // {
           root = "/var/www/bucket.daz.cat";
@@ -361,10 +360,17 @@
             '';
           };
         };
-        "ar1as.space" = opacus // sslForce;
+        "ar1as.space" = sslForce // {
+          root = "/var/www/ar1as.space";
+        };
         ".sixte.st" = stratus // sslRelax;
-        "isbtrfsstableyet.com" = opacus;
-        "kierang.ee.nroach44.id.au" = opacus // sslRelax;
+        "kierang.ee.nroach44.id.au" = sslForce // {
+          root = "/var/www/kierang.ee";
+          extraConfig = ''
+            # required by shrine script
+            autoindex on;
+          '';
+        };
         "shuppy.org" = sslShuppy // {
           locations."/" = {
             root = "/var/www/shuppy.org";
