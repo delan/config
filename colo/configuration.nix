@@ -1,6 +1,7 @@
 # manual setup after initial switch:
 # - provide ./home_colo.ovpn, root:root 600
 # - tailscale up
+# - provide /config/nginx/charming.daz.cat.conf, delan:users 644
 # - provide /config/nginx/go.daz.cat.conf, delan:users 644
 # - provide /config/kate/dariox.club.conf, kate:users 644
 # - provide /config/kate/xenia-dashboard.conf, kate:users 644
@@ -319,7 +320,12 @@
             '';
           };
         } // sslForce;
-        "charming.daz.cat" = opacus // sslForce;
+        "charming.daz.cat" = sslForce // {
+          root = "/var/www/charming.daz.cat";
+          extraConfig = ''
+            include /config/nginx/charming.daz.cat.conf;
+          '';
+        };
         "twitter.daz.cat" = sslForce // {
           locations."/" = {
             root = "/var/www/twitter.daz.cat";
@@ -346,6 +352,12 @@
             # Cache-Control: no-cache (max-age=0, must-revalidate)
             expires -1h;
           '';
+          locations."/labs/charming/" = {
+            extraConfig = ''
+              # http 301
+              rewrite ^/labs/charming/(.*)$ https://charming.daz.cat/$1;
+            '';
+          };
         };
         "ar1as.space" = opacus // sslForce;
         ".sixte.st" = stratus // sslRelax;
