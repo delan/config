@@ -1,4 +1,4 @@
-@                                       60      IN  SOA     ns.shuppy.org. shuppy.fastmail.com. ( 2025092800 600 60 1814400 60 )
+@                                       60      IN  SOA     ns.shuppy.org. shuppy.fastmail.com. ( 2025092900 600 60 1814400 60 )
 @                                       60      IN  NS      ns.shuppy.org.
 @                                       60      IN  NS      ns2.he.net.
 @                                       60      IN  NS      ns2.afraid.org.
@@ -8,7 +8,7 @@
 @                                       60      IN  CAA 128 issuewild ";"
 @                                       60      IN  CAA 0   iodef "mailto:shuppy@fastmail.com"
 ns                                      60      IN  A       103.108.231.122
-ns                                      60      IN  AAAA    2404:f780:8:3006:5054:ff:fe09:6507
+ns                                      60      IN  AAAA    2404:f780:8:3006:cccc:ffff:feee:468b
 acme                                    60      IN  NS      ns.shuppy.org.
 _acme-challenge                         60      IN  CNAME   _acme-challenge.shuppy.org.acme.shuppy.org.
 _acme-challenge.meet                    60      IN  CNAME   _acme-challenge.meet.shuppy.org.acme.shuppy.org.
