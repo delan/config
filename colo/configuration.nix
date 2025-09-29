@@ -443,8 +443,6 @@
 
     kitty.terminfo  # for ruby
 
-    (writeScriptBin "acme-dns.daz.sh" (readFile ./acme-dns.daz.sh))
-    (writeScriptBin "acme-dns.shuppy.sh" (readFile ./acme-dns.shuppy.sh))
     (writeScriptBin "deploy-acme-to-opacus.sh" (readFile ./deploy-acme-to-opacus.sh))
     (writeScriptBin "deploy-acme-to-stratus.sh" (readFile ./deploy-acme-to-stratus.sh))
   ];

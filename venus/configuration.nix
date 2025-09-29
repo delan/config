@@ -257,7 +257,6 @@
     targetcli
     unzip
 
-    (writeScriptBin "acme-dns.daz.sh" (readFile ./acme-dns.daz.sh))
     (writeScriptBin "import-ocean.sh" (readFile ./import-ocean.sh))
     (writeScriptBin "export-ocean.sh" (readFile ./export-ocean.sh))
     (writeScriptBin "fix-ocean-perms.sh" (readFile ./fix-ocean-perms.sh))
