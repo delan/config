@@ -28,12 +28,7 @@
 
     virtualisation = {
       libvirt = true;
-
-      # docker breaks ipv6 neighbor solicitation to libvirt guests on this server.
-      # it broke when we first tried to run cohost-embed on the host, and it broke
-      # again when we upgraded to nixos 24.05, even with that container stopped.
-      # i have no idea why.
-      docker = false;
+      docker = true;
     };
 
     tailscale = true;

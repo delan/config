@@ -43,10 +43,15 @@
         daemon = {
           settings = {
             storage-driver = "overlay2";
-            ipv6 = true;
-            fixed-cidr-v6 = "fd39:9aa4:efad::/80";
-            experimental = true;
-            ip6tables = true;
+
+            # docker’s ip6tables feature breaks ipv6 connectivity to machines and libvirt guests
+            # on unrelated bridges, because it sets the default policy of FORWARD to DROP.
+            # avoid that mess by leaving all of docker’s ipv6 features disabled.
+            # <https://github.com/moby/moby/issues/48365>
+            # <https://docs.docker.com/engine/release-notes/27/#ipv6>
+            # <https://docs.docker.com/engine/release-notes/28/#port-publishing-in-bridge-networks>
+            ipv6 = false;
+            ip6tables = false;
           };
         };
       };
