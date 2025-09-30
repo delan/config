@@ -84,7 +84,7 @@
       inherit config;
       autoStart = false;
     });
-    internal.services.qbittorrent = mkForce false;
+    systemd.services.qbittorrent.wantedBy = mkForce [];
     services.akkoma.enable = mkForce false;
   };
 
