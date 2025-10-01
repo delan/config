@@ -1,4 +1,4 @@
-@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2025092900 600 60 1814400 60 )
+@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2025100100 600 60 1814400 60 )
 @                                       60      IN  NS      ns.daz.cat.
 @                                       60      IN  NS      ns2.afraid.org.
 @                                       60      IN  NS      ns2.he.net.
@@ -34,7 +34,6 @@ storage.venus                           60      IN  A       172.19.129.205
 vm.colo                                 60      IN  A       172.19.130.1
 opacus.colo                             60      IN  A       172.19.130.245
 stratus.colo                            60      IN  A       172.19.130.235
-passionfruit.colo                       60      IN  A       172.19.130.179
 @                                       60      IN  AAAA    2404:f780:8:3006:cccc:ffff:feee:468b
 ns                                      60      IN  AAAA    2404:f780:8:3006:cccc:ffff:feee:468b
 colo                                    60      IN  AAAA    2404:f780:8:3006:cccc:ffff:feee:468b
