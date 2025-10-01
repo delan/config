@@ -22,6 +22,9 @@
       (zone "daz.cat" "daz.cat.zone" {
         inherit provideXFR notify;
       })
+      (zone "tail.daz.cat" "tail.daz.cat.zone" {
+        inherit provideXFR;
+      })
       (zone "home.daz.cat" "home.daz.cat.zone" {
         inherit provideXFR;
       })
