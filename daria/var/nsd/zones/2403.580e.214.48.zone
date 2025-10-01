@@ -1,4 +1,4 @@
-@ 60 IN SOA ns.daz.cat. delan.azabani.com. ( 2025011800 600 60 1814400 60 )
+@ 60 IN SOA ns.daz.cat. delan.azabani.com. ( 2025100100 600 60 1814400 60 )
 @ 60 IN NS ns.daz.cat.
 3.0.0.0.e.e.e.f.f.f.f.f.c.c.c.c.0.0.0.0.4.1.2.0.e.0.8.5.3.0.4.2.ip6.arpa. 60 IN PTR jupiter.daz.cat.
 0.2.e.6.7.a.e.f.f.f.6.4.e.c.6.f.0.0.0.0.4.1.2.0.e.0.8.5.3.0.4.2.ip6.arpa. 60 IN PTR jane.daz.cat.
