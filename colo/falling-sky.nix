@@ -4,6 +4,28 @@ in {
 
   services.httpd = {
     enable = true;
+    # <https://github.com/falling-sky/source/wiki/InstallApachePHP>
+    enablePHP = true;
+    # <https://github.com/falling-sky/source/wiki/InstallApacheVirtualHost>
+    virtualHosts = {
+      "sixte.st" = let
+        # <https://github.com/falling-sky/source/wiki/InstallContent>
+        # mkdir -pv /var/www/sixte.st
+        # rsync -a --del --exclude=site fsky@rsync.test-ipv6.com:stable/content/ /var/www/sixte.st
+        documentRoot = "/var/www/sixte.st";
+      in {
+        inherit documentRoot;
+        extraConfig = ''
+          <Directory "${documentRoot}">
+            Options MULTIVIEWS Indexes FollowSymLinks
+            AllowOverride ALL
+            Order allow,deny
+            Allow from all
+          </Directory>
+        '';
+      };
+    };
+    # <https://github.com/falling-sky/source/wiki/InstallModIP>
     extraModules = let
       mod_ip = pkgs.stdenv.mkDerivation rec {
         pname = "mod_ip";
