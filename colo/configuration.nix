@@ -12,7 +12,7 @@
 # - sudo mkdir -p /var/cache/nginx/fedi-media-proxy.shuppy.org
 # - sudo chown nginx:nginx /var/cache/nginx/fedi-media-proxy.shuppy.org
 { config, lib, options, modulesPath, pkgs, specialArgs }: with lib; {
-  imports = [ ../lib ./dns.nix ];
+  imports = [ ../lib ./dns.nix ./falling-sky ];
 
   internal = {
     hostId = "99D8468B";
@@ -336,6 +336,11 @@
           useACMEHost = "shuppy.org";
           forceSSL = true;
         };
+        falling-sky = {
+          locations."/" = proxy // {
+            proxyPass = "http://127.0.0.1:1280";
+          };
+        };
         stratus = {
           locations."/" = proxy // {
             proxyPass = "http://172.19.130.235";
@@ -359,8 +364,12 @@
             return = "400";
           };
         };
-        "103.108.231.122" = stratus // sslRelax;
-        "2404:f780:8:3006:8f04::1500" = stratus // sslRelax;
+
+        # falling-sky
+        ".sixte.st" = falling-sky // sslRelax;
+        "103.108.231.122" = falling-sky // sslRelax;
+        "[2404:f780:8:3006::468b:1500]" = falling-sky // sslRelax;
+
         "stratus.daz.cat" = stratus // sslForce;
         "bucket.daz.cat" = sslRelax // {
           root = "/var/www/bucket.daz.cat";
@@ -435,7 +444,6 @@
         "ar1as.space" = sslForce // {
           root = "/var/www/ar1as.space";
         };
-        ".sixte.st" = stratus // sslRelax;
         "kierang.ee.nroach44.id.au" = sslForce // {
           root = "/var/www/kierang.ee";
           extraConfig = ''
