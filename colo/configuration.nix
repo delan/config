@@ -101,6 +101,88 @@
   };
 
   networking = {
+    networkmanager.ensureProfiles.profiles = {
+      bridge13 = {
+        bridge = {
+          mac-address = "CE:CC:FF:EE:46:8B";
+          stp = "false";
+        };
+        connection = {
+          id = "bridge13";
+          interface-name = "bridge13";
+          type = "bridge";
+          uuid = "1e71c0c7-6a9d-4624-bec8-9d23c562fda5";
+        };
+        ethernet = { };
+        ipv4 = {
+          address1 = "103.108.231.122/29,103.108.231.121";
+          dns = "8.8.8.8;8.8.4.4;";
+          method = "manual";
+        };
+        ipv6 = {
+          addr-gen-mode = "eui64";
+          ip6-privacy = "2";
+          method = "auto";
+        };
+        proxy = { };
+      };
+      child-eno1 = {
+        bridge-port = { };
+        connection = {
+          controller = "1e71c0c7-6a9d-4624-bec8-9d23c562fda5";
+          id = "child-eno1";
+          interface-name = "eno1";
+          master = "1e71c0c7-6a9d-4624-bec8-9d23c562fda5";
+          port-type = "bridge";
+          slave-type = "bridge";
+          type = "ethernet";
+          uuid = "e4929ddd-0e2f-4b4a-9c5c-2b710b569d5b";
+        };
+        ethernet = { };
+      };
+      child-eno2 = {
+        bridge-port = { };
+        connection = {
+          controller = "1e71c0c7-6a9d-4624-bec8-9d23c562fda5";
+          id = "child-eno2";
+          interface-name = "eno2";
+          master = "1e71c0c7-6a9d-4624-bec8-9d23c562fda5";
+          port-type = "bridge";
+          slave-type = "bridge";
+          type = "ethernet";
+          uuid = "d4a14459-174b-453f-8667-4cdcef09289a";
+        };
+        ethernet = { };
+      };
+      child-eno3 = {
+        bridge-port = { };
+        connection = {
+          controller = "1e71c0c7-6a9d-4624-bec8-9d23c562fda5";
+          id = "child-eno3";
+          interface-name = "eno3";
+          master = "1e71c0c7-6a9d-4624-bec8-9d23c562fda5";
+          port-type = "bridge";
+          slave-type = "bridge";
+          type = "ethernet";
+          uuid = "5adb29f5-7736-4803-a392-84a94a55800e";
+        };
+        ethernet = { };
+      };
+      child-eno4 = {
+        bridge-port = { };
+        connection = {
+          controller = "1e71c0c7-6a9d-4624-bec8-9d23c562fda5";
+          id = "child-eno4";
+          interface-name = "eno4";
+          master = "1e71c0c7-6a9d-4624-bec8-9d23c562fda5";
+          port-type = "bridge";
+          slave-type = "bridge";
+          type = "ethernet";
+          uuid = "7282c7b1-d470-40a2-9a0b-0175c80e1da9";
+        };
+        ethernet = { };
+      };
+    };
     firewall = {
       # logRefusedUnicastsOnly = false;
       # logRefusedPackets = true;
