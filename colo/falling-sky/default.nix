@@ -72,4 +72,16 @@ in {
       (zone "v6ns.sixte.st" "v6ns.sixte.st.zone" {})
     ];
   };
+
+  # <https://github.com/falling-sky/source/wiki/InstallPMTUD>
+  networking.firewall.extraCommands = ''
+    ip6tables -t mangle -C PREROUTING -d 2404:f780:8:3006::468b:1280 -j NFQUEUE --queue-num 1280 \
+    || ip6tables -t mangle -A PREROUTING -d 2404:f780:8:3006::468b:1280 -j NFQUEUE --queue-num 1280
+  '';
+  systemd.services.fsky-mtu1280d = {
+    wantedBy = ["multi-user.target"];
+    script = ''
+      ${pkgs.callPackage ./mtu1280d.nix {}}
+    '';
+  };
 }
