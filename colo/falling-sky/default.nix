@@ -14,6 +14,9 @@ in {
         # rsync -a --del --exclude=site fsky@rsync.test-ipv6.com:stable/content/ /var/www/sixte.st
         documentRoot = "/var/www/sixte.st";
       in {
+        listen = [
+          { ip = "127.0.0.1"; port = 1280; }
+        ];
         inherit documentRoot;
         extraConfig = ''
           <Directory "${documentRoot}">
