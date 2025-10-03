@@ -6,7 +6,7 @@
 
 $TTL 300
 @	IN SOA v6ns1.sixte.st. delan.azabani.com. (
-  2023072800 ; Serial
+  2025100300 ; Serial
   86400 ; Refresh
   7200  ; Retry
   604800 ; Expire
@@ -16,15 +16,15 @@ $TTL 300
 
 ; Specific records for tests
 ipv4		A	103.108.231.122
-ipv6		AAAA	2404:f780:8:3006::8f04:1500
+ipv6		AAAA	2404:f780:8:3006::468b:1500
 ds		A	103.108.231.122
-ds		AAAA	2404:f780:8:3006::8f04:1500
+ds		AAAA	2404:f780:8:3006::468b:1500
 a		A	103.108.231.122
-aaaa		AAAA	2404:f780:8:3006::8f04:1500
+aaaa		AAAA	2404:f780:8:3006::468b:1500
 www4		A	103.108.231.122
-www6		AAAA	2404:f780:8:3006::8f04:1500
+www6		AAAA	2404:f780:8:3006::468b:1500
 v4		A	103.108.231.122
-v6		AAAA	2404:f780:8:3006::8f04:1500
+v6		AAAA	2404:f780:8:3006::468b:1500
 
 
 _acme-challenge CNAME _acme-challenge.v6ns.sixte.st.acme.daz.cat.
