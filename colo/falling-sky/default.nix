@@ -1,6 +1,6 @@
 { config, pkgs, lib, options, modulesPath, ... }: let
 in {
-  imports = [];
+  imports = [ ./nsd.nix ];
 
   services.httpd = {
     enable = true;
@@ -46,6 +46,27 @@ in {
       };
     in [
       { name = "mod_ip"; path = mod_ip; }
+    ];
+  };
+
+  # <https://github.com/falling-sky/source/wiki/InstallDNS>
+  networking.networkmanager.ensureProfiles.profiles.bridge13.ipv6 = {
+    address1 = "2404:f780:8:3006::8f04:1500/128";
+    address2 = "2404:f780:8:3006::8f04:1280/128";
+  };
+  services.falling-sky.nsd = {
+    enable = true;
+    interfaces = ["2404:f780:8:3006::8f04:1500"];
+    zones = let
+      zone = name: filename: options: {
+        name = "${name}.";
+        value = {
+          data = lib.readFile ./${filename};
+        } // options;
+      };
+    in lib.listToAttrs [
+      (zone "v6ns1.sixte.st" "v6ns1.sixte.st.zone" {})
+      (zone "v6ns.sixte.st" "v6ns.sixte.st.zone" {})
     ];
   };
 }
