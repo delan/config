@@ -559,6 +559,16 @@
         "org.ice4j.ipv6.DISABLED" = "true";  # work around abb ipv6 dropouts
       };
     };
+
+    falling-sky = {
+      enable = true;
+      domain = "sixte.st";
+      ipv4-address = "103.108.231.122";
+      ipv6-address = "2404:f780:8:3006::468b:1500";
+      mtu1280-address = "2404:f780:8:3006::468b:1280";
+      v6ns-soa-rname = "delan.azabani.com.";
+      v6ns-acme-challenge-cname = "_acme-challenge.v6ns.sixte.st.acme.daz.cat.";
+    };
   };
 
   environment.systemPackages = with pkgs; [
