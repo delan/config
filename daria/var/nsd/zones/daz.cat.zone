@@ -1,4 +1,4 @@
-@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2025100300 600 60 1814400 60 )
+@                                       60      IN  SOA     ns.daz.cat. delan.azabani.com. ( 2025102700 600 60 1814400 60 )
 @                                       60      IN  NS      ns.daz.cat.
 @                                       60      IN  NS      ns2.afraid.org.
 @                                       60      IN  NS      ns2.he.net.
@@ -70,6 +70,12 @@ funny.computer                          60      IN  CNAME   colo.daz.cat.
 xn--blhaj-nra                           60      IN  CNAME   colo.daz.cat.
 drafts.csswg                            60      IN  CNAME   opacus.daz.cat.
 homepage.venus                          60      IN  CNAME   venus.daz.cat.
+badapple                                60      IN  A       103.108.231.122
+badapple                                60      IN  A       45.63.22.177
+badapple                                60      IN  AAAA    2404:f780:8:3006:cccc:ffff:feee:468b
+badapple                                60      IN  AAAA    2001:19f0:5:2beb:5400:03ff:feb9:95bb
+per.badapple                            60      IN  CNAME   colo.daz.cat.
+ewr.badapple                            60      IN  CNAME   cirrus.daz.cat.
 @                                       60      IN  TXT     "keybase-site-verification=zzcGEacJisGLAhzLlZC1IQ_4swmfqh1XyRc0a5YLROc"
 @                                       60      IN  TXT     "keybase-site-verification=0TvQVAHxVz9UqJ_ce5XC7HcDjm05AVbmGtTtjpIvKS0"
 opacus                                  60      IN  TXT     "v=spf1 a include:colo.daz.cat -all"
