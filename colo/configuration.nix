@@ -191,6 +191,9 @@
         # dns
         53
 
+        # badapple
+        5300
+
         # nginx
         80 443
 
@@ -204,6 +207,9 @@
       allowedUDPPorts = [
         # dns
         53
+
+        # badapple
+        5300
 
         # dhcp
         67
