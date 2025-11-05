@@ -434,18 +434,36 @@
             return = "301 https://www.azabani.com$request_uri";
           };
         };
-        "www.azabani.com" = sslForce // {
+        "www.azabani.com" = let
+          talk = slug: alias: {
+            "/talks/${slug}" = {
+              return = "303 /talks/${slug}/";
+            };
+            "/talks/${slug}/" = {
+              inherit alias;
+              extraConfig = "autoindex on;";
+            };
+          };
+        in sslForce // {
           root = "/var/www/www.azabani.com/_production/_site";
           extraConfig = ''
             # Cache-Control: no-cache (max-age=0, must-revalidate)
             expires -1h;
           '';
-          locations."/labs/charming/" = {
-            extraConfig = ''
-              # http 301
-              rewrite ^/labs/charming/(.*)$ https://charming.daz.cat/$1;
-            '';
-          };
+          locations = {
+            "/labs/charming/" = {
+              extraConfig = ''
+                # http 301
+                rewrite ^/labs/charming/(.*)$ https://charming.daz.cat/$1;
+              '';
+            };
+          }
+          // talk "2021-11-17-css-highlight-pseudos" "/var/www/bucket.daz.cat/work/igalia/talks/2021-11-17/"
+          // talk "2022-05-18-update-on-css-highlight-pseudos" "/var/www/bucket.daz.cat/work/igalia/talks/2022-05-18/"
+          // talk "2022-11-16-faster-style-and-paint-for-css-highlights" "/var/www/bucket.daz.cat/work/igalia/talks/2022-11-16/"
+          // talk "2023-06-05-servo-2023" "/var/www/bucket.daz.cat/work/igalia/talks/2023-06-05/"
+          // talk "2023-11-10-customising-the-web" "/var/www/bucket.daz.cat/work/igalia/talks/2023-11-10/"
+          // {};
         };
         "ar1as.space" = sslForce // {
           root = "/var/www/ar1as.space";
