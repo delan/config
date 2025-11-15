@@ -1,4 +1,4 @@
-@ 60 IN SOA ns.daz.cat. delan.azabani.com. ( 2025100101 600 60 1814400 60 )
+@ 60 IN SOA ns.daz.cat. delan.azabani.com. ( 2025111500 600 60 1814400 60 )
 @ 60 IN NS ns.daz.cat.
 1.42.19.172.in-addr.arpa. 60 IN PTR jane.home.daz.cat.
 2.42.19.172.in-addr.arpa. 60 IN PTR venus.home.daz.cat.
@@ -11,5 +11,6 @@
 10.42.19.172.in-addr.arpa. 60 IN PTR printer.home.daz.cat.
 11.42.19.172.in-addr.arpa. 60 IN PTR ap-main.home.daz.cat.
 36.42.19.172.in-addr.arpa. 60 IN PTR solserv.home.daz.cat.
+116.42.19.172.in-addr.arpa. 60 IN PTR bauxite.home.daz.cat.
 133.42.19.172.in-addr.arpa. 60 IN PTR starfruit.home.daz.cat.
 175.42.19.172.in-addr.arpa. 60 IN PTR dragonfruit.home.daz.cat.

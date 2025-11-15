@@ -1,7 +1,8 @@
-@ 60 IN SOA ns.daz.cat. delan.azabani.com. ( 2025100100 600 60 1814400 60 )
+@ 60 IN SOA ns.daz.cat. delan.azabani.com. ( 2025111500 600 60 1814400 60 )
 @ 60 IN NS ns.daz.cat.
 b.8.6.4.e.e.e.f.f.f.f.f.c.c.c.c.6.0.0.3.8.0.0.0.0.8.7.f.4.0.4.2.ip6.arpa. 60 IN PTR colo.daz.cat.
+0.0.5.1.b.8.6.4.0.0.0.0.0.0.0.0.6.0.0.3.8.0.0.0.0.8.7.f.4.0.4.2.ip6.arpa. 60 IN PTR mtu1500.colo.daz.cat.
+0.8.2.1.b.8.6.4.0.0.0.0.0.0.0.0.6.0.0.3.8.0.0.0.0.8.7.f.4.0.4.2.ip6.arpa. 60 IN PTR mtu1280.colo.daz.cat.
 7.0.5.6.9.0.e.f.f.f.0.0.4.5.0.5.6.0.0.3.8.0.0.0.0.8.7.f.4.0.4.2.ip6.arpa. 60 IN PTR opacus.daz.cat.
 4.0.f.8.4.c.e.f.f.f.0.0.4.5.0.5.6.0.0.3.8.0.0.0.0.8.7.f.4.0.4.2.ip6.arpa. 60 IN PTR stratus.daz.cat.
-0.0.5.1.4.0.f.8.0.0.0.0.0.0.0.0.6.0.0.3.8.0.0.0.0.8.7.f.4.0.4.2.ip6.arpa. 60 IN PTR mtu1500.stratus.daz.cat.
-0.8.2.1.4.0.f.8.0.0.0.0.0.0.0.0.6.0.0.3.8.0.0.0.0.8.7.f.4.0.4.2.ip6.arpa. 60 IN PTR mtu1280.stratus.daz.cat.
+b.8.6.4.e.e.e.f.f.f.f.f.c.c.c.c.6.0.0.3.8.0.0.0.0.8.7.f.4.0.4.2.ip6.arpa. 60 IN PTR badapple.daz.cat.
