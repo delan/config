@@ -238,6 +238,7 @@
         git # needed for nixos-rebuild with flakes
         ripgrep # needed for /root/sync.sh
         nix-output-monitor # nixos-rebuild --log-format internal-json -v switch 2>&1 | nom --json
+        sops # needed for editing secrets in this repo
         nix-doc
         bore
 
