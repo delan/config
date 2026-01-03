@@ -7,7 +7,7 @@
     # https://information.websiteleague.org/books/akkoma-setup-guide
     # https://git.isincredibly.gay/srxl/posting.isincredibly.gay/src/commit/a739448d8c467a1fd0ce1c2ae4627c8f49688079/configuration/akkoma.nix
     config = let
-      upload_dir = "/ocean/active/services/akkoma/uploads";
+      upload_dir = "/cuffs/services/akkoma/uploads";
     in {
       ":pleroma" = with (pkgs.formats.elixirConf { }).lib; {
         ":instance" = {
@@ -104,7 +104,7 @@
   } (
     let
       secret = filename: {
-        _secret = "/ocean/active/secrets/akkoma/${filename}";
+        _secret = "/cuffs/secrets/akkoma/${filename}";
       };
     in {
       # the akkoma module generates six mandatory secrets in /var/lib/secrets/akkoma. we want the
@@ -126,7 +126,7 @@
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_17;
-    dataDir = "/ocean/active/services/postgres";
+    dataDir = "/cuffs/services/postgres";
     settings = {
       # https://pgtune.leopard.in.ua/?dbVersion=17&osType=linux&dbType=web&cpuNum=&totalMemory=1&totalMemoryUnit=GB&connectionNum=20&hdType=hdd
       # DB Version: 17

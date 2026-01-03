@@ -85,7 +85,6 @@
       autoStart = false;
     });
     systemd.services.qbittorrent.wantedBy = mkForce [];
-    services.akkoma.enable = mkForce false;
   };
 
   # hardware-configuration.nix
