@@ -127,10 +127,6 @@
         hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
       };
       luks.devices = {
-        ocean0x0 = { device = "/dev/disk/by-partlabel/ocean0x0"; };
-        ocean0x1 = { device = "/dev/disk/by-partlabel/ocean0x1"; };
-        ocean1x0 = { device = "/dev/disk/by-partlabel/ocean1x0"; };
-        ocean1x1 = { device = "/dev/disk/by-partlabel/ocean1x1"; };
         ocean2x0 = { device = "/dev/disk/by-partlabel/ocean2x0"; };
         ocean2x2 = { device = "/dev/disk/by-partlabel/ocean2x2"; };
         ocean3x0 = { device = "/dev/disk/by-partlabel/ocean3x0"; };
@@ -140,7 +136,9 @@
         ocean5x0 = { device = "/dev/disk/by-partlabel/ocean5x0"; };
         ocean5x2 = { device = "/dev/disk/by-partlabel/ocean5x2"; };
         ocean6x0 = { device = "/dev/disk/by-partlabel/ocean6x0"; };
-        ocean6x1 = { device = "/dev/disk/by-partlabel/ocean6x1"; };
+        ocean6x2 = { device = "/dev/disk/by-partlabel/ocean6x2"; };
+        ocean7x0 = { device = "/dev/disk/by-partlabel/ocean7x0"; };
+        ocean7x1 = { device = "/dev/disk/by-partlabel/ocean7x1"; };
         oceanSx0 = { device = "/dev/disk/by-partlabel/oceanSx0"; };
         oceanSx1 = { device = "/dev/disk/by-partlabel/oceanSx1"; };
       };
