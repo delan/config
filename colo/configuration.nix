@@ -463,6 +463,7 @@
           // talk "2022-11-16-faster-style-and-paint-for-css-highlights" "/var/www/bucket.daz.cat/work/igalia/talks/2022-11-16/"
           // talk "2023-06-05-servo-2023" "/var/www/bucket.daz.cat/work/igalia/talks/2023-06-05/"
           // talk "2023-11-10-customising-the-web" "/var/www/bucket.daz.cat/work/igalia/talks/2023-11-10/"
+          // talk "2025-12-18-shoestring-web-engine-ci" "/var/www/bucket.daz.cat/work/igalia/talks/2025-11-12/"
           // {};
         };
         "ar1as.space" = sslForce // {
