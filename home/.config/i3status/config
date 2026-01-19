@@ -4,6 +4,7 @@ order += "tztime local"
 
 general {
 	output_format = "i3bar"
+	interval = 60
 }
 
 battery all {
