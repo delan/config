@@ -12,7 +12,7 @@
 # - sudo mkdir -p /var/cache/nginx/fedi-media-proxy.shuppy.org
 # - sudo chown nginx:nginx /var/cache/nginx/fedi-media-proxy.shuppy.org
 { config, lib, options, modulesPath, pkgs, specialArgs }: with lib; {
-  imports = [ ../lib ./dns.nix ./falling-sky ];
+  imports = [ ../lib ./dns.nix ./falling-sky ./akkoma.nix ];
 
   internal = {
     hostId = "99D8468B";
@@ -32,6 +32,17 @@
     };
 
     tailscale = true;
+
+    ids = {
+      "akkoma" = { id = 2013; port = 20130; };
+      "postgres" = {
+        id = 2014;
+        # override the deprecated static uid
+        # https://github.com/NixOS/nixpkgs/blob/f9ebe33a928b5d529c895202263a5ce46bdf12f7/nixos/modules/services/databases/postgresql.nix#L575-L584
+        # https://github.com/NixOS/nixpkgs/blob/f9ebe33a928b5d529c895202263a5ce46bdf12f7/nixos/modules/misc/ids.nix#L110
+        force = true;
+      };
+    };
   };
 
   swapDevices = [
@@ -352,6 +363,11 @@
             proxyPass = "http://172.19.130.235";
           };
         };
+        colo = location: port: {
+          locations."${location}" = proxy // {
+            proxyPass = "http://127.0.0.1:${toString port}";
+          };
+        };
         jupiter = port: {
           locations."/" = proxy // {
             # jupiter.tailcdc44b.ts.net
@@ -498,17 +514,17 @@
           enableACME = false;
           useACMEHost = "shuppy.org";
         };
-        "fedi.shuppy.org" = sslShuppy // recursiveUpdate (venus "/" 20130) {
+        "fedi.shuppy.org" = sslShuppy // recursiveUpdate (colo "/" 20130) {
           locations."/" = {
             proxyWebsockets = true;
           };
         };
-        "fedi-media.shuppy.org" = sslShuppy // recursiveUpdate (venus "/media/" 20130) {
+        "fedi-media.shuppy.org" = sslShuppy // recursiveUpdate (colo "/media/" 20130) {
           locations."/media/" = {
             proxyWebsockets = true;
           };
         };
-        "fedi-media-proxy.shuppy.org" = sslShuppy // recursiveUpdate (venus "/proxy" 20130) {
+        "fedi-media-proxy.shuppy.org" = sslShuppy // recursiveUpdate (colo "/proxy" 20130) {
           # https://nixos.org/manual/nixos/stable/#modules-services-akkoma-media-proxy
           locations."/proxy" = {
             extraConfig = ''

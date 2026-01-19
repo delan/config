@@ -55,7 +55,7 @@
         "Pleroma.Web.Endpoint" = {
           url.host = "fedi.shuppy.org";
           http = {
-            ip = "100.95.253.127";
+            ip = "127.0.0.1";
             port = config.internal.ids.akkoma.port;
           };
           # hardening: send cookies over https only
