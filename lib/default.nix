@@ -145,6 +145,8 @@
 
       hardware.enableAllFirmware = true;
       hardware.keyboard.zsa.enable = true;
+      hardware.logitech.wireless.enable = true;
+      hardware.logitech.wireless.enableGraphical = true;
 
       networking = {
         networkmanager = {
@@ -164,7 +166,6 @@
 
       services = {
         fwupd.enable = true;
-        blueman.enable = true;
 
         openssh = {
           enable = true;

@@ -18,9 +18,10 @@
 
       bluetooth = {
         enable = true;
-        powerOnBoot = false;
+        powerOnBoot = true;
       };
     };
+    services.blueman.enable = true;
 
     environment.systemPackages = with pkgs; [
       i3lock
