@@ -25,6 +25,7 @@
 
     environment.systemPackages = with pkgs; [
       i3lock
+      fxlinuxprintutil
 
       # script that ~/.xinitrc (home.nix) runs to start i3. by registering it
       # as a nixos window manager and running it with the nixos session wrapper,
@@ -54,6 +55,7 @@
       printing = {
         enable = true;
         startWhenNeeded = true;
+        drivers = [ pkgs.fxlinuxprint ];
       };
 
       xserver = {
