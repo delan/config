@@ -14,7 +14,7 @@ for i in cuffs; do
   zfs destroy -v $i@$new
 done
 
-for i in home root; do
+for i in home root secrets{,/akkoma} services{,/akkoma,/postgres}; do
   echo ">>> syncing $src_prefix/$i"
   unset old
   set -- -t bookmark -Ho name -d 1 $src_prefix/$i
