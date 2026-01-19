@@ -1,11 +1,11 @@
 {
   inputs = {
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-2.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
       inputs.nixpkgs.follows = "unstable";
     };
     lix-module-workstations = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-2.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
       inputs.nixpkgs.follows = "unstable-workstations";
       inputs.lix.follows = "lix-workstations";
     };
@@ -46,7 +46,7 @@
   in {
     # NOTE: deployified machines use <https://git.isincredibly.gay/srxl/gemstone-labs.nix/src/commit/21e905f71929a54b5f5e25ce9dbe2e5cf0bc4fc9/deploy>
     # servers
-    nixosConfigurations.venus = unstable.lib.nixosSystem {
+    nixosConfigurations.venus = unstable-workstations.lib.nixosSystem {
       # deployified
       system = "x86_64-linux";
       modules = [

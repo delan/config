@@ -171,7 +171,16 @@
           startWhenNeeded = true;
         };
 
-        logind.settings.Login.HandlePowerKey = "ignore";
+        logind =
+          if cfg.unstableWorkstationsCompat
+          then {
+            settings.Login.HandlePowerKey = "ignore";
+          }
+          else {
+            extraConfig = mkIf (!cfg.unstableWorkstationsCompat) ''
+              HandlePowerKey=ignore
+            '';
+          };
 
         unbound = {
           # TODO add stub zones for vpn party and enable?
