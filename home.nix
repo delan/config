@@ -38,6 +38,7 @@
     gnumake
     google-chrome
     htop
+    httpie
     imagemagick
     inkscape
     jmtpfs
