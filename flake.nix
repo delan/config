@@ -104,7 +104,7 @@
         }
       ];
     };
-    nixosConfigurations.jupiter = unstable-workstations.lib.nixosSystem {
+    nixosConfigurations.jupiter = latestNixpkgs.lib.nixosSystem {
       # deployified
       system = "x86_64-linux";
       modules = [

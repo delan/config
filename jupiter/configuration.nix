@@ -68,15 +68,7 @@ in {
   hardware.enableRedistributableFirmware = true;
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
-  # hardware.opengl.extraPackages = [
-  #   # hashcat
-  #   pkgs.rocm-opencl-icd
-  #   pkgs.rocm-opencl-runtime
-  #
-  #   pkgs.mesa.drivers pkgs.amdvlk
-  # ];
-  hardware.graphics.extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
-  boot.kernelPackages = pkgs.linuxPackages_6_16;
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
 
   hardware.opentabletdriver.enable = true;
 

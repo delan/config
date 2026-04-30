@@ -97,7 +97,7 @@
     steam
     steam-run
     sublime4
-    tdesktop
+    telegram-desktop
     texlive.combined.scheme-full
     timidity
     tmux
