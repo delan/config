@@ -67,6 +67,7 @@
     nodejs
     obs-studio
     obsidian
+    octaveFull
     openjdk17
     opentabletdriver
     openvpn
