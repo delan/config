@@ -1,21 +1,9 @@
 {
   inputs = {
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
-      inputs.nixpkgs.follows = "unstable";
-    };
-    lix-module-workstations = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
-      inputs.nixpkgs.follows = "unstable-workstations";
-      inputs.lix.follows = "lix-workstations";
-    };
-    lix-workstations = {
-      url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
-      flake = false;
-    };
     # Fix qemu crash on macOS guests (NixOS/nixpkgs#338598).
     # See also: <https://gitlab.com/qemu-project/qemu/-/commit/a8e63ff289d137197ad7a701a587cc432872d798>
     # Last version deployed before flakes was 68e7dce0a6532e876980764167ad158174402c6f.
+    latestNixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     hm.url = "github:nix-community/home-manager/master";
     hm.inputs.nixpkgs.follows = "unstable";
@@ -29,8 +17,23 @@
     git-diffie.inputs.nixpkgs.follows = "unstable";
   };
 
-  outputs = inputs@{ self, lix-module, unstable, hm, lix-module-workstations, unstable-workstations, hm-workstations, nixos-hardware, sops-nix, git-diffie, ... }:
+  outputs = inputs@{ latestNixpkgs, unstable, hm, unstable-workstations, hm-workstations, nixos-hardware, sops-nix, git-diffie, ... }:
   let
+    latestPkgs = import latestNixpkgs {
+      system = "x86_64-linux";
+    };
+    # can’t use the lix nixos module yet
+    # <https://git.lix.systems/lix-project/nixos-module/issues/107>
+    lix-overlay-module = {
+      nixpkgs.overlays = [ (final: prev: {
+        inherit (latestPkgs.lixPackageSets.lix_2_95)
+          nixpkgs-review
+          nix-eval-jobs
+          nix-fast-build
+          colmena;
+      }) ];
+      nix.package = latestPkgs.lixPackageSets.lix_2_95.lix;
+    };
     pkgsUnstable = import unstable {
       system = "x86_64-linux";
       config = { allowUnfree = true; };
@@ -51,7 +54,7 @@
       system = "x86_64-linux";
       modules = [
         venus/configuration.nix
-        lix-module.nixosModules.default
+        lix-overlay-module
         sops-nix.nixosModules.sops
         git-diffie-module
       ];
@@ -61,7 +64,7 @@
       system = "x86_64-linux";
       modules = [
         colo/configuration.nix
-        lix-module.nixosModules.default
+        lix-overlay-module
         sops-nix.nixosModules.sops
         git-diffie-module
       ];
@@ -71,7 +74,7 @@
       system = "x86_64-linux";
       modules = [
         tol/configuration.nix
-        lix-module.nixosModules.default
+        lix-overlay-module
         sops-nix.nixosModules.sops
         git-diffie-module
       ];
@@ -83,7 +86,7 @@
       system = "x86_64-linux";
       modules = [
         frappetop/configuration.nix
-        lix-module-workstations.nixosModules.default
+        lix-overlay-module
         sops-nix.nixosModules.sops
         git-diffie-module
         # nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen2
@@ -106,7 +109,7 @@
       system = "x86_64-linux";
       modules = [
         jupiter/configuration.nix
-        lix-module-workstations.nixosModules.default
+        lix-overlay-module
         sops-nix.nixosModules.sops
         git-diffie-module
         hm-workstations.nixosModules.home-manager
