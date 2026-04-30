@@ -156,7 +156,7 @@ in {
         3128 3180 # oldssl-proxy
         13367 # qbittorrent torrent (arbitrary)
         13368 13369 # aria2 torrent (arbitrary)
-        20300 # servo ci monitor test (public!)
+        20300 20301 # servo ci monitor test (public!)
       ];
 
       allowedUDPPorts = [
