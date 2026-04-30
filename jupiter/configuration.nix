@@ -46,7 +46,7 @@ in {
   specialisation.swap-gpu.configuration = with lib; {
     services.xserver.videoDrivers = mkForce [ "nouveau" ];
     boot.kernelParams = mkForce [
-      "intel_iommu=on" "default_hugepagesz=1G" "hugepagesz=1G"
+      "intel_iommu=on" "default_hugepagesz=1G" "hugepagesz=1G" "hugepages=32"
       "kvm.ignore_msrs=1"
 
       # https://github.com/NixOS/nixos-hardware/pull/115
@@ -87,7 +87,7 @@ in {
     "kvm-amd"
   ];
   boot.kernelParams = [
-    "intel_iommu=on" "default_hugepagesz=1G" "hugepagesz=1G" "hugepages=96"
+    "intel_iommu=on" "default_hugepagesz=1G" "hugepagesz=1G" "hugepages=32"
     "kvm.ignore_msrs=1"
 
     # https://github.com/NixOS/nixos-hardware/pull/115
