@@ -110,6 +110,44 @@ in {
   };
 
   networking = {
+    networkmanager.plugins = [
+      pkgs.networkmanager-l2tp
+    ];
+    networkmanager.ensureProfiles.profiles = {
+      bridge13 = {
+        bridge = {
+          mac-address = "CE:CC:FF:EE:00:03";
+          multicast-snooping = "false";
+          stp = "false";
+        };
+        connection = {
+          id = "bridge13";
+          interface-name = "bridge13";
+          type = "bridge";
+        };
+        ethernet = { };
+        ipv4 = {
+          method = "auto";
+        };
+        ipv6 = {
+          addr-gen-mode = "eui64";
+          ip6-privacy = "2";
+          method = "auto";
+        };
+        proxy = { };
+      };
+      bridge13-eth25 = {
+        connection = {
+          controller = "bridge13";
+          id = "bridge13-eth25";
+          port-type = "bridge";
+          type = "ethernet";
+        };
+        ethernet = {
+          mac-address = "A8:A1:59:E7:CD:DD";
+        };
+      };
+    };
     firewall = {
       allowedTCPPorts = [
         21 # pyftpdlib
