@@ -96,6 +96,7 @@
     sshfs-fuse
     steam
     steam-run
+    sublime4
     tdesktop
     texlive.combined.scheme-full
     timidity
