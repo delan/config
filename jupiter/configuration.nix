@@ -264,4 +264,8 @@ in {
       { options = [ "NOPASSWD" ]; command = "/home/delan/code/perf-analysis-tools/isolate-cpu-for-shell.sh"; }
     ];
   }];
+
+  # for servo testing
+  services.orca.enable = true;
+  services.gnome.at-spi2-core.enable = true;
 }
