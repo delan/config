@@ -150,6 +150,9 @@
           # https://www.kernel.org/doc/html/latest/admin-guide/sysrq.html
           "kernel.sysrq" = 1;
         };
+
+        # CVE-2026-31431 <https://copy.fail>
+        extraModprobeConfig = "install algif_aead /bin/false";
       };
 
       hardware.enableAllFirmware = true;
