@@ -32,7 +32,7 @@
     geeqie
     gh
     ghidra
-    gimp
+    gimp2  # color icons are broken in gimp3 (NixOS/nixpkgs#511297)
     git-lfs
     gnome-font-viewer
     gnumake
