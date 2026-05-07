@@ -1,4 +1,4 @@
-{ config, lib, options, modulesPath, pkgs, specialArgs }: with lib; {
+{ config, lib, options, modulesPath, pkgs, specialArgs, ... }: with lib; {
   services.nsd = {
     enable = true;
     interfaces = ["103.108.231.122" "2404:f780:8:3006:cccc:ffff:feee:468b"];

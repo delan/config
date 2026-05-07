@@ -11,7 +11,7 @@
 # - provide /var/www/memories/pebble/**
 # - sudo mkdir -p /var/cache/nginx/fedi-media-proxy.shuppy.org
 # - sudo chown nginx:nginx /var/cache/nginx/fedi-media-proxy.shuppy.org
-{ config, lib, options, modulesPath, pkgs, specialArgs }: with lib; {
+{ config, lib, options, modulesPath, pkgs, specialArgs, ... }: with lib; {
   imports = [ ../lib ./dns.nix ./falling-sky ./akkoma.nix ];
 
   internal = {
@@ -19,7 +19,7 @@
     hostName = "colo";
     domain = "daz.cat";
     oldCuffsNames = true;
-    unstableWorkstationsCompat = false;
+    unstableWorkstationsCompat = true;
     luksDevice = "/dev/disk/by-uuid/a8b6dd52-8f9f-42f8-badc-53b43aa9a4df";
     bootDevice = "/dev/disk/by-uuid/0CA9-2BEC";
     swapDevice = null;

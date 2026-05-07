@@ -59,7 +59,7 @@
         git-diffie-module
       ];
     };
-    nixosConfigurations.colo = unstable.lib.nixosSystem {
+    nixosConfigurations.colo = latestNixpkgs.lib.nixosSystem {
       # deployified
       system = "x86_64-linux";
       modules = [

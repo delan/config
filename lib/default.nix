@@ -102,7 +102,7 @@
         # for nheko-0.12.1
         "olm-3.2.16"
 
-        "jitsi-meet-1.0.8043"
+        "jitsi-meet-1.0.8792"
         # <https://github.com/sublimehq/sublime_text/issues/5984#issuecomment-3172332375>
         "openssl-1.1.1w"
         # for darktable-5.2.1
