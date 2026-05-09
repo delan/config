@@ -268,11 +268,11 @@
         atool
         bore
         dnsutils
+        fastfetch
         fd
         htop
         jmtpfs
         man-pages
-        neofetch
         p7zip
         patchelf
         pv
