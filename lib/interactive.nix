@@ -1,9 +1,12 @@
 { config, lib, options, modulesPath, pkgs, ... }: with lib; {
   options.internal = {
     interactive = mkOption { type = types.bool; default = false; };
+    i3 = mkOption { type = types.bool; default = false; };
+    plasma = mkOption { type = types.bool; default = false; };
   };
 
-  config = mkIf config.internal.interactive {
+  config = mkMerge [
+  (mkIf config.internal.interactive {
     services.pipewire = {
       enable = true;
       alsa.enable = true;
@@ -24,34 +27,10 @@
     services.blueman.enable = true;
 
     environment.systemPackages = with pkgs; [
-      i3lock
       fxlinuxprintutil
-
-      # script that ~/.xinitrc (home.nix) runs to start i3. by registering it
-      # as a nixos window manager and running it with the nixos session wrapper,
-      # we get a bunch of helpful features for free, like loading ~/.profile and
-      # ~/.Xresources, piping output to syslog, and setting up dbus correctly.
-      # see <nixpkgs>/nixos/modules/services/x11/display-managers/default.nix,
-      # `let` `xsessionWrapper` and `xsession`.
-      (writeScriptBin "xinitrc" ''
-        #!/bin/sh
-        set -eu
-        session_name=none+i3-unset-shell
-        session_exec=$('${pkgs.ripgrep}/bin/rg' -o --pcre2 '(?<=^Exec=).*' '${config.services.xserver.displayManager.sessionData.desktops}'/share/xsessions/"$session_name.desktop")
-        exec '${config.services.xserver.displayManager.sessionData.wrapper}' "$session_exec"
-      '')
     ];
 
-    programs = {
-      xss-lock = {
-        enable = true;
-        lockerCommand = "i3lock";
-      };
-    };
-
     services = {
-      picom.enable = true;
-
       printing = {
         enable = true;
         startWhenNeeded = true;
@@ -77,21 +56,6 @@
             Option "NaturalScrolling" "off"
           EndSection
         '';
-
-        windowManager.i3.enable = true;
-        displayManager.startx.enable = true;  # don’t install lightdm
-
-        # FIXME: alacritty opens with bash instead of zsh unless we register a
-        # window manager that unsets $SHELL, which for some reason is unset by
-        # lightdm but set to bash by startx
-        displayManager.session = [{
-          manage = "window";
-          name = "i3-unset-shell";
-          start = ''
-            env -u SHELL -- ${pkgs.i3}/bin/i3 &
-            waitPID=$!
-          '';
-        }];
       };
 
       libinput = {
@@ -120,5 +84,56 @@
         wqy_microhei  # for servo
       ];
     };
-  };
+  })
+  (mkIf config.internal.i3 {
+    environment.systemPackages = with pkgs; [
+      i3lock
+      # script that ~/.xinitrc (home.nix) runs to start i3. by registering it
+      # as a nixos window manager and running it with the nixos session wrapper,
+      # we get a bunch of helpful features for free, like loading ~/.profile and
+      # ~/.Xresources, piping output to syslog, and setting up dbus correctly.
+      # see <nixpkgs>/nixos/modules/services/x11/display-managers/default.nix,
+      # `let` `xsessionWrapper` and `xsession`.
+      (writeScriptBin "xinitrc" ''
+        #!/bin/sh
+        set -eu
+        session_name=none+i3-unset-shell
+        session_exec=$('${pkgs.ripgrep}/bin/rg' -o --pcre2 '(?<=^Exec=).*' '${config.services.xserver.displayManager.sessionData.desktops}'/share/xsessions/"$session_name.desktop")
+        exec '${config.services.xserver.displayManager.sessionData.wrapper}' "$session_exec"
+      '')
+    ];
+
+    services.xserver = {
+      windowManager.i3.enable = true;
+      displayManager.startx.enable = true;  # don’t install lightdm
+
+      # FIXME: alacritty opens with bash instead of zsh unless we register a
+      # window manager that unsets $SHELL, which for some reason is unset by
+      # lightdm but set to bash by startx
+      displayManager.session = [{
+        manage = "window";
+        name = "i3-unset-shell";
+        start = ''
+          env -u SHELL -- ${pkgs.i3}/bin/i3 &
+          waitPID=$!
+        '';
+      }];
+    };
+
+    # FIXME: this often spams systemd logs with failures
+    services.picom.enable = true;
+
+    programs.xss-lock = {
+      enable = true;
+      lockerCommand = "i3lock";
+    };
+  })
+  (mkIf config.internal.plasma {
+    # <https://github.com/NixOS/nixpkgs/blob/nixos-25.11/nixos/doc/manual/configuration/profiles/graphical.section.md?plain=1#L6-L9>
+    services.xserver.enable = true;
+    services.displayManager.sddm.enable = true;
+    services.desktopManager.plasma6.enable = true;
+    services.libinput.enable = true;
+  })
+  ];
 }

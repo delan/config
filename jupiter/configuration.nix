@@ -33,6 +33,8 @@ in {
     initialUser = "delan";
 
     interactive = true;
+    i3 = true;
+    plasma = true;
     laptop = false;
     igalia = true;
     tailscale = true;
@@ -304,8 +306,4 @@ in {
   # for servo work
   services.orca.enable = true;
   services.gnome.at-spi2-core.enable = true;
-  services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-  services.libinput.enable = true;
 }
