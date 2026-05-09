@@ -1,5 +1,5 @@
 { config, pkgs, lib, options, modulesPath, ... }: {
-  imports = [ ../lib ];
+  imports = [ ../nixos.nix ];
 
   internal = {
     hostId = "6336419C";

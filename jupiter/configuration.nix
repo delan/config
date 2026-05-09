@@ -18,7 +18,7 @@ let
     '';
   };
 in {
-  imports = [ ../lib ];
+  imports = [ ../nixos.nix ];
 
   internal = {
     hostId = "E897B482";
