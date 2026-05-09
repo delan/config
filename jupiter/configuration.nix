@@ -110,7 +110,21 @@ in {
   fileSystems."/cuffs/osu" = {
     device = "cuffs/osu";
     fsType = "zfs";
-    options = ["user" "noauto"];
+    options = [
+      "noauto"
+      # “Realtime online functionality is not supported on this version of the game. Please upgrade
+      #  to the latest version.”
+      # “2026-05-09 11:29:07 [verbose]: Failed to load module:System.Exception:
+      #  /home/delan/.local/share/osu/AuthNative.so: failed to map segment from shared object”
+      #
+      # [1] https://askubuntu.com/questions/678857/fstab-doesnt-mount-with-exec
+      #
+      # osu! breaks like that ^ if we mount `noexec`. `user` implies `noexec`, and for some reason
+      # we can’t override it with `user,exec` despite [1]. maybe that’s a zfs quirk? but since
+      # `user` is busted anyway (“zfs_mount_at() failed: Insufficient privileges”), just drop
+      # `user` and move on with life. more explicitly:
+      "exec"  # and no "user"
+    ];
   };
 
   networking = {
