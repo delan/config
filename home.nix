@@ -13,53 +13,31 @@
   in [
     ### CLI/TUI ###
     aria2
-    atool
     bc
-    bore
     cabextract
     cdrkit
     clang
     clang-tools
-    dnsutils
     exiftool
-    fd
     ffmpeg
     gdb
     gh
     git-lfs
     gnumake
-    htop
     httpie
-    jmtpfs
     jq
-    man-pages
-    neofetch
-    nix-diff
-    nix-index
     nmap
     nodejs
     openvpn
-    p7zip
-    patchelf
     pup
-    pv
     python3
-    rink
-    ripgrep
     rustup
     smartmontools
     sqlite
-    sshfs-fuse
-    steam-run
-    tmux
     units
-    unzip
-    vim
     weechat
     wget
-    whois
     yt-dlp
-    zip
   ] ++ [
     ### GUI ###
     alacritty

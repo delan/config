@@ -261,8 +261,30 @@
         ripgrep # needed for /root/sync.sh
         nix-output-monitor # nixos-rebuild --log-format internal-json -v switch 2>&1 | nom --json
         sops # needed for editing secrets in this repo
+        nix-diff
         nix-doc
+        nix-index
+
+        atool
         bore
+        dnsutils
+        fd
+        htop
+        jmtpfs
+        man-pages
+        neofetch
+        p7zip
+        patchelf
+        pv
+        rink
+        ripgrep
+        sshfs-fuse
+        steam-run
+        tmux
+        unzip
+        vim
+        whois
+        zip
 
         (writeScriptBin "darktable-exported.sh" (readFile bin/darktable-exported.sh))
         (writeScriptBin "markdown-photos.sh" (readFile bin/markdown-photos.sh))
