@@ -363,7 +363,6 @@
       };
 
       programs.light.enable = true;
-      users.users."${config.internal.initialUser}".extraGroups = [ "video" ];
     })
 
 
@@ -450,6 +449,9 @@
           wqy_microhei  # for servo
         ];
       };
+
+      # for services.desktopManager.plasma6 et al (/dev/dri)
+      users.users."${config.internal.initialUser}".extraGroups = [ "video" ];
     })
 
 

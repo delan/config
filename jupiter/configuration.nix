@@ -197,12 +197,7 @@ in {
   # wireshark
   programs.wireshark.enable = true;
   programs.wireshark.package = pkgs.wireshark-qt;
-  users.users.delan.extraGroups = [
-    # for programs.wireshark
-    "wireshark"
-    # for services.desktopManager.plasma6 (/dev/dri)
-    "video"
-  ];
+  users.users.delan.extraGroups = [ "wireshark" ];
 
   services.cron = {
     enable = true;
