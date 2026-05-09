@@ -268,16 +268,17 @@
     };
   };
 
-  gtk.enable = true;
-  gtk.iconTheme = {
-    package = pkgs.kdePackages.breeze-icons;
-    name = "breeze";
-  };
-  qt.enable = true;
-  qt.style = {
-    package = pkgs.kdePackages.breeze;
-    name = "breeze";
-  };
+  # FIXME breaks if anything else writes ~/.gtkrc-2.0 etc
+  # gtk.enable = true;
+  # gtk.iconTheme = {
+  #   package = pkgs.kdePackages.breeze-icons;
+  #   name = "breeze";
+  # };
+  # qt.enable = true;
+  # qt.style = {
+  #   package = pkgs.kdePackages.breeze;
+  #   name = "breeze";
+  # };
 
   # see environment.systemPackages in lib/interactive.nix
   home.file.".xinitrc".text = ''
