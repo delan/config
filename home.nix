@@ -11,11 +11,7 @@
 
   home.packages = with pkgs; let
   in [
-    #binutils-unwrapped
-    #jetbrains.idea-community
-    #platformio
-    alacritty
-    arandr
+    ### CLI/TUI ###
     aria2
     atool
     bc
@@ -29,20 +25,52 @@
     fd
     ffmpeg
     gdb
-    geeqie
     gh
-    ghidra
-    gimp2  # color icons are broken in gimp3 (NixOS/nixpkgs#511297)
     git-lfs
-    gnome-font-viewer
     gnumake
-    google-chrome
     htop
     httpie
-    imagemagick
-    inkscape
     jmtpfs
     jq
+    man-pages
+    neofetch
+    nix-diff
+    nix-index
+    nmap
+    nodejs
+    openvpn
+    p7zip
+    patchelf
+    pup
+    pv
+    python3
+    rink
+    ripgrep
+    rustup
+    smartmontools
+    sqlite
+    sshfs-fuse
+    steam-run
+    tmux
+    units
+    unzip
+    vim
+    weechat
+    wget
+    whois
+    yt-dlp
+    zip
+  ] ++ [
+    ### GUI ###
+    alacritty
+    arandr
+    geeqie
+    ghidra
+    gimp2  # color icons are broken in gimp3 (NixOS/nixpkgs#511297)
+    gnome-font-viewer
+    google-chrome
+    imagemagick
+    inkscape
     kdePackages.ark
     kdePackages.gwenview
     kdePackages.kdenlive
@@ -52,70 +80,42 @@
     libreoffice
     lxappearance
     maim
-    man-pages
     mc
     mercurialFull
     minicom
     mpv
-    neofetch
     networkmanager-openvpn
     networkmanagerapplet
     nheko
-    nix-diff
-    nix-index
-    nmap
-    nodejs
     obs-studio
     obsidian
     octaveFull
     openjdk17
     opentabletdriver
-    openvpn
     osu-lazer-bin
-    p7zip
-    patchelf
     pavucontrol
     pcmanfm
     picard
     prismlauncher
     pulseaudio  # for pactl in i3
-    pup
-    pv
-    python3
     remmina
-    rink
-    ripgrep
-    rustup
     signal-desktop
     slop
-    smartmontools
     soundfont-fluid
     spotify
-    sqlite
     sqlitebrowser
-    sshfs-fuse
     steam
-    steam-run
     sublime4
     telegram-desktop
     texlive.combined.scheme-full
     timidity
-    tmux
-    units
-    unzip
-    vim
     virt-viewer
     vscode
-    weechat
-    wget
-    whois
     winetricks
     wineWowPackages.full
     xclip
     xdotool
     xorg.xmodmap
-    yt-dlp
-    zip
 
     # https://nixos.wiki/wiki/Discord#Opening_Links_with_Firefox
     # https://github.com/NixOS/nixpkgs/issues/108995#issuecomment-826358042
