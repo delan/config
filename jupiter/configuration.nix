@@ -102,6 +102,16 @@ in {
     fsType = "nfs";
     options = [ "rw" "soft" "bg" ];
   };
+  fileSystems."/cuffs/darktable" = {
+    device = "cuffs/darktable";
+    fsType = "zfs";
+    options = ["user" "noauto"];
+  };
+  fileSystems."/cuffs/osu" = {
+    device = "cuffs/osu";
+    fsType = "zfs";
+    options = ["user" "noauto"];
+  };
 
   networking = {
     networkmanager.plugins = [
