@@ -151,8 +151,16 @@
           "kernel.sysrq" = 1;
         };
 
-        # CVE-2026-31431 <https://copy.fail>
-        extraModprobeConfig = "install algif_aead /bin/false";
+        extraModprobeConfig = ''
+          # CVE-2026-31431 <https://copy.fail>
+          install algif_aead /bin/false
+
+          # CVE-2026-43284 and CVE-2026-43500
+          # <https://github.com/V4bel/dirtyfrag>
+          install esp4 /bin/false
+          install esp6 /bin/false
+          install rxrpc /bin/false
+        '';
       };
 
       hardware.enableAllFirmware = true;
