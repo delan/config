@@ -159,6 +159,7 @@ in {
   };
 
   environment.systemPackages = with pkgs; [
+    accerciser  # for servo a11y work
     cdrkit  # for servo/ci-runners
     colordiff
     cpuset  # for servo perf testing
@@ -194,7 +195,12 @@ in {
   # wireshark
   programs.wireshark.enable = true;
   programs.wireshark.package = pkgs.wireshark-qt;
-  users.users.delan.extraGroups = [ "wireshark" ];
+  users.users.delan.extraGroups = [
+    # for programs.wireshark
+    "wireshark"
+    # for services.desktopManager.plasma6 (/dev/dri)
+    "video"
+  ];
 
   services.cron = {
     enable = true;
@@ -295,7 +301,11 @@ in {
     ];
   }];
 
-  # for servo testing
+  # for servo work
   services.orca.enable = true;
   services.gnome.at-spi2-core.enable = true;
+  services.xserver.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  services.libinput.enable = true;
 }
