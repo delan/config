@@ -55,7 +55,7 @@
     kdePackages.okular
     kicad
     libnotify
-    libreoffice
+    libreoffice-qt
     lxappearance
     maim
     mc
