@@ -291,6 +291,7 @@
         (writeScriptBin "midi.sh" (readFile bin/midi.sh))
         (writeScriptBin "nef2jpg.sh" (readFile bin/nef2jpg.sh))
         (writeScriptBin "photo-details.sh" (readFile bin/photo-details.sh))
+        (writeScriptBin "play-games.sh" (readFile bin/play-games.sh))
         (writeScriptBin "rsync.sh" (readFile bin/rsync.sh))
         (writeScriptBin "screenshot.sh" (readFile bin/screenshot.sh))
         (writeScriptBin "slock" (readFile bin/slock))
