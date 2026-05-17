@@ -43,6 +43,7 @@
       "homepage" = { id = 2010; port = 20100; };
       "decluttarr" = { id = 2011; };
       "paperless" = { id = 2012; port = 20120; };
+      "ums" = { id = 2013; };
     };
   };
 
@@ -239,6 +240,7 @@
     smartmontools
     steam-run
     targetcli
+    ums
     unzip
 
     (writeScriptBin "import-ocean.sh" (readFile ./import-ocean.sh))
@@ -263,11 +265,13 @@
     5201 5202 # iperf3
     25565 # minecraft (gtnh)
     25566 # minecraft (monifactory)
+    1900 5001 # ums
   ];
   networking.firewall.allowedUDPPorts = [
     80 443 # nginx
     111 2049 # nfs
     5201 5202 # iperf3
+    1900 5001 # ums
   ];
 
   # allows you to authenticate sudo using your ssh private key
@@ -432,6 +436,12 @@
     };
     groups.hannah = {
       gid = 13000;
+    };
+    users.ums = {
+      isSystemUser = true;
+      uid = config.internal.ids.ums.id;
+      shell = pkgs.bash;
+      home = "/ocean/active/services/ums";
     };
   };
 
