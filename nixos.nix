@@ -287,17 +287,20 @@
         zip
 
         (writeScriptBin "darktable-exported.sh" (readFile bin/darktable-exported.sh))
+        (writeScriptBin "list-datasets-with-timed-snapshots.sh" (readFile bin/list-datasets-with-timed-snapshots.sh))
         (writeScriptBin "markdown-photos.sh" (readFile bin/markdown-photos.sh))
         (writeScriptBin "midi.sh" (readFile bin/midi.sh))
         (writeScriptBin "nef2jpg.sh" (readFile bin/nef2jpg.sh))
         (writeScriptBin "photo-details.sh" (readFile bin/photo-details.sh))
         (writeScriptBin "play-games.sh" (readFile bin/play-games.sh))
+        (writeScriptBin "prime-bookmarks-in-datasets.sh" (readFile bin/prime-bookmarks-in-datasets.sh))
         (writeScriptBin "rsync.sh" (readFile bin/rsync.sh))
         (writeScriptBin "screenshot.sh" (readFile bin/screenshot.sh))
         (writeScriptBin "slock" (readFile bin/slock))
         (writeScriptBin "smart.sh" (readFile bin/smart.sh))
           smartmontools
         (writeScriptBin "ssg.sh" (readFile bin/ssg.sh))
+        (writeScriptBin "thin-datasets-with-timed-snapshots.sh" (readFile bin/thin-datasets-with-timed-snapshots.sh))
         (writeScriptBin "sync.sh" (readFile bin/sync.sh))
         (writeScriptBin "wine.sh" (readFile bin/wine.sh))
         (writeScriptBin "zfs-iostat-totals" (readFile bin/zfs-iostat-totals))

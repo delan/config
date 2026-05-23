@@ -14,7 +14,7 @@ for i in cuffs cuffs/{cache.nginx,nix,the6p4c}; do
   zfs destroy -v $i@$new
 done
 
-for i in home kate{,/vm0} opacus{,.www} root stratus.{vda,vdb}; do
+for i in home kate{,/vm0} root secrets{,/akkoma} services{,/akkoma,/postgres}; do
   echo ">>> syncing $src_prefix/$i"
   unset old
   set -- -t bookmark -Ho name -d 1 $src_prefix/$i
