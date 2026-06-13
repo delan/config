@@ -294,6 +294,7 @@
         (writeScriptBin "photo-details.sh" (readFile bin/photo-details.sh))
         (writeScriptBin "play-games.sh" (readFile bin/play-games.sh))
         (writeScriptBin "prime-bookmarks-in-datasets.sh" (readFile bin/prime-bookmarks-in-datasets.sh))
+        (writeScriptBin "restart-plex.sh" (readFile bin/restart-plex.sh))
         (writeScriptBin "rsync.sh" (readFile bin/rsync.sh))
         (writeScriptBin "screenshot.sh" (readFile bin/screenshot.sh))
         (writeScriptBin "slock" (readFile bin/slock))

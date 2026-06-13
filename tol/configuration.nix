@@ -190,4 +190,9 @@
       ];
     };
   };
+  systemd.services.podman-plex = {
+    # no `bindsTo`, because the mount unit seems to randomly deactivate
+    # say 17min later for no apparent reason :/
+    after = ["ocean-active.mount"];
+  };
 }
