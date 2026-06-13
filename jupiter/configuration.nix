@@ -307,7 +307,7 @@ in {
 
     # <https://wiki.archlinux.org/index.php?title=Udev&oldid=873129#Mounting_drives_in_rules>
     # <https://wiki.archlinux.org/index.php?title=Udev&oldid=873129#Spawning_long-running_processes>
-    ACTION=="add", SUBSYSTEM=="block", ENV{ID_FS_UUID}=="EE71-3FB8", TAG+="systemd", ENV{SYSTEMD_WANTS}+="move-from-sd-card.service"
+    ACTION=="add", SUBSYSTEM=="block", ENV{ID_FS_UUID}=="7AE6-49EF", TAG+="systemd", ENV{SYSTEMD_WANTS}+="move-from-sd-card.service"
   '';
 
   # move photos and videos from sd card (see services.udev.extraRules)
@@ -322,17 +322,17 @@ in {
         parent_dir=/cuffs/darktable/new
         dest_dir=''${parent_dir:a}/$(date -u +\%FT\%TZ)
 
-        findmnt -M /mnt/sd2 || mount -v /mnt/sd2
+        findmnt -M /mnt/sd3 || mount -v /mnt/sd3
         # `--ignore-existing` to skip files with the same name in different source directories.
         # `--remove-source-files` to delete sources after copying, excluding files skipped above.
         # `tr` to avoid the progress output showing up as `[70B blob data]` in `journalctl`.
         rsync.sh --ignore-existing --remove-source-files --fsync --outbuf=N \
-            /mnt/sd2/DCIM/100MSDCF/ /mnt/sd2/PRIVATE/M4ROOT/CLIP/ "$dest_dir" \
+            /mnt/sd3/DCIM/100MSDCF/ /mnt/sd3/PRIVATE/M4ROOT/CLIP/ "$dest_dir" \
         | stdbuf -o0 tr \\r \\n
         chown -R -- $(stat -c \%u:\%g "''${parent_dir:a}") "$dest_dir"
         # if nothing was copied, remove the destination directory.
         rmdir "$dest_dir" || :
-        umount -v /mnt/sd2
+        umount -v /mnt/sd3
 
         pw-play -R /run/user/$(stat -c \%u "''${parent_dir:a}")/pipewire-0 ${
           pkgs.copyPathToStore ../static/Success.wav
