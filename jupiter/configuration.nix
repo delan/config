@@ -308,6 +308,9 @@ in {
     # <https://wiki.archlinux.org/index.php?title=Udev&oldid=873129#Mounting_drives_in_rules>
     # <https://wiki.archlinux.org/index.php?title=Udev&oldid=873129#Spawning_long-running_processes>
     ACTION=="add", SUBSYSTEM=="block", ENV{ID_FS_UUID}=="7AE6-49EF", TAG+="systemd", ENV{SYSTEMD_WANTS}+="move-from-sd-card.service"
+
+    # test for usb experiment (CH throttle quadrant)
+    SUBSYSTEMS=="usb", ATTR{idVendor}=="068e", ATTR{idProduct}=="00fa", MODE:="0666"
   '';
 
   # move photos and videos from sd card (see services.udev.extraRules)
