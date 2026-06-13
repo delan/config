@@ -155,6 +155,16 @@
         shell = pkgs.zsh;
         extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
       };
+      users.the6p4c = {
+        isNormalUser = true;  # HACK: not true
+        uid = 1002;
+        shell = pkgs.bash;
+        extraGroups = [ "systemd-journal" "wheel" "networkmanager" "libvirtd" "docker" ];
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP4DLGOYx1MAvEl3eED/PKj4w6YrucuRVVnpTAEWnqS2 the6p4c@dragonfruit"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII0WIc6t7qaz/y86Xoi+0G0i9J4vHmLct9u+sASj5cDh the6p4c@starfruit"
+        ];
+      };
     }
     [
       (system { name = "plex"; id = 2101; })
