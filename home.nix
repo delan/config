@@ -76,6 +76,7 @@
     picard
     prismlauncher
     pulseaudio  # for pactl in i3
+    qdirstat
     remmina
     signal-desktop
     slop
