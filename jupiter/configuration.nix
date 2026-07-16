@@ -207,7 +207,6 @@ in {
     ntfs3g
     pciutils
     tcpdump
-    termite
     unzip  # for servo/ci-runners
     usbutils
     uv

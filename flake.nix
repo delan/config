@@ -6,6 +6,7 @@
     pre2505.url = "github:NixOS/nixpkgs/a84ebe20c6bc2ecbcfb000a50776219f48d134cc";
     pre2511.url = "github:NixOS/nixpkgs/d7600c775f877cd87b4f5a831c28aa94137377aa";
     nixos2511.url = "github:NixOS/nixpkgs/0c88e1f2bdb93d5999019e99cb0e61e1fe2af4c5";
+    nixos2605.url = "github:NixOS/nixpkgs/bd0ff2d3eac24699c3664d5966b9ef36f388e2ca";
     hm.url = "github:nix-community/home-manager/99a69bdf8a3c6bf038c4121e9c4b6e99706a187a";
     hm.inputs.nixpkgs.follows = "pre2511";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -15,22 +16,23 @@
     git-diffie.inputs.nixpkgs.follows = "pre2505";
   };
 
-  outputs = inputs@{ pre2505, pre2511, nixos2511, hm, nixos-hardware, sops-nix, git-diffie, ... }:
+  outputs = inputs@{ pre2505, pre2511, nixos2511, nixos2605, hm, nixos-hardware, sops-nix, git-diffie, ... }:
   let
-    nixos2511pkgs = import nixos2511 {
-      system = "x86_64-linux";
-    };
     # can’t use the lix nixos module yet
     # <https://git.lix.systems/lix-project/nixos-module/issues/107>
-    lix-overlay-module = {
+    lix-overlay-module = nixosInput: let
+      pkgs = import nixosInput {
+        system = "x86_64-linux";
+      };
+    in {
       nixpkgs.overlays = [ (final: prev: {
-        inherit (nixos2511pkgs.lixPackageSets.lix_2_95)
+        inherit (pkgs.lixPackageSets.lix_2_95)
           nixpkgs-review
           nix-eval-jobs
           nix-fast-build
           colmena;
       }) ];
-      nix.package = nixos2511pkgs.lixPackageSets.lix_2_95.lix;
+      nix.package = pkgs.lixPackageSets.lix_2_95.lix;
     };
     git-diffie-module = { pkgs, ... }: {
       nixpkgs.overlays = [ git-diffie.overlays.default ];
@@ -44,7 +46,7 @@
       system = "x86_64-linux";
       modules = [
         venus/configuration.nix
-        lix-overlay-module
+        (lix-overlay-module nixos2511)  # NOTE: wrong input
         sops-nix.nixosModules.sops
         git-diffie-module
       ];
@@ -54,7 +56,7 @@
       system = "x86_64-linux";
       modules = [
         colo/configuration.nix
-        lix-overlay-module
+        (lix-overlay-module nixos2511)
         sops-nix.nixosModules.sops
         git-diffie-module
       ];
@@ -64,7 +66,7 @@
       system = "x86_64-linux";
       modules = [
         tol/configuration.nix
-        lix-overlay-module
+        (lix-overlay-module nixos2511)  # NOTE: wrong input
         sops-nix.nixosModules.sops
         git-diffie-module
       ];
@@ -76,7 +78,7 @@
       system = "x86_64-linux";
       modules = [
         frappetop/configuration.nix
-        lix-overlay-module
+        (lix-overlay-module nixos2511)  # NOTE: wrong input
         sops-nix.nixosModules.sops
         git-diffie-module
         # nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen2
@@ -94,12 +96,12 @@
         }
       ];
     };
-    nixosConfigurations.jupiter = nixos2511.lib.nixosSystem {
+    nixosConfigurations.jupiter = nixos2605.lib.nixosSystem {
       # deployified
       system = "x86_64-linux";
       modules = [
         jupiter/configuration.nix
-        lix-overlay-module
+        (lix-overlay-module nixos2605)
         sops-nix.nixosModules.sops
         git-diffie-module
         hm.nixosModules.home-manager

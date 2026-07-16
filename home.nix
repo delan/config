@@ -100,9 +100,12 @@
     # https://github.com/NixOS/nixpkgs/issues/108995#issuecomment-826358042
     (discord.override { nss = nss_latest; })
 
-    (callPackage ./86box.nix {
-      unfreeEnableRoms = true;
-    })
+    # FIXME: broken in nixos 26.05:
+    # error: The libsForQt5.extra-cmake-modules package and the corresponding top-level extra-cmake-modules alias have been removed, as KDE Gear 5 and Plasma 5 have reached end of life.
+    # Please explicitly use kdePackages.extra-cmake-modules for the latest Qt 6-based version.
+    # (callPackage ./86box.nix {
+    #   unfreeEnableRoms = true;
+    # })
     (callPackage ./darktable.nix {})
   ];
 

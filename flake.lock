@@ -108,6 +108,22 @@
         "type": "github"
       }
     },
+    "nixos2605": {
+      "locked": {
+        "lastModified": 1780902259,
+        "narHash": "sha256-q8yYEC5f1mFlQO9RGna4LTc9QrcvWunX6FYp83munkQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "bd0ff2d3eac24699c3664d5966b9ef36f388e2ca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "bd0ff2d3eac24699c3664d5966b9ef36f388e2ca",
+        "type": "github"
+      }
+    },
     "pre2505": {
       "locked": {
         "lastModified": 1742422364,
@@ -146,6 +162,7 @@
         "hm": "hm",
         "nixos-hardware": "nixos-hardware",
         "nixos2511": "nixos2511",
+        "nixos2605": "nixos2605",
         "pre2505": "pre2505",
         "pre2511": "pre2511",
         "sops-nix": "sops-nix"
