@@ -3,44 +3,34 @@
     # Fix qemu crash on macOS guests (NixOS/nixpkgs#338598).
     # See also: <https://gitlab.com/qemu-project/qemu/-/commit/a8e63ff289d137197ad7a701a587cc432872d798>
     # Last version deployed before flakes was 68e7dce0a6532e876980764167ad158174402c6f.
-    latestNixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    hm.url = "github:nix-community/home-manager/master";
-    hm.inputs.nixpkgs.follows = "unstable";
-    unstable-workstations.url = "github:NixOS/nixpkgs/nixos-unstable";
-    hm-workstations.url = "github:nix-community/home-manager/master";
-    hm-workstations.inputs.nixpkgs.follows = "unstable-workstations";
+    pre2505.url = "github:NixOS/nixpkgs/a84ebe20c6bc2ecbcfb000a50776219f48d134cc";
+    pre2511.url = "github:NixOS/nixpkgs/d7600c775f877cd87b4f5a831c28aa94137377aa";
+    nixos2511.url = "github:NixOS/nixpkgs/0c88e1f2bdb93d5999019e99cb0e61e1fe2af4c5";
+    hm.url = "github:nix-community/home-manager/99a69bdf8a3c6bf038c4121e9c4b6e99706a187a";
+    hm.inputs.nixpkgs.follows = "pre2511";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "unstable";
+    sops-nix.inputs.nixpkgs.follows = "pre2505";
     git-diffie.url = "github:the6p4c/git-diffie";
-    git-diffie.inputs.nixpkgs.follows = "unstable";
+    git-diffie.inputs.nixpkgs.follows = "pre2505";
   };
 
-  outputs = inputs@{ latestNixpkgs, unstable, hm, unstable-workstations, hm-workstations, nixos-hardware, sops-nix, git-diffie, ... }:
+  outputs = inputs@{ pre2505, pre2511, nixos2511, hm, nixos-hardware, sops-nix, git-diffie, ... }:
   let
-    latestPkgs = import latestNixpkgs {
+    nixos2511pkgs = import nixos2511 {
       system = "x86_64-linux";
     };
     # can’t use the lix nixos module yet
     # <https://git.lix.systems/lix-project/nixos-module/issues/107>
     lix-overlay-module = {
       nixpkgs.overlays = [ (final: prev: {
-        inherit (latestPkgs.lixPackageSets.lix_2_95)
+        inherit (nixos2511pkgs.lixPackageSets.lix_2_95)
           nixpkgs-review
           nix-eval-jobs
           nix-fast-build
           colmena;
       }) ];
-      nix.package = latestPkgs.lixPackageSets.lix_2_95.lix;
-    };
-    pkgsUnstable = import unstable {
-      system = "x86_64-linux";
-      config = { allowUnfree = true; };
-    };
-    pkgsUnstableWorkstations = import unstable-workstations {
-      system = "x86_64-linux";
-      config = { allowUnfree = true; };
+      nix.package = nixos2511pkgs.lixPackageSets.lix_2_95.lix;
     };
     git-diffie-module = { pkgs, ... }: {
       nixpkgs.overlays = [ git-diffie.overlays.default ];
@@ -49,7 +39,7 @@
   in {
     # NOTE: deployified machines use <https://git.isincredibly.gay/srxl/gemstone-labs.nix/src/commit/21e905f71929a54b5f5e25ce9dbe2e5cf0bc4fc9/deploy>
     # servers
-    nixosConfigurations.venus = unstable-workstations.lib.nixosSystem {
+    nixosConfigurations.venus = pre2511.lib.nixosSystem {
       # deployified
       system = "x86_64-linux";
       modules = [
@@ -59,7 +49,7 @@
         git-diffie-module
       ];
     };
-    nixosConfigurations.colo = latestNixpkgs.lib.nixosSystem {
+    nixosConfigurations.colo = nixos2511.lib.nixosSystem {
       # deployified
       system = "x86_64-linux";
       modules = [
@@ -69,7 +59,7 @@
         git-diffie-module
       ];
     };
-    nixosConfigurations.tol = unstable.lib.nixosSystem {
+    nixosConfigurations.tol = pre2505.lib.nixosSystem {
       # deployified
       system = "x86_64-linux";
       modules = [
@@ -81,7 +71,7 @@
     };
 
     # workstations
-    nixosConfigurations.frappetop = unstable-workstations.lib.nixosSystem {
+    nixosConfigurations.frappetop = pre2511.lib.nixosSystem {
       # deployified
       system = "x86_64-linux";
       modules = [
@@ -90,7 +80,7 @@
         sops-nix.nixosModules.sops
         git-diffie-module
         # nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen2
-        hm-workstations.nixosModules.home-manager
+        hm.nixosModules.home-manager
         {
           home-manager.users.delan = import ./home.nix;
 
@@ -104,7 +94,7 @@
         }
       ];
     };
-    nixosConfigurations.jupiter = latestNixpkgs.lib.nixosSystem {
+    nixosConfigurations.jupiter = nixos2511.lib.nixosSystem {
       # deployified
       system = "x86_64-linux";
       modules = [
@@ -112,7 +102,7 @@
         lix-overlay-module
         sops-nix.nixosModules.sops
         git-diffie-module
-        hm-workstations.nixosModules.home-manager
+        hm.nixosModules.home-manager
         {
           home-manager.users.delan = import ./home.nix;
 
