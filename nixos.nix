@@ -278,6 +278,7 @@
         jmtpfs
         man-pages
         p7zip
+        parallel
         patchelf
         pv
         rink
@@ -424,6 +425,7 @@
 
       environment.systemPackages = with pkgs; [
         fxlinuxprintutil
+        wl-clipboard
       ];
 
       services = {
