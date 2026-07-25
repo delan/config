@@ -18,5 +18,7 @@ for arg in "$@"; do
     esac
 done
 >&2 echo ">>> https://bucket.daz.cat/private/$file_key.html"
-exec goaccess "/var/log/nginx/$file_key.log" --log-format=VCOMBINED \
+
+# <https://github.com/allinurl/goaccess/issues/2973>
+exec goaccess "/var/log/nginx/$file_key.log" --log-format='%v %h %^[%x] "%r" %s %b "%R" "%u"' --datetime-format='%d/%b/%Y:%H:%M:%S %z' \
     --output="/var/www/bucket.daz.cat/private/$file_key.html" --real-time-html --ws-url=ws://127.0.0.1:7890
