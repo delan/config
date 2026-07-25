@@ -331,6 +331,24 @@
       appendHttpConfig = ''
         include /config/kate/dariox.club.conf;
         include /config/kate/xenia-dashboard.conf;
+
+        # for goaccess (see bin/goaccess.sh).
+        # goaccess VCOMBINED (NCSA Combined Log Format with Virtual Host).
+        # it’s unclear what port to use in our `log_format`, but the parsed format is
+        # `%v:%^ %h %^[%d:%t %^] "%r" %s %b "%R" "%u"`, which ignores the port number.
+        # <https://blog.neilsabol.site/post/goaccess-apache-httpd-logformat-log-format-combined-common-vhost/>
+        # <https://nginx.org/en/docs/http/ngx_http_log_module.html#log_format>
+        # <https://nginx.org/en/docs/http/ngx_http_core_module.html#var_remote_port>
+        # <https://nginx.org/en/docs/http/ngx_http_core_module.html#var_request_port>
+        # <https://nginx.org/en/docs/http/ngx_http_core_module.html#var_is_request_port>
+        log_format goaccess_VCOMBINED
+                    '$host:0 '
+                    '$remote_addr - $remote_user [$time_local] '
+                    '"$request" $status $body_bytes_sent '
+                    '"$http_referer" "$http_user_agent"';
+        access_log /var/log/nginx/goaccess.log goaccess_VCOMBINED;
+        access_log /var/log/nginx/goaccess_host_$host.log goaccess_VCOMBINED;
+        open_log_file_cache max=100;
       '';
       virtualHosts = let
         proxy = {
@@ -625,6 +643,7 @@
     # virt-clone(1)
     virt-manager
 
+    goaccess
     ripgrep
     tcpdump
 
@@ -638,6 +657,9 @@
     enable = true;
     systemCronJobs = ["0 22 * * * root sync.sh"];
   };
+
+  # for goaccess (/var/log/nginx)
+  users.users."${config.internal.initialUser}".extraGroups = [ "nginx" ];
 
   users.users.kate = {
     isNormalUser = true;

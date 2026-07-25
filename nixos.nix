@@ -292,6 +292,7 @@
         zip
 
         (writeScriptBin "darktable-exported.sh" (readFile bin/darktable-exported.sh))
+        (writeScriptBin "goaccess.sh" (readFile bin/goaccess.sh))
         (writeScriptBin "list-datasets-with-timed-snapshots.sh" (readFile bin/list-datasets-with-timed-snapshots.sh))
         (writeScriptBin "markdown-photos.sh" (readFile bin/markdown-photos.sh))
         (writeScriptBin "midi.sh" (readFile bin/midi.sh))
