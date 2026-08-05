@@ -112,11 +112,6 @@
       automount = false;
     };
 
-    picom = {
-      enable = true;
-      vSync = true;
-    };
-
     dunst = {
       enable = true;
       settings = {
