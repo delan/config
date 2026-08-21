@@ -170,6 +170,7 @@ in {
       allowedTCPPorts = [
         21 # pyftpdlib
         4000 8000 8080 # default node/python dev
+        8421 # autost shuppy.org staging
         9800 9801 9802 9803 # more dev (arbitrary)
         3128 3180 # oldssl-proxy
         13367 # qbittorrent torrent (arbitrary)
