@@ -486,6 +486,15 @@
 
       # for services.desktopManager.plasma6 et al (/dev/dri)
       users.users."${config.internal.initialUser}".extraGroups = [ "video" ];
+
+      # for chinese pinyin input
+      i18n.inputMethod = {
+        enable = true;
+        type = "fcitx5";
+        fcitx5.addons = with pkgs; [
+          qt6Packages.fcitx5-chinese-addons
+        ];
+      };
     })
 
 
