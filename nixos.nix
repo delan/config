@@ -274,6 +274,7 @@
         dnsutils
         fastfetch
         fd
+        git-filter-repo
         htop
         jmtpfs
         man-pages
