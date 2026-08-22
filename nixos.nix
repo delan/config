@@ -235,6 +235,8 @@
       programs = {
         mosh.enable = true;
         mtr.enable = true;
+        git.enable = true;
+        git.lfs.enable = true;
 
         zsh = {
           enable = true;
