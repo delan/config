@@ -159,6 +159,11 @@
 
       # openzfs/zfs#15646
       options zfs zfs_vdev_disk_classic=0
+
+      # avoid “unsupported SFP+ module type was detected” with Dell FTLX8571D3BCL-FC
+      # (error message only shows on SFP+ hotplug, but we get NO-CARRIER even after reboot)
+      # <https://leo.leung.xyz/wiki/Fixing_ixgbe_unsupported_SFP%2B_module_type_was_detected>
+      options ixgbe allow_unsupported_sfp=1
     '';
 
     # https://sholland.org/2016/howto-pass-usb-ports-to-kvm/
