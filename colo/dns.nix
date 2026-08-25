@@ -54,7 +54,7 @@
       (zone "6.0.0.3.8.0.0.0.0.8.7.f.4.0.4.2.ip6.arpa" "2404.f780.8.3006.64.zone" {
         inherit provideXFR;
       })
-      (zone "4.1.2.0.e.0.8.5.3.0.4.2.ip6.arpa" "2403.580e.214.48.zone" {
+      (zone "e.6.a.0.5.1.8.5.3.0.4.2.ip6.arpa" "2403.5815.a6e.48.zone" {
         inherit provideXFR;
       })
       (zone "e.c.9.2.2.2.3.4.f.e.9.0.6.3.d.f.ip6.arpa" "fd36.09ef.4322.29ce.64.zone" {

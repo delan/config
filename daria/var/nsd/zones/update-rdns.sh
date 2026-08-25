@@ -9,9 +9,9 @@ rg 2404:f780:8:3006: daz.cat.zone | fgrep -ve '@ ' -e 'ns ' \
 | ./update-rdns-for-zone.sh 2404.f780.8.3006.64.zone daz.cat "$drywet"
 if [ "$drywet" = dry ]; then echo >&2; fi
 
-if [ "$drywet" = dry ]; then echo '>>> 2403.580e.214.48.zone' >&2; fi
-rg 2403:580e:214:0: daz.cat.zone \
-| ./update-rdns-for-zone.sh 2403.580e.214.48.zone daz.cat "$drywet"
+if [ "$drywet" = dry ]; then echo '>>> 2403.5815.a6e.48.zone' >&2; fi
+rg 2403:5815:a6e:0: daz.cat.zone \
+| ./update-rdns-for-zone.sh 2403.5815.a6e.48.zone daz.cat "$drywet"
 if [ "$drywet" = dry ]; then echo >&2; fi
 
 if [ "$drywet" = dry ]; then echo '>>> 172.19.42.24.zone' >&2; fi
